@@ -4,3 +4,1133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Apex NHO — Training Outline</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0D1F3C; --navy-mid:#162C50; --navy-dark:#081429;
+  --gold:#C9A84C; --gold-light:#E8D5A3; --gold-dim:#8a6e2e;
+  --cream:#F5F3EE; --cream-dark:#E8E4DB; --cream-mid:#EDEAE4;
+  --white:#FFFFFF; --charcoal:#1A1A2E;
+  --gray:#6B6B6B; --gray-light:#E8E6E1;
+  --green:#1A5C2A; --green-light:#D8F3E8;
+  --red:#6B1A1A; --red-light:#FDF0F0;
+  --amber:#7A5A0A; --amber-light:#FEF3DC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);font-size:14px;line-height:1.55}
+
+/* PRINT */
+@media print {
+  .no-print{display:none!important}
+  body{background:white;font-size:12px}
+  .day-panel{display:block!important}
+}
+
+/* COVER */
+.cover{background:var(--navy);color:white;padding:56px 56px 48px;position:relative;border-bottom:5px solid var(--gold);print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--gold)}
+.cover-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:14px;padding-left:20px}
+.cover-title{font-family:'EB Garamond',serif;font-size:46px;font-weight:700;line-height:1.1;padding-left:20px;margin-bottom:8px}
+.cover-sub{font-size:16px;color:var(--gold-light);font-style:italic;padding-left:20px;margin-bottom:36px}
+.cover-stats{display:flex;gap:40px;padding-left:20px;flex-wrap:wrap}
+.cover-stat{border-left:2px solid rgba(201,168,76,0.3);padding-left:16px}
+.stat-num{font-family:'EB Garamond',serif;font-size:32px;color:var(--gold);line-height:1}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:2px;margin-top:3px}
+
+/* NAV */
+.sticky-nav{position:sticky;top:0;background:var(--navy);z-index:100;padding:0 56px;display:flex;align-items:center;gap:4px;border-bottom:2px solid var(--gold);overflow-x:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.sticky-nav::-webkit-scrollbar{height:3px}
+.sticky-nav::-webkit-scrollbar-thumb{background:var(--gold-dim)}
+.nav-tab{padding:12px 20px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s;text-decoration:none;background:none;border-left:none;border-right:none;border-top:none;font-family:'Barlow',sans-serif}
+.nav-tab:hover,.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.nav-divider{width:1px;background:rgba(201,168,76,0.25);align-self:stretch;margin:8px 8px;flex-shrink:0}
+.nav-home{margin-left:auto;padding:8px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:3px;font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;white-space:nowrap}
+.nav-home:hover{background:var(--gold-light)}
+
+/* WRAPPER */
+.wrapper{max-width:1100px;margin:0 auto;padding:0 56px 80px;background:white}
+
+/* DAY PANELS */
+.day-panel{display:none}
+.day-panel.active{display:block}
+
+/* DAY HEADER */
+.day-header{background:var(--navy);margin:0 -56px;padding:36px 56px;display:flex;align-items:center;gap:24px;border-top:4px solid var(--gold);print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.day-num{font-family:'EB Garamond',serif;font-size:56px;color:var(--gold);line-height:1;opacity:0.4;min-width:60px}
+.day-info{}
+.day-label{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.day-title{font-family:'EB Garamond',serif;font-size:26px;color:white;font-weight:700}
+.day-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px}
+.day-meta{margin-left:auto;display:flex;gap:10px;align-items:flex-start;flex-shrink:0}
+.day-badge{padding:4px 12px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3)}
+
+/* SECTION INTRO */
+.section-intro{padding:28px 0 4px;border-bottom:2px solid var(--cream-dark);margin-bottom:28px}
+.section-intro-label{font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+.section-intro-text{font-family:'EB Garamond',serif;font-size:18px;font-weight:400;line-height:1.65;color:var(--charcoal)}
+
+/* SCHEDULE GRID */
+.schedule-wrap{margin-bottom:32px}
+.schedule-label{font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;margin-top:24px}
+.schedule-table{width:100%;border-collapse:collapse}
+.schedule-table th{background:var(--navy);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:10px 14px;text-align:left;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.schedule-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--cream-dark);vertical-align:top}
+.schedule-table tr:nth-child(even) td{background:var(--cream)}
+.schedule-table tr.break-row td{background:var(--cream-mid);color:var(--gray);font-style:italic;font-size:12px}
+.time-col{white-space:nowrap;color:var(--navy);font-weight:600;width:130px}
+.module-col{font-weight:600;color:var(--navy)}
+.focus-col{color:var(--gray)}
+
+/* MODULE CARDS */
+.module-block{margin-bottom:32px}
+.module-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--cream-dark)}
+.module-num-badge{background:var(--navy);color:var(--gold);font-family:'EB Garamond',serif;font-size:20px;padding:10px 16px;min-width:52px;text-align:center;print-color-adjust:exact;-webkit-print-color-adjust:exact;flex-shrink:0}
+.module-header-info{flex:1}
+.module-tag{font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px}
+.module-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--navy);letter-spacing:0.02em}
+.module-meta{font-size:11px;color:var(--gray);margin-top:2px}
+.module-time{margin-left:auto;font-size:11px;font-weight:600;color:var(--navy);white-space:nowrap;background:var(--cream);padding:6px 12px;border:1px solid var(--cream-dark)}
+
+/* CONTENT ROWS */
+.content-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.content-box{background:var(--cream);border:1px solid var(--cream-dark);padding:16px 18px}
+.content-box-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+.content-box ul{list-style:none;padding:0}
+.content-box ul li{font-size:12.5px;color:var(--charcoal);line-height:1.55;padding:4px 0;border-bottom:1px solid rgba(201,168,76,0.12);display:flex;gap:8px;align-items:baseline}
+.content-box ul li:last-child{border-bottom:none}
+.content-box ul li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.content-box-single{background:var(--cream);border:1px solid var(--cream-dark);padding:16px 18px;margin-bottom:16px}
+
+/* CALLOUT */
+.callout{padding:12px 18px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px}
+.callout-gold{background:var(--amber-light);border-left:4px solid var(--gold)}
+.callout-navy{background:rgba(13,31,60,0.06);border-left:4px solid var(--navy)}
+.callout-green{background:var(--green-light);border-left:4px solid var(--green)}
+.callout-red{background:var(--red-light);border-left:4px solid var(--red)}
+.callout-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.callout-text{font-size:12.5px;line-height:1.6;color:var(--charcoal)}
+.callout-text strong{display:block;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;color:var(--navy)}
+
+/* KEY METHODS */
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gold-dim);border:1px solid var(--gold-dim);margin-bottom:16px}
+.method-cell{background:var(--cream);padding:14px 16px}
+.method-letter{font-family:'EB Garamond',serif;font-size:32px;font-weight:300;font-style:italic;color:var(--gold);line-height:1;display:block;margin-bottom:4px}
+.method-word{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+.method-body{font-size:11.5px;font-weight:300;line-height:1.6;color:var(--gray)}
+
+/* SCENARIO STRIP */
+.scenario-strip{background:var(--navy);padding:16px 20px;margin-bottom:16px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.scenario-label{font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.scenario-text{font-family:'EB Garamond',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.65}
+
+/* DIVIDER */
+.rule{height:1px;background:var(--cream-dark);margin:8px 0}
+.spacer{height:24px}
+
+/* FULL-WIDTH BOX */
+.full-box{margin-bottom:16px}
+
+/* ROLE TRACKS */
+.role-track{border:1px solid var(--cream-dark);margin-bottom:12px;overflow:hidden}
+.role-track-header{background:var(--navy);padding:12px 16px;display:flex;align-items:center;gap:12px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.role-track-icon{font-size:20px}
+.role-track-name{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:white;letter-spacing:0.05em}
+.role-track-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px}
+.role-track-body{padding:14px 16px;background:var(--cream)}
+.role-track-body ul{list-style:none;padding:0}
+.role-track-body ul li{font-size:12.5px;color:var(--charcoal);line-height:1.55;padding:4px 0;border-bottom:1px solid rgba(201,168,76,0.12);display:flex;gap:8px;align-items:baseline}
+.role-track-body ul li:last-child{border-bottom:none}
+.role-track-body ul li::before{content:'→';color:var(--gold);flex-shrink:0;font-size:11px}
+
+/* ASSESSMENT TABLE */
+.assessment-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+.assessment-table th{background:var(--navy);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:8px 12px;text-align:left;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.assessment-table td{padding:8px 12px;font-size:12.5px;border-bottom:1px solid var(--cream-dark);vertical-align:top}
+.assessment-table tr:nth-child(even) td{background:var(--cream)}
+.assessment-table td:first-child{font-weight:600;color:var(--navy);white-space:nowrap}
+
+/* MILESTONE STRIP */
+.milestone-row{display:flex;gap:0;margin-bottom:16px;overflow:hidden;border:1px solid var(--cream-dark)}
+.milestone{flex:1;padding:14px 12px;text-align:center;border-right:1px solid var(--cream-dark)}
+.milestone:last-child{border-right:none}
+.milestone-day{font-family:'EB Garamond',serif;font-size:24px;color:var(--gold);font-weight:300;line-height:1}
+.milestone-label{font-size:8.5px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-top:4px}
+.milestone-text{font-size:11px;color:var(--charcoal);line-height:1.5;margin-top:6px}
+
+@media(max-width:768px){
+  .wrapper,.sticky-nav{padding-left:20px;padding-right:20px}
+  .day-header{padding:24px 20px;margin:0 -20px}
+  .content-row{grid-template-columns:1fr}
+  .method-grid{grid-template-columns:1fr 1fr}
+  .cover{padding:36px 24px}
+  .milestone-row{flex-wrap:wrap}
+  .milestone{flex:0 0 50%}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover no-print">
+  <div class="cover-eyebrow">Apex Concierge Services · Facilitator Reference</div>
+  <div class="cover-title">New Hire Orientation<br>Training Outline</div>
+  <div class="cover-sub">3-Day Program · All Roles · All Sites</div>
+  <div class="cover-stats">
+    <div class="cover-stat"><div class="stat-num">3</div><div class="stat-label">Program Days</div></div>
+    <div class="cover-stat"><div class="stat-num">24h</div><div class="stat-label">Total Training</div></div>
+    <div class="cover-stat"><div class="stat-num">20</div><div class="stat-label">Modules</div></div>
+    <div class="cover-stat"><div class="stat-num">4</div><div class="stat-label">Role Tracks</div></div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav no-print">
+  <button class="nav-tab active" onclick="showDay('d1',this)">Day 1</button>
+  <button class="nav-tab" onclick="showDay('d2',this)">Day 2</button>
+  <button class="nav-tab" onclick="showDay('d3',this)">Day 3</button>
+  <div class="nav-divider"></div>
+  <a class="nav-tab" href="index.html">Materials Library</a>
+  <a class="nav-tab" href="cofacilitator.html">Co-Facilitator App</a>
+  <a class="nav-tab" href="printable-materials.html">Printable Pack</a>
+  <a class="nav-home" href="index.html">← Training Hub</a>
+</nav>
+
+<div class="wrapper">
+
+<!-- ════════════════════════════════════════ DAY 1 ═══ -->
+<div id="d1" class="day-panel active">
+  <div class="day-header">
+    <div class="day-num">1</div>
+    <div class="day-info">
+      <div class="day-label">Day One · 8:00 AM – 5:00 PM</div>
+      <div class="day-title">Foundation — Identity, Standard & Culture</div>
+      <div class="day-sub">Company identity · Professional presence · Core operations · Shift log · Policies · Scenarios · Systems · Leadership</div>
+    </div>
+    <div class="day-meta"><div class="day-badge">9 Modules</div></div>
+  </div>
+
+  <div class="section-intro">
+    <div class="section-intro-label">Day 1 Purpose</div>
+    <div class="section-intro-text">Day 1 is not orientation paperwork. It is a full immersion into who Apex is, what the standard requires, and what it means to represent this organization on shift. Agents leave Day 1 knowing the H.O.M.E. values, the E.D.O. method, the A.C.T. framework, and exactly what is expected of them from their first independent shift forward.</div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="schedule-wrap">
+    <div class="schedule-label">Day 1 Schedule at a Glance</div>
+    <table class="schedule-table">
+      <thead><tr><th class="time-col">Time</th><th class="module-col">Block / Module</th><th class="focus-col">Focus</th></tr></thead>
+      <tbody>
+        <tr><td class="time-col">8:00 – 8:30</td><td class="module-col">Pre-Session: Arrival & Setup</td><td class="focus-col">Environment, introductions, H.O.M.E. cards at seats</td></tr>
+        <tr><td class="time-col">8:30 – 9:15</td><td class="module-col">Module 1: Company Identity & Culture</td><td class="focus-col">Who Apex is, the standard, luxury service mindset</td></tr>
+        <tr><td class="time-col">9:15 – 10:00</td><td class="module-col">Module 2: Client Hierarchy & Roles</td><td class="focus-col">Property chain, who we report to, internal titles</td></tr>
+        <tr class="break-row"><td class="time-col">10:00 – 10:15</td><td colspan="2">Morning Break</td></tr>
+        <tr><td class="time-col">10:15 – 11:00</td><td class="module-col">Module 3: Professional Presence</td><td class="focus-col">Uniform, posture, Friendly ≠ Familiar, desk conduct</td></tr>
+        <tr><td class="time-col">11:00 – 12:00</td><td class="module-col">Module 4: Core Operations</td><td class="focus-col">Shift expectations, desk standards, site tours</td></tr>
+        <tr class="break-row"><td class="time-col">12:00 – 12:45</td><td colspan="2">Lunch Break</td></tr>
+        <tr><td class="time-col">12:45 – 2:00</td><td class="module-col">Module 5: Shift Log Mastery</td><td class="focus-col">E.D.O. method, non-negotiables, live writing drill</td></tr>
+        <tr><td class="time-col">2:00 – 2:45</td><td class="module-col">Module 6: Policies & Accountability</td><td class="focus-col">Attendance, conduct, call-out procedure, device policy</td></tr>
+        <tr class="break-row"><td class="time-col">2:45 – 3:00</td><td colspan="2">Afternoon Break</td></tr>
+        <tr><td class="time-col">3:00 – 4:00</td><td class="module-col">Module 7: Real-World Scenarios</td><td class="focus-col">A.C.T. method, six scenario drills</td></tr>
+        <tr><td class="time-col">4:00 – 4:30</td><td class="module-col">Module 8: Systems Overview</td><td class="focus-col">Connecteam, Paylocity, Yardi — intro and navigation</td></tr>
+        <tr><td class="time-col">4:30 – 5:00</td><td class="module-col">Module 9: Leadership & Closing</td><td class="focus-col">90-day pathway, Day 1 commitment card, send-off</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODULE 1 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">1</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Identity & Culture</div>
+        <div class="module-name">Company Identity & Culture</div>
+        <div class="module-meta">Format: Slide deck, group discussion, reflection activity</div>
+      </div>
+      <div class="module-time">8:30 – 9:15 AM · 45 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Module Objective</strong>Agents understand who Apex is, what the Apex Standard requires, and why luxury residential concierge is a professional discipline — not a customer service job. H.O.M.E. values are internalized, not recited.</div></div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Key Content</div>
+        <ul>
+          <li>The Apex Standard: consistency, intentionality, ownership, representation</li>
+          <li>H.O.M.E. values defined and applied on-shift: Hospitality, Ownership, Mindfulness, Excellence</li>
+          <li>Luxury service mindset: proactive vs. reactive, emotional intelligence as a skill</li>
+          <li>What it means to represent something bigger than yourself on shift</li>
+          <li>The Apex difference: why residential concierge at this level is distinct</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Activities & Materials</div>
+        <ul>
+          <li>H.O.M.E. Values reference card (laminated — pre-staged at every seat)</li>
+          <li>Apex Standard one-pager distributed at module start</li>
+          <li>Luxury Service Mindset card distributed during slide</li>
+          <li>Module 1 reflection card: "What does it mean to represent something bigger than yourself on shift?"</li>
+          <li>Agents write — then 2 share — then facilitator connects to H.O.M.E.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="method-grid">
+      <div class="method-cell"><span class="method-letter">H</span><div class="method-word">Hospitality</div><div class="method-body">Warmth extended to everyone, every time — regardless of mood, shift length, or familiarity with the resident.</div></div>
+      <div class="method-cell"><span class="method-letter">O</span><div class="method-word">Ownership</div><div class="method-body">When something goes wrong, we solve it and document it. We don't assign blame or pass it off.</div></div>
+      <div class="method-cell"><span class="method-letter">M</span><div class="method-word">Mindfulness</div><div class="method-body">We notice what others miss. We anticipate before we react. We are present on post.</div></div>
+    </div>
+    <div class="method-grid" style="margin-top:-1px">
+      <div class="method-cell" style="grid-column:span 3"><span class="method-letter" style="display:inline;font-size:24px">E</span> <span class="method-word" style="display:inline;font-size:11px;letter-spacing:0.1em">Excellence</span> <span class="method-body" style="font-size:12px"> — Whatever value you naturally lead with, excellence is what ties them all together. It is the non-negotiable floor.</span></div>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">2</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Hierarchy & Context</div>
+        <div class="module-name">Client Hierarchy & Roles</div>
+        <div class="module-meta">Format: Slide deck, hierarchy diagram, Q&A</div>
+      </div>
+      <div class="module-time">9:15 – 10:00 AM · 45 min</div>
+    </div>
+    <div class="callout callout-navy"><div class="callout-icon">📌</div><div class="callout-text"><strong>Module Objective</strong>Agents understand the full property chain — who owns the building, who manages it, who Apex reports to, and where the concierge role sits. They understand that every interaction with a resident, vendor, or property staff member carries professional weight.</div></div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Key Content</div>
+        <ul>
+          <li>Property chain: Investment company → Property management company → Apex → Agent</li>
+          <li>Who we work for vs. who we work with: the client distinction</li>
+          <li>Property management contacts: who to escalate to and when</li>
+          <li>Apex internal structure: CEO, Regional Manager, Site Lead, Agent</li>
+          <li>The four Apex concierge roles and their distinctions</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Four Concierge Roles</div>
+        <ul>
+          <li>Concierge Agent — primary desk role, first and last impression</li>
+          <li>Lobby Ambassador — floor presence, resident engagement, amenity oversight</li>
+          <li>Package Porter / Package Admin — intake-to-release cycle, room management</li>
+          <li>Lead Concierge — shift oversight, escalation point, junior agent support</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⚠️</div><div class="callout-text"><strong>Key Framing Point</strong>When a leasing agent, maintenance tech, or vendor gives an agent an instruction — that agent follows the escalation path, not the instruction, unless it is a safety matter. Agents work for Apex. Apex serves the property. That chain matters.</div></div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">3</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Presence & Professionalism</div>
+        <div class="module-name">Professional Presence</div>
+        <div class="module-meta">Format: Slide deck, paired self-assessment activity, group debrief</div>
+      </div>
+      <div class="module-time">10:15 – 11:00 AM · 45 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Module Objective</strong>Agents understand the observable, measurable standards of professional presence at Apex — and can assess themselves against those standards. The Friendly ≠ Familiar distinction is named and felt, not just stated.</div></div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Presence Standards (10-Point)</div>
+        <ul>
+          <li>Uniform: complete, pressed, name badge visible</li>
+          <li>Posture: upright, engaged — not leaning or slumped</li>
+          <li>Phone: personal device off desk and out of hand on post</li>
+          <li>Eye contact: acknowledged within 10 seconds of resident approach</li>
+          <li>Tone: professional regardless of familiarity with resident</li>
+          <li>Desk organization: log open, supplies staged, nothing personal visible</li>
+          <li>Expression: neutral-to-warm default — not flat, not performative</li>
+          <li>Energy: consistent across the shift — not just when busy</li>
+          <li>Language: no slang, no profanity, no venting about work on post</li>
+          <li>Exit: desk not left unattended without coverage confirmed</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Friendly ≠ Familiar</div>
+        <ul>
+          <li>Friendly: warm, consistent, professional — the same for every resident</li>
+          <li>Familiar: casual, exclusive, boundary-crossing — varies by relationship</li>
+          <li>The test: "Would I behave this same way with every resident — or only this one?"</li>
+          <li>Examples of familiar behavior: nickname use without invitation, sharing personal opinions, texting or calling residents, social media connection</li>
+          <li>Friendly ≠ Familiar reference card distributed — agent keeps throughout program</li>
+        </ul>
+      </div>
+    </div>
+    <div class="scenario-strip">
+      <div class="scenario-label">Paired Activity: Presence Self-Assessment (10 min)</div>
+      <div class="scenario-text">Agents pair up and assess each other against the 10-point presence checklist. Each agent receives a score and identifies their top development area. Facilitator debriefs: "What was hardest to assess in your partner? What was hardest to hear about yourself?"</div>
+    </div>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">4</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Operations</div>
+        <div class="module-name">Core Operations</div>
+        <div class="module-meta">Format: Slide deck, desk walkthrough visual, site tour exercise</div>
+      </div>
+      <div class="module-time">11:00 AM – 12:00 PM · 60 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Module Objective</strong>Agents understand the non-negotiable operational standards of every Apex shift: shift start protocol, pass-on requirements, desk standards, minimum tour count, and shift close. They practice building a basic tour route.</div></div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Shift Start Protocol</div>
+        <ul>
+          <li>Arrive 10 minutes before your shift — not on time, early</li>
+          <li>Review full pass-on log before the outgoing agent leaves</li>
+          <li>Confirm: open items, pending packages, known resident concerns</li>
+          <li>Radio charged and on hand before post is assumed</li>
+          <li>Desk organized and log open before outgoing agent departs</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Non-Negotiable Desk Standards</div>
+        <ul>
+          <li>The desk is never unattended — it is a post, not a seat</li>
+          <li>Relief must be confirmed before stepping away for any reason</li>
+          <li>No personal food, personal calls, or personal device use on post</li>
+          <li>Minimum 2 site tours per shift — each documented in the shift log</li>
+          <li>Shift close: pass-on written, open items flagged, relief briefed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="scenario-strip">
+      <div class="scenario-label">Tour Practice Exercise (15 min)</div>
+      <div class="scenario-text">Using the site tour template, agents build a 3-stop tour route for a fictional property: entry point, common area, and amenity zone. Each agent or pair presents their route and explains what they would document. Facilitator connects tour documentation to shift log requirements.</div>
+    </div>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">5</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Shift Log Mastery</div>
+        <div class="module-name">Shift Log Mastery — E.D.O.</div>
+        <div class="module-meta">Format: Slide deck, strong/weak comparison, live writing drill, peer scoring</div>
+      </div>
+      <div class="module-time">12:45 – 2:00 PM · 75 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Module Objective</strong>Agents master the shift log as a formal operational record using the E.D.O. method (Event / Detail / Outcome). They understand why documentation quality is a primary performance indicator and can write compliant entries independently.</div></div>
+    <div class="method-grid">
+      <div class="method-cell"><span class="method-letter">E</span><div class="method-word">Event</div><div class="method-body">What happened? Factual, observable, time-stamped. No editorializing.</div></div>
+      <div class="method-cell"><span class="method-letter">D</span><div class="method-word">Detail</div><div class="method-body">Who was involved, what was said or done, what condition was observed. Specific enough to reconstruct.</div></div>
+      <div class="method-cell"><span class="method-letter">O</span><div class="method-word">Outcome</div><div class="method-body">How was it resolved? Who was notified? What follow-up is required? Open items flagged.</div></div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">7 Non-Negotiable Log Standards</div>
+        <ul>
+          <li>Minimum one entry per hour — more during active periods</li>
+          <li>Every tour documented with time, route, and any observations</li>
+          <li>Pass-on is structured: open items, packages, follow-ups, notes for incoming agent</li>
+          <li>Language is factual and neutral — never editorial or emotional</li>
+          <li>Prohibited phrases: "quiet night," "nothing to report," "all good"</li>
+          <li>Corrections are addenda, not deletions — do not alter prior entries</li>
+          <li>Every interaction with management or maintenance is logged</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Live Writing Drill (40 min)</div>
+        <ul>
+          <li>Three scenarios read aloud by facilitator — agents write independently</li>
+          <li>No reference materials during the timed portion</li>
+          <li>Agents swap papers and score using the E.D.O. rubric (10-point)</li>
+          <li>Facilitator reveals model entries for each scenario</li>
+          <li>Group debrief: most common gaps and how to close them</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 6 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">6</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Policies & Accountability</div>
+        <div class="module-name">Policies & Accountability</div>
+        <div class="module-meta">Format: Policy handout walkthrough, verbal call-out scenario, conduct acknowledgment</div>
+      </div>
+      <div class="module-time">2:00 – 2:45 PM · 45 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Attendance Policy</div>
+        <ul>
+          <li>Call-out procedure: 5-step protocol — who to call, when, and what to say</li>
+          <li>Shift swaps: must be pre-approved, never assumed</li>
+          <li>No-call no-show: immediate formal documentation and review</li>
+          <li>Chronic tardiness: documented after second occurrence</li>
+          <li>Coverage is the agent's responsibility to initiate — not management's to solve</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Conduct Standards</div>
+        <ul>
+          <li>Social media: no photos, no posts referencing residents, properties, or Apex</li>
+          <li>Personal calls: off desk — break or designated area only</li>
+          <li>Confidentiality: resident information is never shared — with anyone</li>
+          <li>Conflict: escalate to supervisor, do not engage or retaliate</li>
+          <li>Fraternal relationships: disclosed to management if it affects scheduling or operations</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-red"><div class="callout-icon">✍️</div><div class="callout-text"><strong>Collect Before Agents Leave Day 1</strong>The Conduct Acknowledgment Form must be signed before agents leave. Walk through every checkbox together. Allow 5 minutes to read and sign. File in personnel folder. Photograph as backup. No exceptions.</div></div>
+  </div>
+
+  <!-- MODULE 7 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">7</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Scenarios</div>
+        <div class="module-name">Real-World Scenarios — A.C.T.</div>
+        <div class="module-meta">Format: Six scenario drills, A.C.T. debrief, reference card distribution</div>
+      </div>
+      <div class="module-time">3:00 – 4:00 PM · 60 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Module Objective</strong>Agents experience realistic on-shift situations and practice the A.C.T. de-escalation method. By end of module, they can apply A.C.T. to any resident interaction — including situations that escalate mid-conversation.</div></div>
+    <div class="method-grid">
+      <div class="method-cell"><span class="method-letter">A</span><div class="method-word">Acknowledge</div><div class="method-body">Name the concern. Let the resident know they've been heard before anything else is said.</div></div>
+      <div class="method-cell"><span class="method-letter">C</span><div class="method-word">Control</div><div class="method-body">Manage the environment, your tone, and the pace. Slow down. Step aside if needed. Don't match escalation.</div></div>
+      <div class="method-cell"><span class="method-letter">T</span><div class="method-word">Transfer or Resolve</div><div class="method-body">Either resolve within your authority and document — or escalate with a warm transfer and full documentation.</div></div>
+    </div>
+    <div class="content-box-single">
+      <div class="content-box-label">Six Scenario Drills</div>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">S1</span> Resident disputes package delivery — claims it was marked delivered but never received</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">S2</span> Unauthorized person requests access to a resident's unit without notice or PTE</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">S3</span> Resident complaint about noise from neighboring unit — escalating in tone</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">S4</span> Vendor shows up without scheduled access — insists they are expected</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">S5</span> Resident asks agent personal questions and attempts to exchange contact information</li>
+        <li style="padding:6px 0;display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">S6</span> Agent observes a safety concern in a common area — no supervisor immediately reachable</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULE 8 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">8</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Systems</div>
+        <div class="module-name">Systems Overview</div>
+        <div class="module-meta">Format: Systems quick-reference card, self-scoring activity</div>
+      </div>
+      <div class="module-time">4:00 – 4:30 PM · 30 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Three Core Platforms</div>
+        <ul>
+          <li><strong>Connecteam</strong> — scheduling, time clock, shift swaps, announcements, training</li>
+          <li><strong>Paylocity</strong> — payroll, onboarding docs, PTO requests, W-2 access</li>
+          <li><strong>Yardi</strong> — resident lookup, work orders, package tracking, PTE verification</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Systems Quick-Check Activity (3 min)</div>
+        <ul>
+          <li>Agents fill in the "SYSTEM" column for 8 task prompts without reference</li>
+          <li>Self-score against the answer key (revealed on facilitator slide)</li>
+          <li>Group debrief — common gaps addressed before Day 2 systems deep dive</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 9 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">9</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 1 · Launch</div>
+        <div class="module-name">Leadership Introduction & Closing</div>
+        <div class="module-meta">Format: Leadership address, 90-day overview, commitment card</div>
+      </div>
+      <div class="module-time">4:30 – 5:00 PM · 30 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">90-Day Pathway Overview</div>
+        <ul>
+          <li>Days 1–3: Shadow — observing under supervision, no independent decisions</li>
+          <li>Days 4–7: Supported — on post with supervisor available and accessible</li>
+          <li>Week 2: Solo with daily check-ins — independent shifts, logged performance</li>
+          <li>Weeks 3–4: Full operation — performance reviewed against commitment card</li>
+          <li>Day 30: Formal review — scored against standards, Excellence Academy eligible</li>
+          <li>Day 90: Full evaluation — rate adjustment eligibility, advancement consideration</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Day 1 Commitment Card (8 min silence)</div>
+        <ul>
+          <li>The standard I commit to holding every shift</li>
+          <li>The area I need to focus on developing</li>
+          <li>My goal by the 90-day mark</li>
+          <li>Agent signs and dates — agent keeps the original</li>
+          <li>Facilitator photographs all cards before agents leave</li>
+          <li>Cards referenced at the 30-day formal review</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-navy"><div class="callout-icon">📸</div><div class="callout-text"><strong>Photograph All Commitment Cards Before Dismissal</strong>These are referenced at the 30-day review. Email photos to your Regional Manager within 24 hours of Day 1 close.</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ DAY 2 ═══ -->
+<div id="d2" class="day-panel">
+  <div class="day-header">
+    <div class="day-num">2</div>
+    <div class="day-info">
+      <div class="day-label">Day Two · 8:00 AM – 5:00 PM</div>
+      <div class="day-title">Operations in Depth</div>
+      <div class="day-sub">Package handling · Incident reporting · Emergency response · Floor scenarios · Systems deep dive · Shift log practicum</div>
+    </div>
+    <div class="day-meta"><div class="day-badge">7 Modules</div></div>
+  </div>
+
+  <div class="section-intro">
+    <div class="section-intro-label">Day 2 Purpose</div>
+    <div class="section-intro-text">Day 1 established the standard. Day 2 builds the operational skills required to execute it. Agents move from understanding what is expected to demonstrating it — in package handling, incident documentation, emergency protocols, and the shift log practicum that closes the day.</div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="schedule-wrap">
+    <div class="schedule-label">Day 2 Schedule at a Glance</div>
+    <table class="schedule-table">
+      <thead><tr><th class="time-col">Time</th><th class="module-col">Module</th><th class="focus-col">Focus</th></tr></thead>
+      <tbody>
+        <tr><td class="time-col">8:00 – 9:00</td><td class="module-col">Module 1: Property Knowledge Deep-Dive</td><td class="focus-col">Site-specific orientation, floor plans, amenities</td></tr>
+        <tr><td class="time-col">9:00 – 10:00</td><td class="module-col">Module 2: Package Handling Practicum</td><td class="focus-col">Full intake-to-release cycle, hands-on category drill</td></tr>
+        <tr class="break-row"><td class="time-col">10:00 – 10:15</td><td colspan="2">Morning Break</td></tr>
+        <tr><td class="time-col">10:15 – 11:15</td><td class="module-col">Module 3: Incident Report Documentation</td><td class="focus-col">When to file, required fields, factual language standard</td></tr>
+        <tr><td class="time-col">11:15 – 12:00</td><td class="module-col">Module 4: Emergency Response Protocols</td><td class="focus-col">Fire, medical, security — verbal drill</td></tr>
+        <tr class="break-row"><td class="time-col">12:00 – 12:45</td><td colspan="2">Lunch Break</td></tr>
+        <tr><td class="time-col">12:45 – 2:00</td><td class="module-col">Module 5: Systems Deep Dive</td><td class="focus-col">Connecteam, Yardi, Paylocity — hands-on navigation</td></tr>
+        <tr><td class="time-col">2:00 – 3:15</td><td class="module-col">Module 6: Advanced Scenario Drills</td><td class="focus-col">On-property, multi-system, floor scenarios</td></tr>
+        <tr class="break-row"><td class="time-col">3:15 – 3:30</td><td colspan="2">Afternoon Break</td></tr>
+        <tr><td class="time-col">3:30 – 4:30</td><td class="module-col">Module 7: Shift Log Practicum</td><td class="focus-col">Timed independent assessment — 3 scenarios, peer scoring</td></tr>
+        <tr><td class="time-col">4:30 – 5:00</td><td class="module-col">Day 2 Closing & Day 3 Preview</td><td class="focus-col">Debrief, take-home reference, Day 3 assignments</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D2 MODULE 1 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·1</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Property Knowledge</div>
+        <div class="module-name">Property Knowledge Deep-Dive</div>
+        <div class="module-meta">Format: Site-specific briefing, floor plan review, amenity walkthrough</div>
+      </div>
+      <div class="module-time">8:00 – 9:00 AM · 60 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Key Content</div>
+        <ul>
+          <li>Property name, address, total units, current occupancy</li>
+          <li>Entry/exit points: main, service, package, emergency</li>
+          <li>Amenity locations: gym, rooftop, co-work, lounge, pool</li>
+          <li>Emergency system locations: AED, fire pulls, extinguishers, stairwells</li>
+          <li>Property management contact roster — distributed by site supervisor</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Site-Specific Items</div>
+        <ul>
+          <li>Key storage: where they are, who has access, when they are released</li>
+          <li>Package room location, access protocol, camera coverage</li>
+          <li>Elevator locations and service elevator protocol</li>
+          <li>Parking: guest, resident, vendor — who manages each</li>
+          <li>Any site-specific quirks or standing resident concerns</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- D2 MODULE 2 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·2</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Package Handling</div>
+        <div class="module-name">Package Handling Practicum</div>
+        <div class="module-meta">Format: Protocol table walkthrough, hands-on intake-to-release drill</div>
+      </div>
+      <div class="module-time">9:00 – 10:00 AM · 60 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Module Objective</strong>Agents can correctly process every package category without reference — from intake through notification through release, including RTS protocol. They understand what each prohibited practice costs the property and Apex.</div></div>
+    <table class="assessment-table">
+      <thead><tr><th>Category</th><th>Intake Protocol</th><th>Window</th><th>Prohibited</th></tr></thead>
+      <tbody>
+        <tr><td>Standard Package</td><td>Confirm → Log → Label → Notify</td><td>72 hours</td><td>Releasing without ID verification</td></tr>
+        <tr><td>Food Delivery</td><td>Confirm → Log → Notify immediately</td><td>24 hours</td><td>Holding beyond window without contact</td></tr>
+        <tr><td>Grocery Delivery</td><td>Confirm → Log → Refrigerate if needed → Notify</td><td>48 hours</td><td>Storing perishables outside climate control</td></tr>
+        <tr><td>High-Value Item</td><td>Confirm → Log → Supervisor notification → Secure storage</td><td>Immediate contact required</td><td>Accepting without supervisor awareness</td></tr>
+        <tr><td>Outgoing / RTS</td><td>Log → Label RTS → Stage in designated area → Carrier handoff</td><td>Per carrier schedule</td><td>Disposing without documentation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D2 MODULE 3 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·3</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Incident Documentation</div>
+        <div class="module-name">Incident Report Documentation</div>
+        <div class="module-meta">Format: Field guide review, documentation drill — 3 scenarios, peer review</div>
+      </div>
+      <div class="module-time">10:15 – 11:15 AM · 60 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">7 Situations Requiring an Incident Report</div>
+        <ul>
+          <li>Any resident injury or medical event on property</li>
+          <li>Property damage — observed or reported</li>
+          <li>Unauthorized access attempt or breach</li>
+          <li>Physical or verbal altercation on property</li>
+          <li>Package loss, theft, or damage claim</li>
+          <li>Safety hazard observed (unremediated after 30 min)</li>
+          <li>Any interaction with police, fire, or EMS on property</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Language Standard</div>
+        <ul>
+          <li>"Resident appeared agitated" ✗ → "Resident raised voice, stated: 'This is unacceptable'" ✓</li>
+          <li>"The package was probably stolen" ✗ → "Package logged at 14:22. Not located at 18:00 check. Supervisor notified." ✓</li>
+          <li>"I think maintenance left the door open" ✗ → "Stairwell door observed propped open at 15:10. Closed by agent. Logged." ✓</li>
+          <li>Report what was observed, said, or done — not what was assumed or felt</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- D2 MODULE 4 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·4</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Emergency Response</div>
+        <div class="module-name">Emergency Response Protocols</div>
+        <div class="module-meta">Format: Reference card distribution, verbal quick-drill (no cards)</div>
+      </div>
+      <div class="module-time">11:15 AM – 12:00 PM · 45 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Three Protocol Cards (6 Steps Each)</div>
+        <ul>
+          <li><strong>Fire:</strong> Alert → Evacuate → Call 911 → Meet at assembly → Contact supervisor → Document</li>
+          <li><strong>Medical:</strong> Assess → Call 911 → Do not move → Stay present → Contact supervisor → Document</li>
+          <li><strong>Security:</strong> Do not engage → Alert supervisor → Call 911 if immediate threat → Observe and document → Meet emergency services at entry</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Verbal Quick-Drill (10 min)</div>
+        <ul>
+          <li>Distribute reference cards — then ask agents to set them face-down</li>
+          <li>Facilitator states emergency type — agent states the first 3 steps from memory</li>
+          <li>Rotate through all three types, calling on different agents</li>
+          <li>After drill: agents may keep cards and reference them — but should not need to</li>
+          <li>Laminated card remains at desk as a posted resource after program</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- D2 MODULE 5 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·5</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Systems</div>
+        <div class="module-name">Systems Deep Dive</div>
+        <div class="module-meta">Format: Hands-on navigation with facilitator, task-based practice</div>
+      </div>
+      <div class="module-time">12:45 – 2:00 PM · 75 min</div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Connecteam (25 min)</div>
+        <ul>
+          <li>Clock in/out — correct procedure and common errors</li>
+          <li>Viewing your schedule and confirming shift assignments</li>
+          <li>Submitting a shift swap request — step by step</li>
+          <li>Accessing announcements and training modules</li>
+          <li>How management monitors activity and time entries</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Yardi + Paylocity (50 min)</div>
+        <ul>
+          <li>Yardi: looking up a resident by unit number or name</li>
+          <li>Yardi: logging a package entry and marking it received</li>
+          <li>Yardi: submitting a work order on behalf of a resident</li>
+          <li>Yardi: verifying a PTE (Permission to Enter) request</li>
+          <li>Paylocity: accessing pay stubs, confirming direct deposit, W-2 access</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- D2 MODULE 6 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·6</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Floor Block</div>
+        <div class="module-name">Advanced Scenario Drills — On Property</div>
+        <div class="module-meta">Format: Live drills at actual property locations — no printed materials</div>
+      </div>
+      <div class="module-time">2:00 – 3:15 PM · 75 min</div>
+    </div>
+    <div class="callout callout-green"><div class="callout-icon">🏢</div><div class="callout-text"><strong>Floor Block — Live Property</strong>This module runs at actual property locations: desk, package room, lobby, amenity space. Facilitator introduces scenarios verbally. Agents respond in real time at real locations. No handouts. No slides.</div></div>
+    <div class="content-box-single">
+      <div class="content-box-label">Advanced Scenario Set</div>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">F1</span> Simultaneous demands: front desk call, package pickup request, and resident entering lobby at the same time — what is the priority order?</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">F2</span> Package room: agent discovers 3 packages with no intake log entries from the previous shift. What is the protocol?</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">F3</span> Amenity space: two residents in a heated dispute. Agent is alone. No supervisor immediately reachable.</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">F4</span> Lobby: a person agent does not recognize claims to be a resident's family member and requests access to the unit. The resident is not answering their phone.</li>
+        <li style="padding:6px 0;display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">F5</span> Tour: agent observes a maintenance issue in a common area and an unreported package in the hallway outside a unit. How does the agent handle both and what does the log entry look like?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D2 MODULE 7 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D2·7</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 2 · Shift Log Practicum</div>
+        <div class="module-name">Shift Log Practicum — Timed Assessment</div>
+        <div class="module-meta">Format: 40-min independent write, peer scoring, model entry review</div>
+      </div>
+      <div class="module-time">3:30 – 4:30 PM · 60 min</div>
+    </div>
+    <div class="callout callout-gold"><div class="callout-icon">⭐</div><div class="callout-text"><strong>Assessment Standard</strong>This is assessment-level work. No assistance, no reference materials. Three scenarios read aloud — agents write full E.D.O. entries independently. Collect all forms before agents leave Day 2. Score and return written feedback before Day 3 begins.</div></div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Three Practicum Scenarios</div>
+        <ul>
+          <li>Scenario A: Package dispute with a resident who becomes verbally aggressive — resolved at desk, supervisor notified</li>
+          <li>Scenario B: Maintenance request submitted during tour — work order placed, resident informed, follow-up flagged</li>
+          <li>Scenario C: Unknown individual accessed amenity space without key fob — observed, documented, management alerted</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">E.D.O. Scoring Rubric (10 pts)</div>
+        <ul>
+          <li>Event present and time-stamped: 0–2 points</li>
+          <li>Detail complete — specific, factual, reconstructable: 0–3 points</li>
+          <li>Outcome documented — action taken, who notified, follow-up: 0–3 points</li>
+          <li>Language standard — neutral, factual, no editorializing: 0–2 points</li>
+          <li>Score of 7+ = compliant. Below 7 = remediation plan before solo shifts.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-red"><div class="callout-icon">✍️</div><div class="callout-text"><strong>Collect All Forms Before Agents Leave Day 2</strong>Score overnight. Provide written feedback. Return scores at the start of Day 3 before Module 1 begins. Agents below 7/10 receive a remediation note — not disqualification.</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ DAY 3 ═══ -->
+<div id="d3" class="day-panel">
+  <div class="day-header">
+    <div class="day-num">3</div>
+    <div class="day-info">
+      <div class="day-label">Day Three · 8:00 AM – 5:00 PM</div>
+      <div class="day-title">Assessment, Launch & Handoff</div>
+      <div class="day-sub">Role-specific tracks · Supervised site walk · Capstone scenarios · Standards assessment · 30-day launch · Supervisor handoff</div>
+    </div>
+    <div class="day-meta"><div class="day-badge">Assessment Day</div></div>
+  </div>
+
+  <div class="section-intro">
+    <div class="section-intro-label">Day 3 Purpose</div>
+    <div class="section-intro-text">Day 3 is the transition from training to the role. Agents demonstrate what they've built across three days — in role-specific work, live site experience, capstone scenarios, and a formal written assessment. The program closes with supervisor handoff and the 30-day commitment that connects today to the formal review.</div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="schedule-wrap">
+    <div class="schedule-label">Day 3 Schedule at a Glance</div>
+    <table class="schedule-table">
+      <thead><tr><th class="time-col">Time</th><th class="module-col">Module</th><th class="focus-col">Focus</th></tr></thead>
+      <tbody>
+        <tr><td class="time-col">8:00 – 9:30</td><td class="module-col">Module 1: Role-Specific Tracks</td><td class="focus-col">Concierge Agent, Lead, Ambassador, Package Admin breakouts</td></tr>
+        <tr><td class="time-col">9:30 – 10:30</td><td class="module-col">Module 2: Supervised Site Walk</td><td class="focus-col">Live property walkthrough — site supervisor present</td></tr>
+        <tr class="break-row"><td class="time-col">10:30 – 10:45</td><td colspan="2">Morning Break</td></tr>
+        <tr><td class="time-col">10:45 – 12:00</td><td class="module-col">Module 3: Capstone Scenario Round</td><td class="focus-col">High-complexity, multi-system scenarios — full A.C.T. application</td></tr>
+        <tr class="break-row"><td class="time-col">12:00 – 12:45</td><td colspan="2">Lunch Break — Facilitator scores assessment during this time</td></tr>
+        <tr><td class="time-col">12:45 – 1:45</td><td class="module-col">Module 4: Standards Assessment</td><td class="focus-col">10-question written knowledge check — all three days</td></tr>
+        <tr><td class="time-col">1:45 – 3:00</td><td class="module-col">Module 5: 30-Day Excellence Launch</td><td class="focus-col">Pathway review, milestone expectations, commitment plan</td></tr>
+        <tr><td class="time-col">3:00 – 4:00</td><td class="module-col">Module 6: Site Supervisor Handoff</td><td class="focus-col">Formal supervisor introduction, site expectations, Q&A</td></tr>
+        <tr><td class="time-col">4:00 – 5:00</td><td class="module-col">Program Closing & Commitment</td><td class="focus-col">Final commitment card, program completion, send-off</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D3 MODULE 1 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D3·1</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Role-Specific</div>
+        <div class="module-name">Role-Specific Tracks</div>
+        <div class="module-meta">Format: Breakout tracks by assigned role — 90-minute deep dive</div>
+      </div>
+      <div class="module-time">8:00 – 9:30 AM · 90 min</div>
+    </div>
+    <div class="content-row">
+      <div class="role-track">
+        <div class="role-track-header"><div class="role-track-icon">🏨</div><div><div class="role-track-name">Track A — Concierge Agent / Main Concierge</div><div class="role-track-sub">Primary desk role. First and last impression.</div></div></div>
+        <div class="role-track-body"><ul>
+          <li>Desk management across a full shift under variable demand</li>
+          <li>Managing simultaneous interactions: phone, walk-up, radio, log</li>
+          <li>Shift handoff: outgoing agent's obligation to the incoming</li>
+          <li>Resident relationship calibration — warmth without familiarity at scale</li>
+        </ul></div>
+      </div>
+      <div class="role-track">
+        <div class="role-track-header"><div class="role-track-icon">🤝</div><div><div class="role-track-name">Track B — Lobby Ambassador</div><div class="role-track-sub">Floor presence, community, amenity oversight.</div></div></div>
+        <div class="role-track-body"><ul>
+          <li>Proactive vs. reactive floor presence — the Ambassador difference</li>
+          <li>Amenity oversight: what to observe, what to document, when to act</li>
+          <li>Resident engagement on the floor — conversation without overstep</li>
+          <li>Communication back to desk: what the desk needs to know and when</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="content-row">
+      <div class="role-track">
+        <div class="role-track-header"><div class="role-track-icon">📦</div><div><div class="role-track-name">Track C — Package Porter / Package Admin</div><div class="role-track-sub">Intake-to-release cycle and room management.</div></div></div>
+        <div class="role-track-body"><ul>
+          <li>Full package room management: organization, labeling, logging, camera awareness</li>
+          <li>Managing high-volume days: perishable windows under load</li>
+          <li>Release verification: what constitutes sufficient ID</li>
+          <li>RTS protocol: when to escalate and how to document</li>
+        </ul></div>
+      </div>
+      <div class="role-track">
+        <div class="role-track-header"><div class="role-track-icon">👑</div><div><div class="role-track-name">Track D — Lead Concierge</div><div class="role-track-sub">Shift oversight, escalation point, team support.</div></div></div>
+        <div class="role-track-body"><ul>
+          <li>Shift lead responsibilities: what changes when you are the senior on post</li>
+          <li>Supporting junior agents without undermining their authority with residents</li>
+          <li>When to escalate to management vs. resolve at the site level</li>
+          <li>Documenting team performance observations within the shift log</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D3 MODULE 2 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D3·2</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Site Experience</div>
+        <div class="module-name">Supervised Site Walk</div>
+        <div class="module-meta">Format: Live property walkthrough — site supervisor present and observing</div>
+      </div>
+      <div class="module-time">9:30 – 10:30 AM · 60 min</div>
+    </div>
+    <div class="callout callout-green"><div class="callout-icon">🏢</div><div class="callout-text"><strong>Site Supervisor Present</strong>The site supervisor joins for this module. Their role is to observe the agent in context — how they walk the property, how they engage with the space, how they communicate. Facilitator defers to supervisor in this block while remaining present.</div></div>
+    <div class="content-box-single">
+      <div class="content-box-label">Site Walk Structure</div>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);font-size:12.5px"><strong style="color:var(--navy)">Stop 1: Entry & Lobby</strong> — agents identify camera locations, entry points, guest access protocol, desk sight lines</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);font-size:12.5px"><strong style="color:var(--navy)">Stop 2: Package Room</strong> — agents walk intake protocol in real space, identify storage zones and overflow areas</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);font-size:12.5px"><strong style="color:var(--navy)">Stop 3: Amenity Spaces</strong> — agents identify what needs to be observed on each tour stop and what gets documented</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--cream-dark);font-size:12.5px"><strong style="color:var(--navy)">Stop 4: Emergency Systems</strong> — AED, fire pull stations, extinguishers, stairwell exits — agents locate and confirm</li>
+        <li style="padding:6px 0;font-size:12.5px"><strong style="color:var(--navy)">Debrief</strong> — supervisor addresses site-specific expectations and open questions before returning to classroom</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D3 MODULE 3 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D3·3</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Capstone</div>
+        <div class="module-name">Capstone Scenario Round</div>
+        <div class="module-meta">Format: High-complexity scenarios — full A.C.T. response, log entry, debrief</div>
+      </div>
+      <div class="module-time">10:45 AM – 12:00 PM · 75 min</div>
+    </div>
+    <div class="content-box-single">
+      <div class="content-box-label">Capstone Scenario Set — Multi-System, High Complexity</div>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:8px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">C1</span> Resident calls in from outside the building to report a water leak in their unit. A maintenance vendor is on-site for a separate job. Agent is alone at the desk with a guest waiting for access. Walk through every step: who do you contact, in what order, what do you document?</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--cream-dark);display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">C2</span> During a tour, agent discovers a package that has been sitting in a hallway for an unknown amount of time. The package has no label. No intake log exists for it. There is a resident in the hallway asking about it.</li>
+        <li style="padding:8px 0;display:flex;gap:10px;font-size:12.5px"><span style="color:var(--gold);font-weight:700;min-width:30px">C3</span> A person approaches the desk claiming to be a property inspector. They have no appointment confirmation. They are professionally dressed and present ID. They are asking for access to the roof and mechanical areas. What is the protocol — step by step?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- D3 MODULE 4 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D3·4</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Assessment</div>
+        <div class="module-name">Standards Assessment — Written</div>
+        <div class="module-meta">Format: 10-question individual written assessment — no reference materials</div>
+      </div>
+      <div class="module-time">12:45 – 1:45 PM · 60 min</div>
+    </div>
+    <div class="callout callout-red"><div class="callout-icon">✍️</div><div class="callout-text"><strong>Collect Before Lunch Break — Return Scored Before Program Close</strong>No assistance. No reference materials. Score during Module 5 and return with written feedback before the program closes. Agents below passing receive a remediation plan — not disqualification from the role.</div></div>
+    <table class="assessment-table">
+      <thead><tr><th style="width:50px">#</th><th>Assessment Area</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td>Q1</td><td>H.O.M.E. values — define each and give one on-shift application</td><td>Standard</td></tr>
+        <tr><td>Q2</td><td>Write a full E.D.O. log entry for a provided scenario (high-weight)</td><td><strong>High</strong></td></tr>
+        <tr><td>Q3</td><td>Package categories — name the five and their intake protocols</td><td>Standard</td></tr>
+        <tr><td>Q4</td><td>Call-out procedure — list the 5 required steps in order</td><td>Standard</td></tr>
+        <tr><td>Q5</td><td>Escalation decision — given a scenario, identify: resolve, escalate, or emergency</td><td>Standard</td></tr>
+        <tr><td>Q6</td><td>A.C.T. method — define each step and give an example phrase for each</td><td>Standard</td></tr>
+        <tr><td>Q7</td><td>Incident report scenario — write the entry using factual language standard (high-weight)</td><td><strong>High</strong></td></tr>
+        <tr><td>Q8</td><td>Systems identification — match 6 tasks to their correct platform</td><td>Standard</td></tr>
+        <tr><td>Q9</td><td>Emergency response — state the first 3 steps for each emergency type</td><td>Standard</td></tr>
+        <tr><td>Q10</td><td>Friendly ≠ Familiar — provide one example of each, explain the test question</td><td>Standard</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D3 MODULE 5 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D3·5</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Excellence Launch</div>
+        <div class="module-name">30-Day Excellence Launch</div>
+        <div class="module-meta">Format: Milestone review, 30-day commitment plan, Excellence Academy pathway</div>
+      </div>
+      <div class="module-time">1:45 – 3:00 PM · 75 min</div>
+    </div>
+    <div class="milestone-row">
+      <div class="milestone"><div class="milestone-day">D1–3</div><div class="milestone-label">Shadow Phase</div><div class="milestone-text">Observation under supervision. No independent decisions.</div></div>
+      <div class="milestone"><div class="milestone-day">D4–7</div><div class="milestone-label">Supported Phase</div><div class="milestone-text">On post with supervisor accessible. Learning by doing.</div></div>
+      <div class="milestone"><div class="milestone-day">Wk 2</div><div class="milestone-label">Solo + Check-Ins</div><div class="milestone-text">Independent shifts. Daily supervisor check-in.</div></div>
+      <div class="milestone"><div class="milestone-day">Wk 3–4</div><div class="milestone-label">Full Operation</div><div class="milestone-text">Full accountability. Performance logged against commitment card.</div></div>
+      <div class="milestone"><div class="milestone-day">D30</div><div class="milestone-label">Formal Review</div><div class="milestone-text">Scored assessment. Excellence Academy eligibility determined.</div></div>
+      <div class="milestone"><div class="milestone-day">D90</div><div class="milestone-label">Full Evaluation</div><div class="milestone-text">Rate adjustment eligibility. Advancement consideration.</div></div>
+    </div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">30-Day Commitment Plan (10 min silence)</div>
+        <ul>
+          <li>Primary performance goal for the first 30 days</li>
+          <li>Specific actions to take every shift toward that goal</li>
+          <li>The area requiring most focused development</li>
+          <li>How the agent will know they succeeded at the 30-day review</li>
+          <li>Agent signs, dates — submitted to site supervisor at Module 6 handoff</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Excellence Academy Eligibility</div>
+        <ul>
+          <li>30-day assessment score of 85% or above</li>
+          <li>Zero attendance violations in the first 30 days</li>
+          <li>Shift log quality rated compliant by site supervisor</li>
+          <li>No open conduct flags at the time of review</li>
+          <li>Site supervisor endorsement required</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- D3 MODULE 6 -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">D3·6</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Supervisor Handoff</div>
+        <div class="module-name">Site Supervisor Handoff</div>
+        <div class="module-meta">Format: Formal introduction, site expectations brief, open Q&A</div>
+      </div>
+      <div class="module-time">3:00 – 4:00 PM · 60 min</div>
+    </div>
+    <div class="callout callout-green"><div class="callout-icon">🤝</div><div class="callout-text"><strong>Site Supervisor Leads This Module</strong>Facilitator introduces the supervisor and steps back. Supervisor delivers site expectations, first-shift information, and opens the floor for questions. Facilitator collects 30-day commitment plans from agents to deliver to supervisor at close.</div></div>
+    <div class="content-row">
+      <div class="content-box">
+        <div class="content-box-label">Supervisor Covers</div>
+        <ul>
+          <li>Site-specific expectations beyond program standards</li>
+          <li>First shift assignment: date, time, what to expect</li>
+          <li>How to reach the supervisor on shift</li>
+          <li>Site-specific residents or situations to be aware of</li>
+          <li>What the supervisor will be watching for in the first two weeks</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <div class="content-box-label">Facilitator Delivers to Supervisor</div>
+        <ul>
+          <li>All 30-day commitment plans (collected from Module 5)</li>
+          <li>Shift log practicum scores with written notes</li>
+          <li>Standards assessment scores</li>
+          <li>Any agent flags or observations from across three days</li>
+          <li>Day 1 commitment card photos (sent separately within 24 hours)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM CLOSE -->
+  <div class="module-block">
+    <div class="module-header">
+      <div class="module-num-badge">✓</div>
+      <div class="module-header-info">
+        <div class="module-tag">Day 3 · Program Close</div>
+        <div class="module-name">Final Commitment & Program Closing</div>
+        <div class="module-meta">Format: Final commitment card, program completion, send-off</div>
+      </div>
+      <div class="module-time">4:00 – 5:00 PM · 60 min</div>
+    </div>
+    <div class="content-box-single">
+      <div class="content-box-label">Final Commitment Card — Three Prompts (8 min silence)</div>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:8px 0;border-bottom:1px solid var(--cream-dark);font-size:13px">1. The Apex Standard I carry into every shift.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--cream-dark);font-size:13px">2. The one thing I hold myself accountable for in the first 30 days.</li>
+        <li style="padding:8px 0;font-size:13px">3. The professional I intend to be at Apex.</li>
+      </ul>
+    </div>
+    <div class="callout callout-navy"><div class="callout-icon">📸</div><div class="callout-text"><strong>Photograph All Final Commitment Cards Before Dismissal</strong>Agents keep their cards and bring them to their 30-day review. Facilitator photographs every card. Note: "Bring this to your 30-day review." These are referenced, not collected.</div></div>
+
+    <!-- POST-PROGRAM CHECKLIST -->
+    <div class="spacer"></div>
+    <div style="background:var(--cream);border-left:4px solid var(--gold);padding:16px 20px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px">Post-Program — Within 24 Hours of Day 3 Close</div>
+      <div style="font-size:13px;color:var(--charcoal);line-height:1.7">
+        ☐ All Conduct Acknowledgment Forms filed in personnel folder<br>
+        ☐ All commitment card photos emailed to Regional Manager<br>
+        ☐ Assessment scores summary emailed to Regional Manager<br>
+        ☐ Any agent flags or remediation notes documented<br>
+        ☐ Supervisor handoff notes sent to site supervisor<br>
+        ☐ 30-Day Commitment Plans confirmed received by supervisor
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrapper -->
+
+<script>
+function showDay(id, btn) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab[onclick]').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
