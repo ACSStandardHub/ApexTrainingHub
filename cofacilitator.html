@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex NHO — Co-Facilitator App</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1F3C;
+  --navy-light: #162d54;
+  --navy-mid: #1a3567;
+  --gold: #C9A84C;
+  --gold-light: #dfc06e;
+  --gold-dim: #8a6e2e;
+  --cream: #F5F3EE;
+  --cream-dark: #e8e4db;
+  --white: #ffffff;
+  --gray-light: #f0ede8;
+  --gray-mid: #c8c2b6;
+  --gray-dark: #5a5448;
+  --text-dark: #1a1612;
+  --text-mid: #3d3830;
+  --success: #2d6a4f;
+  --success-light: #d8f3e8;
+  --warn: #b5621a;
+  --warn-light: #fdebd8;
+  --alert: #6B1A1A;
+  --alert-light: #fdf0f0;
+  --sidebar-width: 300px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Barlow',sans-serif; background:var(--navy); color:var(--text-dark); min-height:100vh; overflow-x:hidden; }
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-width); height:100vh;
+  background:var(--navy); overflow-y:auto; z-index:100; display:flex; flex-direction:column;
+  border-right:1px solid rgba(201,168,76,0.15);
+}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
+
+.sidebar-logo { padding:24px 20px 16px; border-bottom:1px solid rgba(201,168,76,0.2); }
+.brand-tag { font-family:'Barlow Condensed',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.brand-name { font-family:'EB Garamond',serif; font-size:18px; color:white; line-height:1.2; }
+.brand-sub { font-size:10px; color:rgba(255,255,255,0.4); margin-top:3px; }
+
+/* facilitator ID badge */
+.facilitator-badge { padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.badge-label { font-size:9px; color:rgba(255,255,255,0.35); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px; }
+.badge-name { font-size:13px; font-weight:600; color:white; }
+.badge-role { font-size:11px; color:var(--gold); }
+
+/* session progress */
+.session-progress { padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.prog-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.prog-label { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:0.1em; }
+.prog-pct { font-size:11px; font-weight:600; color:var(--gold); }
+.prog-bar { height:3px; background:rgba(255,255,255,0.1); border-radius:2px; }
+.prog-fill { height:100%; background:linear-gradient(90deg,var(--gold-dim),var(--gold)); border-radius:2px; transition:width 0.4s ease; }
+
+/* day tabs */
+.day-tabs { display:flex; padding:14px 20px 0; gap:5px; }
+.day-tab { flex:1; padding:7px 4px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); border-radius:4px; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); cursor:pointer; text-align:center; transition:all 0.2s; }
+.day-tab.active { background:var(--gold); border-color:var(--gold); color:var(--navy); }
+.day-tab:hover:not(.active) { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); }
+
+/* nav items */
+.nav-section { padding:10px 0; flex:1; }
+.nav-day-label { padding:8px 20px 4px; font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); opacity:0.7; }
+.nav-item { display:flex; align-items:center; gap:8px; padding:9px 20px; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
+.nav-item:hover { background:rgba(255,255,255,0.05); }
+.nav-item.active { background:rgba(201,168,76,0.1); border-left-color:var(--gold); }
+.nav-item.done { border-left-color:var(--success); }
+.nav-item.hidden-day { display:none; }
+.nav-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.15); flex-shrink:0; transition:all 0.2s; }
+.nav-item.active .nav-dot { background:var(--gold); }
+.nav-item.done .nav-dot { background:var(--success); }
+.nav-type { font-size:8px; font-weight:700; letter-spacing:0.15em; padding:2px 6px; border-radius:2px; flex-shrink:0; }
+.nav-type.classroom { background:rgba(13,31,60,0.5); color:rgba(255,255,255,0.5); }
+.nav-type.floor { background:rgba(26,92,42,0.4); color:#6fcf97; }
+.nav-type.handoff { background:rgba(201,168,76,0.2); color:var(--gold); }
+.nav-text { font-size:11px; font-weight:500; color:rgba(255,255,255,0.55); line-height:1.3; flex:1; }
+.nav-item.active .nav-text { color:rgba(255,255,255,0.9); }
+
+/* ── MAIN ── */
+#main { margin-left:var(--sidebar-width); min-height:100vh; background:var(--cream); }
+
+/* topbar */
+#topbar { background:var(--navy); padding:12px 40px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50; border-bottom:2px solid var(--gold); }
+.topbar-left { display:flex; flex-direction:column; gap:2px; }
+.topbar-crumb { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:0.15em; text-transform:uppercase; }
+.topbar-title { font-size:14px; font-weight:600; color:white; }
+.topbar-actions { display:flex; gap:10px; align-items:center; }
+.btn-nav { padding:7px 16px; border-radius:3px; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; border:none; font-family:'Barlow',sans-serif; }
+.btn-prev { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6); }
+.btn-prev:hover { background:rgba(255,255,255,0.14); }
+.btn-next { background:var(--gold); color:var(--navy); }
+.btn-next:hover { background:var(--gold-light); }
+.btn-done { background:var(--success); color:white; }
+.btn-done:hover { background:#235a42; }
+
+/* ── SECTIONS ── */
+.section { display:none; animation:fadeIn 0.3s ease; }
+.section.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* hero banner */
+.hero-banner { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 70%,#1e2d5a 100%); padding:48px 48px 40px; position:relative; overflow:hidden; }
+.hero-banner::before { content:''; position:absolute; top:-40px; right:-40px; width:260px; height:260px; border-radius:50%; border:50px solid rgba(201,168,76,0.05); }
+.hero-tag { display:inline-block; padding:4px 12px; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); border-radius:2px; font-size:9px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.hero-title { font-family:'EB Garamond',serif; font-size:36px; color:white; line-height:1.15; margin-bottom:10px; }
+.hero-sub { font-size:14px; color:rgba(255,255,255,0.5); max-width:560px; line-height:1.6; }
+
+/* content body */
+.content-body { padding:36px 48px; }
+
+/* facilitator script block */
+.script-block { background:var(--navy); border-radius:6px; padding:22px 28px; margin:20px 0; position:relative; }
+.script-block::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--gold); border-radius:6px 0 0 6px; }
+.script-label { font-size:9px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.script-text { font-family:'EB Garamond',serif; font-size:15px; color:rgba(255,255,255,0.88); line-height:1.7; font-style:italic; }
+.script-text strong { font-style:normal; color:white; font-weight:600; }
+
+/* coaching cue */
+.coaching-cue { background:rgba(181,98,26,0.1); border:1px dashed rgba(181,98,26,0.4); border-radius:6px; padding:14px 18px; margin:14px 0; }
+.cue-label { font-size:9px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--warn); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.cue-text { font-size:12.5px; color:var(--text-mid); line-height:1.6; }
+
+/* watch for */
+.watch-for { background:var(--alert-light); border-left:4px solid var(--alert); border-radius:0 6px 6px 0; padding:14px 18px; margin:14px 0; }
+.watch-label { font-size:9px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--alert); margin-bottom:6px; }
+.watch-text { font-size:12.5px; color:var(--text-mid); line-height:1.6; }
+
+/* timing block */
+.timing-block { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+.timing-chip { padding:5px 14px; border-radius:20px; font-size:11px; font-weight:600; display:flex; align-items:center; gap:6px; }
+.chip-classroom { background:rgba(13,31,60,0.1); color:var(--navy); }
+.chip-floor { background:rgba(26,92,42,0.1); color:var(--success); }
+.chip-handoff { background:rgba(201,168,76,0.15); color:var(--gold-dim); }
+.chip-icon { font-size:13px; }
+
+/* content block */
+.content-block { margin-bottom:22px; }
+.block-title { font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--navy); border-bottom:2px solid var(--gold); display:inline-block; padding-bottom:2px; margin-bottom:10px; }
+.content-list { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.content-list li { display:flex; gap:10px; font-size:13px; line-height:1.55; color:var(--text-mid); }
+.content-list li::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; margin-top:7px; }
+
+/* handout checklist */
+.handout-checklist { background:white; border:1px solid var(--cream-dark); border-radius:6px; overflow:hidden; margin:16px 0; }
+.handout-header { background:var(--navy); padding:10px 16px; display:flex; justify-content:space-between; align-items:center; }
+.handout-header-text { font-size:11px; font-weight:700; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; }
+.handout-row { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--cream-dark); cursor:pointer; transition:all 0.2s; }
+.handout-row:last-child { border-bottom:none; }
+.handout-row:hover { background:var(--gray-light); }
+.handout-row.checked { background:var(--success-light); }
+.handout-check { width:18px; height:18px; border:2px solid var(--cream-dark); border-radius:3px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; transition:all 0.2s; }
+.handout-row.checked .handout-check { background:var(--success); border-color:var(--success); color:white; }
+.handout-name { flex:1; font-size:12.5px; font-weight:600; color:var(--navy); }
+.handout-detail { font-size:11px; color:var(--gray-dark); }
+.handout-when { font-size:10px; font-weight:600; color:var(--gold-dim); background:rgba(201,168,76,0.1); padding:2px 8px; border-radius:10px; flex-shrink:0; }
+
+/* notes field */
+.notes-area { margin:20px 0; }
+.notes-label { font-size:10px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:8px; }
+.notes-input { width:100%; padding:14px 16px; font-family:'Barlow',sans-serif; font-size:13px; color:var(--text-dark); border:1px solid var(--cream-dark); border-radius:6px; resize:vertical; min-height:100px; background:white; outline:none; transition:border-color 0.2s; }
+.notes-input:focus { border-color:var(--gold); }
+.notes-input::placeholder { color:var(--gray-mid); }
+
+/* agent roster */
+.roster-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin:14px 0; }
+.roster-card { background:white; border:1px solid var(--cream-dark); border-radius:6px; padding:12px 14px; cursor:pointer; transition:all 0.2s; }
+.roster-card:hover { border-color:var(--gold); }
+.roster-card.flagged { border-color:var(--alert); background:var(--alert-light); }
+.roster-card.strong { border-color:var(--success); background:var(--success-light); }
+.roster-name { font-size:13px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.roster-role { font-size:11px; color:var(--gray-dark); }
+.roster-flags { display:flex; gap:4px; flex-wrap:wrap; margin-top:8px; }
+.flag { font-size:9px; font-weight:700; padding:2px 6px; border-radius:2px; letter-spacing:0.1em; }
+.flag-attention { background:rgba(107,26,26,0.1); color:var(--alert); }
+.flag-strong { background:rgba(45,106,79,0.1); color:var(--success); }
+.flag-quiet { background:rgba(90,84,72,0.1); color:var(--gray-dark); }
+
+/* two-col layout */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+
+/* stat row */
+.stat-row { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+.stat-box { background:white; border:1px solid var(--cream-dark); border-radius:6px; padding:14px 18px; flex:1; min-width:120px; }
+.stat-num { font-family:'EB Garamond',serif; font-size:28px; color:var(--navy); line-height:1; margin-bottom:4px; }
+.stat-label { font-size:11px; color:var(--gray-dark); }
+
+/* divider */
+.divider { height:1px; background:var(--cream-dark); margin:24px 0; }
+.gold-divider { height:2px; background:linear-gradient(90deg,var(--gold),transparent); margin:24px 0; border:none; }
+
+/* floor block */
+.floor-block { background:linear-gradient(135deg,#0a2010 0%,#1a4a28 100%); border-radius:8px; padding:24px 28px; margin:20px 0; border:1px solid rgba(111,207,151,0.2); }
+.floor-block-label { font-size:9px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#6fcf97; margin-bottom:10px; }
+.floor-block-title { font-family:'EB Garamond',serif; font-size:22px; color:white; margin-bottom:14px; }
+.floor-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.floor-list li { display:flex; gap:10px; font-size:13px; line-height:1.5; color:rgba(255,255,255,0.8); }
+.floor-list li::before { content:'→'; color:#6fcf97; flex-shrink:0; font-weight:700; }
+
+/* comment box */
+.comment-box { background:white; border:1px solid var(--cream-dark); border-radius:6px; padding:14px 16px; margin:10px 0; }
+.comment-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.comment-author { font-size:11px; font-weight:700; color:var(--navy); }
+.comment-time { font-size:10px; color:var(--gray-dark); }
+.comment-text { font-size:13px; color:var(--text-mid); line-height:1.5; }
+.comment-input-row { display:flex; gap:8px; margin-top:12px; }
+.comment-input { flex:1; padding:9px 12px; border:1px solid var(--cream-dark); border-radius:4px; font-family:'Barlow',sans-serif; font-size:13px; outline:none; transition:border-color 0.2s; }
+.comment-input:focus { border-color:var(--gold); }
+.btn-comment { padding:9px 18px; background:var(--navy); color:white; border:none; border-radius:4px; font-family:'Barlow',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s; }
+.btn-comment:hover { background:var(--navy-mid); }
+
+/* mobile */
+#menu-toggle { display:none; position:fixed; top:14px; left:14px; width:40px; height:40px; background:var(--navy); border:none; border-radius:4px; cursor:pointer; z-index:200; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
+#menu-toggle span { display:block; width:20px; height:2px; background:white; border-radius:1px; }
+@media(max-width:768px) { #menu-toggle{display:flex} #sidebar{transform:translateX(-100%)} #sidebar.open{transform:translateX(0)} #main{margin-left:0} .two-col{grid-template-columns:1fr} .content-body{padding:24px 20px} }
+</style>
+</head>
+<body>
+<a href="index.html">← Back to Training Library</a>
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand-tag">Co-Facilitator App</div>
+    <div class="brand-name">Apex Concierge Services</div>
+    <div class="brand-sub">New Hire Orientation · Internal Use Only</div>
+  </div>
+
+  <div class="facilitator-badge">
+    <div class="badge-label">Facilitating as</div>
+    <div class="badge-name" id="facilitatorName">Select Facilitator ▾</div>
+    <div class="badge-role" id="facilitatorRole"></div>
+  </div>
+
+  <div class="session-progress">
+    <div class="prog-row">
+      <span class="prog-label">Session Progress</span>
+      <span class="prog-pct" id="progPct">0%</span>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="day-tabs">
+    <div class="day-tab active" onclick="switchDay(1)">Day 1</div>
+    <div class="day-tab" onclick="switchDay(2)">Day 2</div>
+    <div class="day-tab" onclick="switchDay(3)">Day 3</div>
+  </div>
+
+  <div class="nav-section" id="navList"></div>
+</nav>
+
+<div id="main">
+  <div id="topbar">
+    <div class="topbar-left">
+      <div class="topbar-crumb" id="topCrumb">Session Overview</div>
+      <div class="topbar-title" id="topTitle">Apex New Hire Orientation — Co-Facilitator</div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn-nav btn-prev" onclick="navigate(-1)">← Prev</button>
+      <button class="btn-nav btn-done" onclick="markDone()">✓ Mark Done</button>
+      <button class="btn-nav btn-next" onclick="navigate(1)">Next →</button>
+    </div>
+  </div>
+  <div id="content"></div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+
+const FACILITATORS = [
+  { name: "Khalif Rashid", role: "Regional Operations Manager" },
+  { name: "Danielle McManus", role: "CEO & Founder" },
+  { name: "Shiva", role: "Lead Facilitator" },
+  { name: "Training Assistant", role: "Co-Facilitator" },
+];
+
+const AGENTS = [
+  { name: "Agent 1", role: "Concierge Agent", property: "Ora Seaport", flags: [] },
+  { name: "Agent 2", role: "Lead Concierge", property: "Via Seaport", flags: [] },
+  { name: "Agent 3", role: "Lobby Ambassador", property: "The Benjamin", flags: [] },
+  { name: "Agent 4", role: "Package Admin", property: "Franklin", flags: [] },
+];
+
+const SECTIONS = [
+  // DAY 1
+  { id:"d1-overview", day:1, type:"classroom", navText:"Program Overview", title:"Program Overview", render:renderD1Overview },
+  { id:"d1-pre", day:1, type:"classroom", navText:"Pre-Session Arrival", title:"Pre-Session", render:renderD1Pre },
+  { id:"d1-m1", day:1, type:"classroom", navText:"M1 — Identity & Culture", title:"Module 1: Company Identity & Culture", render:renderD1M1 },
+  { id:"d1-m2", day:1, type:"classroom", navText:"M2 — Client Hierarchy", title:"Module 2: Client Hierarchy & Roles", render:renderD1M2 },
+  { id:"d1-m3", day:1, type:"classroom", navText:"M3 — Professional Presence", title:"Module 3: Professional Presence", render:renderD1M3 },
+  { id:"d1-m4", day:1, type:"classroom", navText:"M4 — Core Operations", title:"Module 4: Core Operations", render:renderD1M4 },
+  { id:"d1-m5", day:1, type:"classroom", navText:"M5 — Shift Log Mastery", title:"Module 5: Shift Log Mastery", render:renderD1M5 },
+  { id:"d1-m6", day:1, type:"classroom", navText:"M6 — Policies", title:"Module 6: Policies & Accountability", render:renderD1M6 },
+  { id:"d1-m7", day:1, type:"classroom", navText:"M7 — Scenarios", title:"Module 7: Real-World Scenarios", render:renderD1M7 },
+  { id:"d1-m8", day:1, type:"classroom", navText:"M8 — Systems", title:"Module 8: Systems Overview", render:renderD1M8 },
+  { id:"d1-m9", day:1, type:"classroom", navText:"M9 — Leadership & Close", title:"Module 9: Leadership & Closing", render:renderD1M9 },
+  // DAY 2
+  { id:"d2-overview", day:2, type:"classroom", navText:"Day 2 Overview", title:"Day 2 Overview", render:renderD2Overview },
+  { id:"d2-m1", day:2, type:"classroom", navText:"M1 — Package Handling", title:"Module 1: Package Handling", render:renderD2M1 },
+  { id:"d2-m2", day:2, type:"classroom", navText:"M2 — Incident Reporting", title:"Module 2: Incident Reporting", render:renderD2M2 },
+  { id:"d2-m3", day:2, type:"classroom", navText:"M3 — Emergency Response", title:"Module 3: Emergency Response", render:renderD2M3 },
+  { id:"d2-floor", day:2, type:"floor", navText:"Floor — Scenario Drills", title:"Floor Block: Advanced Scenarios", render:renderD2Floor },
+  { id:"d2-m4", day:2, type:"classroom", navText:"M4 — Shift Log Practicum", title:"Module 4: Shift Log Practicum", render:renderD2M4 },
+  // DAY 3
+  { id:"d3-overview", day:3, type:"classroom", navText:"Day 3 Overview", title:"Day 3 Overview", render:renderD3Overview },
+  { id:"d3-m1", day:3, type:"classroom", navText:"M1 — Role Tracks", title:"Module 1: Role-Specific Tracks", render:renderD3M1 },
+  { id:"d3-floor1", day:3, type:"floor", navText:"Floor — Site Walk", title:"Floor Block: Supervised Site Walk", render:renderD3Floor1 },
+  { id:"d3-floor2", day:3, type:"floor", navText:"Floor — Capstone Scenarios", title:"Floor Block: Capstone Scenarios", render:renderD3Floor2 },
+  { id:"d3-m2", day:3, type:"classroom", navText:"M2 — Standards Assessment", title:"Module 2: Standards Assessment", render:renderD3M2 },
+  { id:"d3-m3", day:3, type:"classroom", navText:"M3 — 30-Day Launch", title:"Module 3: 30-Day Excellence Launch", render:renderD3M3 },
+  { id:"d3-handoff", day:3, type:"handoff", navText:"Supervisor Handoff", title:"Supervisor Handoff & Program Close", render:renderD3Handoff },
+];
+
+let currentIdx = 0;
+let activeDay = 1;
+let done = new Set();
+let comments = {};
+let agentData = JSON.parse(JSON.stringify(AGENTS));
+let sessionNotes = {};
+let currentFacilitator = null;
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+
+function script(text) {
+  return `<div class="script-block"><div class="script-label">📢 Say This</div><div class="script-text">${text}</div></div>`;
+}
+
+function cue(text) {
+  return `<div class="coaching-cue"><div class="cue-label">⚡ Coaching Cue</div><div class="cue-text">${text}</div></div>`;
+}
+
+function watchFor(text) {
+  return `<div class="watch-for"><div class="watch-label">👁 Watch For</div><div class="watch-text">${text}</div></div>`;
+}
+
+function handouts(items) {
+  const rows = items.map(([name, detail, when], i) => `
+    <div class="handout-row" onclick="toggleHandout(this)" id="ho-${currentIdx}-${i}">
+      <div class="handout-check" id="hc-${currentIdx}-${i}"></div>
+      <div class="handout-name">${name}</div>
+      <div class="handout-detail">${detail}</div>
+      <div class="handout-when">${when}</div>
+    </div>`).join('');
+  return `<div class="handout-checklist">
+    <div class="handout-header"><span class="handout-header-text">📋 Handouts for This Block</span><span style="font-size:10px;color:rgba(255,255,255,0.4)">Tap to mark distributed</span></div>
+    ${rows}
+  </div>`;
+}
+
+function bullets(title, items) {
+  return `<div class="content-block"><div class="block-title">${title}</div><ul class="content-list">${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+}
+
+function sectionHero(tag, title, sub) {
+  return `<div class="hero-banner"><div class="hero-tag">${tag}</div><div class="hero-title">${title}</div><div class="hero-sub">${sub}</div></div>`;
+}
+
+function notesField(id) {
+  const saved = sessionNotes[id] || '';
+  return `<div class="notes-area">
+    <div class="notes-label">🗒 Session Notes — ${id}</div>
+    <textarea class="notes-input" id="notes-${id}" placeholder="Add your observations, agent responses, things to follow up on…" onchange="saveNote('${id}',this.value)">${saved}</textarea>
+  </div>`;
+}
+
+function commentsPanel(id) {
+  const msgs = comments[id] || [];
+  const msgHtml = msgs.map(m => `<div class="comment-box"><div class="comment-header"><span class="comment-author">${m.author}</span><span class="comment-time">${m.time}</span></div><div class="comment-text">${m.text}</div></div>`).join('');
+  return `<div class="content-block" style="margin-top:24px">
+    <div class="block-title">Team Comments</div>
+    <div id="comments-${id}">${msgHtml || '<div style="color:var(--gray-dark);font-size:12px;padding:8px 0">No comments yet — add one below.</div>'}</div>
+    <div class="comment-input-row">
+      <input class="comment-input" id="ci-${id}" placeholder="Add a comment, observation, or flag for this section…" onkeydown="if(event.key==='Enter')addComment('${id}')">
+      <button class="btn-comment" onclick="addComment('${id}')">Post</button>
+    </div>
+  </div>`;
+}
+
+function agentRoster() {
+  return `<div class="content-block">
+    <div class="block-title">Agent Roster — Flag & Track</div>
+    <div class="roster-grid">
+      ${agentData.map((a,i) => `
+        <div class="roster-card ${a.flags.includes('attention')?'flagged':a.flags.includes('strong')?'strong':''}" id="rc-${i}" onclick="showAgentMenu(${i})">
+          <div class="roster-name">${a.name}</div>
+          <div class="roster-role">${a.role} · ${a.property}</div>
+          <div class="roster-flags">${a.flags.map(f=>`<span class="flag flag-${f}">${f.toUpperCase()}</span>`).join('')}</div>
+        </div>`).join('')}
+    </div>
+    <div style="font-size:11px;color:var(--gray-dark);margin-top:8px">Tap an agent card to flag their engagement level.</div>
+  </div>`;
+}
+
+function chipRow(blocks) {
+  return `<div class="timing-block">${blocks.map(([icon,label,type])=>`<div class="timing-chip chip-${type}"><span class="chip-icon">${icon}</span>${label}</div>`).join('')}</div>`;
+}
+
+// ── SECTION RENDERERS ─────────────────────────────────────────────────────────
+
+function renderD1Overview() {
+  return `
+  ${sectionHero("Day 1 of 3 · Co-Facilitator Guide", "Foundation Day", "Identity · Culture · Professional Presence · Core Operations · Shift Log · Policies · Scenarios · Systems · Leadership")}
+  <div class="content-body">
+    ${chipRow([["🏫","Classroom-forward","classroom"],["⏱","Full day","classroom"],["✍️","Written outputs: Conduct Acknowledgment, Commitment Card","classroom"]])}
+    ${bullets("Day 1 Objectives — What Agents Leave With", [
+      "A clear understanding of who Apex is and what standard they are representing.",
+      "The H.O.M.E. Values internalized — not recited, internalized.",
+      "The Friendly ≠ Familiar distinction named and felt.",
+      "The E.D.O. method practiced with peer scoring.",
+      "A signed conduct acknowledgment form collected before they leave.",
+      "A personal commitment card written and dated.",
+    ])}
+    ${script('"Before we start — look around this room. This is what Apex-level preparation looks like. Everything has a place. Nothing is accidental. Carry this into every shift."')}
+    ${cue("Energy in this room before a word is spoken is the first lesson. Be early. Be composed. Be the standard.")}
+    ${agentRoster()}
+    ${notesField("d1-overview")}
+    ${commentsPanel("d1-overview")}
+  </div>`;
+}
+
+function renderD1Pre() {
+  return `
+  ${sectionHero("Day 1 · Pre-Session", "Arrival & Environment Setup", "The room is the first lesson. Agents experience the standard before you say a word.")}
+  <div class="content-body">
+    ${handouts([
+      ["H.O.M.E. Values Reference Card","1 per agent — pre-staged at each seat","At seats"],
+    ])}
+    ${bullets("Facilitator Pre-Arrival Checklist", [
+      "Room set to Apex standard — clean, organized, no clutter at any surface.",
+      "Training packets, pens, and name tents at every seat before first agent arrives.",
+      "Schedule overview displayed or projected.",
+      "Soft background music at low, professional volume.",
+      "You are in full professional appearance — you are modeling.",
+    ])}
+    ${script('"The way this room was set up when you walked in — the quiet, the order, the intentionality — that is the Apex Standard. Deliberate. Unannounced. Non-negotiable."')}
+    ${cue("Name the lesson explicitly at the start of Module 1. Agents need to hear that the environment was a deliberate instructional choice.")}
+    ${watchFor("Agents who arrive late, appear disengaged, or do not greet the room with awareness. Note them. This tells you something about their default state before any training begins.")}
+    ${notesField("d1-pre")}
+    ${commentsPanel("d1-pre")}
+  </div>`;
+}
+
+function renderD1M1() {
+  return `
+  ${sectionHero("Day 1 · Module 1", "Company Identity & Culture", "Agents leave understanding that they represent something — not just fulfilling a job function.")}
+  <div class="content-body">
+    ${handouts([
+      ["Apex Standard One-Pager","1 per agent","Module 1 start"],
+    ])}
+    ${script('"You are not just a concierge — you are Apex in every interaction. Every moment at that desk is a brand moment. Residents don\'t see Apex Concierge Services — they see you."')}
+    ${bullets("H.O.M.E. Values — Facilitation Notes", [
+      "H — Hospitality: Do not read the definition. Ask first: 'What does genuine warmth look like at 2 AM?' Then give the Apex answer.",
+      "O — Ownership: 'Take initiative. Don't wait to be told.' Ask: 'Give me an example of ownership that has nothing to do with titles.'",
+      "M — Mindfulness: 'Stay aware before the need is voiced.' Ask: 'What does it look like when someone misses this?'",
+      "E — Excellence: 'Excellence is a decision.' Not a mood. Ask agents to define the difference.",
+    ])}
+    ${cue("Agent voice first — standard second. Ask before revealing. The agent who connects the value to their own language owns it. The agent who just reads it off the slide does not.")}
+    ${script('"What does it mean to represent something bigger than yourself on shift? How does that change how you approach a difficult moment?"')}
+    ${watchFor("Agents who respond with surface-level answers ('be professional', 'help residents'). Push gently: 'What does it feel like to know a resident's sense of safety starts with whether you are at that desk?' Let that land.")}
+    ${notesField("d1-m1")}
+    ${commentsPanel("d1-m1")}
+  </div>`;
+}
+
+function renderD1M2() {
+  return `
+  ${sectionHero("Day 1 · Module 2", "Client Hierarchy & Roles", "Agents understand who owns decisions, who they serve, and how to navigate every relationship.")}
+  <div class="content-body">
+    ${script('"A leasing agent you don\'t recognize approaches the desk and says they need to let their client into Unit 412. They tell you the property manager approved it verbally. How do you handle this?"')}
+    ${bullets("Key Teaching Points", [
+      "Leasing is a partner — not a supervisor. Supporting their work is part of the role, but 'they said it was approved' is not authorization.",
+      "The reporting line is: Apex Regional Manager → Site Supervisor. Everyone else is supported, not reported to.",
+      "When in doubt: refer to your shift log. Escalate to your supervisor. Document.",
+      "Access can be granted when properly logged — the log is what makes it legitimate.",
+    ])}
+    ${cue("The most common mistake is agents treating 'support' as the same as 'follow orders.' Name the distinction clearly: supporting someone is not the same as taking direction from them.")}
+    ${watchFor("Agents who answer the leasing scenario with a flat 'no.' Correct them — the answer is 'yes, with the right steps.' The training point is about verification and documentation, not refusal.")}
+    ${notesField("d1-m2")}
+    ${commentsPanel("d1-m2")}
+  </div>`;
+}
+
+function renderD1M3() {
+  return `
+  ${sectionHero("Day 1 · Module 3", "Professional Presence", "Appearance, energy, and communication are operational standards — not personal preferences.")}
+  <div class="content-body">
+    ${handouts([
+      ["Friendly ≠ Familiar Reference Card","1 per agent","Module 3 start"],
+      ["Apex Presence Checklist (10-point)","1 per agent","Module 3 paired activity"],
+    ])}
+    ${script('"Would I behave the same way with every resident — or only this one? If the answer is only this one — you have crossed into familiar."')}
+    ${bullets("Friendly ≠ Familiar — Facilitation Notes", [
+      "Ask for examples before the slide. Let two or three agents name specific behaviors that feel friendly but cross the line.",
+      "Common answers: calling residents by nicknames, staying to chat, sharing opinions on internal matters.",
+      "For each answer, name the line without shaming: 'That feels warm in the moment. Here is where it creates a problem...'",
+      "Close with: 'Friendly is consistent. Familiar is selective. The standard is not a ceiling — it is a floor.'",
+    ])}
+    ${cue("Do not rush the Friendly ≠ Familiar slide. This is one of the most common failure points in the field. Agents need to feel the distinction, not just hear it.")}
+    ${watchFor("Agents who push back ('but residents like when I'm friendly!'). They are not wrong — they are missing the distinction. Redirect: 'You are absolutely right. The question is whether every resident gets the same warmth, or just the ones you like.'")}
+    ${notesField("d1-m3")}
+    ${commentsPanel("d1-m3")}
+  </div>`;
+}
+
+function renderD1M4() {
+  return `
+  ${sectionHero("Day 1 · Module 4", "Core Operations", "The non-negotiables of every shift — what the desk is, and how to manage it.")}
+  <div class="content-body">
+    ${handouts([
+      ["Shift Expectations One-Pager","1 per agent","Module 4 start"],
+      ["Site Tour Template","1 per agent","Tour practice exercise"],
+    ])}
+    ${script('"The desk is never unattended. No exceptions. Bathroom or break: secure a relief before stepping away. If relief is unavailable, notify your supervisor immediately. Abandoning a post without coverage is a terminable offense."')}
+    ${bullets("Tour Practice Exercise", [
+      "Agents build a 3-stop tour route on paper using the site floor plan or a generalized layout.",
+      "Each agent presents: 'On my tour, I would check these 3 stops because...'",
+      "Connect every stop to what gets logged — what they observe, observe, observe.",
+      "The goal: touring is not casual walking. It is structured, timed, and documented.",
+    ])}
+    ${cue("The desk-is-never-unattended rule should feel non-negotiable before you move on. If any agent seems uncertain about this, stop and reinforce it directly before advancing.")}
+    ${notesField("d1-m4")}
+    ${commentsPanel("d1-m4")}
+  </div>`;
+}
+
+function renderD1M5() {
+  return `
+  ${sectionHero("Day 1 · Module 5", "Shift Log Mastery — E.D.O.", "The shift log is not a notes field. It is a formal operational record.")}
+  <div class="content-body">
+    ${handouts([
+      ["E.D.O. Reference Card (laminated)","1 per agent — keep on person","Module 5 start"],
+      ["Shift Log Non-Negotiables Sheet","1 per agent","Module 5D"],
+      ["Strong vs. Weak Log Entry Sheet","1 per agent","Module 5E comparison"],
+      ["E.D.O. Scoring Rubric","1 per agent","Module 5F drill"],
+    ])}
+    ${script('"An undocumented event did not happen — operationally and legally. If you were not at your post, there is no log entry to prove otherwise. If a package was mishandled, the log is the record. Write it like it matters — because it does."')}
+    ${bullets("Live Writing Drill — How to Run It", [
+      "Read each scenario prompt once at normal pace. Do not slow-read or add drama.",
+      "Agents write their E.D.O. entry independently. 4 minutes per scenario. No assistance.",
+      "Swap papers for peer scoring against the rubric.",
+      "Facilitator walks through the model entry for each scenario. Ask: what was missing? What was the strongest entry in the room?",
+    ])}
+    ${cue("This is the highest-stakes instructional block of Day 1. If you are running short on time, cut Module 8 Q&A — not Module 5. Log quality is how supervisors assess agent performance.")}
+    ${watchFor("Agents who write entries that are too short ('9 PM — checked building, all clear'). Show them the strong entry side by side. The contrast should be visceral, not explained.")}
+    ${notesField("d1-m5")}
+    ${commentsPanel("d1-m5")}
+  </div>`;
+}
+
+function renderD1M6() {
+  return `
+  ${sectionHero("Day 1 · Module 6", "Policies & Accountability", "Agents understand Apex behavioral and operational expectations — and sign to confirm.")}
+  <div class="content-body">
+    ${handouts([
+      ["Attendance & Conduct Policy Handout","1 per agent","Module 6 start"],
+      ["Conduct Acknowledgment Form","1 per agent — COLLECT before agents leave","Module 6 end"],
+    ])}
+    ${script('"You wake up sick the morning of your shift. Walk me through exactly what you do — step by step." [Let an agent respond. Close gaps against the slide.] The last point is the most important: the procedure is what makes it excused. The reason alone does not.')}
+    ${bullets("Call-Out Procedure — The Five Required Steps", [
+      "1. Call out minimum 2 hours before shift begins — no exceptions.",
+      "2. Text AND call — do not rely on a single form of communication.",
+      "3. Contact direct supervisor AND the on-call manager line — both.",
+      "4. Provide a reason and estimated return-to-duty status.",
+      "5. If absence exceeds 2 consecutive days, return with documentation.",
+    ])}
+    <div style="background:var(--alert-light);border:1px solid var(--alert);border-radius:6px;padding:16px 20px;margin:16px 0">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--alert);margin-bottom:6px">⚠️ Collect Before Agents Leave</div>
+      <div style="font-size:13px;color:var(--text-mid)">Every signed Conduct Acknowledgment Form must be collected before agents leave today. No unsigned forms exit the room. File in personnel folder. Photograph as backup and send to Khalif.</div>
+    </div>
+    ${notesField("d1-m6")}
+    ${commentsPanel("d1-m6")}
+  </div>`;
+}
+
+function renderD1M7() {
+  return `
+  ${sectionHero("Day 1 · Module 7", "Real-World Scenarios", "Decision-making and de-escalation under real conditions. No lecture — all applied.")}
+  <div class="content-body">
+    ${handouts([
+      ["Escalation Decision Tree","1 per agent","Module 7 start"],
+      ["Response Framework Card","1 per agent","Module 7 start"],
+    ])}
+    ${bullets("Six Scenarios — Facilitation Order", [
+      "S1 Noise Complaint — Tests: de-escalation, documentation, not over-promising.",
+      "S2 Smoking Violation — Tests: enforcing policy without confrontation, E.D.O. outcome entry.",
+      "S3 Missing Package — Tests: validating frustration not accusation, staying on facts.",
+      "S4 Escalation Decision — Tests: knowing when role ends, escalation as strength.",
+      "S5 Communication Under Pressure — Tests: triage, composure, priority under load.",
+      "S6 Unauthorized Person — Tests: professional contact, escalation threshold, documentation from first observation.",
+    ])}
+    ${script('"A.C.T. is not a script — it is a structure for composure under pressure. Walk back through each scenario using A.C.T. as the lens. Where did agents naturally apply it? Where did they skip a step?"')}
+    ${cue("Introduce A.C.T. AFTER the scenarios — not before. Retroactive analysis builds more durable understanding than teaching the framework first.")}
+    ${watchFor("Agents who over-promise in scenarios ('I'll take care of it right now'). Flag this gently: 'What are you actually authorized to promise?' The goal is composure and process — not resolution.")}
+    ${notesField("d1-m7")}
+    ${commentsPanel("d1-m7")}
+  </div>`;
+}
+
+function renderD1M8() {
+  return `
+  ${sectionHero("Day 1 · Module 8", "Systems Overview", "Functional orientation to Connecteam, Paylocity, and Yardi.")}
+  <div class="content-body">
+    ${handouts([
+      ["Systems Reference Card (laminated)","1 per agent — keep on person","Module 8 start"],
+      ["Systems Quick-Check Card","1 per agent — write-in activity","Module 8 activity"],
+    ])}
+    ${bullets("Three Systems — What Each Is For", [
+      "CONNECTEAM — Scheduling, shift management, communication, shift swaps. All scheduling goes here. Not personal texts.",
+      "PAYLOCITY — Payroll, tax documents, time and attendance. All onboarding docs must be complete before first payroll.",
+      "YARDI — Resident database, work orders, package tracking (property-dependent). Resident lookup before every package release.",
+    ])}
+    ${cue("This module is orientation-level only. Deep system training happens at the property. Your goal: agents can name what each system is for and identify which tasks go where.")}
+    ${script('"Quick-Check activity: 3 minutes, fill in the system column without help. Self-score. We review as a group. Ask — any confusion before we move on?"')}
+    ${notesField("d1-m8")}
+    ${commentsPanel("d1-m8")}
+  </div>`;
+}
+
+function renderD1M9() {
+  return `
+  ${sectionHero("Day 1 · Module 9", "Leadership Introduction & Closing", "Close Day 1 with intention. Set the leadership tone. Send agents out with clarity.")}
+  <div class="content-body">
+    ${handouts([
+      ["90-Day Expectation Overview","1 per agent","Module 9 start"],
+      ["Day 1 Commitment Card","Project the slide — or print separately","Module 9 close"],
+    ])}
+    ${script('"You don\'t need a title to lead. Your behavior sets the standard for the space. How you operate when no one is watching is the true Apex Standard."')}
+    ${bullets("Commitment Card — How to Run It", [
+      "Project the card slide. Silence — do not read the prompts aloud while agents are writing.",
+      "Give 8 full minutes. If agents finish early, tell them to write more specifically.",
+      "Ask: 'Would anyone like to share one thing they wrote?' Do not pressure.",
+      "Photograph every card before agents leave. These are referenced at the 30-day review.",
+    ])}
+    ${script('"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."')}
+    ${cue("Read the closing line slowly. Pause after 'this standard.' Pause again after 'Today is the baseline.' Then: 'Now go exceed it.' End. Q&A 3 minutes. Dismiss.")}
+    <div style="background:var(--alert-light);border:1px solid var(--alert);border-radius:6px;padding:16px 20px;margin:16px 0">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--alert);margin-bottom:6px">⚠️ Before Anyone Leaves</div>
+      <div style="font-size:13px;color:var(--text-mid)">✓ All Conduct Acknowledgment Forms collected<br>✓ All Commitment Cards photographed<br>✓ Systems Reference Card in every agent's hand</div>
+    </div>
+    ${notesField("d1-m9")}
+    ${commentsPanel("d1-m9")}
+  </div>`;
+}
+
+// DAY 2
+
+function renderD2Overview() {
+  return `
+  ${sectionHero("Day 2 of 3 · Co-Facilitator Guide", "Operations in Depth", "Package Handling · Incident Reporting · Emergency Response · Floor Scenarios · Shift Log Practicum")}
+  <div class="content-body">
+    ${chipRow([["🏫","Classroom: Package, Incidents, Emergency","classroom"],["🏃","Floor: Scenario Drills","floor"],["📝","Assessment: Shift Log Practicum","classroom"]])}
+    ${bullets("Day 2 Opens With", [
+      "20-minute debrief: 'What from yesterday feels solid? What felt unclear?'",
+      "Return any log feedback from Day 1 practicum if applicable.",
+      "The themes agents surface tell you where to spend extra time in today's modules.",
+    ])}
+    ${cue("Day 2 is more technically demanding than Day 1. Energy management matters. The floor block is not a break — frame it that way explicitly.")}
+    ${agentRoster()}
+    ${notesField("d2-overview")}
+    ${commentsPanel("d2-overview")}
+  </div>`;
+}
+
+function renderD2M1() {
+  return `
+  ${sectionHero("Day 2 · Module 1", "Package Handling & Delivery Protocols", "Execute the complete handling sequence for all five package types — correctly, every time.")}
+  <div class="content-body">
+    ${handouts([
+      ["Package Category Protocol Table","1 per agent","Module 1 start"],
+      ["Package Handling Quick-Reference (laminated)","1 per agent — for the package room","Module 1"],
+    ])}
+    ${script('"Log it in the system BEFORE you move the package anywhere. System entry is not the last step — it is the second step. If a package disappears between intake and storage and you have no log entry, you have no record it was ever received."')}
+    ${bullets("Five Categories — Facilitation Notes", [
+      "Standard: Baseline. Walk through step by step. No shortcuts on any step.",
+      "Food Delivery vs. Grocery Delivery: test the 24/48 hour distinction explicitly. Run it until automatic.",
+      "High-Value: never on general shelf. Electronics, luxury goods. Misclassifying is prohibited.",
+      "RTS/Outgoing: no postage, no acceptance. Decline professionally. Log the refusal.",
+    ])}
+    ${cue("For each category, ask agents to state the protocol before you reveal it. Testing before telling builds retention.")}
+    ${watchFor("Agents who say they would release a package without ID if they 'know' the resident. Stop immediately. 'You know them today. What happens when you are wrong?' Reinforce: verification every time, regardless of familiarity.")}
+    ${notesField("d2-m1")}
+    ${commentsPanel("d2-m1")}
+  </div>`;
+}
+
+function renderD2M2() {
+  return `
+  ${sectionHero("Day 2 · Module 2", "Incident Report Documentation", "Know when to file, how to write correctly, and what language to never use.")}
+  <div class="content-body">
+    ${handouts([
+      ["Incident Report Field Guide","1 per agent","Module 2 start"],
+      ["Blank Incident Report Forms (x3)","3 per agent","Documentation drill"],
+    ])}
+    ${script('"When in doubt — file. An unnecessary report is recoverable. A missing report is not."')}
+    ${bullets("Language Drill — Run This", [
+      "Show the 'Never Write This' column. For each: 'Why is this problematic?' Agents should identify that it is an interpretation, not an observation.",
+      "Observation vs. Conclusion: 'Resident appeared intoxicated' is a conclusion. 'Resident exhibited slurred speech and unsteady gait' is an observation.",
+      "Documentation drill: read each prompt once. Agents complete individually. Peer review for factual language, complete fields, neutral tone.",
+    ])}
+    ${cue("Group debrief of the drill should focus on language accuracy, not content. Ask: 'Did you write what you saw, or what you concluded?'")}
+    ${notesField("d2-m2")}
+    ${commentsPanel("d2-m2")}
+  </div>`;
+}
+
+function renderD2M3() {
+  return `
+  ${sectionHero("Day 2 · Module 3", "Emergency Response Protocols", "Know your role in every emergency type — and execute without improvising.")}
+  <div class="content-body">
+    ${handouts([
+      ["Emergency Response Reference Card","1 per agent","Module 3"],
+    ])}
+    ${script('"Call first. Document everything. Support within your role. You are not first responders. You are the organized, professional point of contact who ensures the right people get the right information at the right time."')}
+    ${bullets("Verbal Quick-Drill — Run After Each Protocol", [
+      "Say: 'Fire. What are your first three actions?' Agents respond without cards.",
+      "Then: 'Medical emergency, unresponsive resident. First three steps.'",
+      "Then: 'Security threat. First three steps.'",
+      "If agents hesitate: run it again. This knowledge must be immediate — not recalled.",
+    ])}
+    ${cue("The security protocol has one step agents often miss: 'Your safety is not secondary to the building's. Remove yourself from danger first.' Emphasize this.")}
+    ${watchFor("Agents who say they would try to de-escalate an active physical threat themselves. Correct immediately: call 911, do not confront, do not intervene. Your job is communication and documentation.")}
+    ${notesField("d2-m3")}
+    ${commentsPanel("d2-m3")}
+  </div>`;
+}
+
+function renderD2Floor() {
+  return `
+  ${sectionHero("Day 2 · Floor Block", "Advanced Scenario Drills — On Site", "Multi-layer situations run live on your assigned property.")}
+  <div class="content-body">
+    <div class="floor-block">
+      <div class="floor-block-label">🏃 Floor Block — Live Drills</div>
+      <div class="floor-block-title">Run These Drills On Site</div>
+      <ul class="floor-list">
+        <li>Run at actual property locations: desk, package room, lobby, amenity space. Physical context is the point.</li>
+        <li>Introduce each scenario verbally. Agents respond as if it is real.</li>
+        <li>After each drill: 'What did you do first? What did you log? Who did you notify?'</li>
+        <li>Introduce complication layers mid-drill: 'Now the resident has begun filming you. What changes?'</li>
+        <li>Apply A.C.T. retroactively after each: 'Where did you Acknowledge? Control? Transfer?'</li>
+        <li>Minimum three drills. Add more based on what you observe in agents.</li>
+      </ul>
+    </div>
+    ${cue("The floor block is not a break. Frame it explicitly: 'The floor blocks are not breaks — they are the work. What you practice on site today is what you carry into your first solo shift.'")}
+    ${watchFor("Agents who become passive on the floor — observing instead of responding. Engage them directly: 'You're at the desk. This is happening. What do you do?'")}
+    ${notesField("d2-floor")}
+    ${commentsPanel("d2-floor")}
+  </div>`;
+}
+
+function renderD2M4() {
+  return `
+  ${sectionHero("Day 2 · Module 4", "Shift Log Practicum — Individual Assessment", "Write a complete shift log from a live prompt — timed, individual, no assistance.")}
+  <div class="content-body">
+    ${handouts([
+      ["Blank Shift Log Templates (x3)","3 per agent","Practicum start"],
+      ["E.D.O. Scoring Rubric (second copy)","1 per agent — for peer scoring","Practicum"],
+    ])}
+    ${bullets("Practicum Protocol", [
+      "Individual. No assistance. 40 minutes to write all three entries.",
+      "You may not answer questions. If an agent asks for help: 'Answer it the way you understand it — that is the point.'",
+      "Peer score after the 40 minutes: swap papers, assess against the rubric.",
+      "Collect all logs before agents leave. Score and provide written feedback before Day 3.",
+    ])}
+    <div style="background:var(--alert-light);border:1px solid var(--alert);border-radius:6px;padding:16px 20px;margin:16px 0">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--alert);margin-bottom:6px">⚠️ Collect Before Agents Leave</div>
+      <div style="font-size:13px;color:var(--text-mid)">All shift log practicum forms must be collected before agents leave Day 2. Score and provide written feedback before Day 3 begins.</div>
+    </div>
+    ${notesField("d2-m4")}
+    ${commentsPanel("d2-m4")}
+  </div>`;
+}
+
+// DAY 3
+
+function renderD3Overview() {
+  return `
+  ${sectionHero("Day 3 of 3 · Co-Facilitator Guide", "Assessment, Launch & Handoff", "Role Tracks · Site Walk · Capstone Scenarios · Assessment · 30-Day Launch · Supervisor Handoff")}
+  <div class="content-body">
+    ${chipRow([["🏫","Classroom: Role Tracks, Assessment, Launch","classroom"],["🏃","Floor: Site Walk + Capstone Drills","floor"],["🤝","Handoff: Supervisor Takes the Room","handoff"]])}
+    ${bullets("Day 3 Opens With", [
+      "Return scored practicum feedback from Day 2.",
+      "Open Q&A: 'What from Days 1 and 2 do you still feel uncertain about?'",
+      "The themes you hear tell you where to add emphasis in today's capstone scenarios.",
+    ])}
+    ${cue("Day 3 is a transition day. Your role shifts from instructor to handoff facilitator. By Module 6, the supervisor is running the room. Your job is to set that up cleanly.")}
+    ${agentRoster()}
+    ${notesField("d3-overview")}
+    ${commentsPanel("d3-overview")}
+  </div>`;
+}
+
+function renderD3M1() {
+  return `
+  ${sectionHero("Day 3 · Module 1", "Role-Specific Tracks", "Each agent deepens the responsibilities, standards, and watch-outs specific to their role.")}
+  <div class="content-body">
+    ${handouts([
+      ["Role-Specific Job Description","1 per agent — their role only","Module 1 start"],
+    ])}
+    ${bullets("Four Tracks — Split or Run Together", [
+      "Track A: Concierge Agent / Main Concierge — desk management, log standard, simultaneous demands.",
+      "Track B: Lead Concierge / Senior Agent — shift leadership, coaching in the moment, escalation ownership.",
+      "Track C: Lobby Ambassador / Doorman — positioning, greeting protocol, visitor management.",
+      "Track D: Package Admin / Package Porter — high-volume precision, package room organization, end-of-shift reconciliation.",
+    ])}
+    ${cue("On the 'Watch For' column of each role card: ask agents which ones they think will be hardest for them personally. Receive it without judgment. This is where self-awareness begins.")}
+    ${watchFor("Agents who seem surprised by the responsibilities in their role. If they say 'I didn't know I was responsible for that' — this is a gap in onboarding that needs to be flagged.")}
+    ${notesField("d3-m1")}
+    ${commentsPanel("d3-m1")}
+  </div>`;
+}
+
+function renderD3Floor1() {
+  return `
+  ${sectionHero("Day 3 · Floor Block", "Supervised Site Walk — On Your Property", "Live property walkthrough with the site supervisor.")}
+  <div class="content-body">
+    ${handouts([
+      ["Site Floor Plan (annotated)","1 per agent","Before the walk"],
+    ])}
+    <div class="floor-block">
+      <div class="floor-block-label">🏃 Floor Block — Site Walk</div>
+      <div class="floor-block-title">The Supervisor Leads This Walk</div>
+      <ul class="floor-list">
+        <li>Your role during the walk: observe. Note how agents carry themselves, how they ask questions, what they miss.</li>
+        <li>Brief the supervisor before: what to look for — engagement, awareness, question quality.</li>
+        <li>Post-walk debrief (20 min, supervisor leads): What surprised you? What do you still not know? Biggest question?</li>
+        <li>What agents ask tells you their real gaps — more than the assessment will.</li>
+      </ul>
+    </div>
+    ${cue("This is the first real evaluation opportunity for the supervisor. They are watching how the agent carries themselves in the actual environment. Your job: set it up and step back.")}
+    ${notesField("d3-floor1")}
+    ${commentsPanel("d3-floor1")}
+  </div>`;
+}
+
+function renderD3Floor2() {
+  return `
+  ${sectionHero("Day 3 · Floor Block", "Capstone Scenario Round — On Site", "The most complex scenario work of the program — individual, written responses.")}
+  <div class="content-body">
+    <div class="floor-block">
+      <div class="floor-block-label">🏃 Floor Block — Capstone Scenarios</div>
+      <div class="floor-block-title">Four Scenarios — Highest Complexity</div>
+      <ul class="floor-list">
+        <li>C1: Multi-Party Lobby Conflict — composure, process, supervisor call, real-time documentation.</li>
+        <li>C2: Policy Gray Zone — when policy is silent, escalate. Never fill gaps with personal judgment.</li>
+        <li>C3: Shift Handoff Failure — document what you inherited, investigate, notify supervisor immediately.</li>
+        <li>C4: Wellness Check Trigger — life-safety matter. First call is always the supervisor. Not optional.</li>
+      </ul>
+    </div>
+    ${watchFor("C4 is the most emotionally charged scenario. Some agents will minimize or freeze. Reinforce: this is life-safety. The supervisor call happens regardless of uncertainty.")}
+    ${cue("Debrief C1: 'What were your first three words?' That tells you whether the agent defaulted to managing or de-escalating.")}
+    ${notesField("d3-floor2")}
+    ${commentsPanel("d3-floor2")}
+  </div>`;
+}
+
+function renderD3M2() {
+  return `
+  ${sectionHero("Day 3 · Module 2", "Standards Assessment", "Written knowledge check covering all three days. Individual, no reference materials.")}
+  <div class="content-body">
+    ${handouts([
+      ["Standards Assessment Forms (printed)","1 per agent","Module 2 start — collect before lunch"],
+    ])}
+    ${bullets("Assessment Protocol", [
+      "Distribute forms. No assistance. No notes. No phones. 60 minutes.",
+      "If an agent asks for clarification: 'Answer it the way you understand it — that is the point.'",
+      "Score during Module 3. Return with written feedback before the program closes.",
+    ])}
+    ${bullets("Scoring Guide", [
+      "9–10 correct (90–100%): baseline met. Flag two missed questions in notes.",
+      "8 correct (80%): passing. Note missed questions. Flag in 30-day file.",
+      "6–7 correct (60–70%): below threshold. 15-min remediation conversation today. Two specific re-study areas assigned.",
+      "Below 6 (under 60%): formal development flag. Contact Khalif. Do not clear for solo without follow-up.",
+    ])}
+    ${notesField("d3-m2")}
+    ${commentsPanel("d3-m2")}
+  </div>`;
+}
+
+function renderD3M3() {
+  return `
+  ${sectionHero("Day 3 · Module 3", "30-Day Excellence Launch", "Every agent leaves with a clear map and a written commitment plan.")}
+  <div class="content-body">
+    ${handouts([
+      ["30-Day Commitment Plan Form","1 per agent — submitted to supervisor at Module 6","Module 3"],
+    ])}
+    ${script('"We do not advance by tenure. We advance by demonstrated performance. Ninety days of consistent, documented, above-standard work is the clearest path to advancement consideration at Apex. Every shift is part of the record."')}
+    ${bullets("30-Day Plan — How to Run It", [
+      "10 minutes of silence for agents to complete all four fields.",
+      "Collect all plans before the supervisor handoff — they go to the supervisor at Module 6.",
+      "These plans are referenced at the 30-day review. Make sure they are specific, not aspirational.",
+    ])}
+    ${cue("'Ninety days of consistent, documented, above-standard work.' Say it. Let it land. Do not add to it.")}
+    ${notesField("d3-m3")}
+    ${commentsPanel("d3-m3")}
+  </div>`;
+}
+
+function renderD3Handoff() {
+  return `
+  ${sectionHero("Day 3 · Supervisor Handoff", "The Room Belongs to the Supervisor Now", "Formal introduction, site expectations, final commitment card, program close.")}
+  <div class="content-body">
+    ${handouts([
+      ["Final Commitment Card","1 per agent — agents keep it, you photograph","Program close"],
+      ["Property Contact Sheet (site-specific)","1 per agent","Program close"],
+      ["System Login Credentials (site-specific)","Supervisor distributes","Module 6 handoff"],
+    ])}
+    ${script('"This is [supervisor name]. They are your direct leader from this point forward. Everything you have built this week — the log standard, the presence, the ownership mindset — they are who you demonstrate it to every shift."')}
+    ${bullets("Handoff Protocol", [
+      "Introduce the supervisor formally. Then step back entirely.",
+      "Supervisor covers: communication preference, log standard, site-specific expectations, current active issues, first-week check-in schedule.",
+      "Supervisor receives: 30-Day Commitment Plans, assessment results summary, system credentials to distribute.",
+      "You observe. Note what agents ask — it tells you what to follow up on.",
+    ])}
+    <div style="background:var(--success-light);border:1px solid var(--success);border-radius:6px;padding:16px 20px;margin:16px 0">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--success);margin-bottom:6px">✓ Program Close Checklist</div>
+      <div style="font-size:13px;color:var(--text-mid)">□ All final commitment cards photographed<br>□ Property contact sheets distributed<br>□ System credentials distributed by supervisor<br>□ Email Khalif: agent names, assessment scores, any flags, supervisor handoff notes</div>
+    </div>
+    ${script('"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."')}
+    ${notesField("d3-handoff")}
+    ${commentsPanel("d3-handoff")}
+  </div>`;
+}
+
+// ── ENGINE ────────────────────────────────────────────────────────────────────
+
+function buildNav() {
+  const list = document.getElementById('navList');
+  list.innerHTML = '';
+  [1,2,3].forEach(day => {
+    const label = document.createElement('div');
+    label.className = 'nav-day-label';
+    label.id = `nav-day-${day}`;
+    label.textContent = `Day ${day}`;
+    if(day !== activeDay) label.style.display = 'none';
+    list.appendChild(label);
+    SECTIONS.filter(s => s.day === day).forEach(s => {
+      const idx = SECTIONS.indexOf(s);
+      const item = document.createElement('div');
+      item.className = `nav-item${idx===currentIdx?' active':''}${done.has(idx)?' done':''}${s.day!==activeDay?' hidden-day':''}`;
+      item.id = `nav-${idx}`;
+      item.onclick = () => goTo(idx);
+      item.innerHTML = `<div class="nav-dot"></div><span class="nav-type ${s.type}">${s.type.toUpperCase()}</span><span class="nav-text">${s.navText}</span>`;
+      list.appendChild(item);
+    });
+  });
+}
+
+function updateProgress() {
+  const pct = Math.round((done.size / SECTIONS.length) * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progPct').textContent = pct + '%';
+}
+
+function goTo(idx) {
+  if(idx < 0 || idx >= SECTIONS.length) return;
+  currentIdx = idx;
+  const s = SECTIONS[idx];
+  activeDay = s.day;
+  document.querySelectorAll('.day-tab').forEach((t,i) => t.classList.toggle('active', i+1===activeDay));
+  document.querySelectorAll('.nav-item').forEach((el,i) => {
+    el.classList.toggle('active', i===currentIdx);
+    el.classList.toggle('hidden-day', SECTIONS[i].day !== activeDay);
+  });
+  document.querySelectorAll('.nav-day-label').forEach(el => {
+    const d = parseInt(el.id.split('-')[2]);
+    el.style.display = d === activeDay ? '' : 'none';
+  });
+  document.getElementById('topCrumb').textContent = `Day ${s.day} · ${s.type.charAt(0).toUpperCase()+s.type.slice(1)}`;
+  document.getElementById('topTitle').textContent = s.title;
+  document.getElementById('content').innerHTML = `<div class="section active">${s.render()}</div>`;
+  document.getElementById('main').scrollTo?document.getElementById('main').scrollTo(0,0):window.scrollTo(0,0);
+  updateProgress();
+}
+
+function navigate(dir) { goTo(currentIdx + dir); }
+function switchDay(d) { const f = SECTIONS.find(s => s.day === d); if(f) goTo(SECTIONS.indexOf(f)); }
+function markDone() {
+  done.add(currentIdx);
+  const el = document.getElementById(`nav-${currentIdx}`);
+  if(el) { el.classList.add('done'); el.classList.remove('active'); }
+  updateProgress();
+  navigate(1);
+}
+function toggleHandout(el) {
+  el.classList.toggle('checked');
+  const check = el.querySelector('.handout-check');
+  if(check) check.textContent = el.classList.contains('checked') ? '✓' : '';
+}
+function saveNote(id, val) { sessionNotes[id] = val; }
+function addComment(id) {
+  const input = document.getElementById(`ci-${id}`);
+  if(!input || !input.value.trim()) return;
+  if(!comments[id]) comments[id] = [];
+  const author = currentFacilitator ? currentFacilitator.name : 'Facilitator';
+  const time = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  comments[id].push({ author, time, text: input.value.trim() });
+  input.value = '';
+  goTo(currentIdx);
+}
+function showAgentMenu(idx) {
+  const flags = ['attention','strong','quiet'];
+  const agent = agentData[idx];
+  const next = flags.find(f => !agent.flags.includes(f)) || '';
+  if(!next) { agent.flags = []; }
+  else {
+    if(agent.flags.includes(next)) agent.flags = agent.flags.filter(f => f !== next);
+    else { agent.flags = [next]; }
+  }
+  goTo(currentIdx);
+}
+
+// Facilitator selector modal
+function showFacilitatorSelect() {
+  const existing = document.getElementById('fac-modal');
+  if(existing) { existing.remove(); return; }
+  const modal = document.createElement('div');
+  modal.id = 'fac-modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:1000;display:flex;align-items:center;justify-content:center';
+  modal.innerHTML = `<div style="background:var(--navy);border-radius:8px;padding:28px;min-width:300px;border:1px solid rgba(201,168,76,0.3)">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Select Facilitator</div>
+    ${FACILITATORS.map((f,i) => `<div onclick="selectFacilitator(${i})" style="padding:12px 16px;cursor:pointer;border-radius:4px;margin-bottom:6px;background:rgba(255,255,255,0.06);transition:all 0.2s" onmouseover="this.style.background='rgba(201,168,76,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+      <div style="font-size:13px;font-weight:600;color:white">${f.name}</div>
+      <div style="font-size:11px;color:var(--gold)">${f.role}</div>
+    </div>`).join('')}
+    <div onclick="document.getElementById('fac-modal').remove()" style="margin-top:12px;text-align:center;font-size:12px;color:rgba(255,255,255,0.4);cursor:pointer">Cancel</div>
+  </div>`;
+  document.body.appendChild(modal);
+}
+function selectFacilitator(idx) {
+  currentFacilitator = FACILITATORS[idx];
+  document.getElementById('facilitatorName').textContent = currentFacilitator.name;
+  document.getElementById('facilitatorRole').textContent = currentFacilitator.role;
+  document.getElementById('fac-modal').remove();
+}
+
+document.getElementById('facilitatorName').onclick = showFacilitatorSelect;
+
+// INIT
+buildNav();
+goTo(0);
+</script>
+</body>
+</html>
