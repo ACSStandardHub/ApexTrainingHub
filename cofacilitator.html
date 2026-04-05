@@ -46,11 +46,39 @@ body { font-family:'Barlow',sans-serif; background:var(--navy); color:var(--text
 .brand-name { font-family:'EB Garamond',serif; font-size:18px; color:white; line-height:1.2; }
 .brand-sub { font-size:10px; color:rgba(255,255,255,0.4); margin-top:3px; }
 
-/* facilitator ID badge */
-.facilitator-badge { padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.06); }
-.badge-label { font-size:9px; color:rgba(255,255,255,0.35); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px; }
-.badge-name { font-size:13px; font-weight:600; color:white; }
-.badge-role { font-size:11px; color:var(--gold); }
+/* facilitator team panel */
+.facilitator-badge { padding:14px 20px 16px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.badge-label { font-size:9px; color:rgba(255,255,255,0.35); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:10px; }
+.team-field { margin-bottom:10px; }
+.team-field label { display:block; font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.52); margin-bottom:5px; }
+.team-field input { width:100%; padding:9px 11px; border:1px solid rgba(255,255,255,0.12); border-radius:4px; background:rgba(255,255,255,0.05); color:white; font-family:'Barlow',sans-serif; font-size:12px; outline:none; transition:all 0.2s; }
+.team-field input:focus { border-color:rgba(201,168,76,0.7); background:rgba(255,255,255,0.08); }
+.team-field input::placeholder { color:rgba(255,255,255,0.28); }
+.team-actions { display:flex; gap:8px; margin-top:6px; }
+.team-save, .team-clear { flex:1; padding:8px 10px; border:none; border-radius:4px; font-family:'Barlow',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
+.team-save { background:var(--gold); color:var(--navy); }
+.team-save:hover { background:var(--gold-light); }
+.team-clear { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.72); }
+.team-clear:hover { background:rgba(255,255,255,0.14); }
+.team-status { margin-top:10px; font-size:10px; color:rgba(255,255,255,0.38); line-height:1.5; }
+.team-summary { margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:5px; }
+.team-summary-row { display:flex; gap:8px; align-items:flex-start; }
+.team-summary-tag { min-width:44px; font-size:8px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); opacity:0.85; }
+.team-summary-name { font-size:11px; color:white; line-height:1.35; }
+.team-meta-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.team-meta-display { margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:5px; }
+.team-meta-row { display:flex; gap:8px; align-items:flex-start; }
+.team-meta-tag { min-width:44px; font-size:8px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); opacity:0.85; }
+.team-meta-value { font-size:11px; color:white; line-height:1.35; }
+.report-actions { display:flex; gap:8px; margin-top:12px; }
+.report-btn { flex:1; padding:8px 10px; border:none; border-radius:4px; font-family:'Barlow',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
+.report-btn.copy { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.78); }
+.report-btn.copy:hover { background:rgba(255,255,255,0.14); }
+.report-btn.download { background:var(--gold); color:var(--navy); }
+.report-btn.download:hover { background:var(--gold-light); }
+.topbar-session-meta { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:0.05em; margin-top:2px; }
+@media(max-width:768px){ .team-meta-grid{grid-template-columns:1fr;} .report-actions{flex-direction:column;} }
+.topbar-team { font-size:10px; color:rgba(255,255,255,0.52); letter-spacing:0.05em; margin-top:3px; }
 
 /* session progress */
 .session-progress { padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.06); }
@@ -100,6 +128,38 @@ body { font-family:'Barlow',sans-serif; background:var(--navy); color:var(--text
 .btn-next:hover { background:var(--gold-light); }
 .btn-done { background:var(--success); color:white; }
 .btn-done:hover { background:#235a42; }
+
+.topbar-home {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  margin-bottom: 4px;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+
+.topbar-home:hover {
+  opacity: 0.8;
+}
+
+
+.completion-pill{display:none;padding:8px 12px;border-radius:999px;background:var(--success);color:white;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.completion-pill.show{display:inline-flex;align-items:center;gap:6px}
+.program-complete-box{background:var(--success-light);border:1px solid var(--success);border-radius:8px;padding:16px 18px;margin:18px 0}
+.program-complete-title{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--success);margin-bottom:6px}
+.program-complete-text{font-size:13px;color:var(--text-mid);line-height:1.55}
+.obs-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.obs-export-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tracker-btn.export{background:var(--gold);color:var(--navy)}
+.tracker-btn.export:hover{background:var(--gold-light)}
+.tracker-btn.secondary:hover,.tracker-btn.primary:hover{opacity:.92}
+.obs-day-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.obs-day-summary-card{border:1px solid var(--cream-dark);border-radius:8px;padding:10px 12px;background:var(--gray-light)}
+.obs-day-summary-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+@media(max-width:768px){.obs-day-summary-grid{grid-template-columns:1fr}}
 
 /* ── SECTIONS ── */
 .section { display:none; animation:fadeIn 0.3s ease; }
@@ -216,18 +276,58 @@ body { font-family:'Barlow',sans-serif; background:var(--navy); color:var(--text
 .btn-comment { padding:9px 18px; background:var(--navy); color:white; border:none; border-radius:4px; font-family:'Barlow',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s; }
 .btn-comment:hover { background:var(--navy-mid); }
 
+
+/* new hire observation tracker */
+.tracker-shell{background:white;border:1px solid var(--cream-dark);border-radius:8px;padding:18px 18px 12px;margin:18px 0}
+.tracker-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.tracker-sub{font-size:12px;color:var(--gray-dark);max-width:680px;line-height:1.5}
+.tracker-add{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:8px;align-items:end;margin:12px 0 16px}
+.tracker-add input{padding:10px 12px;border:1px solid var(--cream-dark);border-radius:6px;font-family:'Barlow',sans-serif;font-size:12px}
+.tracker-add button,.tracker-btn{padding:10px 14px;border:none;border-radius:6px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.tracker-add button,.tracker-btn.primary{background:var(--navy);color:white}
+.tracker-btn.secondary{background:var(--cream);color:var(--navy);border:1px solid var(--cream-dark)}
+.tracker-empty{padding:18px;border:1px dashed var(--cream-dark);border-radius:8px;color:var(--gray-dark);font-size:12px;background:var(--gray-light)}
+.observation-card{border:1px solid var(--cream-dark);border-radius:8px;padding:14px;margin-bottom:12px;background:#fff}
+.observation-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.observation-name{font-size:14px;font-weight:700;color:var(--navy)}
+.observation-role{font-size:11px;color:var(--gray-dark);margin-top:3px}
+.observation-day{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px}
+.obs-actions{display:flex;gap:8px;flex-wrap:wrap}
+.obs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.obs-field label,.obs-wide label{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:5px}
+.obs-field select,.obs-wide textarea,.obs-wide input,.obs-field input{width:100%;padding:9px 10px;border:1px solid var(--cream-dark);border-radius:6px;font-family:'Barlow',sans-serif;font-size:12px;background:white}
+.obs-wide textarea{min-height:72px;resize:vertical}
+.obs-wide{margin-bottom:10px}
+.obs-footer{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.obs-summary-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.obs-pill{padding:4px 8px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.obs-pill.strong{background:var(--success-light);color:var(--success)}
+.obs-pill.mixed{background:var(--amber-light);color:var(--warn)}
+.obs-pill.attention{background:var(--alert-light);color:var(--alert)}
+.obs-mini{font-size:11px;color:var(--gray-dark)}
+.obs-day-tabs{display:inline-flex;gap:6px;background:var(--gray-light);padding:4px;border-radius:999px;margin-top:8px}
+.obs-day-tab{padding:5px 10px;border:none;border-radius:999px;background:transparent;color:var(--gray-dark);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.obs-day-tab.active{background:var(--navy);color:var(--gold)}
+.obs-summary-box{background:var(--gray-light);border:1px solid var(--cream-dark);border-radius:6px;padding:10px 12px;margin:10px 0}
+.obs-summary-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+.obs-summary-text{font-size:12px;color:var(--text-mid);line-height:1.55}
+.tracker-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.tracker-count{font-size:11px;color:var(--gray-dark)}
+@media(max-width:768px){.tracker-add,.obs-grid,.obs-footer{grid-template-columns:1fr}}
+
 /* mobile */
 #menu-toggle { display:none; position:fixed; top:14px; left:14px; width:40px; height:40px; background:var(--navy); border:none; border-radius:4px; cursor:pointer; z-index:200; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
 #menu-toggle span { display:block; width:20px; height:2px; background:white; border-radius:1px; }
 @media(max-width:768px) { #menu-toggle{display:flex} #sidebar{transform:translateX(-100%)} #sidebar.open{transform:translateX(0)} #main{margin-left:0} .two-col{grid-template-columns:1fr} .content-body{padding:24px 20px} }
+
+
 </style>
 </head>
 <body>
-<a href="index.html">← Back to Training Library</a>
+
 <button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
   <span></span><span></span><span></span>
 </button>
-
 <nav id="sidebar">
   <div class="sidebar-logo">
     <div class="brand-tag">Co-Facilitator App</div>
@@ -236,9 +336,56 @@ body { font-family:'Barlow',sans-serif; background:var(--navy); color:var(--text
   </div>
 
   <div class="facilitator-badge">
-    <div class="badge-label">Facilitating as</div>
-    <div class="badge-name" id="facilitatorName">Select Facilitator ▾</div>
-    <div class="badge-role" id="facilitatorRole"></div>
+    <div class="badge-label">Session Team Setup</div>
+
+    <div class="team-field">
+      <label for="leadFacilitator">Lead Facilitator</label>
+      <input type="text" id="leadFacilitator" placeholder="Enter lead facilitator">
+    </div>
+
+    <div class="team-field">
+      <label for="coFacilitator">Co-Facilitator</label>
+      <input type="text" id="coFacilitator" placeholder="Enter co-facilitator">
+    </div>
+
+    <div class="team-field">
+      <label for="trainingAssistant">Training Assistant <span style="opacity:.7">(Optional)</span></label>
+      <input type="text" id="trainingAssistant" placeholder="Enter training assistant">
+    </div>
+
+    <div class="team-meta-grid">
+      <div class="team-field">
+        <label for="trainingSite">Site / Property</label>
+        <input type="text" id="trainingSite" placeholder="Enter site or property">
+      </div>
+      <div class="team-field">
+        <label for="trainingDate">Training Date</label>
+        <input type="date" id="trainingDate">
+      </div>
+    </div>
+
+    <div class="team-actions">
+      <button class="team-save" onclick="saveSessionTeam()">Save Session</button>
+      <button class="team-clear" onclick="clearSessionTeam()">Clear</button>
+    </div>
+
+    <div class="team-status" id="teamStatus">Enter your facilitation team and session details, then save.</div>
+
+    <div class="team-summary" id="teamSummary">
+      <div class="team-summary-row"><span class="team-summary-tag">Lead</span><span class="team-summary-name" id="teamLeadDisplay">—</span></div>
+      <div class="team-summary-row"><span class="team-summary-tag">Co</span><span class="team-summary-name" id="teamCoDisplay">—</span></div>
+      <div class="team-summary-row"><span class="team-summary-tag">Assist</span><span class="team-summary-name" id="teamAssistDisplay">—</span></div>
+    </div>
+
+    <div class="team-meta-display">
+      <div class="team-meta-row"><span class="team-meta-tag">Site</span><span class="team-meta-value" id="teamSiteDisplay">—</span></div>
+      <div class="team-meta-row"><span class="team-meta-tag">Date</span><span class="team-meta-value" id="teamDateDisplay">—</span></div>
+    </div>
+
+    <div class="report-actions">
+      <button class="report-btn copy" onclick="copyDayReport()">Copy Day Report</button>
+      <button class="report-btn download" onclick="downloadDayReport()">Download Day Report</button>
+    </div>
   </div>
 
   <div class="session-progress">
@@ -260,35 +407,45 @@ body { font-family:'Barlow',sans-serif; background:var(--navy); color:var(--text
 
 <div id="main">
   <div id="topbar">
-    <div class="topbar-left">
-      <div class="topbar-crumb" id="topCrumb">Session Overview</div>
-      <div class="topbar-title" id="topTitle">Apex New Hire Orientation — Co-Facilitator</div>
-    </div>
-    <div class="topbar-actions">
-      <button class="btn-nav btn-prev" onclick="navigate(-1)">← Prev</button>
-      <button class="btn-nav btn-done" onclick="markDone()">✓ Mark Done</button>
-      <button class="btn-nav btn-next" onclick="navigate(1)">Next →</button>
-    </div>
+  <div class="topbar-left">
+    <a class="topbar-home" href="index.html">← Materials Library</a>
+    <div class="topbar-crumb" id="topCrumb">Session Overview</div>
+    <div class="topbar-title" id="topTitle">Apex New Hire Orientation — Co-Facilitator</div>
+      <div class="topbar-team" id="topbarTeam">Lead: — · Co: — · Assist: —</div>
+      <div class="topbar-session-meta" id="topbarSessionMeta">Site: — · Date: —</div>
   </div>
+ <div class="topbar-actions">
+  <button class="btn-nav btn-prev" onclick="navigate(-1)">← Prev</button>
+  <button class="btn-nav btn-done" onclick="markDone()">✓ Mark Done</button>
+  <button class="btn-nav btn-next" id="topbarNextBtn" onclick="handleTopbarNext()">Next →</button>
+</div>
+</div>
+
   <div id="content"></div>
 </div>
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
 
-const FACILITATORS = [
-  { name: "Khalif Rashid", role: "Regional Operations Manager" },
-  { name: "Danielle McManus", role: "CEO & Founder" },
-  { name: "Shiva", role: "Lead Facilitator" },
-  { name: "Training Assistant", role: "Co-Facilitator" },
-];
+const facilitatorTeam = { lead: '', co: '', assistant: '', site: '', date: '' };
 
-const AGENTS = [
-  { name: "Agent 1", role: "Concierge Agent", property: "Ora Seaport", flags: [] },
-  { name: "Agent 2", role: "Lead Concierge", property: "Via Seaport", flags: [] },
-  { name: "Agent 3", role: "Lobby Ambassador", property: "The Benjamin", flags: [] },
-  { name: "Agent 4", role: "Package Admin", property: "Franklin", flags: [] },
-];
+const AGENTS = [];
+const OBS_RATINGS = ['','strong','mixed','attention'];
+const OBS_FIELDS = ['punctuality','engagement','presence','comprehension'];
+const OBS_LABELS = {
+  punctuality: 'Punctuality',
+  engagement: 'Engagement',
+  presence: 'Presence',
+  comprehension: 'Role Comprehension'
+};
+const OBS_STATUS_OPTIONS = ['','strong-start','on-track','watch-closely','needs-follow-up'];
+const OBS_STATUS_LABELS = {
+  '': 'Select status',
+  'strong-start': 'Strong Start',
+  'on-track': 'Steady / On Track',
+  'watch-closely': 'Watch Closely',
+  'needs-follow-up': 'Needs Follow-Up'
+};
 
 const SECTIONS = [
   // DAY 1
@@ -327,9 +484,129 @@ let comments = {};
 let agentData = JSON.parse(JSON.stringify(AGENTS));
 let sessionNotes = {};
 let currentFacilitator = null;
+const STORAGE_KEY = 'apex-cofacilitator-state-v1';
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
+let reportDownloaded = false;
+
+function isFinalSection() {
+  return currentIdx === SECTIONS.length - 1;
+}
+
+function handleTopbarNext() {
+  if (isFinalSection()) {
+    markDone();
+    showCompletionPrompt();
+    return;
+  }
+  navigate(1);
+}
+
+function showCompletionPrompt() {
+  reportDownloaded = false;
+
+  const container = document.getElementById('content');
+
+  container.innerHTML = `
+    <div class="content-body">
+      <div class="program-complete-box">
+        <div class="program-complete-title">Program Complete</div>
+        <div class="program-complete-text">
+          Before closing out, download your Day Report and any Review-Ready summaries for each agent.
+        </div>
+
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="tracker-btn export" onclick="downloadCompletionReport()">Download Day Report</button>
+          <button class="tracker-btn secondary" onclick="copyCompletionReport()">Copy Day Report</button>
+        </div>
+
+        <div id="completionStatus" style="margin-top:12px; font-size:12px; color:var(--warn);">
+          Download the Day Report to unlock reset.
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button 
+            class="tracker-btn primary" 
+            id="resetOrientationBtn" 
+            onclick="completeAndResetOrientation()"
+            disabled
+            style="opacity:.5; cursor:not-allowed;"
+          >
+            Complete & Reset Orientation
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function unlockResetButton() {
+  reportDownloaded = true;
+
+  const resetBtn = document.getElementById('resetOrientationBtn');
+  const status = document.getElementById('completionStatus');
+
+  if (resetBtn) {
+    resetBtn.disabled = false;
+    resetBtn.style.opacity = '1';
+    resetBtn.style.cursor = 'pointer';
+  }
+
+  if (status) {
+    status.textContent = 'Day Report downloaded. Reset is now unlocked.';
+    status.style.color = 'var(--success)';
+  }
+}
+
+function downloadCompletionReport() {
+  downloadDayReport();
+  unlockResetButton();
+}
+
+function copyCompletionReport() {
+  copyDayReport();
+}
+
+function completeAndResetOrientation() {
+  if (!reportDownloaded) {
+    alert("Download the Day Report first before resetting orientation.");
+    return;
+  }
+
+  const confirmReset = confirm(
+    "This will complete the session and reset the orientation for the next class. Continue?"
+  );
+  if (!confirmReset) return;
+
+  const finalConfirm = confirm(
+    "Final confirmation: this will clear notes, comments, completion progress, and new hire observations. Reset now?"
+  );
+  if (!finalConfirm) return;
+
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn("Could not clear local storage:", e);
+  }
+
+  done = new Set();
+  comments = {};
+  sessionNotes = {};
+  agentData = [];
+  currentIdx = 0;
+  activeDay = 1;
+
+  if (typeof facilitatorTeam !== "undefined") {
+    facilitatorTeam.lead = "";
+    facilitatorTeam.co = "";
+    facilitatorTeam.assistant = "";
+    facilitatorTeam.site = "";
+    facilitatorTeam.date = "";
+  }
+
+  window.location.reload();
+}
 function script(text) {
   return `<div class="script-block"><div class="script-label">📢 Say This</div><div class="script-text">${text}</div></div>`;
 }
@@ -385,18 +662,177 @@ function commentsPanel(id) {
   </div>`;
 }
 
-function agentRoster() {
+
+function createEmptyObservation(day) {
+  return {
+    punctuality: '',
+    engagement: '',
+    presence: '',
+    comprehension: '',
+    status: '',
+    note: '',
+    reviewCarry: false,
+    reviewNote: ''
+  };
+}
+
+function ensureAgentShape(agent) {
+  if(!agent.days || typeof agent.days !== 'object') agent.days = {};
+  if(!agent.days[1]) agent.days[1] = createEmptyObservation(1);
+  if(!agent.days[2]) agent.days[2] = createEmptyObservation(2);
+  if(typeof agent.name !== 'string') agent.name = '';
+  if(typeof agent.role !== 'string') agent.role = '';
+  if(typeof agent.property !== 'string') agent.property = '';
+  return agent;
+}
+
+function getObservation(agent, day = activeDay) {
+  ensureAgentShape(agent);
+  return agent.days[day] || (agent.days[day] = createEmptyObservation(day));
+}
+
+function ratingLabel(value) {
+  return value === 'strong' ? 'Strong' : value === 'mixed' ? 'Mixed' : value === 'attention' ? 'Needs Attention' : 'Not rated';
+}
+
+function getCardDay(agent) {
+  ensureAgentShape(agent);
+  const fallback = activeDay > 2 ? 2 : activeDay;
+  const candidate = Number(agent.viewDay || fallback);
+  return candidate === 1 || candidate === 2 ? candidate : fallback;
+}
+
+function summarizeObservation(agent, day) {
+  ensureAgentShape(agent);
+  const obs = getObservation(agent, day);
+  const strong = OBS_FIELDS.filter(f => obs[f] === 'strong');
+  const mixed = OBS_FIELDS.filter(f => obs[f] === 'mixed');
+  const attention = OBS_FIELDS.filter(f => obs[f] === 'attention');
+
+  const parts = [];
+  if(strong.length) parts.push(`showed strong ${strong.map(f => OBS_LABELS[f].toLowerCase()).join(', ')}`);
+  if(mixed.length) parts.push(`was mixed in ${mixed.map(f => OBS_LABELS[f].toLowerCase()).join(', ')}`);
+  if(attention.length) parts.push(`needs follow-up in ${attention.map(f => OBS_LABELS[f].toLowerCase()).join(', ')}`);
+
+  let summary = parts.length
+    ? `${agent.name || 'This hire'} ${parts.join('; ')}.`
+    : `${agent.name || 'This hire'} has no scored observations captured for Day ${day} yet.`;
+
+  if((obs.note || '').trim()) summary += ` Orientation note: ${obs.note.trim()}`;
+  if(obs.reviewCarry && (obs.reviewNote || '').trim()) summary += ` Review reference: ${obs.reviewNote.trim()}`;
+  return summary;
+}
+
+function observationTracker() {
+  const defaultDay = activeDay > 2 ? 2 : activeDay;
+  const cards = agentData.map((agent, i) => {
+    ensureAgentShape(agent);
+    const cardDay = getCardDay(agent) || defaultDay;
+    const obs = getObservation(agent, cardDay);
+    const pills = OBS_FIELDS.filter(f => obs[f]).map(f => `<span class="obs-pill ${obs[f]}">${OBS_LABELS[f]}: ${ratingLabel(obs[f])}</span>`).join('');
+    return `
+      <div class="observation-card">
+        <div class="observation-card-head">
+          <div>
+            <div class="observation-name">${agent.name || 'New Hire'}</div>
+            <div class="observation-role">${agent.role || 'Role not set'} · ${agent.property || 'Property not set'}</div>
+            <div class="obs-day-tabs">
+              <button class="obs-day-tab ${cardDay===1?'active':''}" onclick="setObservationCardDay(${i},1)">Day 1</button>
+              <button class="obs-day-tab ${cardDay===2?'active':''}" onclick="setObservationCardDay(${i},2)">Day 2</button>
+            </div>
+            <div class="obs-summary-row">${pills || '<span class="obs-mini">No ratings captured yet for this day.</span>'}</div>
+          </div>
+          <div class="obs-actions">
+            <button class="tracker-btn secondary" onclick="removeObservationAgent(${i})">Remove</button>
+          </div>
+        </div>
+
+        <div class="obs-grid">
+          ${OBS_FIELDS.map(field => `
+            <div class="obs-field">
+              <label>${OBS_LABELS[field]}</label>
+              <select onchange="updateObservationField(${i}, '${field}', this.value, ${cardDay})">
+                <option value="">Select rating</option>
+                <option value="strong" ${obs[field]==='strong'?'selected':''}>Strong</option>
+                <option value="mixed" ${obs[field]==='mixed'?'selected':''}>Mixed</option>
+                <option value="attention" ${obs[field]==='attention'?'selected':''}>Needs Attention</option>
+              </select>
+            </div>`).join('')}
+        </div>
+
+        <div class="obs-wide">
+          <label>Overall Status</label>
+          <select onchange="updateObservationField(${i}, 'status', this.value, ${cardDay})">
+            ${OBS_STATUS_OPTIONS.map(opt => `<option value="${opt}" ${obs.status===opt?'selected':''}>${OBS_STATUS_LABELS[opt]}</option>`).join('')}
+          </select>
+        </div>
+
+        <div class="obs-wide">
+          <label>Orientation Notes</label>
+          <textarea placeholder="What stood out today? Keep this specific and observable." onchange="updateObservationField(${i}, 'note', this.value, ${cardDay})">${obs.note || ''}</textarea>
+        </div>
+
+        <div class="obs-footer">
+          <div class="obs-field">
+            <label>Carry into 30/90 Review?</label>
+            <select onchange="updateObservationField(${i}, 'reviewCarry', this.value === 'yes', ${cardDay})">
+              <option value="no" ${!obs.reviewCarry?'selected':''}>No</option>
+              <option value="yes" ${obs.reviewCarry?'selected':''}>Yes</option>
+            </select>
+          </div>
+          <div class="obs-field">
+            <label>Review Reference Note</label>
+            <input type="text" placeholder="Short sentence for later review use" value="${obs.reviewNote || ''}" onchange="updateObservationField(${i}, 'reviewNote', this.value, ${cardDay})">
+          </div>
+        </div>
+
+        <div class="obs-day-summary-grid">
+          <div class="obs-day-summary-card">
+            <div class="obs-day-summary-title">Day 1 Snapshot</div>
+            <div class="obs-summary-text">${summarizeObservation(agent, 1)}</div>
+          </div>
+          <div class="obs-day-summary-card">
+            <div class="obs-day-summary-title">Day 2 Snapshot</div>
+            <div class="obs-summary-text">${summarizeObservation(agent, 2)}</div>
+          </div>
+        </div>
+
+        <div class="obs-summary-box">
+          <div class="obs-summary-title">Review-Ready Summary</div>
+          <div class="obs-summary-text">${buildReviewReadySummary(agent)}</div>
+        </div>
+
+        <div class="obs-export-row">
+          <button class="tracker-btn export" onclick="copyAgentSummary(${i})">Copy Summary</button>
+          <button class="tracker-btn secondary" onclick="downloadAgentSummary(${i})">Download Summary</button>
+        </div>
+      </div>`;
+  }).join('');
+
   return `<div class="content-block">
-    <div class="block-title">Agent Roster — Flag & Track</div>
-    <div class="roster-grid">
-      ${agentData.map((a,i) => `
-        <div class="roster-card ${a.flags.includes('attention')?'flagged':a.flags.includes('strong')?'strong':''}" id="rc-${i}" onclick="showAgentMenu(${i})">
-          <div class="roster-name">${a.name}</div>
-          <div class="roster-role">${a.role} · ${a.property}</div>
-          <div class="roster-flags">${a.flags.map(f=>`<span class="flag flag-${f}">${f.toUpperCase()}</span>`).join('')}</div>
-        </div>`).join('')}
+    <div class="block-title">New Hire Observation Tracker</div>
+    <div class="tracker-shell">
+      <div class="tracker-head">
+        <div>
+          <div class="tracker-sub">Track punctuality, engagement, presence, and role comprehension across both orientation days. Designed to work for one-on-one onboarding or group classes and leave behind useful 30/90-day review language.</div>
+        </div>
+        <div class="obs-mini">Use each card as a running two-day observation file</div>
+      </div>
+
+      <div class="tracker-toolbar">
+        <div class="tracker-count">${agentData.length} hire${agentData.length===1?'':'s'} in tracker</div>
+        <div class="obs-mini">Tip: Add all hires first, then score as the day unfolds.</div>
+      </div>
+
+      <div class="tracker-add">
+        <input type="text" id="newHireName" placeholder="New hire name">
+        <input type="text" id="newHireRole" placeholder="Role / position">
+        <input type="text" id="newHireProperty" placeholder="Site / property">
+        <button onclick="addObservationAgent()">Add Hire</button>
+      </div>
+
+      ${cards || '<div class="tracker-empty">No hires added yet. Add one above to start tracking observations for this session.</div>'}
     </div>
-    <div style="font-size:11px;color:var(--gray-dark);margin-top:8px">Tap an agent card to flag their engagement level.</div>
   </div>`;
 }
 
@@ -421,7 +857,7 @@ function renderD1Overview() {
     ])}
     ${script('"Before we start — look around this room. This is what Apex-level preparation looks like. Everything has a place. Nothing is accidental. Carry this into every shift."')}
     ${cue("Energy in this room before a word is spoken is the first lesson. Be early. Be composed. Be the standard.")}
-    ${agentRoster()}
+    ${observationTracker()}
     ${notesField("d1-overview")}
     ${commentsPanel("d1-overview")}
   </div>`;
@@ -664,7 +1100,7 @@ function renderD2Overview() {
       "The themes agents surface tell you where to spend extra time in today's modules.",
     ])}
     ${cue("Day 2 is more technically demanding than Day 1. Energy management matters. The floor block is not a break — frame it that way explicitly.")}
-    ${agentRoster()}
+    ${observationTracker()}
     ${notesField("d2-overview")}
     ${commentsPanel("d2-overview")}
   </div>`;
@@ -792,7 +1228,7 @@ function renderD3Overview() {
       "The themes you hear tell you where to add emphasis in today's capstone scenarios.",
     ])}
     ${cue("Day 3 is a transition day. Your role shifts from instructor to handoff facilitator. By Module 6, the supervisor is running the room. Your job is to set that up cleanly.")}
-    ${agentRoster()}
+    ${observationTracker()}
     ${notesField("d3-overview")}
     ${commentsPanel("d3-overview")}
   </div>`;
@@ -925,6 +1361,7 @@ function renderD3Handoff() {
       <div style="font-size:13px;color:var(--text-mid)">□ All final commitment cards photographed<br>□ Property contact sheets distributed<br>□ System credentials distributed by supervisor<br>□ Email Khalif: agent names, assessment scores, any flags, supervisor handoff notes</div>
     </div>
     ${script('"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."')}
+    ${renderProgramCompletionBox()}
     ${notesField("d3-handoff")}
     ${commentsPanel("d3-handoff")}
   </div>`;
@@ -958,6 +1395,7 @@ function updateProgress() {
   const pct = Math.round((done.size / SECTIONS.length) * 100);
   document.getElementById('progFill').style.width = pct + '%';
   document.getElementById('progPct').textContent = pct + '%';
+  updateCompletionUI(false);
 }
 
 function goTo(idx) {
@@ -977,6 +1415,7 @@ function goTo(idx) {
   document.getElementById('topCrumb').textContent = `Day ${s.day} · ${s.type.charAt(0).toUpperCase()+s.type.slice(1)}`;
   document.getElementById('topTitle').textContent = s.title;
   document.getElementById('content').innerHTML = `<div class="section active">${s.render()}</div>`;
+  updateTopbarNextButton();
   document.getElementById('main').scrollTo?document.getElementById('main').scrollTo(0,0):window.scrollTo(0,0);
   updateProgress();
 }
@@ -986,16 +1425,24 @@ function switchDay(d) { const f = SECTIONS.find(s => s.day === d); if(f) goTo(SE
 function markDone() {
   done.add(currentIdx);
   const el = document.getElementById(`nav-${currentIdx}`);
-  if(el) { el.classList.add('done'); el.classList.remove('active'); }
+  if (el) { el.classList.add('done'); el.classList.remove('active'); }
   updateProgress();
-  navigate(1);
+  persistState();
+  const completedNow = isProgramComplete();
+  updateCompletionUI(completedNow);
+  if (completedNow) {
+    goTo(currentIdx);
+  } else {
+    navigate(1);
+  }
 }
+
 function toggleHandout(el) {
   el.classList.toggle('checked');
   const check = el.querySelector('.handout-check');
   if(check) check.textContent = el.classList.contains('checked') ? '✓' : '';
 }
-function saveNote(id, val) { sessionNotes[id] = val; }
+function saveNote(id, val) { sessionNotes[id] = val; persistState(); }
 function addComment(id) {
   const input = document.getElementById(`ci-${id}`);
   if(!input || !input.value.trim()) return;
@@ -1004,49 +1451,466 @@ function addComment(id) {
   const time = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   comments[id].push({ author, time, text: input.value.trim() });
   input.value = '';
+  persistState();
   goTo(currentIdx);
 }
-function showAgentMenu(idx) {
-  const flags = ['attention','strong','quiet'];
-  const agent = agentData[idx];
-  const next = flags.find(f => !agent.flags.includes(f)) || '';
-  if(!next) { agent.flags = []; }
-  else {
-    if(agent.flags.includes(next)) agent.flags = agent.flags.filter(f => f !== next);
-    else { agent.flags = [next]; }
+// Session team + persistence
+function getPrimaryFacilitatorName() {
+  return facilitatorTeam.lead || facilitatorTeam.co || facilitatorTeam.assistant || 'Facilitator';
+}
+
+function formatSessionDate(value) {
+  if(!value) return '—';
+  const d = new Date(value + 'T00:00:00');
+  if(Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString([], { year:'numeric', month:'long', day:'numeric' });
+}
+
+function updateTeamDisplays() {
+  const lead = facilitatorTeam.lead || '—';
+  const co = facilitatorTeam.co || '—';
+  const assistant = facilitatorTeam.assistant || '—';
+  const site = facilitatorTeam.site || '—';
+  const dateText = formatSessionDate(facilitatorTeam.date);
+
+  const leadEl = document.getElementById('teamLeadDisplay');
+  const coEl = document.getElementById('teamCoDisplay');
+  const assistEl = document.getElementById('teamAssistDisplay');
+  const siteEl = document.getElementById('teamSiteDisplay');
+  const dateEl = document.getElementById('teamDateDisplay');
+  const topbarEl = document.getElementById('topbarTeam');
+  const topbarMetaEl = document.getElementById('topbarSessionMeta');
+
+  if(leadEl) leadEl.textContent = lead;
+  if(coEl) coEl.textContent = co;
+  if(assistEl) assistEl.textContent = assistant;
+  if(siteEl) siteEl.textContent = site;
+  if(dateEl) dateEl.textContent = dateText;
+  if(topbarEl) topbarEl.textContent = `Lead: ${lead} · Co: ${co} · Assist: ${assistant}`;
+  if(topbarMetaEl) topbarMetaEl.textContent = `Site: ${site} · Date: ${dateText}`;
+
+  currentFacilitator = { name: getPrimaryFacilitatorName() };
+}
+
+function saveSessionTeam() {
+  facilitatorTeam.lead = (document.getElementById('leadFacilitator')?.value || '').trim();
+  facilitatorTeam.co = (document.getElementById('coFacilitator')?.value || '').trim();
+  facilitatorTeam.assistant = (document.getElementById('trainingAssistant')?.value || '').trim();
+  facilitatorTeam.site = (document.getElementById('trainingSite')?.value || '').trim();
+  facilitatorTeam.date = (document.getElementById('trainingDate')?.value || '').trim();
+
+  updateTeamDisplays();
+  const status = document.getElementById('teamStatus');
+  if(status) {
+    const stamp = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    status.textContent = `Session setup saved at ${stamp}.`;
   }
+  persistState();
+}
+
+function clearSessionTeam() {
+  facilitatorTeam.lead = '';
+  facilitatorTeam.co = '';
+  facilitatorTeam.assistant = '';
+  facilitatorTeam.site = '';
+  facilitatorTeam.date = '';
+
+  const ids = ['leadFacilitator','coFacilitator','trainingAssistant','trainingSite','trainingDate'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+
+  const status = document.getElementById('teamStatus');
+  if(status) status.textContent = 'Session setup cleared.';
+
+  updateTeamDisplays();
+  persistState();
+}
+
+
+function rerenderCurrentSection() {
   goTo(currentIdx);
 }
 
-// Facilitator selector modal
-function showFacilitatorSelect() {
-  const existing = document.getElementById('fac-modal');
-  if(existing) { existing.remove(); return; }
-  const modal = document.createElement('div');
-  modal.id = 'fac-modal';
-  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:1000;display:flex;align-items:center;justify-content:center';
-  modal.innerHTML = `<div style="background:var(--navy);border-radius:8px;padding:28px;min-width:300px;border:1px solid rgba(201,168,76,0.3)">
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Select Facilitator</div>
-    ${FACILITATORS.map((f,i) => `<div onclick="selectFacilitator(${i})" style="padding:12px 16px;cursor:pointer;border-radius:4px;margin-bottom:6px;background:rgba(255,255,255,0.06);transition:all 0.2s" onmouseover="this.style.background='rgba(201,168,76,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
-      <div style="font-size:13px;font-weight:600;color:white">${f.name}</div>
-      <div style="font-size:11px;color:var(--gold)">${f.role}</div>
-    </div>`).join('')}
-    <div onclick="document.getElementById('fac-modal').remove()" style="margin-top:12px;text-align:center;font-size:12px;color:rgba(255,255,255,0.4);cursor:pointer">Cancel</div>
+function addObservationAgent() {
+  const nameEl = document.getElementById('newHireName');
+  const roleEl = document.getElementById('newHireRole');
+  const propertyEl = document.getElementById('newHireProperty');
+  const name = (nameEl?.value || '').trim();
+  const role = (roleEl?.value || '').trim();
+  const property = (propertyEl?.value || '').trim();
+  if(!name) {
+    if(nameEl) nameEl.focus();
+    return;
+  }
+  const fallbackDay = activeDay > 2 ? 2 : activeDay;
+  const agent = ensureAgentShape({ name, role, property, viewDay: fallbackDay, days: { 1: createEmptyObservation(1), 2: createEmptyObservation(2) } });
+  agentData.push(agent);
+  if(nameEl) nameEl.value = '';
+  if(roleEl) roleEl.value = '';
+  if(propertyEl) propertyEl.value = '';
+  persistState();
+  rerenderCurrentSection();
+}
+
+function removeObservationAgent(index) {
+  if(index < 0 || index >= agentData.length) return;
+  agentData.splice(index, 1);
+  persistState();
+  rerenderCurrentSection();
+}
+
+function setObservationCardDay(index, day) {
+  const agent = agentData[index];
+  if(!agent) return;
+  ensureAgentShape(agent);
+  agent.viewDay = day;
+  persistState();
+  rerenderCurrentSection();
+}
+
+function updateObservationField(index, field, value, day) {
+  const agent = agentData[index];
+  if(!agent) return;
+  ensureAgentShape(agent);
+  const obs = getObservation(agent, day);
+  obs[field] = value;
+  agent.viewDay = day;
+  persistState();
+  rerenderCurrentSection();
+}
+
+function buildReviewReadySummary(agent) {
+  ensureAgentShape(agent);
+  const day1 = summarizeObservation(agent, 1);
+  const day2 = summarizeObservation(agent, 2);
+  const carryNotes = [agent.days[1].reviewCarry ? agent.days[1].reviewNote : '', agent.days[2].reviewCarry ? agent.days[2].reviewNote : ''].filter(Boolean);
+  return `${day1} Day 2: ${day2}${carryNotes.length ? ' Carry-forward themes: ' + carryNotes.join(' | ') : ''}`;
+}
+
+
+function buildAgentExportText(index) {
+  const agent = agentData[index];
+  if(!agent) return '';
+  ensureAgentShape(agent);
+  const lines = [];
+  lines.push(`APEX ORIENTATION OBSERVATION SUMMARY`);
+  lines.push('');
+  lines.push(`Hire: ${agent.name || 'Unnamed Hire'}`);
+  lines.push(`Role: ${agent.role || 'Role not set'}`);
+  lines.push(`Site / Property: ${agent.property || facilitatorTeam.site || '—'}`);
+  lines.push(`Training Date: ${formatSessionDate(facilitatorTeam.date)}`);
+  lines.push(`Lead Facilitator: ${facilitatorTeam.lead || '—'}`);
+  lines.push(`Co-Facilitator: ${facilitatorTeam.co || '—'}`);
+  lines.push('');
+  [1,2].forEach(day => {
+    const obs = getObservation(agent, day);
+    lines.push(`DAY ${day}`);
+    lines.push(`Punctuality: ${ratingLabel(obs.punctuality)}`);
+    lines.push(`Engagement: ${ratingLabel(obs.engagement)}`);
+    lines.push(`Presence: ${ratingLabel(obs.presence)}`);
+    lines.push(`Role Comprehension: ${ratingLabel(obs.comprehension)}`);
+    lines.push(`Overall Status: ${OBS_STATUS_LABELS[obs.status] || 'Not set'}`);
+    if((obs.note || '').trim()) lines.push(`Orientation Note: ${obs.note.trim()}`);
+    lines.push(`Carry to 30/90 Review: ${obs.reviewCarry ? 'Yes' : 'No'}`);
+    if((obs.reviewNote || '').trim()) lines.push(`Review Reference: ${obs.reviewNote.trim()}`);
+    lines.push(`Summary: ${summarizeObservation(agent, day)}`);
+    lines.push('');
+  });
+  lines.push('REVIEW-READY ORIENTATION SUMMARY');
+  lines.push(buildReviewReadySummary(agent));
+  return lines.join('\n');
+}
+
+async function copyAgentSummary(index) {
+  const text = buildAgentExportText(index);
+  if(!text) return;
+  try {
+    await navigator.clipboard.writeText(text);
+    const status = document.getElementById('teamStatus');
+    if(status) status.textContent = `Summary copied for ${agentData[index]?.name || 'hire'}.`;
+  } catch (err) {
+    window.prompt('Copy this agent summary:', text);
+  }
+}
+
+function downloadAgentSummary(index) {
+  const text = buildAgentExportText(index);
+  if(!text) return;
+  const agent = agentData[index] || {};
+  const safeName = (agent.name || 'hire').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const safeDate = (facilitatorTeam.date || new Date().toISOString().slice(0,10));
+  const fileName = `apex-orientation-summary-${safeName || 'hire'}-${safeDate}.txt`;
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  const status = document.getElementById('teamStatus');
+  if(status) status.textContent = `Summary downloaded for ${agent.name || 'hire'}.`;
+}
+
+function isProgramComplete() {
+  return done.size === SECTIONS.length;
+}
+
+function renderProgramCompletionBox() {
+  if(!isProgramComplete()) return '';
+  return `<div class="program-complete-box">
+    <div class="program-complete-title">✓ Orientation Complete</div>
+    <div class="program-complete-text">All modules across Day 1, Day 2, and Day 3 have been marked complete. Download your day report and any individual agent summaries before resetting this orientation.</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+      <button class="tracker-btn primary" onclick="downloadDayReport()">Download Day Report</button>
+      <button class="tracker-btn secondary" onclick="completeAndResetOrientation()">Complete & Reset Orientation</button>
+    </div>
   </div>`;
-  document.body.appendChild(modal);
-}
-function selectFacilitator(idx) {
-  currentFacilitator = FACILITATORS[idx];
-  document.getElementById('facilitatorName').textContent = currentFacilitator.name;
-  document.getElementById('facilitatorRole').textContent = currentFacilitator.role;
-  document.getElementById('fac-modal').remove();
 }
 
-document.getElementById('facilitatorName').onclick = showFacilitatorSelect;
+function updateCompletionUI(triggerAlert = false) {
+  const complete = isProgramComplete();
+  const pill = document.getElementById('completionPill');
+  if (pill) pill.classList.toggle('show', complete);
 
+  const status = document.getElementById('teamStatus');
+  if (complete) {
+    if (status) status.textContent = 'Orientation complete. Download your report and agent summaries, then click Complete & Reset Orientation when you are ready.';
+    if (triggerAlert && !window.__apexCompletionAnnounced) {
+      window.__apexCompletionAnnounced = true;
+      setTimeout(() => {
+        window.alert('Orientation complete. Download the Day 3 report and any individual agent summaries before clicking Complete & Reset Orientation.');
+        goTo(currentIdx);
+      }, 50);
+    }
+  } else {
+    if (status && !facilitatorTeam.lead && !facilitatorTeam.co && !facilitatorTeam.assistant && !facilitatorTeam.site && !facilitatorTeam.date) {
+      status.textContent = 'Enter your facilitation team and session details, then save.';
+    }
+    window.__apexCompletionAnnounced = false;
+  }
+}
+
+function buildDayReportText(day = activeDay) {
+  const daySections = SECTIONS.filter(s => s.day === day);
+  const completedSections = daySections.filter(s => done.has(SECTIONS.indexOf(s)));
+  const reportLines = [];
+
+  reportLines.push(`APEX NEW HIRE ORIENTATION — DAY ${day} REPORT`);
+  reportLines.push('');
+  reportLines.push(`Site / Property: ${facilitatorTeam.site || '—'}`);
+  reportLines.push(`Training Date: ${formatSessionDate(facilitatorTeam.date)}`);
+  reportLines.push(`Lead Facilitator: ${facilitatorTeam.lead || '—'}`);
+  reportLines.push(`Co-Facilitator: ${facilitatorTeam.co || '—'}`);
+  reportLines.push(`Training Assistant: ${facilitatorTeam.assistant || '—'}`);
+  reportLines.push('');
+  reportLines.push(`Sections Completed: ${completedSections.length} of ${daySections.length}`);
+  reportLines.push('');
+
+  reportLines.push('SECTION STATUS');
+  daySections.forEach(section => {
+    const idx = SECTIONS.indexOf(section);
+    const status = done.has(idx) ? 'Done' : 'Open';
+    reportLines.push(`- ${section.title}: ${status}`);
+  });
+
+  reportLines.push('');
+  reportLines.push('SECTION NOTES');
+  daySections.forEach(section => {
+    const note = (sessionNotes[section.id] || '').trim();
+    if(note) {
+      reportLines.push('');
+      reportLines.push(`${section.title}`);
+      reportLines.push(note);
+    }
+  });
+
+  const dayComments = daySections.flatMap(section => {
+    const msgs = comments[section.id] || [];
+    return msgs.map(m => ({ section: section.title, ...m }));
+  });
+
+  reportLines.push('');
+  reportLines.push('COMMENTS / FLAGS');
+  if(dayComments.length) {
+    dayComments.forEach(entry => {
+      reportLines.push(`- [${entry.section}] ${entry.author}: ${entry.text} (${entry.time})`);
+    });
+  } else {
+    reportLines.push('No comments captured.');
+  }
+
+  const dayForObservations = day > 2 ? 2 : day;
+  reportLines.push('');
+  reportLines.push('NEW HIRE OBSERVATIONS');
+  if(agentData.length) {
+    agentData.forEach(agent => {
+      ensureAgentShape(agent);
+      const obs = getObservation(agent, dayForObservations);
+      reportLines.push(`- ${agent.name || 'Unnamed Hire'} (${agent.role || 'Role not set'} · ${agent.property || 'Property not set'})`);
+      reportLines.push(`  Punctuality: ${ratingLabel(obs.punctuality)}`);
+      reportLines.push(`  Engagement: ${ratingLabel(obs.engagement)}`);
+      reportLines.push(`  Presence: ${ratingLabel(obs.presence)}`);
+      reportLines.push(`  Role Comprehension: ${ratingLabel(obs.comprehension)}`);
+      reportLines.push(`  Overall Status: ${OBS_STATUS_LABELS[obs.status] || 'Not set'}`);
+      if((obs.note || '').trim()) reportLines.push(`  Orientation Note: ${obs.note.trim()}`);
+      reportLines.push(`  Carry to 30/90 Review: ${obs.reviewCarry ? 'Yes' : 'No'}`);
+      if((obs.reviewNote || '').trim()) reportLines.push(`  Review Reference: ${obs.reviewNote.trim()}`);
+      reportLines.push(`  Day ${dayForObservations} Summary: ${summarizeObservation(agent, dayForObservations)}`);
+      reportLines.push('');
+    });
+
+    reportLines.push('REVIEW-READY ORIENTATION SUMMARIES');
+    agentData.forEach(agent => {
+      reportLines.push(`- ${agent.name || 'Unnamed Hire'}: ${buildReviewReadySummary(agent)}`);
+    });
+  } else {
+    reportLines.push('No new hire observations captured.');
+  }
+
+  reportLines.push('');
+  reportLines.push('END OF REPORT');
+  return reportLines.join('\n');
+}
+
+async function copyDayReport() {
+  const text = buildDayReportText(activeDay);
+  try {
+    await navigator.clipboard.writeText(text);
+    const status = document.getElementById('teamStatus');
+    if(status) status.textContent = `Day ${activeDay} report copied to clipboard.`;
+  } catch (err) {
+    window.prompt('Copy your Day Report:', text);
+  }
+}
+
+function downloadDayReport() {
+  const text = buildDayReportText(activeDay);
+  const safeSite = (facilitatorTeam.site || 'site').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const safeDate = (facilitatorTeam.date || new Date().toISOString().slice(0,10));
+  const fileName = `apex-day-${activeDay}-report-${safeSite || 'site'}-${safeDate}.txt`;
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+
+  const status = document.getElementById('teamStatus');
+  if(status) status.textContent = `Day ${activeDay} report downloaded.`;
+}
+
+
+function resetOrientationState() {
+  done = new Set();
+  comments = {};
+  agentData = [];
+  sessionNotes = {};
+  facilitatorTeam.lead = '';
+  facilitatorTeam.co = '';
+  facilitatorTeam.assistant = '';
+  facilitatorTeam.site = '';
+  facilitatorTeam.date = '';
+  currentFacilitator = null;
+  currentIdx = 0;
+  activeDay = 1;
+  window.__apexCompletionAnnounced = false;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (err) {
+    console.warn('Unable to clear session state.', err);
+  }
+  buildNav();
+  goTo(0);
+  hydrateTeamInputs();
+  updateCompletionUI(false);
+  const status = document.getElementById('teamStatus');
+  if(status) status.textContent = 'Orientation reset. Enter the next session details to begin again.';
+}
+
+function completeAndResetOrientation() {
+  if (!isProgramComplete()) {
+    alert('All modules must be marked done before you can complete and reset the orientation.');
+    return;
+  }
+
+  const proceed = window.confirm(
+    'Orientation is complete. Before resetting, download the Day 3 report and any individual agent summaries you want to keep.\n\nPress OK if you are ready to clear and reset this orientation, or Cancel to stay on this completed session.'
+  );
+  if (!proceed) return;
+
+  const secondCheck = window.confirm(
+    'This will clear the session team, notes, completion marks, comments, and new hire observations for this orientation. Reset now?'
+  );
+  if (!secondCheck) return;
+
+  resetOrientationState();
+  window.alert('Orientation reset complete. The session has been cleared and is ready for the next class.');
+}
+
+function persistState() {
+  const payload = {
+    facilitatorTeam,
+    done: Array.from(done),
+    comments,
+    agentData,
+    sessionNotes
+  };
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  } catch (err) {
+    console.warn('Unable to save session state.', err);
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const saved = JSON.parse(raw);
+
+    if(saved.facilitatorTeam) {
+      facilitatorTeam.lead = saved.facilitatorTeam.lead || '';
+      facilitatorTeam.co = saved.facilitatorTeam.co || '';
+      facilitatorTeam.assistant = saved.facilitatorTeam.assistant || '';
+      facilitatorTeam.site = saved.facilitatorTeam.site || '';
+      facilitatorTeam.date = saved.facilitatorTeam.date || '';
+    }
+
+    if(Array.isArray(saved.done)) done = new Set(saved.done);
+    if(saved.comments && typeof saved.comments === 'object') comments = saved.comments;
+    if(Array.isArray(saved.agentData)) agentData = saved.agentData.map(ensureAgentShape);
+    if(saved.sessionNotes && typeof saved.sessionNotes === 'object') sessionNotes = saved.sessionNotes;
+  } catch (err) {
+    console.warn('Unable to load session state.', err);
+  }
+}
+
+function hydrateTeamInputs() {
+  const leadInput = document.getElementById('leadFacilitator');
+  const coInput = document.getElementById('coFacilitator');
+  const assistInput = document.getElementById('trainingAssistant');
+  const siteInput = document.getElementById('trainingSite');
+  const dateInput = document.getElementById('trainingDate');
+  if(leadInput) leadInput.value = facilitatorTeam.lead || '';
+  if(coInput) coInput.value = facilitatorTeam.co || '';
+  if(assistInput) assistInput.value = facilitatorTeam.assistant || '';
+  if(siteInput) siteInput.value = facilitatorTeam.site || '';
+  if(dateInput) dateInput.value = facilitatorTeam.date || '';
+  updateTeamDisplays();
+}
 // INIT
+loadState();
 buildNav();
 goTo(0);
+hydrateTeamInputs();
+updateCompletionUI(false);
 </script>
 </body>
 </html>

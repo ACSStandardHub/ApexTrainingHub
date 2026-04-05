@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
 <title>Apex NHO — Printable Materials Pack</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Barlow:wght@300;400;500;600;700&amp;family=Barlow+Condensed:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
 :root {
   --navy:#0D1F3C; --navy-mid:#162C50; --navy-dark:#081429;
@@ -28,6 +29,11 @@ body{font-family:'Barlow',sans-serif;background:#d8d4cc;color:var(--charcoal);fo
 .nav-spacer{flex:1}
 .btn-print-all{padding:8px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:3px;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
 .btn-print-all:hover{background:var(--gold-light)}
+.nav-home {
+  color: var(--gold);
+  margin-right: 6px;
+}
+
 
 /* SECTION HEADERS */
 .section-header{background:var(--navy);padding:24px 32px;margin-bottom:24px;border-left:6px solid var(--gold);print-color-adjust:exact;-webkit-print-color-adjust:exact}
@@ -122,985 +128,1010 @@ body{font-family:'Barlow',sans-serif;background:#d8d4cc;color:var(--charcoal);fo
   .materials-grid{grid-template-columns:1fr;padding:0 12px 12px}
   .three-col,.two-col{grid-template-columns:1fr}
 }
+
+.badge-print{background:rgba(201,168,76,0.12);color:var(--gold-light);border:1px solid rgba(201,168,76,0.3);}
+
+.print-one-btn{
+  margin-top:10px;
+  padding:6px 12px;
+  background:var(--gold);
+  color:var(--navy);
+  border:none;
+  border-radius:3px;
+  font-family:'Barlow',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.print-one-btn:hover{background:var(--gold-light);}
+@media print{
+  body.print-single .mat{display:none !important;}
+  body.print-single .mat.print-target{
+    display:block !important;
+    break-inside:auto;
+    page-break-inside:auto;
+    margin:0 !important;
+    border:1px solid #ddd !important;
+  }
+  body.print-single .screen-nav,
+  body.print-single .section-header,
+  body.print-single .btn-print-all,
+  body.print-single .print-one-btn{
+    display:none !important;
+  }
+}
 </style>
 </head>
 <body>
-<a href="index.html">← Back to Training Library</a>
 <!-- SCREEN NAV -->
 <nav class="screen-nav no-print">
-  <div class="nav-logo">Apex NHO · Materials</div>
-  <a class="nav-link active" href="#day1">Day 1</a>
-  <a class="nav-link" href="#day2">Day 2</a>
-  <a class="nav-link" href="#day3">Day 3</a>
-  <div class="nav-spacer"></div>
-  <button class="btn-print-all" onclick="window.print()">🖨 Print All</button>
+<a class="nav-link nav-home" href="index
+.html">← Materials Library</a>
+<div class="nav-logo">Apex NHO · Materials</div>
+<a class="nav-link active" href="#day1">Day 1</a>
+<a class="nav-link" href="#day2">Day 2</a>
+<a class="nav-link" href="#day3">Day 3</a>
+<div class="nav-spacer"></div>
+<button class="btn-print-all" onclick="window.print()">🖨 Print All</button>
 </nav>
-
 <!-- ═══════════════════════════════════════ DAY 1 ═══ -->
 <div id="day1">
 <div class="section-header">
-  <div class="sh-day">Day 1 — 21 Materials</div>
-  <div class="sh-title">Foundation</div>
-  <div class="sh-sub">Pre-Session · Modules 1–9 · Commitment Card</div>
+<div class="sh-day">Day 1 — 21 Materials</div>
+<div class="sh-title">Foundation</div>
+<div class="sh-sub">Pre-Session · Modules 1–9 · Commitment Card</div>
 </div>
-
 <div class="materials-grid">
-
 <!-- 1. H.O.M.E. Values Reference Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-00 · Pre-Stage at Seats</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
-  <div class="mat-body">
-    <div class="mat-title">H.O.M.E. Values Reference Card</div>
-    <div class="three-col">
-      <div class="col-card">
-        <div class="col-letter">H</div>
-        <div class="col-word">Hospitality</div>
-        <div class="col-def">Genuine warmth in every interaction. Residents feel welcomed — not processed. Not tolerated. Welcomed.</div>
-      </div>
-      <div class="col-card">
-        <div class="col-letter">O</div>
-        <div class="col-word">Ownership</div>
-        <div class="col-def">Take initiative. Don't wait to be told. Own your shift, your space, and the outcome.</div>
-      </div>
-      <div class="col-card">
-        <div class="col-letter">M</div>
-        <div class="col-word">Mindfulness</div>
-        <div class="col-def">Stay aware of your environment, your team, and resident needs before they are voiced.</div>
-      </div>
-    </div>
-    <div class="col-card" style="margin-top:8px">
-      <div class="col-letter">E</div>
-      <div class="col-word">Excellence</div>
-      <div class="col-def">Operate above the minimum. Always present the best version of this role. Excellence is a decision — not a mood.</div>
-    </div>
-    <div class="rule-callout" style="margin-top:10px">
-      <div class="rule-text">"You are not just a concierge. You are Apex."</div>
-      <div class="rule-sub">Every shift. Every property. Every interaction.</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation</div>
-  </div>
+<div class="mat" id="d1-00">
+<div class="mat-header"><span class="mat-id">D1-00 · Pre-Stage at Seats</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
+<div class="mat-body">
+<div class="mat-title">H.O.M.E. Values Reference Card</div>
+<div class="three-col">
+<div class="col-card">
+<div class="col-letter">H</div>
+<div class="col-word">Hospitality</div>
+<div class="col-def">Genuine warmth in every interaction. Residents feel welcomed — not processed. Not tolerated. Welcomed.</div>
 </div>
-
+<div class="col-card">
+<div class="col-letter">O</div>
+<div class="col-word">Ownership</div>
+<div class="col-def">Take initiative. Don't wait to be told. Own your shift, your space, and the outcome.</div>
+</div>
+<div class="col-card">
+<div class="col-letter">M</div>
+<div class="col-word">Mindfulness</div>
+<div class="col-def">Stay aware of your environment, your team, and resident needs before they are voiced.</div>
+</div>
+</div>
+<div class="col-card" style="margin-top:8px">
+<div class="col-letter">E</div>
+<div class="col-word">Excellence</div>
+<div class="col-def">Operate above the minimum. Always present the best version of this role. Excellence is a decision — not a mood.</div>
+</div>
+<div class="rule-callout" style="margin-top:10px">
+<div class="rule-text">"You are not just a concierge. You are Apex."</div>
+<div class="rule-sub">Every shift. Every property. Every interaction.</div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation</div>
+</div>
+</div>
 <!-- 2. Apex Standard One-Pager -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-01 · Module 1 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">The Apex Standard — Five Non-Negotiables</div>
-    <ul class="item-list">
-      <li><strong>Consistency</strong> — The same level of professionalism at 8 AM, at midnight, and on a slow Tuesday.</li>
-      <li><strong>Intentionality</strong> — Nothing about how you present, communicate, or operate is accidental.</li>
-      <li><strong>Ownership</strong> — You do not wait to be corrected. You hold the standard because it is yours.</li>
-      <li><strong>Representation</strong> — You are Apex on shift. You are also Apex near the property off shift.</li>
-      <li><strong>Non-Negotiable</strong> — The standard does not lower based on volume, resident behavior, or how your day is going.</li>
-    </ul>
-    <div class="rule-callout-gold">
-      <div class="rule-text">"What you walked into this morning — the quiet, the order, the intentionality — that is what Apex-level preparation looks like."</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 1</div>
-  </div>
+<div class="mat" id="d1-01">
+<div class="mat-header"><span class="mat-id">D1-01 · Module 1 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">The Apex Standard — Five Non-Negotiables</div>
+<ul class="item-list">
+<li><strong>Consistency</strong> — The same level of professionalism at 8 AM, at midnight, and on a slow Tuesday.</li>
+<li><strong>Intentionality</strong> — Nothing about how you present, communicate, or operate is accidental.</li>
+<li><strong>Ownership</strong> — You do not wait to be corrected. You hold the standard because it is yours.</li>
+<li><strong>Representation</strong> — You are Apex on shift. You are also Apex near the property off shift.</li>
+<li><strong>Non-Negotiable</strong> — The standard does not lower based on volume, resident behavior, or how your day is going.</li>
+</ul>
+<div class="rule-callout-gold">
+<div class="rule-text">"What you walked into this morning — the quiet, the order, the intentionality — that is what Apex-level preparation looks like."</div>
 </div>
-
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 1</div>
+</div>
+</div>
 <!-- 3. Luxury Service Mindset Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-02 · Module 1 — Luxury Mindset Slide</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Luxury Service Mindset Card</div>
-    <div class="two-col">
-      <div class="col-card" style="border-top-color:var(--red)">
-        <div class="col-label" style="color:var(--red)">Reactive Service</div>
-        <div class="col-def">Waits for the resident to identify a problem. Responds only when asked. Minimum effort. Minimum presence.</div>
-      </div>
-      <div class="col-card" style="border-top-color:var(--green)">
-        <div class="col-label" style="color:var(--green)">Proactive Service</div>
-        <div class="col-def">Anticipates needs before they are voiced. Prevents the ask. Creates the experience before the resident knows it is missing.</div>
-      </div>
-    </div>
-    <div class="subhead">The Luxury Standard</div>
-    <ul class="item-list">
-      <li>Every resident receives the same level of attention — regardless of their mood or yours.</li>
-      <li>Emotional intelligence is a professional skill, not a personality preference.</li>
-      <li>The resident who is difficult today deserves the same service as the one who is pleasant.</li>
-    </ul>
-    <div class="rule-callout">
-      <div class="rule-text">"Luxury is not about expensive environments. It is about the quality of experience you deliver."</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 1</div>
-  </div>
+<div class="mat" id="d1-02">
+<div class="mat-header"><span class="mat-id">D1-02 · Module 1 — Luxury Mindset Slide</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Luxury Service Mindset Card</div>
+<div class="two-col">
+<div class="col-card" style="border-top-color:var(--red)">
+<div class="col-label" style="color:var(--red)">Reactive Service</div>
+<div class="col-def">Waits for the resident to identify a problem. Responds only when asked. Minimum effort. Minimum presence.</div>
 </div>
-
+<div class="col-card" style="border-top-color:var(--green)">
+<div class="col-label" style="color:var(--green)">Proactive Service</div>
+<div class="col-def">Anticipates needs before they are voiced. Prevents the ask. Creates the experience before the resident knows it is missing.</div>
+</div>
+</div>
+<div class="subhead">The Luxury Standard</div>
+<ul class="item-list">
+<li>Every resident receives the same level of attention — regardless of their mood or yours.</li>
+<li>Emotional intelligence is a professional skill, not a personality preference.</li>
+<li>The resident who is difficult today deserves the same service as the one who is pleasant.</li>
+</ul>
+<div class="rule-callout">
+<div class="rule-text">"Luxury is not about expensive environments. It is about the quality of experience you deliver."</div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 1</div>
+</div>
+</div>
 <!-- 4. Module 1 Reflection Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-03 · Module 1 Reflection Prompt</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Module 1 Reflection Card</div>
-    <div class="rule-callout-gold">
-      <div class="rule-text">"What does it mean to represent something bigger than yourself on shift?"</div>
-    </div>
-    <div class="subhead">Your Response</div>
-    <div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead" style="margin-top:14px">Think About</div>
-    <ul class="item-list">
-      <li>What does a resident trust when they walk past the desk?</li>
-      <li>What does it mean to hold a standard that does not belong to just you?</li>
-    </ul>
-    <div class="sign-line" style="margin-top:12px"><span class="sign-label">Name:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px;height:20px"></div></div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 1</div>
-  </div>
+<div class="mat" id="d1-03">
+<div class="mat-header"><span class="mat-id">D1-03 · Module 1 Reflection Prompt</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Module 1 Reflection Card</div>
+<div class="rule-callout-gold">
+<div class="rule-text">"What does it mean to represent something bigger than yourself on shift?"</div>
 </div>
-
+<div class="subhead">Your Response</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+<div class="subhead" style="margin-top:14px">Think About</div>
+<ul class="item-list">
+<li>What does a resident trust when they walk past the desk?</li>
+<li>What does it mean to hold a standard that does not belong to just you?</li>
+</ul>
+<div class="sign-line" style="margin-top:12px"><span class="sign-label">Name:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px;height:20px"></div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 1</div>
+</div>
+</div>
 <!-- 5. Friendly ≠ Familiar -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-04 · Module 3 — Before Paired Discussion</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Friendly ≠ Familiar — Professional Boundary Reference</div>
-    <div class="two-col">
-      <div class="col-card" style="border-top-color:var(--green)">
-        <div class="col-label" style="color:var(--green)">Friendly — Required</div>
-        <ul class="item-list">
-          <li>Warm, engaged greeting by name</li>
-          <li>Genuine interest in resident wellbeing</li>
-          <li>Proactive offers of assistance</li>
-          <li>Professional warmth — every resident, every time</li>
-        </ul>
-      </div>
-      <div class="col-card" style="border-top-color:var(--red)">
-        <div class="col-label" style="color:var(--red)">Familiar — Never</div>
-        <ul class="item-list">
-          <li>Nicknames, casual address, favoritism</li>
-          <li>Personal conversations beyond the role</li>
-          <li>Sharing opinions on internal matters</li>
-          <li>Special treatment based on relationship</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rule-callout" style="margin-top:10px">
-      <div class="rule-text">"Would I behave the same way with every resident — or only this one?"</div>
-      <div class="rule-sub">If the answer is only this one — you have crossed into familiar. Friendly is consistent. Familiar is selective.</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 3</div>
-  </div>
+<div class="mat" id="d1-04">
+<div class="mat-header"><span class="mat-id">D1-04 · Module 3 — Before Paired Discussion</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Friendly ≠ Familiar — Professional Boundary Reference</div>
+<div class="two-col">
+<div class="col-card" style="border-top-color:var(--green)">
+<div class="col-label" style="color:var(--green)">Friendly — Required</div>
+<ul class="item-list">
+<li>Warm, engaged greeting by name</li>
+<li>Genuine interest in resident wellbeing</li>
+<li>Proactive offers of assistance</li>
+<li>Professional warmth — every resident, every time</li>
+</ul>
 </div>
-
+<div class="col-card" style="border-top-color:var(--red)">
+<div class="col-label" style="color:var(--red)">Familiar — Never</div>
+<ul class="item-list">
+<li>Nicknames, casual address, favoritism</li>
+<li>Personal conversations beyond the role</li>
+<li>Sharing opinions on internal matters</li>
+<li>Special treatment based on relationship</li>
+</ul>
+</div>
+</div>
+<div class="rule-callout" style="margin-top:10px">
+<div class="rule-text">"Would I behave the same way with every resident — or only this one?"</div>
+<div class="rule-sub">If the answer is only this one — you have crossed into familiar. Friendly is consistent. Familiar is selective.</div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 3</div>
+</div>
+</div>
 <!-- 6. Presence Checklist -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-05 · Module 3 — Paired Self-Assessment</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Apex Presence Checklist — 10-Point</div>
-    <div class="subhead">Assess your partner. Circle: Yes / Needs Work</div>
-    <table class="table-std">
-      <thead><tr><th>#</th><th>Observable Standard</th><th>Assessment</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>Uniform clean, pressed, and fully intact</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>2</td><td>Name badge visible at all times</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>3</td><td>Hair groomed and professional</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>4</td><td>Standing or seated with upright posture</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>5</td><td>Eye contact made within 5 seconds of approach</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>6</td><td>No visible personal items at the desk</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>7</td><td>Greeting delivered with appropriate warmth</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>8</td><td>Desk area organized and clear of clutter</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>9</td><td>Body language open — no crossed arms or turning away</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-        <tr><td>10</td><td>Energy is engaged and professional — not flat or distracted</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
-      </tbody>
-    </table>
-    <div class="subhead">One specific thing to improve:</div><div class="write-line"></div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 3</div>
-  </div>
+<div class="mat" id="d1-05">
+<div class="mat-header"><span class="mat-id">D1-05 · Module 3 — Paired Self-Assessment</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Apex Presence Checklist — 10-Point</div>
+<div class="subhead">Assess your partner. Circle: Yes / Needs Work</div>
+<table class="table-std">
+<thead><tr><th>#</th><th>Observable Standard</th><th>Assessment</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Uniform clean, pressed, and fully intact</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>2</td><td>Name badge visible at all times</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>3</td><td>Hair groomed and professional</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>4</td><td>Standing or seated with upright posture</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>5</td><td>Eye contact made within 5 seconds of approach</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>6</td><td>No visible personal items at the desk</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>7</td><td>Greeting delivered with appropriate warmth</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>8</td><td>Desk area organized and clear of clutter</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>9</td><td>Body language open — no crossed arms or turning away</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+<tr><td>10</td><td>Energy is engaged and professional — not flat or distracted</td><td style="color:var(--gray);font-size:11px">Yes / Needs Work</td></tr>
+</tbody>
+</table>
+<div class="subhead">One specific thing to improve:</div><div class="write-line"></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 3</div>
 </div>
-
+</div>
 <!-- 7. Shift Expectations One-Pager -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-06 · Module 4 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Shift Expectations One-Pager</div>
-    <div class="subhead">Shift Start — Before You Sit Down</div>
-    <ul class="item-list numbered">
-      <li>Arrive 10 minutes before your shift — never clock in and immediately take position unprepared.</li>
-      <li>Review the pass-on log in full before the outgoing agent leaves.</li>
-      <li>Confirm open items: pending packages, active maintenance, known resident concerns.</li>
-      <li>Check desk setup: log open, radio charged, call sheet current, supplies stocked.</li>
-    </ul>
-    <div class="subhead">Non-Negotiables — Every Shift</div>
-    <ul class="item-list">
-      <li>The desk is never unattended. Relief before stepping away — always.</li>
-      <li>Minimum 2 property tours per shift — both logged using E.D.O.</li>
-      <li>Minimum 1 shift log entry per hour — time-stamped.</li>
-      <li>Complete pass-on entry required at end of every shift — all three sections.</li>
-    </ul>
-    <div class="alert-bar">Abandoning a post without coverage is a terminable offense.</div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 4</div>
-  </div>
+<div class="mat" id="d1-06">
+<div class="mat-header"><span class="mat-id">D1-06 · Module 4 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Shift Expectations One-Pager</div>
+<div class="subhead">Shift Start — Before You Sit Down</div>
+<ul class="item-list numbered">
+<li>Arrive 10 minutes before your shift — never clock in and immediately take position unprepared.</li>
+<li>Review the pass-on log in full before the outgoing agent leaves.</li>
+<li>Confirm open items: pending packages, active maintenance, known resident concerns.</li>
+<li>Check desk setup: log open, radio charged, call sheet current, supplies stocked.</li>
+</ul>
+<div class="subhead">Non-Negotiables — Every Shift</div>
+<ul class="item-list">
+<li>The desk is never unattended. Relief before stepping away — always.</li>
+<li>Minimum 2 property tours per shift — both logged using E.D.O.</li>
+<li>Minimum 1 shift log entry per hour — time-stamped.</li>
+<li>Complete pass-on entry required at end of every shift — all three sections.</li>
+</ul>
+<div class="alert-bar">Abandoning a post without coverage is a terminable offense.</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 4</div>
 </div>
-
+</div>
 <!-- 8. Site Tour Template -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-07 · Module 4 — Tour Practice Exercise</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Site Tour Template</div>
-    <div class="subhead">Build Your 3-Stop Tour Route</div>
-    <table class="table-std">
-      <thead><tr><th>Stop</th><th>Location</th><th>What I Observe</th><th>Log Trigger</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>2</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>3</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-      </tbody>
-    </table>
-    <div class="subhead" style="margin-top:12px">Standard Tour Stops to Consider</div>
-    <div class="two-col">
-      <ul class="item-list"><li>Lobby & main entry</li><li>Mailroom & package area</li><li>Elevator banks</li><li>Stairwells</li></ul>
-      <ul class="item-list"><li>Pool / fitness / amenities</li><li>Parking garage entry</li><li>Service entrance</li><li>Common corridors</li></ul>
-    </div>
-    <div class="rule-callout-gold" style="margin-top:8px">
-      <div class="rule-text">Every stop you observe → Every observation gets logged.</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 4</div>
-  </div>
+<div class="mat" id="d1-07">
+<div class="mat-header"><span class="mat-id">D1-07 · Module 4 — Tour Practice Exercise</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Site Tour Template</div>
+<div class="subhead">Build Your 3-Stop Tour Route</div>
+<table class="table-std">
+<thead><tr><th>Stop</th><th>Location</th><th>What I Observe</th><th>Log Trigger</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>2</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>3</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+</tbody>
+</table>
+<div class="subhead" style="margin-top:12px">Standard Tour Stops to Consider</div>
+<div class="two-col">
+<ul class="item-list"><li>Lobby &amp; main entry</li><li>Mailroom &amp; package area</li><li>Elevator banks</li><li>Stairwells</li></ul>
+<ul class="item-list"><li>Pool / fitness / amenities</li><li>Parking garage entry</li><li>Service entrance</li><li>Common corridors</li></ul>
 </div>
-
+<div class="rule-callout-gold" style="margin-top:8px">
+<div class="rule-text">Every stop you observe → Every observation gets logged.</div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 4</div>
+</div>
+</div>
 <!-- 9. E.D.O. Reference Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-08 · Module 5 Start — Keep on Person</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
-  <div class="mat-body">
-    <div class="mat-title">E.D.O. Method Reference Card</div>
-    <div class="three-col">
-      <div class="col-card navy-bg">
-        <div class="col-letter light">E</div>
-        <div class="col-word light">Event</div>
-        <div class="col-label light">What happened?</div>
-        <div class="col-def light">One specific, observable, factual sentence. If you cannot state it clearly — you do not have an Event yet.</div>
-      </div>
-      <div class="col-card navy-bg">
-        <div class="col-letter light">D</div>
-        <div class="col-word light">Detail</div>
-        <div class="col-label light">Who, when, where, how?</div>
-        <div class="col-def light">Exact time. Unit or location. Parties involved. Specific circumstances. No assumptions — facts only.</div>
-      </div>
-      <div class="col-card navy-bg">
-        <div class="col-letter light">O</div>
-        <div class="col-word light">Outcome</div>
-        <div class="col-label light">What did you do?</div>
-        <div class="col-def light">Resolved, escalated, or pending? If pending — to whom, and why? Every entry needs an outcome.</div>
-      </div>
-    </div>
-    <div class="subhead" style="margin-top:10px">Model Entry</div>
-    <div class="rule-callout-gold">
-      <div class="rule-text" style="font-size:12px;font-style:normal"><strong>E:</strong> Resident in Unit 412 reported a water leak under the kitchen sink at 2:14 PM.<br><strong>D:</strong> Resident called the desk. Reported water pooling under cabinet since approximately noon. Maintenance notified via Yardi WO #2204 at 2:17 PM.<br><strong>O:</strong> Resident acknowledged notification. Work order submitted. Pending maintenance response. Flagged for pass-on.</div>
-    </div>
-    <div class="alert-bar">An undocumented event did not happen — operationally and legally.</div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
-  </div>
+<div class="mat" id="d1-08">
+<div class="mat-header"><span class="mat-id">D1-08 · Module 5 Start — Keep on Person</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
+<div class="mat-body">
+<div class="mat-title">E.D.O. Method Reference Card</div>
+<div class="three-col">
+<div class="col-card navy-bg">
+<div class="col-letter light">E</div>
+<div class="col-word light">Event</div>
+<div class="col-label light">What happened?</div>
+<div class="col-def light">One specific, observable, factual sentence. If you cannot state it clearly — you do not have an Event yet.</div>
 </div>
-
+<div class="col-card navy-bg">
+<div class="col-letter light">D</div>
+<div class="col-word light">Detail</div>
+<div class="col-label light">Who, when, where, how?</div>
+<div class="col-def light">Exact time. Unit or location. Parties involved. Specific circumstances. No assumptions — facts only.</div>
+</div>
+<div class="col-card navy-bg">
+<div class="col-letter light">O</div>
+<div class="col-word light">Outcome</div>
+<div class="col-label light">What did you do?</div>
+<div class="col-def light">Resolved, escalated, or pending? If pending — to whom, and why? Every entry needs an outcome.</div>
+</div>
+</div>
+<div class="subhead" style="margin-top:10px">Model Entry</div>
+<div class="rule-callout-gold">
+<div class="rule-text" style="font-size:12px;font-style:normal"><strong>E:</strong> Resident in Unit 412 reported a water leak under the kitchen sink at 2:14 PM.<br/><strong>D:</strong> Resident called the desk. Reported water pooling under cabinet since approximately noon. Maintenance notified via Yardi WO #2204 at 2:17 PM.<br/><strong>O:</strong> Resident acknowledged notification. Work order submitted. Pending maintenance response. Flagged for pass-on.</div>
+</div>
+<div class="alert-bar">An undocumented event did not happen — operationally and legally.</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
+</div>
+</div>
 <!-- 10. Shift Log Non-Negotiables -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-09 · Module 5D</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Shift Log Non-Negotiables</div>
-    <ul class="item-list">
-      <li>Minimum <strong>1 entry per hour</strong> — every entry time-stamped. If nothing occurred, log that explicitly.</li>
-      <li>Minimum <strong>2 tour entries per shift</strong> — route taken, stops covered, observations noted.</li>
-      <li><strong>Pass-on entry required</strong> at end of every shift — all three sections completed.</li>
-      <li>Tone: <strong>professional, neutral, factual</strong> — no personal opinion, no casual language, no first person.</li>
-      <li><strong>"Quiet night"</strong> and <strong>"Nothing to report"</strong> are not acceptable entries — ever.</li>
-      <li>Corrections: <strong>never delete</strong> — add a follow-up entry with updated information and timestamp.</li>
-      <li>Never copy and paste previous shift entries — every entry must reflect the actual shift.</li>
-    </ul>
-    <div class="subhead">Prohibited Language in the Log</div>
-    <div class="two-col">
-      <div class="compare-cell cell-weak"><span class="cell-label">Never Write</span>"Things were quiet tonight."<br>"Handled it."<br>"The resident was drunk."<br>"I think it was fine."</div>
-      <div class="compare-cell cell-strong"><span class="cell-label">Write This</span>"No incidents to report — 1:05 AM tour completed, all areas clear."<br>"[Specific action taken and outcome documented.]"</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
-  </div>
+<div class="mat" id="d1-09">
+<div class="mat-header"><span class="mat-id">D1-09 · Module 5D</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Shift Log Non-Negotiables</div>
+<ul class="item-list">
+<li>Minimum <strong>1 entry per hour</strong> — every entry time-stamped. If nothing occurred, log that explicitly.</li>
+<li>Minimum <strong>2 tour entries per shift</strong> — route taken, stops covered, observations noted.</li>
+<li><strong>Pass-on entry required</strong> at end of every shift — all three sections completed.</li>
+<li>Tone: <strong>professional, neutral, factual</strong> — no personal opinion, no casual language, no first person.</li>
+<li><strong>"Quiet night"</strong> and <strong>"Nothing to report"</strong> are not acceptable entries — ever.</li>
+<li>Corrections: <strong>never delete</strong> — add a follow-up entry with updated information and timestamp.</li>
+<li>Never copy and paste previous shift entries — every entry must reflect the actual shift.</li>
+</ul>
+<div class="subhead">Prohibited Language in the Log</div>
+<div class="two-col">
+<div class="compare-cell cell-weak"><span class="cell-label">Never Write</span>"Things were quiet tonight."<br/>"Handled it."<br/>"The resident was drunk."<br/>"I think it was fine."</div>
+<div class="compare-cell cell-strong"><span class="cell-label">Write This</span>"No incidents to report — 1:05 AM tour completed, all areas clear."<br/>"[Specific action taken and outcome documented.]"</div>
 </div>
-
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
+</div>
+</div>
 <!-- 11. Strong vs. Weak -->
-<div class="mat full-width">
-  <div class="mat-header"><span class="mat-id">D1-10 · Module 5E — Comparison Exercise</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Strong vs. Weak Log Entry Examples</div>
-    <div class="subhead">Review each pair. Name the gaps in the weak entry before looking at the strong version.</div>
-    <div class="subhead" style="margin-top:12px">Entry Pair 1 — Tour Log</div>
-    <div class="compare-row">
-      <div class="compare-cell cell-weak"><span class="cell-label">Weak</span>9 PM — checked building, everything fine.</div>
-      <div class="compare-cell cell-strong"><span class="cell-label">Strong</span>9:04 PM — Conducted scheduled tour of floors 1–4, pool deck, and parking garage. No violations observed. Hallway light out on floor 3 near stairwell exit — submitted maintenance ticket #MT-0817. All entry points secure.</div>
-    </div>
-    <div class="subhead">Entry Pair 2 — Package Incident</div>
-    <div class="compare-row">
-      <div class="compare-cell cell-weak"><span class="cell-label">Weak</span>2 PM — package issue with resident. Handled it.</div>
-      <div class="compare-cell cell-strong"><span class="cell-label">Strong</span>2:12 PM — Resident from Unit 308 (M. Chen) reported not receiving package logged on 4/2 at 11:45 AM (UPS — Patagonia). System log confirmed receipt and storage in locker 14. Resident confirmed receipt after review. No further action required. Pass-on: no open items.</div>
-    </div>
-    <div class="subhead">Entry Pair 3 — Resident Altercation</div>
-    <div class="compare-row">
-      <div class="compare-cell cell-weak"><span class="cell-label">Weak</span>11:30 PM — two residents were arguing in the lobby. It got kind of loud. They eventually left.</div>
-      <div class="compare-cell cell-strong"><span class="cell-label">Strong</span>11:32 PM — Verbal exchange between resident from Unit 612 (name unknown) and resident from Unit 705 (name unknown) observed in main lobby. Exchange was vocal but did not become physical. Concierge de-escalated verbally. Both parties departed separately by 11:40 PM. Supervisor notified at 11:34 PM via radio. Incident report filed — reference #IR-041. Flagged for pass-on.</div>
-    </div>
-    <div class="subhead" style="margin-top:12px">What was missing from each weak entry?</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
-  </div>
+<div class="mat full-width" id="d1-10">
+<div class="mat-header"><span class="mat-id">D1-10 · Module 5E — Comparison Exercise</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Strong vs. Weak Log Entry Examples</div>
+<div class="subhead">Review each pair. Name the gaps in the weak entry before looking at the strong version.</div>
+<div class="subhead" style="margin-top:12px">Entry Pair 1 — Tour Log</div>
+<div class="compare-row">
+<div class="compare-cell cell-weak"><span class="cell-label">Weak</span>9 PM — checked building, everything fine.</div>
+<div class="compare-cell cell-strong"><span class="cell-label">Strong</span>9:04 PM — Conducted scheduled tour of floors 1–4, pool deck, and parking garage. No violations observed. Hallway light out on floor 3 near stairwell exit — submitted maintenance ticket #MT-0817. All entry points secure.</div>
 </div>
-
+<div class="subhead">Entry Pair 2 — Package Incident</div>
+<div class="compare-row">
+<div class="compare-cell cell-weak"><span class="cell-label">Weak</span>2 PM — package issue with resident. Handled it.</div>
+<div class="compare-cell cell-strong"><span class="cell-label">Strong</span>2:12 PM — Resident from Unit 308 (M. Chen) reported not receiving package logged on 4/2 at 11:45 AM (UPS — Patagonia). System log confirmed receipt and storage in locker 14. Resident confirmed receipt after review. No further action required. Pass-on: no open items.</div>
+</div>
+<div class="subhead">Entry Pair 3 — Resident Altercation</div>
+<div class="compare-row">
+<div class="compare-cell cell-weak"><span class="cell-label">Weak</span>11:30 PM — two residents were arguing in the lobby. It got kind of loud. They eventually left.</div>
+<div class="compare-cell cell-strong"><span class="cell-label">Strong</span>11:32 PM — Verbal exchange between resident from Unit 612 (name unknown) and resident from Unit 705 (name unknown) observed in main lobby. Exchange was vocal but did not become physical. Concierge de-escalated verbally. Both parties departed separately by 11:40 PM. Supervisor notified at 11:34 PM via radio. Incident report filed — reference #IR-041. Flagged for pass-on.</div>
+</div>
+<div class="subhead" style="margin-top:12px">What was missing from each weak entry?</div>
+<div class="write-line"></div><div class="write-line"></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
+</div>
+</div>
 <!-- 12. E.D.O. Scoring Rubric -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-11 · Module 5F — Peer Scoring</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">E.D.O. Scoring Rubric</div>
-    <table class="table-std">
-      <thead><tr><th>Component</th><th>Criteria</th><th>Points</th><th>Score</th></tr></thead>
-      <tbody>
-        <tr><td>Event (E)</td><td>One clear, specific, observable sentence</td><td>0–2</td><td>____</td></tr>
-        <tr><td>Detail (D)</td><td>Time-stamped, unit/location named, parties identified, no assumptions</td><td>0–3</td><td>____</td></tr>
-        <tr><td>Outcome (O)</td><td>Resolved / escalated / pending clearly stated — with who and when</td><td>0–3</td><td>____</td></tr>
-        <tr><td>Language Standard</td><td>Objective, third-person, factual — no editorial, no casual phrases</td><td>0–2</td><td>____</td></tr>
-        <tr><td colspan="2" style="font-weight:700;color:var(--navy)">Total</td><td style="font-weight:700">0–10</td><td>____</td></tr>
-      </tbody>
-    </table>
-    <div class="subhead">Score Meaning</div>
-    <ul class="item-list">
-      <li><strong>9–10:</strong> Strong — meets Apex standard. Keep this quality on every shift.</li>
-      <li><strong>7–8:</strong> Passing — minor gaps. Note what to tighten for the practicum.</li>
-      <li><strong>5–6:</strong> Below standard — missing one full component. Rewrite before moving on.</li>
-      <li><strong>Below 5:</strong> Needs coaching — significant gaps. Flag for facilitator review.</li>
-    </ul>
-    <div class="subhead">Feedback for Your Partner</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
-  </div>
+<div class="mat" id="d1-11">
+<div class="mat-header"><span class="mat-id">D1-11 · Module 5F — Peer Scoring</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">E.D.O. Scoring Rubric</div>
+<table class="table-std">
+<thead><tr><th>Component</th><th>Criteria</th><th>Points</th><th>Score</th></tr></thead>
+<tbody>
+<tr><td>Event (E)</td><td>One clear, specific, observable sentence</td><td>0–2</td><td>____</td></tr>
+<tr><td>Detail (D)</td><td>Time-stamped, unit/location named, parties identified, no assumptions</td><td>0–3</td><td>____</td></tr>
+<tr><td>Outcome (O)</td><td>Resolved / escalated / pending clearly stated — with who and when</td><td>0–3</td><td>____</td></tr>
+<tr><td>Language Standard</td><td>Objective, third-person, factual — no editorial, no casual phrases</td><td>0–2</td><td>____</td></tr>
+<tr><td colspan="2" style="font-weight:700;color:var(--navy)">Total</td><td style="font-weight:700">0–10</td><td>____</td></tr>
+</tbody>
+</table>
+<div class="subhead">Score Meaning</div>
+<ul class="item-list">
+<li><strong>9–10:</strong> Strong — meets Apex standard. Keep this quality on every shift.</li>
+<li><strong>7–8:</strong> Passing — minor gaps. Note what to tighten for the practicum.</li>
+<li><strong>5–6:</strong> Below standard — missing one full component. Rewrite before moving on.</li>
+<li><strong>Below 5:</strong> Needs coaching — significant gaps. Flag for facilitator review.</li>
+</ul>
+<div class="subhead">Feedback for Your Partner</div>
+<div class="write-line"></div><div class="write-line"></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 5</div>
 </div>
-
+</div>
 <!-- 13. Attendance & Conduct Policy -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-12 · Module 6 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Attendance & Conduct Policy Handout</div>
-    <div class="subhead">Call-Out Procedure — 5 Required Steps</div>
-    <ul class="item-list numbered">
-      <li>Call out minimum <strong>2 hours</strong> before your shift begins — no exceptions.</li>
-      <li><strong>Text AND call</strong> — do not rely on a single form of communication.</li>
-      <li>Contact <strong>direct supervisor AND the on-call manager</strong> — both.</li>
-      <li>Provide a reason and estimated <strong>return-to-duty status</strong>.</li>
-      <li>If absence exceeds 2 consecutive days: return with <strong>documentation</strong>.</li>
-    </ul>
-    <div class="alert-bar">If you do not follow this procedure, the absence is unexcused — regardless of the reason.</div>
-    <div class="subhead">Shift Swap Protocol</div>
-    <ul class="item-list">
-      <li>Attempt direct coverage swap first. Post in All Users Chat if needed.</li>
-      <li>Management confirmation required before any swap is official.</li>
-      <li>A verbal agreement between agents is not a confirmed swap.</li>
-      <li>You remain responsible for the shift until management releases you.</li>
-    </ul>
-    <div class="subhead">Conduct Standards</div>
-    <ul class="item-list">
-      <li>No photos, videos, or commentary about residents or the property on social media.</li>
-      <li>Personal calls kept to emergencies during working time.</li>
-      <li>Conflicts with coworkers: handled privately with supervisor — never at the desk.</li>
-    </ul>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 6</div>
-  </div>
+<div class="mat" id="d1-12">
+<div class="mat-header"><span class="mat-id">D1-12 · Module 6 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Attendance &amp; Conduct Policy Handout</div>
+<div class="subhead">Call-Out Procedure — 5 Required Steps</div>
+<ul class="item-list numbered">
+<li>Call out minimum <strong>2 hours</strong> before your shift begins — no exceptions.</li>
+<li><strong>Text AND call</strong> — do not rely on a single form of communication.</li>
+<li>Contact <strong>direct supervisor AND the on-call manager</strong> — both.</li>
+<li>Provide a reason and estimated <strong>return-to-duty status</strong>.</li>
+<li>If absence exceeds 2 consecutive days: return with <strong>documentation</strong>.</li>
+</ul>
+<div class="alert-bar">If you do not follow this procedure, the absence is unexcused — regardless of the reason.</div>
+<div class="subhead">Shift Swap Protocol</div>
+<ul class="item-list">
+<li>Attempt direct coverage swap first. Post in All Users Chat if needed.</li>
+<li>Management confirmation required before any swap is official.</li>
+<li>A verbal agreement between agents is not a confirmed swap.</li>
+<li>You remain responsible for the shift until management releases you.</li>
+</ul>
+<div class="subhead">Conduct Standards</div>
+<ul class="item-list">
+<li>No photos, videos, or commentary about residents or the property on social media.</li>
+<li>Personal calls kept to emergencies during working time.</li>
+<li>Conflicts with coworkers: handled privately with supervisor — never at the desk.</li>
+</ul>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 6</div>
 </div>
-
+</div>
 <!-- 14. Conduct Acknowledgment Form -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-13 · Module 6 End — COLLECT SIGNED</span><span class="mat-badge badge-collect">⚠️ Collect Before Agents Leave</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Conduct Acknowledgment Form</div>
-    <div class="subhead">I acknowledge that I have received, read, and understood the following policies:</div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">Attendance policy — call-out procedure, minimum notice, documentation requirements</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">Shift swap protocol — management confirmation required before any swap is valid</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">Personal device standards — phones stored during working time, emergencies only</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">Fraternization policy — no personal relationships with residents or financial arrangements</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">Confidentiality — resident information is private; no social media posts about the property</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">Friendly ≠ Familiar — the boundary between professional warmth and familiarity</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">The desk is never unattended — coverage must be secured before stepping away</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text">E.D.O. shift log standard — minimum entry frequency, required components, prohibited language</div></div>
-    <div style="height:12px"></div>
-    <div class="sign-line"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
-    <div class="sign-line" style="margin-top:8px"><span class="sign-label">Agent Name (print):</span><div class="sign-space"></div><span class="sign-label">Property:</span><div style="width:120px"></div></div>
-    <div class="sign-line" style="margin-top:8px"><span class="sign-label">Facilitator Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 6 · File in Personnel Folder</div>
-  </div>
+<div class="mat" id="d1-13">
+<div class="mat-header"><span class="mat-id">D1-13 · Module 6 End — COLLECT SIGNED</span><span class="mat-badge badge-collect">⚠️ Collect Signed</span></div>
+<div class="mat-body">
+<div class="mat-title">Conduct Acknowledgment Form</div>
+<div class="subhead">I acknowledge that I have received, read, and understood the following policies:</div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">Attendance policy — call-out procedure, minimum notice, documentation requirements</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">Shift swap protocol — management confirmation required before any swap is valid</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">Personal device standards — phones stored during working time, emergencies only</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">Fraternization policy — no personal relationships with residents or financial arrangements</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">Confidentiality — resident information is private; no social media posts about the property</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">Friendly ≠ Familiar — the boundary between professional warmth and familiarity</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">The desk is never unattended — coverage must be secured before stepping away</div></div>
+<div class="check-item"><div class="check-box"></div><div class="check-text">E.D.O. shift log standard — minimum entry frequency, required components, prohibited language</div></div>
+<div style="height:12px"></div>
+<div class="sign-line"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
+<div class="sign-line" style="margin-top:8px"><span class="sign-label">Agent Name (print):</span><div class="sign-space"></div><span class="sign-label">Property:</span><div style="width:120px"></div></div>
+<div class="sign-line" style="margin-top:8px"><span class="sign-label">Facilitator Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 6 · File in Personnel Folder</div>
 </div>
-
+</div>
 <!-- 15. Escalation Decision Tree -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-14 · Module 7 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Escalation Decision Tree</div>
-    <div class="rule-callout-gold"><div class="rule-text">Can I resolve this within my role and authority?</div></div>
-    <div class="two-col" style="margin-top:8px">
-      <div class="col-card" style="border-top-color:var(--green)">
-        <div class="col-label" style="color:var(--green)">Yes — Resolve</div>
-        <ul class="item-list"><li>Take action within your role scope</li><li>Log the event using E.D.O.</li><li>Note any follow-up required in pass-on</li></ul>
-      </div>
-      <div class="col-card" style="border-top-color:var(--amber)">
-        <div class="col-label" style="color:var(--amber)">No — Escalate</div>
-        <ul class="item-list"><li>Contact supervisor immediately</li><li>Provide: what happened, who is involved, what you have done so far</li><li>Log the escalation — including time and who was notified</li></ul>
-      </div>
-    </div>
-    <div class="subhead" style="margin-top:8px">Always Log — Regardless of Path</div>
-    <ul class="item-list">
-      <li>Resident complaint escalated or unresolved at desk level → File + log</li>
-      <li>Security concern or suspicious person → Escalate + log</li>
-      <li>Any injury, damage, or altercation → Incident report + log</li>
-      <li>Policy gray area (no clear answer) → Escalate before acting, then log</li>
-    </ul>
-    <div class="rule-callout"><div class="rule-text">"Escalation is strength. The agent who escalates correctly protects themselves, the resident, and the company."</div></div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 7</div>
-  </div>
+<div class="mat" id="d1-14">
+<div class="mat-header"><span class="mat-id">D1-14 · Module 7 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Escalation Decision Tree</div>
+<div class="rule-callout-gold"><div class="rule-text">Can I resolve this within my role and authority?</div></div>
+<div class="two-col" style="margin-top:8px">
+<div class="col-card" style="border-top-color:var(--green)">
+<div class="col-label" style="color:var(--green)">Yes — Resolve</div>
+<ul class="item-list"><li>Take action within your role scope</li><li>Log the event using E.D.O.</li><li>Note any follow-up required in pass-on</li></ul>
 </div>
-
+<div class="col-card" style="border-top-color:var(--amber)">
+<div class="col-label" style="color:var(--amber)">No — Escalate</div>
+<ul class="item-list"><li>Contact supervisor immediately</li><li>Provide: what happened, who is involved, what you have done so far</li><li>Log the escalation — including time and who was notified</li></ul>
+</div>
+</div>
+<div class="subhead" style="margin-top:8px">Always Log — Regardless of Path</div>
+<ul class="item-list">
+<li>Resident complaint escalated or unresolved at desk level → File + log</li>
+<li>Security concern or suspicious person → Escalate + log</li>
+<li>Any injury, damage, or altercation → Incident report + log</li>
+<li>Policy gray area (no clear answer) → Escalate before acting, then log</li>
+</ul>
+<div class="rule-callout"><div class="rule-text">"Escalation is strength. The agent who escalates correctly protects themselves, the resident, and the company."</div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 7</div>
+</div>
+</div>
 <!-- 16. A.C.T. Reference Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-15 · Module 7 — After Scenarios</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
-  <div class="mat-body">
-    <div class="mat-title">A.C.T. Method Reference Card</div>
-    <div class="three-col">
-      <div class="col-card navy-bg">
-        <div class="col-letter light">A</div>
-        <div class="col-word light">Acknowledge</div>
-        <div class="col-def light">Recognize what is happening. Do not react — respond. Let the resident know they have been heard before anything else.</div>
-      </div>
-      <div class="col-card navy-bg">
-        <div class="col-letter light">C</div>
-        <div class="col-word light">Control</div>
-        <div class="col-def light">Control the environment first, then the conversation. Lower your voice. Create space. Your calm is your most powerful tool.</div>
-      </div>
-      <div class="col-card navy-bg">
-        <div class="col-letter light">T</div>
-        <div class="col-word light">Transfer or Resolve</div>
-        <div class="col-def light">Resolve within your authority — or escalate. Document the action and outcome regardless of which path you take.</div>
-      </div>
-    </div>
-    <div class="subhead" style="margin-top:10px">Common Failure Points</div>
-    <ul class="item-list">
-      <li><strong>Skipping A:</strong> Jumping to solution before the resident feels heard creates more conflict.</li>
-      <li><strong>Matching energy:</strong> When a resident raises their voice, the instinct is to match it. Do the opposite.</li>
-      <li><strong>Over-promising in T:</strong> Only commit to what you can actually deliver.</li>
-    </ul>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 7</div>
-  </div>
+<div class="mat" id="d1-15">
+<div class="mat-header"><span class="mat-id">D1-15 · Module 7 — After Scenarios</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
+<div class="mat-body">
+<div class="mat-title">A.C.T. Method Reference Card</div>
+<div class="three-col">
+<div class="col-card navy-bg">
+<div class="col-letter light">A</div>
+<div class="col-word light">Acknowledge</div>
+<div class="col-def light">Recognize what is happening. Do not react — respond. Let the resident know they have been heard before anything else.</div>
 </div>
-
+<div class="col-card navy-bg">
+<div class="col-letter light">C</div>
+<div class="col-word light">Control</div>
+<div class="col-def light">Control the environment first, then the conversation. Lower your voice. Create space. Your calm is your most powerful tool.</div>
+</div>
+<div class="col-card navy-bg">
+<div class="col-letter light">T</div>
+<div class="col-word light">Transfer or Resolve</div>
+<div class="col-def light">Resolve within your authority — or escalate. Document the action and outcome regardless of which path you take.</div>
+</div>
+</div>
+<div class="subhead" style="margin-top:10px">Common Failure Points</div>
+<ul class="item-list">
+<li><strong>Skipping A:</strong> Jumping to solution before the resident feels heard creates more conflict.</li>
+<li><strong>Matching energy:</strong> When a resident raises their voice, the instinct is to match it. Do the opposite.</li>
+<li><strong>Over-promising in T:</strong> Only commit to what you can actually deliver.</li>
+</ul>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 7</div>
+</div>
+</div>
 <!-- 17. Response Framework Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-16 · Module 7 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Response Framework Card</div>
-    <div class="subhead">Instead of This → Say This</div>
-    <table class="table-std">
-      <thead><tr><th>Avoid</th><th>Use Instead</th></tr></thead>
-      <tbody>
-        <tr><td>"I don't know."</td><td>"Let me find that out for you right now."</td></tr>
-        <tr><td>"That's not my job."</td><td>"Let me connect you with the right person."</td></tr>
-        <tr><td>"There's nothing I can do."</td><td>"Here is what I can do for you."</td></tr>
-        <tr><td>"They haven't come yet."</td><td>"I'll follow up on that and get back to you by [time]."</td></tr>
-        <tr><td>"I can't help with that."</td><td>"Here is who I'm connecting you with and why."</td></tr>
-      </tbody>
-    </table>
-    <div class="subhead" style="margin-top:10px">De-Escalation Language</div>
-    <ul class="item-list">
-      <li>"I understand this has been frustrating — let me look into this right now."</li>
-      <li>"I want to make sure we resolve this correctly for you."</li>
-      <li>"I'm going to escalate this to my supervisor so they can follow up with you today."</li>
-      <li>"Can I get your name and unit so I can log this and follow up?"</li>
-    </ul>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 7</div>
-  </div>
+<div class="mat" id="d1-16">
+<div class="mat-header"><span class="mat-id">D1-16 · Module 7 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Response Framework Card</div>
+<div class="subhead">Instead of This → Say This</div>
+<table class="table-std">
+<thead><tr><th>Avoid</th><th>Use Instead</th></tr></thead>
+<tbody>
+<tr><td>"I don't know."</td><td>"Let me find that out for you right now."</td></tr>
+<tr><td>"That's not my job."</td><td>"Let me connect you with the right person."</td></tr>
+<tr><td>"There's nothing I can do."</td><td>"Here is what I can do for you."</td></tr>
+<tr><td>"They haven't come yet."</td><td>"I'll follow up on that and get back to you by [time]."</td></tr>
+<tr><td>"I can't help with that."</td><td>"Here is who I'm connecting you with and why."</td></tr>
+</tbody>
+</table>
+<div class="subhead" style="margin-top:10px">De-Escalation Language</div>
+<ul class="item-list">
+<li>"I understand this has been frustrating — let me look into this right now."</li>
+<li>"I want to make sure we resolve this correctly for you."</li>
+<li>"I'm going to escalate this to my supervisor so they can follow up with you today."</li>
+<li>"Can I get your name and unit so I can log this and follow up?"</li>
+</ul>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 7</div>
 </div>
-
+</div>
 <!-- 18. Systems Quick-Reference Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-17 · Module 8 Start — Desk or Bag</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Systems Quick-Reference Card</div>
-    <div class="three-col">
-      <div class="col-card navy-bg">
-        <div class="col-word light">Connecteam</div>
-        <div class="col-label light">Scheduling & Communication</div>
-        <ul class="item-list" style="margin-top:6px">
-          <li style="color:rgba(255,255,255,0.8)">Clock in / clock out every shift</li>
-          <li style="color:rgba(255,255,255,0.8)">View your schedule</li>
-          <li style="color:rgba(255,255,255,0.8)">Submit shift swap requests</li>
-          <li style="color:rgba(255,255,255,0.8)">Read company announcements</li>
-          <li style="color:rgba(255,255,255,0.8)">All scheduling communication</li>
-        </ul>
-      </div>
-      <div class="col-card navy-bg">
-        <div class="col-word light">Paylocity</div>
-        <div class="col-label light">Payroll & HR</div>
-        <ul class="item-list" style="margin-top:6px">
-          <li style="color:rgba(255,255,255,0.8)">Complete onboarding docs</li>
-          <li style="color:rgba(255,255,255,0.8)">Set up direct deposit</li>
-          <li style="color:rgba(255,255,255,0.8)">Access pay stubs & W-2</li>
-          <li style="color:rgba(255,255,255,0.8)">Track PTO</li>
-          <li style="color:rgba(255,255,255,0.8)">Report pay discrepancies</li>
-        </ul>
-      </div>
-      <div class="col-card navy-bg">
-        <div class="col-word light">Yardi</div>
-        <div class="col-label light">Property Management</div>
-        <ul class="item-list" style="margin-top:6px">
-          <li style="color:rgba(255,255,255,0.8)">Verify resident before package release</li>
-          <li style="color:rgba(255,255,255,0.8)">Submit work orders (log # in shift log)</li>
-          <li style="color:rgba(255,255,255,0.8)">Package tracking (site-specific)</li>
-          <li style="color:rgba(255,255,255,0.8)">Resident database lookup</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 8</div>
-  </div>
+<div class="mat" id="d1-17">
+<div class="mat-header"><span class="mat-id">D1-17 · Module 8 Start — Desk or Bag</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
+<div class="mat-body">
+<div class="mat-title">Systems Quick-Reference Card</div>
+<div class="three-col">
+<div class="col-card navy-bg">
+<div class="col-word light">Connecteam</div>
+<div class="col-label light">Scheduling &amp; Communication</div>
+<ul class="item-list" style="margin-top:6px">
+<li style="color:rgba(255,255,255,0.8)">Clock in / clock out every shift</li>
+<li style="color:rgba(255,255,255,0.8)">View your schedule</li>
+<li style="color:rgba(255,255,255,0.8)">Submit shift swap requests</li>
+<li style="color:rgba(255,255,255,0.8)">Read company announcements</li>
+<li style="color:rgba(255,255,255,0.8)">All scheduling communication</li>
+</ul>
 </div>
-
+<div class="col-card navy-bg">
+<div class="col-word light">Paylocity</div>
+<div class="col-label light">Payroll &amp; HR</div>
+<ul class="item-list" style="margin-top:6px">
+<li style="color:rgba(255,255,255,0.8)">Complete onboarding docs</li>
+<li style="color:rgba(255,255,255,0.8)">Set up direct deposit</li>
+<li style="color:rgba(255,255,255,0.8)">Access pay stubs &amp; W-2</li>
+<li style="color:rgba(255,255,255,0.8)">Track PTO</li>
+<li style="color:rgba(255,255,255,0.8)">Report pay discrepancies</li>
+</ul>
+</div>
+<div class="col-card navy-bg">
+<div class="col-word light">Yardi</div>
+<div class="col-label light">Property Management</div>
+<ul class="item-list" style="margin-top:6px">
+<li style="color:rgba(255,255,255,0.8)">Verify resident before package release</li>
+<li style="color:rgba(255,255,255,0.8)">Submit work orders (log # in shift log)</li>
+<li style="color:rgba(255,255,255,0.8)">Package tracking (site-specific)</li>
+<li style="color:rgba(255,255,255,0.8)">Resident database lookup</li>
+</ul>
+</div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 8</div>
+</div>
+</div>
 <!-- 19. Systems Quick-Check Activity Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-18 · Module 8D Activity</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Systems Quick-Check Card</div>
-    <div class="subhead">Match each task to the correct system — without help. 3 minutes.</div>
-    <table class="table-std">
-      <thead><tr><th>Task</th><th>System</th></tr></thead>
-      <tbody>
-        <tr><td>Clock in and out of your shift</td><td>___________________</td></tr>
-        <tr><td>Submit a work order for a maintenance issue</td><td>___________________</td></tr>
-        <tr><td>Access your pay stub from last week</td><td>___________________</td></tr>
-        <tr><td>Request to swap your Friday shift</td><td>___________________</td></tr>
-        <tr><td>Look up a resident before releasing a package</td><td>___________________</td></tr>
-        <tr><td>Set up your direct deposit</td><td>___________________</td></tr>
-        <tr><td>View your schedule for the next 7 days</td><td>___________________</td></tr>
-        <tr><td>Submit a W-4 or onboarding document</td><td>___________________</td></tr>
-      </tbody>
-    </table>
-    <div class="success-bar" style="margin-top:10px;font-size:11px">Answers: Connecteam · Yardi · Paylocity · Connecteam · Yardi · Paylocity · Connecteam · Paylocity</div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 8</div>
-  </div>
+<div class="mat" id="d1-18">
+<div class="mat-header"><span class="mat-id">D1-18 · Module 8D Activity</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Systems Quick-Check Card</div>
+<div class="subhead">Match each task to the correct system — without help. 3 minutes.</div>
+<table class="table-std">
+<thead><tr><th>Task</th><th>System</th></tr></thead>
+<tbody>
+<tr><td>Clock in and out of your shift</td><td>___________________</td></tr>
+<tr><td>Submit a work order for a maintenance issue</td><td>___________________</td></tr>
+<tr><td>Access your pay stub from last week</td><td>___________________</td></tr>
+<tr><td>Request to swap your Friday shift</td><td>___________________</td></tr>
+<tr><td>Look up a resident before releasing a package</td><td>___________________</td></tr>
+<tr><td>Set up your direct deposit</td><td>___________________</td></tr>
+<tr><td>View your schedule for the next 7 days</td><td>___________________</td></tr>
+<tr><td>Submit a W-4 or onboarding document</td><td>___________________</td></tr>
+</tbody>
+</table>
+<div class="success-bar" style="margin-top:10px;font-size:11px">Answers: Connecteam · Yardi · Paylocity · Connecteam · Yardi · Paylocity · Connecteam · Paylocity</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 8</div>
 </div>
-
+</div>
 <!-- 20. 90-Day Expectation Overview -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-19 · Module 9 Start — Keep Through Day 90</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">90-Day Expectation Overview</div>
-    <table class="table-std">
-      <thead><tr><th>Phase</th><th>Mode</th><th>What It Looks Like</th></tr></thead>
-      <tbody>
-        <tr><td>Days 1–3</td><td>Shadow</td><td>Follow supervisor or senior agent every shift. Observe, ask questions, log with guidance.</td></tr>
-        <tr><td>Days 4–7</td><td>Supported</td><td>Independent operation with supervisor accessible. Log independently — reviewed end of shift.</td></tr>
-        <tr><td>Week 2</td><td>Solo + Check-Ins</td><td>Fully independent with daily supervisor check-in. Flag anything uncertain before acting.</td></tr>
-        <tr><td>Weeks 3–4</td><td>Full Operation</td><td>Performance benchmarked: attendance, log quality, resident feedback, professional presence.</td></tr>
-        <tr><td>Day 30</td><td>Formal Review</td><td>Log quality, attendance, conduct, escalation decisions. Written feedback. Commitment card reviewed.</td></tr>
-        <tr><td>Day 90</td><td>Full Evaluation</td><td>Trajectory, advancement consideration. Excellence Academy eligibility assessed.</td></tr>
-      </tbody>
-    </table>
-    <div class="rule-callout" style="margin-top:10px">
-      <div class="rule-text">"We do not advance by tenure. We advance by demonstrated performance. Every shift is part of the record."</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 9</div>
-  </div>
+<div class="mat" id="d1-19">
+<div class="mat-header"><span class="mat-id">D1-19 · Module 9 Start — Keep Through Day 90</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">90-Day Expectation Overview</div>
+<table class="table-std">
+<thead><tr><th>Phase</th><th>Mode</th><th>What It Looks Like</th></tr></thead>
+<tbody>
+<tr><td>Days 1–3</td><td>Shadow</td><td>Follow supervisor or senior agent every shift. Observe, ask questions, log with guidance.</td></tr>
+<tr><td>Days 4–7</td><td>Supported</td><td>Independent operation with supervisor accessible. Log independently — reviewed end of shift.</td></tr>
+<tr><td>Week 2</td><td>Solo + Check-Ins</td><td>Fully independent with daily supervisor check-in. Flag anything uncertain before acting.</td></tr>
+<tr><td>Weeks 3–4</td><td>Full Operation</td><td>Performance benchmarked: attendance, log quality, resident feedback, professional presence.</td></tr>
+<tr><td>Day 30</td><td>Formal Review</td><td>Log quality, attendance, conduct, escalation decisions. Written feedback. Commitment card reviewed.</td></tr>
+<tr><td>Day 90</td><td>Full Evaluation</td><td>Trajectory, advancement consideration. Excellence Academy eligibility assessed.</td></tr>
+</tbody>
+</table>
+<div class="rule-callout" style="margin-top:10px">
+<div class="rule-text">"We do not advance by tenure. We advance by demonstrated performance. Every shift is part of the record."</div>
 </div>
-
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Module 9</div>
+</div>
+</div>
 <!-- 21. Day 1 Commitment Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D1-20 · Module 9 Close — Agent Keeps / Facilitator Photographs</span><span class="mat-badge badge-collect">📷 Photograph</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Day 1 Commitment Card</div>
-    <div class="subhead">The standard I commit to holding every shift is...</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead" style="margin-top:10px">The area I know I need to focus on developing is...</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead" style="margin-top:10px">My goal by the 90-day mark is...</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="rule-callout" style="margin-top:12px"><div class="rule-text">"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."</div></div>
-    <div class="sign-line" style="margin-top:12px"><span class="sign-label">Signed:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
-    <div style="font-size:10px;color:var(--gray);margin-top:6px">Bring this card to your 30-day review.</div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 1</div>
-  </div>
+<div class="mat" id="d1-20">
+<div class="mat-header"><span class="mat-id">D1-20 · Module 9 Close — Agent Keeps / Facilitator Photographs</span><span class="mat-badge badge-collect">📷 Photograph</span></div>
+<div class="mat-body">
+<div class="mat-title">Day 1 Commitment Card</div>
+<div class="subhead">The standard I commit to holding every shift is...</div>
+<div class="write-line"></div><div class="write-line"></div>
+<div class="subhead" style="margin-top:10px">The area I know I need to focus on developing is...</div>
+<div class="write-line"></div><div class="write-line"></div>
+<div class="subhead" style="margin-top:10px">My goal by the 90-day mark is...</div>
+<div class="write-line"></div><div class="write-line"></div>
+<div class="rule-callout" style="margin-top:12px"><div class="rule-text">"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."</div></div>
+<div class="sign-line" style="margin-top:12px"><span class="sign-label">Signed:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
+<div style="font-size:10px;color:var(--gray);margin-top:6px">Bring this card to your 30-day review.</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 1</div>
 </div>
-
+</div>
 </div><!-- /day1 grid -->
-
 <!-- ═══════════════════════════════════════ DAY 2 ═══ -->
 <div id="day2">
 <div class="section-header page-break">
-  <div class="sh-day">Day 2 — 8 Materials</div>
-  <div class="sh-title">Operations in Depth</div>
-  <div class="sh-sub">Package Handling · Incident Reporting · Emergency Response · Shift Log Practicum</div>
+<div class="sh-day">Day 2 — 8 Materials</div>
+<div class="sh-title">Operations in Depth</div>
+<div class="sh-sub">Package Handling · Incident Reporting · Emergency Response · Shift Log Practicum</div>
 </div>
-
 <div class="materials-grid">
-
 <!-- 22. Package Category Protocol Table -->
-<div class="mat full-width">
-  <div class="mat-header"><span class="mat-id">D2-01 · Module 1 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Package Category Protocol Table</div>
-    <table class="table-std">
-      <thead><tr><th>Category</th><th>Intake Protocol</th><th>Storage</th><th>Notification</th><th>Time Window</th><th>Critical Rule</th></tr></thead>
-      <tbody>
-        <tr><td>Standard Package</td><td>Confirm → Log → Label</td><td>General shelf</td><td>Text or email</td><td>Standard pickup</td><td>Log before moving — no exceptions.</td></tr>
-        <tr><td>Food Delivery</td><td>Confirm → Log → Label → Refrigerate</td><td>Refrigerator</td><td>CALL — not just text</td><td>24 hours from delivery</td><td>Dispose after 24 hours if unclaimed. Document disposal.</td></tr>
-        <tr><td>Grocery Delivery</td><td>Confirm → Log → Label → Refrigerate</td><td>Refrigerator</td><td>Daily outreach required</td><td>48 hours from delivery</td><td>Different window than food delivery. Escalate to Lead before disposal.</td></tr>
-        <tr><td>High-Value Item</td><td>Confirm → Log → Label → Secured storage</td><td>Locked / secured area</td><td>Notify promptly</td><td>Standard pickup</td><td>Never on general shelf. Electronics, luxury goods, anything over $200 visible.</td></tr>
-        <tr><td>Outgoing / RTS</td><td>Verify postage → Log → Stage for carrier</td><td>Designated staging area</td><td>N/A</td><td>Carrier pickup schedule</td><td>No postage = no acceptance. Decline professionally. Log the refusal.</td></tr>
-      </tbody>
-    </table>
-    <div class="alert-bar" style="margin-top:8px">Log it in the system BEFORE you move the package anywhere. This step cannot be skipped.</div>
-    <div class="subhead" style="margin-top:8px">Release Protocol — Every Package</div>
-    <ul class="item-list">
-      <li>Verify recipient identity (photo ID or Yardi system lookup) before retrieving the package.</li>
-      <li>If anything does not match — hold the package. Contact your Lead. Do not release.</li>
-      <li>Log the pickup in the system before the resident leaves.</li>
-    </ul>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 2 Module 1</div>
-  </div>
+<div class="mat full-width" id="d2-01">
+<div class="mat-header"><span class="mat-id">D2-01 · Module 1 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Package Category Protocol Table</div>
+<table class="table-std">
+<thead><tr><th>Category</th><th>Intake Protocol</th><th>Storage</th><th>Notification</th><th>Time Window</th><th>Critical Rule</th></tr></thead>
+<tbody>
+<tr><td>Standard Package</td><td>Confirm → Log → Label</td><td>General shelf</td><td>Text or email</td><td>Standard pickup</td><td>Log before moving — no exceptions.</td></tr>
+<tr><td>Food Delivery</td><td>Confirm → Log → Label → Refrigerate</td><td>Refrigerator</td><td>CALL — not just text</td><td>24 hours from delivery</td><td>Dispose after 24 hours if unclaimed. Document disposal.</td></tr>
+<tr><td>Grocery Delivery</td><td>Confirm → Log → Label → Refrigerate</td><td>Refrigerator</td><td>Daily outreach required</td><td>48 hours from delivery</td><td>Different window than food delivery. Escalate to Lead before disposal.</td></tr>
+<tr><td>High-Value Item</td><td>Confirm → Log → Label → Secured storage</td><td>Locked / secured area</td><td>Notify promptly</td><td>Standard pickup</td><td>Never on general shelf. Electronics, luxury goods, anything over $200 visible.</td></tr>
+<tr><td>Outgoing / RTS</td><td>Verify postage → Log → Stage for carrier</td><td>Designated staging area</td><td>N/A</td><td>Carrier pickup schedule</td><td>No postage = no acceptance. Decline professionally. Log the refusal.</td></tr>
+</tbody>
+</table>
+<div class="alert-bar" style="margin-top:8px">Log it in the system BEFORE you move the package anywhere. This step cannot be skipped.</div>
+<div class="subhead" style="margin-top:8px">Release Protocol — Every Package</div>
+<ul class="item-list">
+<li>Verify recipient identity (photo ID or Yardi system lookup) before retrieving the package.</li>
+<li>If anything does not match — hold the package. Contact your Lead. Do not release.</li>
+<li>Log the pickup in the system before the resident leaves.</li>
+</ul>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 2 Module 1</div>
 </div>
-
+</div>
 <!-- 23. Package Quick-Reference -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D2-02 · Module 1 — Package Room Posting</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Package Handling Quick-Reference Card</div>
-    <div class="subhead">Every Package — Four Steps</div>
-    <ul class="item-list numbered">
-      <li><strong>Confirm</strong> — Verify name and unit against leaseholder records</li>
-      <li><strong>Log</strong> — System entry before the package moves anywhere</li>
-      <li><strong>Label</strong> — Unit number, date, time received</li>
-      <li><strong>Notify</strong> — Contact resident through designated channel</li>
-    </ul>
-    <div class="subhead">Perishable Windows</div>
-    <div class="two-col">
-      <div class="col-card" style="border-top-color:var(--amber)"><div class="col-label" style="color:var(--amber)">Food Delivery</div><div style="font-size:20px;font-weight:700;color:var(--navy);margin:4px 0">24 HRS</div><div class="col-def">CALL to notify. Dispose after 24 hours. Document disposal.</div></div>
-      <div class="col-card" style="border-top-color:var(--green)"><div class="col-label" style="color:var(--green)">Grocery Delivery</div><div style="font-size:20px;font-weight:700;color:var(--navy);margin:4px 0">48 HRS</div><div class="col-def">Daily outreach. Escalate to Lead before disposal.</div></div>
-    </div>
-    <div class="alert-bar" style="margin-top:8px;font-size:11px">Never release without verifying ID. Never store high-value on general shelf.</div>
-    <div class="footer-apex">Apex Concierge Services · Package Room · Day 2</div>
-  </div>
+<div class="mat" id="d2-02">
+<div class="mat-header"><span class="mat-id">D2-02 · Module 1 — Package Room Posting</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
+<div class="mat-body">
+<div class="mat-title">Package Handling Quick-Reference Card</div>
+<div class="subhead">Every Package — Four Steps</div>
+<ul class="item-list numbered">
+<li><strong>Confirm</strong> — Verify name and unit against leaseholder records</li>
+<li><strong>Log</strong> — System entry before the package moves anywhere</li>
+<li><strong>Label</strong> — Unit number, date, time received</li>
+<li><strong>Notify</strong> — Contact resident through designated channel</li>
+</ul>
+<div class="subhead">Perishable Windows</div>
+<div class="two-col">
+<div class="col-card" style="border-top-color:var(--amber)"><div class="col-label" style="color:var(--amber)">Food Delivery</div><div style="font-size:20px;font-weight:700;color:var(--navy);margin:4px 0">24 HRS</div><div class="col-def">CALL to notify. Dispose after 24 hours. Document disposal.</div></div>
+<div class="col-card" style="border-top-color:var(--green)"><div class="col-label" style="color:var(--green)">Grocery Delivery</div><div style="font-size:20px;font-weight:700;color:var(--navy);margin:4px 0">48 HRS</div><div class="col-def">Daily outreach. Escalate to Lead before disposal.</div></div>
 </div>
-
+<div class="alert-bar" style="margin-top:8px;font-size:11px">Never release without verifying ID. Never store high-value on general shelf.</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Package Room · Day 2</div>
+</div>
+</div>
 <!-- 24. Incident Report Field Guide -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D2-03 · Module 2 Start</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Incident Report Field Guide</div>
-    <div class="subhead">When to File — Always Required</div>
-    <ul class="item-list">
-      <li>Any physical altercation, threat, or confrontation — regardless of outcome</li>
-      <li>Any injury to a resident, guest, or visitor — even minor</li>
-      <li>Any property damage — structural, amenity, or unit-adjacent</li>
-      <li>Any unauthorized entry, security breach, or suspicious activity acted upon</li>
-      <li>Any medical emergency — including EMS response</li>
-      <li>Any resident complaint escalated or unresolved at desk level</li>
-    </ul>
-    <div class="success-bar" style="margin-top:6px">When in doubt — file. An unnecessary report is recoverable. A missing report is not.</div>
-    <div class="subhead" style="margin-top:10px">Required Fields — Every Report</div>
-    <ul class="item-list">
-      <li><strong>Date and time</strong> — exact, to the minute</li>
-      <li><strong>Location</strong> — specific: floor, unit vicinity, amenity name</li>
-      <li><strong>Parties involved</strong> — full names or physical description</li>
-      <li><strong>What happened</strong> — objective, sequential, factual only</li>
-      <li><strong>Actions taken</strong> — who notified, when, what response</li>
-      <li><strong>Outcome/status</strong> — resolved, pending, or escalated to whom</li>
-    </ul>
-    <div class="subhead" style="margin-top:10px">Language Standard</div>
-    <div class="compare-row">
-      <div class="compare-cell cell-weak"><span class="cell-label">Never Write</span>"The resident was drunk"<br>"He was being aggressive"<br>"The situation was handled"</div>
-      <div class="compare-cell cell-strong"><span class="cell-label">Write This</span>"Resident exhibited slurred speech and unsteady gait"<br>"Subject moved toward the desk with raised voice"<br>"Supervisor notified at 9:42 PM. Resolved by 9:55 PM."</div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 2 Module 2</div>
-  </div>
+<div class="mat" id="d2-03">
+<div class="mat-header"><span class="mat-id">D2-03 · Module 2 Start</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Incident Report Field Guide</div>
+<div class="subhead">When to File — Always Required</div>
+<ul class="item-list">
+<li>Any physical altercation, threat, or confrontation — regardless of outcome</li>
+<li>Any injury to a resident, guest, or visitor — even minor</li>
+<li>Any property damage — structural, amenity, or unit-adjacent</li>
+<li>Any unauthorized entry, security breach, or suspicious activity acted upon</li>
+<li>Any medical emergency — including EMS response</li>
+<li>Any resident complaint escalated or unresolved at desk level</li>
+</ul>
+<div class="success-bar" style="margin-top:6px">When in doubt — file. An unnecessary report is recoverable. A missing report is not.</div>
+<div class="subhead" style="margin-top:10px">Required Fields — Every Report</div>
+<ul class="item-list">
+<li><strong>Date and time</strong> — exact, to the minute</li>
+<li><strong>Location</strong> — specific: floor, unit vicinity, amenity name</li>
+<li><strong>Parties involved</strong> — full names or physical description</li>
+<li><strong>What happened</strong> — objective, sequential, factual only</li>
+<li><strong>Actions taken</strong> — who notified, when, what response</li>
+<li><strong>Outcome/status</strong> — resolved, pending, or escalated to whom</li>
+</ul>
+<div class="subhead" style="margin-top:10px">Language Standard</div>
+<div class="compare-row">
+<div class="compare-cell cell-weak"><span class="cell-label">Never Write</span>"The resident was drunk"<br/>"He was being aggressive"<br/>"The situation was handled"</div>
+<div class="compare-cell cell-strong"><span class="cell-label">Write This</span>"Resident exhibited slurred speech and unsteady gait"<br/>"Subject moved toward the desk with raised voice"<br/>"Supervisor notified at 9:42 PM. Resolved by 9:55 PM."</div>
 </div>
-
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 2 Module 2</div>
+</div>
+</div>
 <!-- 25. Blank Incident Report Forms -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D2-04 · Module 2 Documentation Drill — Print 3 per Agent</span><span class="mat-badge badge-form">📝 × 3 Forms</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Blank Incident Report Form</div>
-    <div class="two-col">
-      <div><div class="subhead">Date</div><div class="write-line"></div></div>
-      <div><div class="subhead">Time</div><div class="write-line"></div></div>
-    </div>
-    <div class="subhead">Location (specific)</div><div class="write-line"></div>
-    <div class="subhead">Parties Involved</div><div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead">What Happened (objective, factual, sequential)</div>
-    <div class="write-area" style="min-height:70px"></div>
-    <div class="subhead">Actions Taken</div>
-    <div class="write-area"></div>
-    <div class="subhead">Who Was Notified and When</div><div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead">Current Status / Outcome</div><div class="write-line"></div>
-    <div class="two-col" style="margin-top:10px">
-      <div class="sign-line"><span class="sign-label">Agent Signature:</span></div>
-      <div class="sign-line"><span class="sign-label">Date / Time:</span></div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · Incident Report · Day 2 Module 2</div>
-  </div>
+<div class="mat" id="d2-04">
+<div class="mat-header"><span class="mat-id">D2-04 · Module 2 Documentation Drill — Print 3 per Agent</span><span class="mat-badge badge-form">📝 × 3 Forms</span></div>
+<div class="mat-body">
+<div class="mat-title">Blank Incident Report Form</div>
+<div class="two-col">
+<div><div class="subhead">Date</div><div class="write-line"></div></div>
+<div><div class="subhead">Time</div><div class="write-line"></div></div>
 </div>
-
+<div class="subhead">Location (specific)</div><div class="write-line"></div>
+<div class="subhead">Parties Involved</div><div class="write-line"></div><div class="write-line"></div>
+<div class="subhead">What Happened (objective, factual, sequential)</div>
+<div class="write-area" style="min-height:70px"></div>
+<div class="subhead">Actions Taken</div>
+<div class="write-area"></div>
+<div class="subhead">Who Was Notified and When</div><div class="write-line"></div><div class="write-line"></div>
+<div class="subhead">Current Status / Outcome</div><div class="write-line"></div>
+<div class="two-col" style="margin-top:10px">
+<div class="sign-line"><span class="sign-label">Agent Signature:</span></div>
+<div class="sign-line"><span class="sign-label">Date / Time:</span></div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Incident Report · Day 2 Module 2</div>
+</div>
+</div>
 <!-- 26. Emergency Response Reference Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D2-05 · Module 3 — Desk Posting</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Emergency Response Reference Card</div>
-    <div class="subhead" style="color:var(--red)">🔴 Fire</div>
-    <ul class="item-list numbered">
-      <li>Call 911 immediately. Do not investigate.</li>
-      <li>Activate fire alarm if not already triggered.</li>
-      <li>Direct residents to nearest exit — no elevators.</li>
-      <li>Stage at assembly point. Do not re-enter.</li>
-      <li>Meet emergency responders at entrance.</li>
-      <li>Document: alarm time, your actions, who you notified.</li>
-    </ul>
-    <div class="subhead" style="color:#1a3a6b;margin-top:10px">🔵 Medical</div>
-    <ul class="item-list numbered">
-      <li>Call 911. Provide address, floor, nature of emergency.</li>
-      <li>Do not move the individual unless immediate danger.</li>
-      <li>Stay with them — calm and professional. Clear bystanders.</li>
-      <li>Meet EMS at entry. Provide access and information.</li>
-      <li>Document: time, what was observed, who responded.</li>
-    </ul>
-    <div class="subhead" style="color:var(--amber);margin-top:10px">🟡 Security Threat</div>
-    <ul class="item-list numbered">
-      <li>Do not confront. Maintain distance and calm demeanor.</li>
-      <li>Call 911 if there is a credible threat to safety.</li>
-      <li>Notify supervisor — use radio or secondary line.</li>
-      <li>Observe and document: description, direction, what was said.</li>
-      <li>Your safety is not secondary to the building's. Remove yourself first.</li>
-    </ul>
-    <div class="rule-callout" style="margin-top:8px"><div class="rule-text" style="font-size:12px">Call first. Document everything. Support within your role.</div></div>
-    <div class="footer-apex">Apex Concierge Services · Emergency Protocols · Day 2</div>
-  </div>
+<div class="mat" id="d2-05">
+<div class="mat-header"><span class="mat-id">D2-05 · Module 3 — Desk Posting</span><span class="mat-badge badge-lam">🔖 Laminated</span></div>
+<div class="mat-body">
+<div class="mat-title">Emergency Response Reference Card</div>
+<div class="subhead" style="color:var(--red)">🔴 Fire</div>
+<ul class="item-list numbered">
+<li>Call 911 immediately. Do not investigate.</li>
+<li>Activate fire alarm if not already triggered.</li>
+<li>Direct residents to nearest exit — no elevators.</li>
+<li>Stage at assembly point. Do not re-enter.</li>
+<li>Meet emergency responders at entrance.</li>
+<li>Document: alarm time, your actions, who you notified.</li>
+</ul>
+<div class="subhead" style="color:#1a3a6b;margin-top:10px">🔵 Medical</div>
+<ul class="item-list numbered">
+<li>Call 911. Provide address, floor, nature of emergency.</li>
+<li>Do not move the individual unless immediate danger.</li>
+<li>Stay with them — calm and professional. Clear bystanders.</li>
+<li>Meet EMS at entry. Provide access and information.</li>
+<li>Document: time, what was observed, who responded.</li>
+</ul>
+<div class="subhead" style="color:var(--amber);margin-top:10px">🟡 Security Threat</div>
+<ul class="item-list numbered">
+<li>Do not confront. Maintain distance and calm demeanor.</li>
+<li>Call 911 if there is a credible threat to safety.</li>
+<li>Notify supervisor — use radio or secondary line.</li>
+<li>Observe and document: description, direction, what was said.</li>
+<li>Your safety is not secondary to the building's. Remove yourself first.</li>
+</ul>
+<div class="rule-callout" style="margin-top:8px"><div class="rule-text" style="font-size:12px">Call first. Document everything. Support within your role.</div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Emergency Protocols · Day 2</div>
 </div>
-
+</div>
 <!-- 27. Blank Shift Log Templates -->
-<div class="mat full-width">
-  <div class="mat-header"><span class="mat-id">D2-06 · Module 4 Practicum — Print 3 per Agent</span><span class="mat-badge badge-form">📝 × 3 Templates</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Blank Shift Log Template — Practicum Assessment</div>
-    <div class="alert-bar">Individual. Timed. No assistance. No reference materials. 40 minutes.</div>
-    <div class="two-col" style="margin-top:10px">
-      <div><div class="subhead">Agent Name</div><div class="write-line"></div></div>
-      <div><div class="subhead">Scenario #</div><div class="write-line"></div></div>
-    </div>
-    <div class="rule-callout-gold" style="margin:10px 0"><div class="rule-text" style="font-size:12px;font-style:normal">E = What happened (factual, specific, one sentence) &nbsp;|&nbsp; D = Who, when, where (exact detail) &nbsp;|&nbsp; O = What did you do, what is the status</div></div>
-    <table class="table-std">
-      <thead><tr><th style="width:80px">Time</th><th style="width:60px">E / D / O</th><th>Entry</th></tr></thead>
-      <tbody>
-        <tr><td><div class="write-line"></div></td><td style="color:var(--gold-dim);font-weight:700">E</td><td><div class="write-line"></div></td></tr>
-        <tr><td></td><td style="color:var(--gold-dim);font-weight:700">D</td><td><div class="write-line"></div><div class="write-line"></div></td></tr>
-        <tr><td></td><td style="color:var(--gold-dim);font-weight:700">O</td><td><div class="write-line"></div></td></tr>
-        <tr style="background:#f8f8f8"><td><div class="write-line"></div></td><td style="color:var(--gold-dim);font-weight:700">E</td><td><div class="write-line"></div></td></tr>
-        <tr style="background:#f8f8f8"><td></td><td style="color:var(--gold-dim);font-weight:700">D</td><td><div class="write-line"></div><div class="write-line"></div></td></tr>
-        <tr style="background:#f8f8f8"><td></td><td style="color:var(--gold-dim);font-weight:700">O</td><td><div class="write-line"></div></td></tr>
-        <tr><td><div class="write-line"></div></td><td style="color:var(--gold-dim);font-weight:700">E</td><td><div class="write-line"></div></td></tr>
-        <tr><td></td><td style="color:var(--gold-dim);font-weight:700">D</td><td><div class="write-line"></div><div class="write-line"></div></td></tr>
-        <tr><td></td><td style="color:var(--gold-dim);font-weight:700">O</td><td><div class="write-line"></div></td></tr>
-      </tbody>
-    </table>
-    <div class="sign-line" style="margin-top:10px"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:100px"></div></div>
-    <div class="footer-apex">Apex Concierge Services · Shift Log Practicum · Day 2 Module 4</div>
-  </div>
+<div class="mat full-width" id="d2-06">
+<div class="mat-header"><span class="mat-id">D2-06 · Module 4 Practicum — Print 3 per Agent</span><span class="mat-badge badge-form">📝 × 3 Templates</span></div>
+<div class="mat-body">
+<div class="mat-title">Blank Shift Log Template — Practicum Assessment</div>
+<div class="alert-bar">Individual. Timed. No assistance. No reference materials. 40 minutes.</div>
+<div class="two-col" style="margin-top:10px">
+<div><div class="subhead">Agent Name</div><div class="write-line"></div></div>
+<div><div class="subhead">Scenario #</div><div class="write-line"></div></div>
 </div>
-
+<div class="rule-callout-gold" style="margin:10px 0"><div class="rule-text" style="font-size:12px;font-style:normal">E = What happened (factual, specific, one sentence)  |  D = Who, when, where (exact detail)  |  O = What did you do, what is the status</div></div>
+<table class="table-std">
+<thead><tr><th style="width:80px">Time</th><th style="width:60px">E / D / O</th><th>Entry</th></tr></thead>
+<tbody>
+<tr><td><div class="write-line"></div></td><td style="color:var(--gold-dim);font-weight:700">E</td><td><div class="write-line"></div></td></tr>
+<tr><td></td><td style="color:var(--gold-dim);font-weight:700">D</td><td><div class="write-line"></div><div class="write-line"></div></td></tr>
+<tr><td></td><td style="color:var(--gold-dim);font-weight:700">O</td><td><div class="write-line"></div></td></tr>
+<tr style="background:#f8f8f8"><td><div class="write-line"></div></td><td style="color:var(--gold-dim);font-weight:700">E</td><td><div class="write-line"></div></td></tr>
+<tr style="background:#f8f8f8"><td></td><td style="color:var(--gold-dim);font-weight:700">D</td><td><div class="write-line"></div><div class="write-line"></div></td></tr>
+<tr style="background:#f8f8f8"><td></td><td style="color:var(--gold-dim);font-weight:700">O</td><td><div class="write-line"></div></td></tr>
+<tr><td><div class="write-line"></div></td><td style="color:var(--gold-dim);font-weight:700">E</td><td><div class="write-line"></div></td></tr>
+<tr><td></td><td style="color:var(--gold-dim);font-weight:700">D</td><td><div class="write-line"></div><div class="write-line"></div></td></tr>
+<tr><td></td><td style="color:var(--gold-dim);font-weight:700">O</td><td><div class="write-line"></div></td></tr>
+</tbody>
+</table>
+<div class="sign-line" style="margin-top:10px"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:100px"></div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Shift Log Practicum · Day 2 Module 4</div>
+</div>
+</div>
 <!-- 28. E.D.O. Rubric Practicum Copy -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D2-07 · Module 4 — Peer Scoring After Practicum</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">E.D.O. Scoring Rubric — Practicum Copy</div>
-    <div class="subhead">Score your partner's entry for each scenario</div>
-    <table class="table-std">
-      <thead><tr><th>Component</th><th>Criteria</th><th>Max</th><th>S1</th><th>S2</th><th>S3</th></tr></thead>
-      <tbody>
-        <tr><td>Event</td><td>Specific, factual, observable</td><td>2</td><td>__</td><td>__</td><td>__</td></tr>
-        <tr><td>Detail</td><td>Time, location, parties, no assumptions</td><td>3</td><td>__</td><td>__</td><td>__</td></tr>
-        <tr><td>Outcome</td><td>Status clearly stated, escalation noted</td><td>3</td><td>__</td><td>__</td><td>__</td></tr>
-        <tr><td>Language</td><td>Objective, professional, factual</td><td>2</td><td>__</td><td>__</td><td>__</td></tr>
-        <tr><td style="font-weight:700;color:var(--navy)">Total</td><td></td><td>10</td><td>__</td><td>__</td><td>__</td></tr>
-      </tbody>
-    </table>
-    <div class="subhead" style="margin-top:10px">Feedback — one specific note per scenario</div>
-    <div class="subhead" style="font-size:10px">Scenario 1:</div><div class="write-line"></div>
-    <div class="subhead" style="font-size:10px">Scenario 2:</div><div class="write-line"></div>
-    <div class="subhead" style="font-size:10px">Scenario 3:</div><div class="write-line"></div>
-    <div class="footer-apex">Apex Concierge Services · Shift Log Practicum · Day 2 Module 4</div>
-  </div>
+<div class="mat" id="d2-07">
+<div class="mat-header"><span class="mat-id">D2-07 · Module 4 — Peer Scoring After Practicum</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">E.D.O. Scoring Rubric — Practicum Copy</div>
+<div class="subhead">Score your partner's entry for each scenario</div>
+<table class="table-std">
+<thead><tr><th>Component</th><th>Criteria</th><th>Max</th><th>S1</th><th>S2</th><th>S3</th></tr></thead>
+<tbody>
+<tr><td>Event</td><td>Specific, factual, observable</td><td>2</td><td>__</td><td>__</td><td>__</td></tr>
+<tr><td>Detail</td><td>Time, location, parties, no assumptions</td><td>3</td><td>__</td><td>__</td><td>__</td></tr>
+<tr><td>Outcome</td><td>Status clearly stated, escalation noted</td><td>3</td><td>__</td><td>__</td><td>__</td></tr>
+<tr><td>Language</td><td>Objective, professional, factual</td><td>2</td><td>__</td><td>__</td><td>__</td></tr>
+<tr><td style="font-weight:700;color:var(--navy)">Total</td><td></td><td>10</td><td>__</td><td>__</td><td>__</td></tr>
+</tbody>
+</table>
+<div class="subhead" style="margin-top:10px">Feedback — one specific note per scenario</div>
+<div class="subhead" style="font-size:10px">Scenario 1:</div><div class="write-line"></div>
+<div class="subhead" style="font-size:10px">Scenario 2:</div><div class="write-line"></div>
+<div class="subhead" style="font-size:10px">Scenario 3:</div><div class="write-line"></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Shift Log Practicum · Day 2 Module 4</div>
 </div>
-
+</div>
 <!-- 29. Prohibited Practices Reference -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D2-08 · Day 2 Close — Take-Home Review</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Prohibited Practices Reference</div>
-    <div class="subhead">Package Handling</div>
-    <ul class="item-list"><li>Storing any package without logging it first</li><li>Releasing a package without verifying recipient identity</li><li>Misclassifying high-value items as standard packages</li><li>Accepting outgoing packages without proper postage</li></ul>
-    <div class="subhead" style="margin-top:8px">Log & Documentation</div>
-    <ul class="item-list"><li>Submitting vague entries ("quiet night", "nothing to report")</li><li>Deleting or editing entries — corrections are additions only</li><li>Logging after the shift ends instead of in real time</li><li>Using casual or editorial language in any log entry</li></ul>
-    <div class="subhead" style="margin-top:8px">Resident Interactions</div>
-    <ul class="item-list"><li>Discussing residents with other residents</li><li>Sharing opinions on internal building or management matters</li><li>Making leasing or maintenance commitments on behalf of the property</li><li>Social media posts about residents, incidents, or the property</li></ul>
-    <div class="subhead" style="margin-top:8px">Site Conduct</div>
-    <ul class="item-list"><li>Leaving the desk without secured coverage</li><li>Personal phone use visible to residents while at the desk</li><li>Accepting gifts, meals, or financial arrangements from residents</li><li>Personal relationships with residents outside the role scope</li></ul>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 2</div>
-  </div>
+<div class="mat" id="d2-08">
+<div class="mat-header"><span class="mat-id">D2-08 · Day 2 Close — Take-Home Review</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Prohibited Practices Reference</div>
+<div class="subhead">Package Handling</div>
+<ul class="item-list"><li>Storing any package without logging it first</li><li>Releasing a package without verifying recipient identity</li><li>Misclassifying high-value items as standard packages</li><li>Accepting outgoing packages without proper postage</li></ul>
+<div class="subhead" style="margin-top:8px">Log &amp; Documentation</div>
+<ul class="item-list"><li>Submitting vague entries ("quiet night", "nothing to report")</li><li>Deleting or editing entries — corrections are additions only</li><li>Logging after the shift ends instead of in real time</li><li>Using casual or editorial language in any log entry</li></ul>
+<div class="subhead" style="margin-top:8px">Resident Interactions</div>
+<ul class="item-list"><li>Discussing residents with other residents</li><li>Sharing opinions on internal building or management matters</li><li>Making leasing or maintenance commitments on behalf of the property</li><li>Social media posts about residents, incidents, or the property</li></ul>
+<div class="subhead" style="margin-top:8px">Site Conduct</div>
+<ul class="item-list"><li>Leaving the desk without secured coverage</li><li>Personal phone use visible to residents while at the desk</li><li>Accepting gifts, meals, or financial arrangements from residents</li><li>Personal relationships with residents outside the role scope</li></ul>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 2</div>
 </div>
-
+</div>
 </div><!-- /day2 grid -->
-
 <!-- ═══════════════════════════════════════ DAY 3 ═══ -->
 <div id="day3">
 <div class="section-header page-break">
-  <div class="sh-day">Day 3 — 6 Materials</div>
-  <div class="sh-title">Assessment, Launch & Handoff</div>
-  <div class="sh-sub">Role Tracks · Assessment · 30-Day Plan · Commitment Card</div>
+<div class="sh-day">Day 3 — 6 Materials</div>
+<div class="sh-title">Assessment, Launch &amp; Handoff</div>
+<div class="sh-sub">Role Tracks · Assessment · 30-Day Plan · Commitment Card</div>
 </div>
-
 <div class="materials-grid">
-
 <!-- 30. Role-Specific Job Descriptions -->
-<div class="mat full-width">
-  <div class="mat-header"><span class="mat-id">D3-01 · Module 1 Start — Print Agent's Role Only</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Role-Specific Track Reference — All Four Roles</div>
-    <div class="subhead">Distribute the agent's assigned role only — not all four.</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
-      <div>
-        <div class="col-card" style="border-top-color:var(--gold)"><div class="col-word">Concierge Agent</div></div>
-        <ul class="item-list" style="margin-top:6px"><li>Manage lobby desk and all resident interactions</li><li>E.D.O. shift log every entry, every shift</li><li>Package intake, storage, and release per protocol</li><li>Minimum 2 tours per shift — logged</li><li>Escalate within role boundaries</li></ul>
-        <div class="subhead">Success Looks Like</div>
-        <ul class="item-list"><li>Desk always staffed and professional</li><li>Log entries every 60 minutes or less</li><li>Zero packages stored without prior logging</li></ul>
-        <div class="subhead">Watch For</div>
-        <ul class="item-list"><li style="color:var(--red)">Leaving desk without coverage</li><li style="color:var(--red)">Logging at end of shift instead of real time</li></ul>
-      </div>
-      <div>
-        <div class="col-card" style="border-top-color:#1a5c8b"><div class="col-word">Lead Concierge / Senior Agent</div></div>
-        <ul class="item-list" style="margin-top:6px"><li>All Concierge Agent responsibilities plus peer oversight</li><li>Clear new agents for solo only after demonstrated readiness</li><li>Coach in the moment — not after the shift ends</li><li>First escalation point when supervisor unavailable</li></ul>
-        <div class="subhead">Success Looks Like</div>
-        <ul class="item-list"><li>New agents cleared when ready — not just read the material</li><li>Feedback is direct, specific, and documented</li></ul>
-        <div class="subhead">Watch For</div>
-        <ul class="item-list"><li style="color:var(--red)">Covering for underperformers instead of addressing it</li><li style="color:var(--red)">Taking over tasks instead of coaching through them</li></ul>
-      </div>
-      <div>
-        <div class="col-card" style="border-top-color:var(--green)"><div class="col-word">Lobby Ambassador / Doorman</div></div>
-        <ul class="item-list" style="margin-top:6px"><li>Primary visible presence in the lobby</li><li>Greet every resident and visitor — name where known</li><li>Manage lobby flow during high-traffic periods</li><li>Coordinate with desk during events and move-ins</li></ul>
-        <div class="subhead">Success Looks Like</div>
-        <ul class="item-list"><li>Every person acknowledged within 30 seconds of entry</li><li>Body language open and engaged from 15 feet away</li></ul>
-        <div class="subhead">Watch For</div>
-        <ul class="item-list"><li style="color:var(--red)">Passive presence — sitting without engagement</li><li style="color:var(--red)">Deferring every question to the desk</li></ul>
-      </div>
-      <div>
-        <div class="col-card" style="border-top-color:var(--amber)"><div class="col-word">Package Admin / Package Porter</div></div>
-        <ul class="item-list" style="margin-top:6px"><li>All package intake, logging, storage, and release</li><li>Package room maintained at Apex standard at all times</li><li>Execute RTS procedures and carrier coordination</li><li>Log every package interaction in real time</li></ul>
-        <div class="subhead">Success Looks Like</div>
-        <ul class="item-list"><li>Every item has a system entry before it moves</li><li>Perishable protocols executed within 15 minutes</li><li>Resident pickups verified every time</li></ul>
-        <div class="subhead">Watch For</div>
-        <ul class="item-list"><li style="color:var(--red)">Batching packages and logging all at once</li><li style="color:var(--red)">Releasing based on verbal confirmation only</li></ul>
-      </div>
-    </div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 3 Module 1</div>
-  </div>
+<div class="mat full-width" id="d3-01">
+<div class="mat-header"><span class="mat-id">D3-01 · Module 1 Start — Print Agent's Role Only</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Role-Specific Track Reference — All Four Roles</div>
+<div class="subhead">Distribute the agent's assigned role only — not all four.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+<div>
+<div class="col-card" style="border-top-color:var(--gold)"><div class="col-word">Concierge Agent</div></div>
+<ul class="item-list" style="margin-top:6px"><li>Manage lobby desk and all resident interactions</li><li>E.D.O. shift log every entry, every shift</li><li>Package intake, storage, and release per protocol</li><li>Minimum 2 tours per shift — logged</li><li>Escalate within role boundaries</li></ul>
+<div class="subhead">Success Looks Like</div>
+<ul class="item-list"><li>Desk always staffed and professional</li><li>Log entries every 60 minutes or less</li><li>Zero packages stored without prior logging</li></ul>
+<div class="subhead">Watch For</div>
+<ul class="item-list"><li style="color:var(--red)">Leaving desk without coverage</li><li style="color:var(--red)">Logging at end of shift instead of real time</li></ul>
 </div>
-
+<div>
+<div class="col-card" style="border-top-color:#1a5c8b"><div class="col-word">Lead Concierge / Senior Agent</div></div>
+<ul class="item-list" style="margin-top:6px"><li>All Concierge Agent responsibilities plus peer oversight</li><li>Clear new agents for solo only after demonstrated readiness</li><li>Coach in the moment — not after the shift ends</li><li>First escalation point when supervisor unavailable</li></ul>
+<div class="subhead">Success Looks Like</div>
+<ul class="item-list"><li>New agents cleared when ready — not just read the material</li><li>Feedback is direct, specific, and documented</li></ul>
+<div class="subhead">Watch For</div>
+<ul class="item-list"><li style="color:var(--red)">Covering for underperformers instead of addressing it</li><li style="color:var(--red)">Taking over tasks instead of coaching through them</li></ul>
+</div>
+<div>
+<div class="col-card" style="border-top-color:var(--green)"><div class="col-word">Lobby Ambassador / Doorman</div></div>
+<ul class="item-list" style="margin-top:6px"><li>Primary visible presence in the lobby</li><li>Greet every resident and visitor — name where known</li><li>Manage lobby flow during high-traffic periods</li><li>Coordinate with desk during events and move-ins</li></ul>
+<div class="subhead">Success Looks Like</div>
+<ul class="item-list"><li>Every person acknowledged within 30 seconds of entry</li><li>Body language open and engaged from 15 feet away</li></ul>
+<div class="subhead">Watch For</div>
+<ul class="item-list"><li style="color:var(--red)">Passive presence — sitting without engagement</li><li style="color:var(--red)">Deferring every question to the desk</li></ul>
+</div>
+<div>
+<div class="col-card" style="border-top-color:var(--amber)"><div class="col-word">Package Admin / Package Porter</div></div>
+<ul class="item-list" style="margin-top:6px"><li>All package intake, logging, storage, and release</li><li>Package room maintained at Apex standard at all times</li><li>Execute RTS procedures and carrier coordination</li><li>Log every package interaction in real time</li></ul>
+<div class="subhead">Success Looks Like</div>
+<ul class="item-list"><li>Every item has a system entry before it moves</li><li>Perishable protocols executed within 15 minutes</li><li>Resident pickups verified every time</li></ul>
+<div class="subhead">Watch For</div>
+<ul class="item-list"><li style="color:var(--red)">Batching packages and logging all at once</li><li style="color:var(--red)">Releasing based on verbal confirmation only</li></ul>
+</div>
+</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Orientation · Day 3 Module 1</div>
+</div>
+</div>
 <!-- 31. Standards Assessment Form -->
-<div class="mat full-width">
-  <div class="mat-header"><span class="mat-id">D3-03 · Module 2 — COLLECT BEFORE LUNCH</span><span class="mat-badge badge-collect">⚠️ Collect Before Lunch</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Standards Assessment Form — 10 Questions</div>
-    <div class="alert-bar">Individual. Written. No notes, no phones, no reference materials. No assistance. 60 minutes.</div>
-    <div class="subhead" style="margin-top:12px">Agent Name: <span style="display:inline-block;width:200px;border-bottom:1px solid #ccc"></span> &nbsp; Role: <span style="display:inline-block;width:150px;border-bottom:1px solid #ccc"></span> &nbsp; Date: <span style="display:inline-block;width:100px;border-bottom:1px solid #ccc"></span></div>
-    <div style="margin-top:14px">
-      <div class="subhead">Q1 — Name and define the four H.O.M.E. Values in your own words.</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q2 — Write a complete E.D.O. shift log entry for this scenario: A resident from Unit 502 calls at 9:47 PM to report a water leak coming from the unit above. You submit a Yardi work order and notify your supervisor.</div>
-      <div class="write-area" style="min-height:80px"></div>
-      <div class="subhead">Q3 — Name the five package categories and state the time window for each perishable type.</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q4 — What are the five required steps in the call-out procedure?</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q5 — What is the Friendly ≠ Familiar distinction? Give one example of each.</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q6 — Name the three systems and state what each one is used for.</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q7 — Using the A.C.T. method, walk through how you would handle this scenario: A resident approaches the desk visibly upset, raises their voice, and demands to speak to building management immediately about a noise complaint that was not resolved last week.</div>
-      <div class="write-area" style="min-height:80px"></div>
-      <div class="subhead">Q8 — What are your first three actions in a fire emergency?</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q9 — What makes a shift log entry unacceptable? Name at least three prohibited practices.</div>
-      <div class="write-area"></div>
-      <div class="subhead">Q10 — What does the 90-day Excellence Academy eligibility require? Name three criteria.</div>
-      <div class="write-area"></div>
-    </div>
-    <div class="sign-line" style="margin-top:12px"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date Completed:</span><div style="width:100px"></div></div>
-    <div class="footer-apex">Apex Concierge Services · Standards Assessment · Day 3 Module 2 · Score and return with written feedback before program closes</div>
-  </div>
+<div class="mat full-width" id="d3-03">
+<div class="mat-header"><span class="mat-id">D3-03 · Module 2 — COLLECT BEFORE LUNCH</span><span class="mat-badge badge-collect">⚠️ Collect Signed</span></div>
+<div class="mat-body">
+<div class="mat-title">Standards Assessment Form — 10 Questions</div>
+<div class="alert-bar">Individual. Written. No notes, no phones, no reference materials. No assistance. 60 minutes.</div>
+<div class="subhead" style="margin-top:12px">Agent Name: <span style="display:inline-block;width:200px;border-bottom:1px solid #ccc"></span>   Role: <span style="display:inline-block;width:150px;border-bottom:1px solid #ccc"></span>   Date: <span style="display:inline-block;width:100px;border-bottom:1px solid #ccc"></span></div>
+<div style="margin-top:14px">
+<div class="subhead">Q1 — Name and define the four H.O.M.E. Values in your own words.</div>
+<div class="write-area"></div>
+<div class="subhead">Q2 — Write a complete E.D.O. shift log entry for this scenario: A resident from Unit 502 calls at 9:47 PM to report a water leak coming from the unit above. You submit a Yardi work order and notify your supervisor.</div>
+<div class="write-area" style="min-height:80px"></div>
+<div class="subhead">Q3 — Name the five package categories and state the time window for each perishable type.</div>
+<div class="write-area"></div>
+<div class="subhead">Q4 — What are the five required steps in the call-out procedure?</div>
+<div class="write-area"></div>
+<div class="subhead">Q5 — What is the Friendly ≠ Familiar distinction? Give one example of each.</div>
+<div class="write-area"></div>
+<div class="subhead">Q6 — Name the three systems and state what each one is used for.</div>
+<div class="write-area"></div>
+<div class="subhead">Q7 — Using the A.C.T. method, walk through how you would handle this scenario: A resident approaches the desk visibly upset, raises their voice, and demands to speak to building management immediately about a noise complaint that was not resolved last week.</div>
+<div class="write-area" style="min-height:80px"></div>
+<div class="subhead">Q8 — What are your first three actions in a fire emergency?</div>
+<div class="write-area"></div>
+<div class="subhead">Q9 — What makes a shift log entry unacceptable? Name at least three prohibited practices.</div>
+<div class="write-area"></div>
+<div class="subhead">Q10 — What does the 90-day Excellence Academy eligibility require? Name three criteria.</div>
+<div class="write-area"></div>
 </div>
-
+<div class="sign-line" style="margin-top:12px"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date Completed:</span><div style="width:100px"></div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Standards Assessment · Day 3 Module 2 · Score and return with written feedback before program closes</div>
+</div>
+</div>
 <!-- 33. 30-Day Commitment Plan -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D3-04 · Module 3 — Submit to Supervisor at Module 6</span><span class="mat-badge badge-collect">📋 Submit to Supervisor</span></div>
-  <div class="mat-body">
-    <div class="mat-title">30-Day Commitment Plan Form</div>
-    <div class="subhead">Agent Name</div><div class="write-line"></div>
-    <div class="two-col">
-      <div><div class="subhead">Role</div><div class="write-line"></div></div>
-      <div><div class="subhead">Property</div><div class="write-line"></div></div>
-    </div>
-    <div class="subhead" style="margin-top:10px">My primary performance goal for the first 30 days is...</div>
-    <div class="write-area"></div>
-    <div class="subhead">The specific actions I will take every shift to achieve this are...</div>
-    <div class="write-area"></div>
-    <div class="subhead">The area I know requires the most focused development is...</div>
-    <div class="write-area"></div>
-    <div class="subhead">At my 30-day review, I will know I succeeded if...</div>
-    <div class="write-area"></div>
-    <div class="sign-line" style="margin-top:10px"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
-    <div class="footer-apex">Apex Concierge Services · 30-Day Launch · Day 3 Module 3 · Referenced at 30-Day Review</div>
-  </div>
+<div class="mat" id="d3-04">
+<div class="mat-header"><span class="mat-id">D3-04 · Module 3 — Submit to Supervisor at Module 6</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">30-Day Commitment Plan Form</div>
+<div class="subhead">Agent Name</div><div class="write-line"></div>
+<div class="two-col">
+<div><div class="subhead">Role</div><div class="write-line"></div></div>
+<div><div class="subhead">Property</div><div class="write-line"></div></div>
 </div>
-
+<div class="subhead" style="margin-top:10px">My primary performance goal for the first 30 days is...</div>
+<div class="write-area"></div>
+<div class="subhead">The specific actions I will take every shift to achieve this are...</div>
+<div class="write-area"></div>
+<div class="subhead">The area I know requires the most focused development is...</div>
+<div class="write-area"></div>
+<div class="subhead">At my 30-day review, I will know I succeeded if...</div>
+<div class="write-area"></div>
+<div class="sign-line" style="margin-top:10px"><span class="sign-label">Agent Signature:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · 30-Day Launch · Day 3 Module 3 · Referenced at 30-Day Review</div>
+</div>
+</div>
 <!-- 34. Property Contact Sheet -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D3-05 · Program Close — Supervisor Distributes</span><span class="mat-badge badge-lam">Print</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Property Contact Sheet</div>
-    <div class="subhead">Property</div><div class="write-line"></div>
-    <table class="table-std" style="margin-top:8px">
-      <thead><tr><th>Contact</th><th>Name</th><th>Number / Method</th></tr></thead>
-      <tbody>
-        <tr><td>Site Supervisor</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>On-Call Manager Line</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>Regional Manager</td><td>Khalif Rashid</td><td><div class="write-line"></div></td></tr>
-        <tr><td>Property Management</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>Leasing Office</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>Maintenance Emergency</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>Building Emergency Line</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
-        <tr><td>Police Non-Emergency</td><td></td><td><div class="write-line"></div></td></tr>
-      </tbody>
-    </table>
-    <div class="subhead" style="margin-top:10px">Connecteam Login</div><div class="write-line"></div>
-    <div class="subhead">Yardi Login</div><div class="write-line"></div>
-    <div class="subhead">Paylocity Login</div><div class="write-line"></div>
-    <div class="footer-apex">Apex Concierge Services · Property Contact Sheet · Day 3 Close · Keep Through Day 90</div>
-  </div>
+<div class="mat" id="d3-05">
+<div class="mat-header"><span class="mat-id">D3-05 · Program Close — Supervisor Distributes</span><span class="mat-badge badge-print">🖨 Print</span></div>
+<div class="mat-body">
+<div class="mat-title">Property Contact Sheet</div>
+<div class="subhead">Property</div><div class="write-line"></div>
+<table class="table-std" style="margin-top:8px">
+<thead><tr><th>Contact</th><th>Name</th><th>Number / Method</th></tr></thead>
+<tbody>
+<tr><td>Site Supervisor</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>On-Call Manager Line</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>Regional Manager</td><td>Khalif Rashid</td><td><div class="write-line"></div></td></tr>
+<tr><td>Property Management</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>Leasing Office</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>Maintenance Emergency</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>Building Emergency Line</td><td><div class="write-line"></div></td><td><div class="write-line"></div></td></tr>
+<tr><td>Police Non-Emergency</td><td></td><td><div class="write-line"></div></td></tr>
+</tbody>
+</table>
+<div class="subhead" style="margin-top:10px">Connecteam Login</div><div class="write-line"></div>
+<div class="subhead">Yardi Login</div><div class="write-line"></div>
+<div class="subhead">Paylocity Login</div><div class="write-line"></div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · Property Contact Sheet · Day 3 Close · Keep Through Day 90</div>
 </div>
-
+</div>
 <!-- 35. Final Commitment Card -->
-<div class="mat">
-  <div class="mat-header"><span class="mat-id">D3-06 · Program Close — Agent Keeps / Facilitator Photographs</span><span class="mat-badge badge-collect">📷 Photograph All Cards</span></div>
-  <div class="mat-body">
-    <div class="mat-title">Final Commitment Card — Three-Day Program</div>
-    <div class="rule-callout" style="margin-bottom:12px"><div class="rule-text">"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."</div></div>
-    <div class="subhead">The Apex Standard I carry into every shift, starting today, is...</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead" style="margin-top:10px">The one thing I hold myself accountable for in the first 30 days is...</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="subhead" style="margin-top:10px">The professional I intend to be at Apex is...</div>
-    <div class="write-line"></div><div class="write-line"></div>
-    <div class="sign-line" style="margin-top:14px"><span class="sign-label">Signed:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
-    <div style="font-size:10px;color:var(--gray);margin-top:6px;text-align:center">Bring this card to your 30-day review.</div>
-    <div class="footer-apex">Apex Concierge Services · New Hire Experience · Three Days · Greater Boston</div>
-  </div>
+<div class="mat" id="d3-06">
+<div class="mat-header"><span class="mat-id">D3-06 · Program Close — Agent Keeps / Facilitator Photographs</span><span class="mat-badge badge-collect">📷 Photograph</span></div>
+<div class="mat-body">
+<div class="mat-title">Final Commitment Card — Three-Day Program</div>
+<div class="rule-callout" style="margin-bottom:12px"><div class="rule-text">"You were hired because we believe you can represent this standard. Today is the baseline. Now go exceed it."</div></div>
+<div class="subhead">The Apex Standard I carry into every shift, starting today, is...</div>
+<div class="write-line"></div><div class="write-line"></div>
+<div class="subhead" style="margin-top:10px">The one thing I hold myself accountable for in the first 30 days is...</div>
+<div class="write-line"></div><div class="write-line"></div>
+<div class="subhead" style="margin-top:10px">The professional I intend to be at Apex is...</div>
+<div class="write-line"></div><div class="write-line"></div>
+<div class="sign-line" style="margin-top:14px"><span class="sign-label">Signed:</span><div class="sign-space"></div><span class="sign-label">Date:</span><div style="width:80px"></div></div>
+<div style="font-size:10px;color:var(--gray);margin-top:6px;text-align:center">Bring this card to your 30-day review.</div>
+<button class="print-one-btn" onclick="printOne(this)">Print This</button>
+<div class="footer-apex">Apex Concierge Services · New Hire Experience · Three Days · Greater Boston</div>
 </div>
-
+</div>
 </div><!-- /day3 grid -->
 </div>
-
 <script>
 document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
@@ -1121,5 +1152,21 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 ['day1','day2','day3'].forEach(id => { const el = document.getElementById(id); if(el) observer.observe(el); });
 </script>
-</body>
+</div></div><script>
+function printOne(button) {
+  const allCards = document.querySelectorAll('.mat');
+  const selectedCard = button.closest('.mat');
+  if (!selectedCard) return;
+  allCards.forEach(card => card.classList.remove('print-target'));
+  selectedCard.classList.add('print-target');
+  document.body.classList.add('print-single');
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => {
+      document.body.classList.remove('print-single');
+      selectedCard.classList.remove('print-target');
+    }, 300);
+  }, 100);
+}
+</script></body>
 </html>

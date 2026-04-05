@@ -1,10 +1,12 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
 <title>Apex Training Materials Library — By Day</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Barlow:wght@300;400;500;600;700&amp;family=Barlow+Condensed:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
 :root {
   --navy:#0D1F3C; --navy-mid:#162C50; --navy-dark:#081429;
@@ -121,818 +123,758 @@ body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);fo
   .material-card{grid-template-columns:auto 1fr}
   .cover{padding:36px 24px}
 }
+
+.material-link{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+.material-link .material-card{cursor:pointer;}
+.material-link:hover .material-card{border-color:var(--gold);}
 </style>
 </head>
 <body>
-<a href="cofacilitator.html">Open Co-Facilitator App</a>
-<a href="printable-materials.html">Open Printable Materials Pack</a>
 <!-- COVER -->
 <div class="cover no-print">
-  <div class="cover-eyebrow">Apex Concierge Services · Internal Use</div>
-  <div class="cover-title">Training Materials Library</div>
-  <div class="cover-sub">All handouts, reference cards, and forms — organized by day and module</div>
-  <div class="cover-stats">
-    <div class="cover-stat"><div class="stat-num">33</div><div class="stat-label">Total Materials</div></div>
-    <div class="cover-stat"><div class="stat-num">3</div><div class="stat-label">Program Days</div></div>
-    <div class="cover-stat"><div class="stat-num">5</div><div class="stat-label">Forms to Collect</div></div>
-    <div class="cover-stat"><div class="stat-num">6</div><div class="stat-label">Laminated Items</div></div>
-  </div>
+<div class="cover-eyebrow">Apex Concierge Services · Internal Use</div>
+<div class="cover-title">Training Materials Library</div>
+<div class="cover-sub">All handouts, reference cards, and forms — organized by day and module</div>
+<div class="cover-stats">
+<div class="cover-stat"><div class="stat-num">33</div><div class="stat-label">Total Materials</div></div>
+<div class="cover-stat"><div class="stat-num">3</div><div class="stat-label">Program Days</div></div>
+<div class="cover-stat"><div class="stat-num">5</div><div class="stat-label">Forms to Collect</div></div>
+<div class="cover-stat"><div class="stat-num">6</div><div class="stat-label">Laminated Items</div></div>
 </div>
-
+</div>
 <!-- STICKY NAV -->
 <nav class="sticky-nav no-print">
-  <a class="nav-tab active" href="#day1">Day 1</a>
-  <a class="nav-tab" href="#day2">Day 2</a>
-  <a class="nav-tab" href="#day3">Day 3</a>
-  <a class="nav-tab" href="#summary">Full Schedule</a>
-  <button class="nav-print" onclick="window.print()">🖨 Print All</button>
+<a class="nav-tab active" href="#day1">Day 1</a>
+<a class="nav-tab" href="#day2">Day 2</a>
+<a class="nav-tab" href="#day3">Day 3</a>
+<a class="nav-tab" href="#summary">Full Schedule</a>
+<div style="width:1px;height:24px;background:rgba(201,168,76,0.25);margin:0 12px;"></div>
+<a class="nav-tab" href="nho-outline.html">Outline</a>
+<a class="nav-tab" href="cofacilitator.html">Co-Facilitator</a>
+<a class="nav-tab" href="printable-materials.html">Materials</a>
+<button class="nav-print" onclick="window.print()">🖨 Print All</button>
 </nav>
-
 <!-- FILTER BAR -->
 <div class="filter-bar no-print">
-  <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" onclick="filterAll()">All Materials</button>
-  <button class="filter-btn" onclick="filterType('laminated')">🔖 Laminated</button>
-  <button class="filter-btn" onclick="filterType('collect')">⚠️ Collect Signed</button>
-  <button class="filter-btn" onclick="filterType('form')">📝 Forms</button>
-  <button class="filter-btn" onclick="filterType('print')">🖨 Print Only</button>
+<span class="filter-label">Filter:</span>
+<button class="filter-btn active" onclick="filterAll()">All Materials</button>
+<button class="filter-btn" onclick="filterType('laminated')">🔖 Laminated</button>
+<button class="filter-btn" onclick="filterType('collect')">⚠️ Collect Signed</button>
+<button class="filter-btn" onclick="filterType('form')">📝 Forms</button>
+<button class="filter-btn" onclick="filterType('print')">🖨 Print Only</button>
 </div>
-
 <div class="wrapper">
-
 <!-- ═══════════════════════════════════════════════════════ DAY 1 ═══ -->
-<div id="day1" class="page-break">
-  <div class="day-header">
-    <div class="day-num">1</div>
-    <div class="day-info">
-      <div class="day-label">Day One</div>
-      <div class="day-title">Foundation</div>
-      <div class="day-sub">Identity · Culture · Presence · Operations · Shift Log · Policies · Scenarios · Systems · Leadership</div>
-    </div>
-    <div class="day-meta">
-      <div class="day-badge badge-count">19 Materials</div>
-    </div>
-  </div>
-
-  <!-- PRE-SESSION -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Pre-Session</div>
-      <div class="module-name">Arrival & Environment Setup</div>
-      <div class="module-count">1 material</div>
-    </div>
-
-    <div class="material-card" data-type="laminated">
-      <div class="mat-index">1</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-00 · Identity & Culture · Reference Card</div>
-        <div class="mat-title">H.O.M.E. Values Reference Card</div>
-        <div class="mat-desc">Four-value framework: Hospitality, Ownership, Mindfulness, Excellence. Each value with definition and on-shift application. Agent keeps for the duration of the program.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-laminated">🔖 Laminated</span>
-        <div class="mat-when"><strong>Pre-Stage</strong>At every seat before agents arrive. First thing they see.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 1 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 1</div>
-      <div class="module-name">Company Identity & Culture</div>
-      <div class="module-count">3 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">2</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-01 · Identity & Culture · One-Pager</div>
-        <div class="mat-title">The Apex Standard — One-Pager</div>
-        <div class="mat-desc">Five non-negotiable standards of what it means to operate at the Apex level: consistency, intentionality, ownership, representation, non-negotiability. Wall-postable format.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Distribute at Module 1 start</strong>Walk through with agents before advancing to H.O.M.E.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">3</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-02 · Identity & Culture · Mindset Card</div>
-        <div class="mat-title">Luxury Service Mindset Card</div>
-        <div class="mat-desc">Proactive vs. reactive service defined. Emotional intelligence as a professional skill. What luxury service actually means in a residential concierge context.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 1 — Luxury Mindset slide</strong>Agents reference while facilitator presents.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">4</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-03 · Identity & Culture · Reflection Prompt</div>
-        <div class="mat-title">Module 1 Reflection Card</div>
-        <div class="mat-desc">Single reflection prompt with three writing lines: "What does it mean to represent something bigger than yourself on shift?" Used for the Module 1 closing reflection activity.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 1 reflection slide</strong>Agents write, then 2 share. Agent keeps card.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 3 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 3</div>
-      <div class="module-name">Professional Presence</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">5</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-04 · Identity & Culture · Boundary Reference</div>
-        <div class="mat-title">Friendly ≠ Familiar — Professional Boundary Reference</div>
-        <div class="mat-desc">Side-by-side reference: what Friendly looks like vs. what Familiar looks like. Includes the core test question: "Would I behave the same way with every resident — or only this one?" Agent keeps throughout the program.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 3 — Friendly ≠ Familiar slide</strong>Distribute before the paired discussion activity.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">6</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-05 · Professional Presence · Checklist</div>
-        <div class="mat-title">Apex Presence Checklist — 10-Point</div>
-        <div class="mat-desc">Ten observable presence standards covering appearance, posture, eye contact, desk organization, energy, and communication. Used for the paired self-assessment activity in Module 3.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 3 — paired activity</strong>Agents assess each other. Debrief together.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 4 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 4</div>
-      <div class="module-name">Core Operations</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">7</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-06 · Operations · One-Pager</div>
-        <div class="mat-title">Shift Expectations One-Pager</div>
-        <div class="mat-desc">Desk is never unattended rule, shift start protocol, pass-on requirements, minimum tour count per shift, and shift close requirements. Quick reference for new agents on their first solo shifts.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 4 start</strong>Walk through together before moving to tour practice.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">8</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-07 · Operations · Field Template</div>
-        <div class="mat-title">Site Tour Template</div>
-        <div class="mat-desc">Blank tour route worksheet with prompts: stop name, purpose of observation, what to look for, what to log. Used for the Module 4 tour practice exercise before the actual property walk.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 4 — tour practice exercise</strong>Agents build their own route, then present.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 5 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 5</div>
-      <div class="module-name">Shift Log Mastery — E.D.O.</div>
-      <div class="module-count">4 materials</div>
-    </div>
-
-    <div class="material-card" data-type="laminated">
-      <div class="mat-index">9</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-08 · Operations · Reference Card</div>
-        <div class="mat-title">E.D.O. Method Reference Card</div>
-        <div class="mat-desc">Event / Detail / Outcome defined with the three required questions for each component and a model log entry. Laminated for durability — agents carry this for the duration of the program and into the field.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-laminated">🔖 Laminated</span>
-        <div class="mat-when"><strong>Module 5 start</strong>Hand out and tell agents: "Keep this on your person."</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">10</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-09 · Operations · Standards Sheet</div>
-        <div class="mat-title">Shift Log Non-Negotiables</div>
-        <div class="mat-desc">Seven absolute log standards: minimum entry frequency, tour entry requirements, pass-on structure, tone requirements, prohibited phrases ("quiet night", "nothing to report"), and correction protocol.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 5D — Non-Negotiables slide</strong>Walk through each item. Ask: which will be hardest to maintain?</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">11</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-10 · Operations · Comparison Sheet</div>
-        <div class="mat-title">Strong vs. Weak Log Entry Examples</div>
-        <div class="mat-desc">Side-by-side comparison of three entry pairs: weak version (vague, incomplete, editorial) vs. strong version (factual, specific, time-stamped, outcome-documented). Used for the Module 5E comparison exercise.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 5E comparison exercise</strong>Ask agents to name the gaps in the weak version before revealing the strong.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">12</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-11 · Operations · Assessment Rubric</div>
-        <div class="mat-title">E.D.O. Scoring Rubric</div>
-        <div class="mat-desc">Scoring criteria for the live writing drill: Event present (0–2), Detail complete (0–3), Outcome documented (0–3), Language standard (0–2). 10-point total. Used for peer scoring during the Module 5F drill.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 5F — writing drill</strong>Distribute for peer scoring after agents write independently.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 6 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 6</div>
-      <div class="module-name">Policies & Accountability</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">13</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-12 · Policy · Handout</div>
-        <div class="mat-title">Attendance & Conduct Policy Handout</div>
-        <div class="mat-desc">Call-out procedure (5 steps), shift swap protocol, coverage requirements, conduct standards: social media, personal calls, conflict resolution, confidentiality. Full policy reference drawn from the 2026 Handbook.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 6 start</strong>Walk through together. Run the verbal call-out scenario before advancing to the slide.</div>
-      </div>
-    </div>
-
-    <div class="collect-row">
-      <span style="font-size:16px">⚠️</span>
-      <span class="collect-row-text">The Conduct Acknowledgment Form must be collected and signed before agents leave Day 1. No exceptions. File in personnel folder. Photograph as backup.</span>
-    </div>
-
-    <div class="material-card" data-type="collect">
-      <div class="mat-index">14</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-13 · Policy · Acknowledgment Form — COLLECT SIGNED</div>
-        <div class="mat-title">Conduct Acknowledgment Form</div>
-        <div class="mat-desc">Checkbox acknowledgment for: attendance policy, call-out procedure, device standards, fraternization policy, confidentiality, social media policy. Agent signature + date. Facilitator signature + date. Goes into personnel file.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-collect">⚠️ Collect Signed</span>
-        <div class="mat-when"><strong>Module 6 end — BEFORE agents leave</strong>Walk through every checkbox. Allow 5 min to read and sign.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 7 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 7</div>
-      <div class="module-name">Real-World Scenarios</div>
-      <div class="module-count">3 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">15</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-14 · De-Escalation · Decision Framework</div>
-        <div class="mat-title">Escalation Decision Tree</div>
-        <div class="mat-desc">Visual flowchart: can I resolve this within my role? → Yes: resolve and document → No: escalate to supervisor → Always: log the full interaction. Covers four escalation paths: resident complaint, unauthorized access, safety concern, conduct violation.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 7 start</strong>Agents reference during all six scenario drills.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="laminated">
-      <div class="mat-index">16</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-15 · De-Escalation · Reference Card</div>
-        <div class="mat-title">A.C.T. Method Reference Card</div>
-        <div class="mat-desc">Acknowledge / Control / Transfer or Resolve. Each step defined with on-shift language examples. Back side: common failure points per step. Laminated — agents carry into the field.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-laminated">🔖 Laminated</span>
-        <div class="mat-when"><strong>Module 7 — after scenarios</strong>Introduce A.C.T. retroactively. Agents carry this.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">17</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-16 · De-Escalation · Framework Card</div>
-        <div class="mat-title">Response Framework Card</div>
-        <div class="mat-desc">Quick-reference for the A.C.T. application: what to say in each phase, how to manage the physical environment, when to escalate vs. resolve. Used during scenario debriefs.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 7 start</strong>Agents reference during all six scenario drills alongside the Escalation Decision Tree.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 8 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 8</div>
-      <div class="module-name">Systems Overview</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="laminated">
-      <div class="mat-index">18</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-17 · Systems · Reference Card</div>
-        <div class="mat-title">Systems Quick-Reference Card</div>
-        <div class="mat-desc">Three-column card: Connecteam (scheduling, time clock, announcements, shift swaps), Paylocity (payroll, onboarding docs, PTO, W-2), Yardi (resident lookup, work orders, package tracking). Laminated for daily desk use.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-laminated">🔖 Laminated</span>
-        <div class="mat-when"><strong>Module 8 start</strong>Tell agents: "Keep this at the desk or in your bag."</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">19</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-18 · Systems · Activity Card</div>
-        <div class="mat-title">Systems Quick-Check Card</div>
-        <div class="mat-desc">Eight tasks with a blank "SYSTEM" column for agents to fill in. Used for the Module 8 self-scoring activity. Answer key in footer of the projected slide. 3-minute individual, then group debrief.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 8D activity</strong>3 min individual, self-score, group debrief.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 9 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 9</div>
-      <div class="module-name">Leadership Introduction & Closing</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">20</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-19 · Launch · Overview Document</div>
-        <div class="mat-title">90-Day Expectation Overview</div>
-        <div class="mat-desc">Phase-by-phase overview: Days 1–3 (Shadow), Days 4–7 (Supported), Week 2 (Solo + Check-Ins), Weeks 3–4 (Full Operation), Day 30 (Formal Review), Day 90 (Full Evaluation). Excellence Academy eligibility criteria.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 9 start</strong>Agent keeps throughout program and into first 90 days.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="collect">
-      <div class="mat-index">21</div>
-      <div class="mat-body">
-        <div class="mat-id">D1-20 · Launch · Commitment Card — PHOTOGRAPH</div>
-        <div class="mat-title">Day 1 Commitment Card</div>
-        <div class="mat-desc">Three prompts: the standard I commit to holding every shift / the area I need to focus on developing / my goal by the 90-day mark. Signature and date line. Agent keeps original. Facilitator photographs before agents leave.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-collect">📷 Photograph</span>
-        <div class="mat-when"><strong>Module 9 close</strong>8 min silence to write. Agent keeps card. You photograph all cards.</div>
-      </div>
-    </div>
-  </div>
+<div class="page-break" id="day1">
+<div class="day-header">
+<div class="day-num">1</div>
+<div class="day-info">
+<div class="day-label">Day One</div>
+<div class="day-title">Foundation</div>
+<div class="day-sub">Identity · Culture · Presence · Operations · Shift Log · Policies · Scenarios · Systems · Leadership</div>
 </div>
-
+<div class="day-meta">
+<div class="day-badge badge-count">19 Materials</div>
+</div>
+</div>
+<!-- PRE-SESSION -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Pre-Session</div>
+<div class="module-name">Arrival &amp; Environment Setup</div>
+<div class="module-count">1 material</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-00"><div class="material-card" data-type="laminated">
+<div class="mat-index">1</div>
+<div class="mat-body">
+<div class="mat-id">D1-00 · Identity &amp; Culture · Reference Card</div>
+<div class="mat-title">H.O.M.E. Values Reference Card</div>
+<div class="mat-desc">Four-value framework: Hospitality, Ownership, Mindfulness, Excellence. Each value with definition and on-shift application. Agent keeps for the duration of the program.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-laminated">🔖 Laminated</span>
+<div class="mat-when"><strong>Pre-Stage</strong>At every seat before agents arrive. First thing they see.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 1 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 1</div>
+<div class="module-name">Company Identity &amp; Culture</div>
+<div class="module-count">3 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-01"><div class="material-card" data-type="print">
+<div class="mat-index">2</div>
+<div class="mat-body">
+<div class="mat-id">D1-01 · Identity &amp; Culture · One-Pager</div>
+<div class="mat-title">The Apex Standard — One-Pager</div>
+<div class="mat-desc">Five non-negotiable standards of what it means to operate at the Apex level: consistency, intentionality, ownership, representation, non-negotiability. Wall-postable format.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Distribute at Module 1 start</strong>Walk through with agents before advancing to H.O.M.E.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-02"><div class="material-card" data-type="print">
+<div class="mat-index">3</div>
+<div class="mat-body">
+<div class="mat-id">D1-02 · Identity &amp; Culture · Mindset Card</div>
+<div class="mat-title">Luxury Service Mindset Card</div>
+<div class="mat-desc">Proactive vs. reactive service defined. Emotional intelligence as a professional skill. What luxury service actually means in a residential concierge context.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 1 — Luxury Mindset slide</strong>Agents reference while facilitator presents.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-03"><div class="material-card" data-type="print">
+<div class="mat-index">4</div>
+<div class="mat-body">
+<div class="mat-id">D1-03 · Identity &amp; Culture · Reflection Prompt</div>
+<div class="mat-title">Module 1 Reflection Card</div>
+<div class="mat-desc">Single reflection prompt with three writing lines: "What does it mean to represent something bigger than yourself on shift?" Used for the Module 1 closing reflection activity.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 1 reflection slide</strong>Agents write, then 2 share. Agent keeps card.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 3 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 3</div>
+<div class="module-name">Professional Presence</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-04"><div class="material-card" data-type="print">
+<div class="mat-index">5</div>
+<div class="mat-body">
+<div class="mat-id">D1-04 · Identity &amp; Culture · Boundary Reference</div>
+<div class="mat-title">Friendly ≠ Familiar — Professional Boundary Reference</div>
+<div class="mat-desc">Side-by-side reference: what Friendly looks like vs. what Familiar looks like. Includes the core test question: "Would I behave the same way with every resident — or only this one?" Agent keeps throughout the program.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 3 — Friendly ≠ Familiar slide</strong>Distribute before the paired discussion activity.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-05"><div class="material-card" data-type="print">
+<div class="mat-index">6</div>
+<div class="mat-body">
+<div class="mat-id">D1-05 · Professional Presence · Checklist</div>
+<div class="mat-title">Apex Presence Checklist — 10-Point</div>
+<div class="mat-desc">Ten observable presence standards covering appearance, posture, eye contact, desk organization, energy, and communication. Used for the paired self-assessment activity in Module 3.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 3 — paired activity</strong>Agents assess each other. Debrief together.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 4 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 4</div>
+<div class="module-name">Core Operations</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-06"><div class="material-card" data-type="print">
+<div class="mat-index">7</div>
+<div class="mat-body">
+<div class="mat-id">D1-06 · Operations · One-Pager</div>
+<div class="mat-title">Shift Expectations One-Pager</div>
+<div class="mat-desc">Desk is never unattended rule, shift start protocol, pass-on requirements, minimum tour count per shift, and shift close requirements. Quick reference for new agents on their first solo shifts.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 4 start</strong>Walk through together before moving to tour practice.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-07"><div class="material-card" data-type="print">
+<div class="mat-index">8</div>
+<div class="mat-body">
+<div class="mat-id">D1-07 · Operations · Field Template</div>
+<div class="mat-title">Site Tour Template</div>
+<div class="mat-desc">Blank tour route worksheet with prompts: stop name, purpose of observation, what to look for, what to log. Used for the Module 4 tour practice exercise before the actual property walk.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 4 — tour practice exercise</strong>Agents build their own route, then present.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 5 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 5</div>
+<div class="module-name">Shift Log Mastery — E.D.O.</div>
+<div class="module-count">4 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-08"><div class="material-card" data-type="laminated">
+<div class="mat-index">9</div>
+<div class="mat-body">
+<div class="mat-id">D1-08 · Operations · Reference Card</div>
+<div class="mat-title">E.D.O. Method Reference Card</div>
+<div class="mat-desc">Event / Detail / Outcome defined with the three required questions for each component and a model log entry. Laminated for durability — agents carry this for the duration of the program and into the field.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-laminated">🔖 Laminated</span>
+<div class="mat-when"><strong>Module 5 start</strong>Hand out and tell agents: "Keep this on your person."</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-09"><div class="material-card" data-type="print">
+<div class="mat-index">10</div>
+<div class="mat-body">
+<div class="mat-id">D1-09 · Operations · Standards Sheet</div>
+<div class="mat-title">Shift Log Non-Negotiables</div>
+<div class="mat-desc">Seven absolute log standards: minimum entry frequency, tour entry requirements, pass-on structure, tone requirements, prohibited phrases ("quiet night", "nothing to report"), and correction protocol.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 5D — Non-Negotiables slide</strong>Walk through each item. Ask: which will be hardest to maintain?</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-10"><div class="material-card" data-type="print">
+<div class="mat-index">11</div>
+<div class="mat-body">
+<div class="mat-id">D1-10 · Operations · Comparison Sheet</div>
+<div class="mat-title">Strong vs. Weak Log Entry Examples</div>
+<div class="mat-desc">Side-by-side comparison of three entry pairs: weak version (vague, incomplete, editorial) vs. strong version (factual, specific, time-stamped, outcome-documented). Used for the Module 5E comparison exercise.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 5E comparison exercise</strong>Ask agents to name the gaps in the weak version before revealing the strong.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-11"><div class="material-card" data-type="print">
+<div class="mat-index">12</div>
+<div class="mat-body">
+<div class="mat-id">D1-11 · Operations · Assessment Rubric</div>
+<div class="mat-title">E.D.O. Scoring Rubric</div>
+<div class="mat-desc">Scoring criteria for the live writing drill: Event present (0–2), Detail complete (0–3), Outcome documented (0–3), Language standard (0–2). 10-point total. Used for peer scoring during the Module 5F drill.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 5F — writing drill</strong>Distribute for peer scoring after agents write independently.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 6 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 6</div>
+<div class="module-name">Policies &amp; Accountability</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-12"><div class="material-card" data-type="print">
+<div class="mat-index">13</div>
+<div class="mat-body">
+<div class="mat-id">D1-12 · Policy · Handout</div>
+<div class="mat-title">Attendance &amp; Conduct Policy Handout</div>
+<div class="mat-desc">Call-out procedure (5 steps), shift swap protocol, coverage requirements, conduct standards: social media, personal calls, conflict resolution, confidentiality. Full policy reference drawn from the 2026 Handbook.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 6 start</strong>Walk through together. Run the verbal call-out scenario before advancing to the slide.</div>
+</div>
+</div></a>
+<div class="collect-row">
+<span style="font-size:16px">⚠️</span>
+<span class="collect-row-text">The Conduct Acknowledgment Form must be collected and signed before agents leave Day 1. No exceptions. File in personnel folder. Photograph as backup.</span>
+</div>
+<a class="material-link" href="printable-materials.html#d1-13"><div class="material-card" data-type="collect">
+<div class="mat-index">14</div>
+<div class="mat-body">
+<div class="mat-id">D1-13 · Policy · Acknowledgment Form — COLLECT SIGNED</div>
+<div class="mat-title">Conduct Acknowledgment Form</div>
+<div class="mat-desc">Checkbox acknowledgment for: attendance policy, call-out procedure, device standards, fraternization policy, confidentiality, social media policy. Agent signature + date. Facilitator signature + date. Goes into personnel file.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-collect">⚠️ Collect Signed</span>
+<div class="mat-when"><strong>Module 6 end — BEFORE agents leave</strong>Walk through every checkbox. Allow 5 min to read and sign.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 7 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 7</div>
+<div class="module-name">Real-World Scenarios</div>
+<div class="module-count">3 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-14"><div class="material-card" data-type="print">
+<div class="mat-index">15</div>
+<div class="mat-body">
+<div class="mat-id">D1-14 · De-Escalation · Decision Framework</div>
+<div class="mat-title">Escalation Decision Tree</div>
+<div class="mat-desc">Visual flowchart: can I resolve this within my role? → Yes: resolve and document → No: escalate to supervisor → Always: log the full interaction. Covers four escalation paths: resident complaint, unauthorized access, safety concern, conduct violation.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 7 start</strong>Agents reference during all six scenario drills.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-15"><div class="material-card" data-type="laminated">
+<div class="mat-index">16</div>
+<div class="mat-body">
+<div class="mat-id">D1-15 · De-Escalation · Reference Card</div>
+<div class="mat-title">A.C.T. Method Reference Card</div>
+<div class="mat-desc">Acknowledge / Control / Transfer or Resolve. Each step defined with on-shift language examples. Back side: common failure points per step. Laminated — agents carry into the field.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-laminated">🔖 Laminated</span>
+<div class="mat-when"><strong>Module 7 — after scenarios</strong>Introduce A.C.T. retroactively. Agents carry this.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-16"><div class="material-card" data-type="print">
+<div class="mat-index">17</div>
+<div class="mat-body">
+<div class="mat-id">D1-16 · De-Escalation · Framework Card</div>
+<div class="mat-title">Response Framework Card</div>
+<div class="mat-desc">Quick-reference for the A.C.T. application: what to say in each phase, how to manage the physical environment, when to escalate vs. resolve. Used during scenario debriefs.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 7 start</strong>Agents reference during all six scenario drills alongside the Escalation Decision Tree.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 8 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 8</div>
+<div class="module-name">Systems Overview</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-17"><div class="material-card" data-type="laminated">
+<div class="mat-index">18</div>
+<div class="mat-body">
+<div class="mat-id">D1-17 · Systems · Reference Card</div>
+<div class="mat-title">Systems Quick-Reference Card</div>
+<div class="mat-desc">Three-column card: Connecteam (scheduling, time clock, announcements, shift swaps), Paylocity (payroll, onboarding docs, PTO, W-2), Yardi (resident lookup, work orders, package tracking). Laminated for daily desk use.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-laminated">🔖 Laminated</span>
+<div class="mat-when"><strong>Module 8 start</strong>Tell agents: "Keep this at the desk or in your bag."</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-18"><div class="material-card" data-type="print">
+<div class="mat-index">19</div>
+<div class="mat-body">
+<div class="mat-id">D1-18 · Systems · Activity Card</div>
+<div class="mat-title">Systems Quick-Check Card</div>
+<div class="mat-desc">Eight tasks with a blank "SYSTEM" column for agents to fill in. Used for the Module 8 self-scoring activity. Answer key in footer of the projected slide. 3-minute individual, then group debrief.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 8D activity</strong>3 min individual, self-score, group debrief.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 9 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 9</div>
+<div class="module-name">Leadership Introduction &amp; Closing</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d1-19"><div class="material-card" data-type="print">
+<div class="mat-index">20</div>
+<div class="mat-body">
+<div class="mat-id">D1-19 · Launch · Overview Document</div>
+<div class="mat-title">90-Day Expectation Overview</div>
+<div class="mat-desc">Phase-by-phase overview: Days 1–3 (Shadow), Days 4–7 (Supported), Week 2 (Solo + Check-Ins), Weeks 3–4 (Full Operation), Day 30 (Formal Review), Day 90 (Full Evaluation). Excellence Academy eligibility criteria.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 9 start</strong>Agent keeps throughout program and into first 90 days.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d1-20"><div class="material-card" data-type="collect">
+<div class="mat-index">21</div>
+<div class="mat-body">
+<div class="mat-id">D1-20 · Launch · Commitment Card — PHOTOGRAPH</div>
+<div class="mat-title">Day 1 Commitment Card</div>
+<div class="mat-desc">Three prompts: the standard I commit to holding every shift / the area I need to focus on developing / my goal by the 90-day mark. Signature and date line. Agent keeps original. Facilitator photographs before agents leave.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-collect">📷 Photograph</span>
+<div class="mat-when"><strong>Module 9 close</strong>8 min silence to write. Agent keeps card. You photograph all cards.</div>
+</div>
+</div></a>
+</div>
+</div>
 <!-- ═══════════════════════════════════════════════════════ DAY 2 ═══ -->
-<div id="day2" class="page-break">
-  <div class="day-header">
-    <div class="day-num">2</div>
-    <div class="day-info">
-      <div class="day-label">Day Two</div>
-      <div class="day-title">Operations in Depth</div>
-      <div class="day-sub">Package Handling · Incident Reporting · Emergency Response · Floor Scenarios · Shift Log Practicum</div>
-    </div>
-    <div class="day-meta">
-      <div class="day-badge badge-count">8 Materials</div>
-    </div>
-  </div>
-
-  <!-- MODULE 1 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 1</div>
-      <div class="module-name">Package Handling & Delivery Protocols</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">22</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-01 · Package Protocols · Protocol Table</div>
-        <div class="mat-title">Package Category Protocol Table</div>
-        <div class="mat-desc">Five-row table: Standard Package, Food Delivery, Grocery Delivery, High-Value Item, Outgoing/RTS. Each row: intake protocol, storage location, notification method, time window, prohibited practices. Reference during the category walk-through.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 1 start</strong>Walk row by row. Test before revealing each protocol.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="laminated">
-      <div class="mat-index">23</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-02 · Package Protocols · Quick-Reference</div>
-        <div class="mat-title">Package Handling Quick-Reference Card</div>
-        <div class="mat-desc">Condensed version of the five-category protocol for posting in the package room. Intake sequence (Confirm → Log → Label → Notify), perishable windows (24hr food / 48hr grocery), release verification steps, RTS procedure. Laminated for package room posting.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-laminated">🔖 Laminated</span>
-        <div class="mat-when"><strong>Module 1</strong>Tell agents: "This lives in the package room." For the desk area, the Systems card covers daily package logging.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 2 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 2</div>
-      <div class="module-name">Incident Report Documentation</div>
-      <div class="module-count">2 materials</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">24</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-03 · Incident Protocols · Field Guide</div>
-        <div class="mat-title">Incident Report Field Guide</div>
-        <div class="mat-desc">When to file (7 trigger situations), required fields, factual language standard with side-by-side "Never Write This / Write This Instead" examples, escalation protocol after filing. Reference during the documentation drill.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 2 start</strong>Walk through the trigger situations first. Then distribute blank forms.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="form">
-      <div class="mat-index">25</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-04 · Incident Protocols · Blank Forms × 3</div>
-        <div class="mat-title">Blank Incident Report Forms</div>
-        <div class="mat-desc">Three blank forms per agent for the Module 2 documentation drill. Three scenarios provided verbally by facilitator. Agents complete individually. Peer review follows for: factual language, complete fields, neutral tone, action documentation.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-form">📝 × 3 Forms</span>
-        <div class="mat-when"><strong>Module 2 documentation drill</strong>3 per agent. Individual completion then peer review.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 3 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 3</div>
-      <div class="module-name">Emergency Response Protocols</div>
-      <div class="module-count">1 material</div>
-    </div>
-
-    <div class="material-card" data-type="laminated">
-      <div class="mat-index">26</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-05 · Emergency · Reference Card</div>
-        <div class="mat-title">Emergency Response Reference Card</div>
-        <div class="mat-desc">Three-protocol card: Fire (6 steps), Medical (6 steps), Security (6 steps). Each step numbered and action-specific. Back side: first call for each emergency type, documentation requirements, who meets emergency services at entry. Laminated for desk posting.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-laminated">🔖 Laminated</span>
-        <div class="mat-when"><strong>Module 3</strong>After distributing, run the verbal quick-drill: first three steps for each emergency type without looking at the card.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLOOR BLOCK -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag floor">Floor Block</div>
-      <div class="module-name">Advanced Scenario Drills — On Site</div>
-      <div class="module-count">No printed materials — live drills</div>
-    </div>
-    <div style="padding:14px 18px;background:var(--cream);border-left:4px solid var(--green);font-size:13px;color:var(--gray);margin-bottom:16px">
+<div class="page-break" id="day2">
+<div class="day-header">
+<div class="day-num">2</div>
+<div class="day-info">
+<div class="day-label">Day Two</div>
+<div class="day-title">Operations in Depth</div>
+<div class="day-sub">Package Handling · Incident Reporting · Emergency Response · Floor Scenarios · Shift Log Practicum</div>
+</div>
+<div class="day-meta">
+<div class="day-badge badge-count">8 Materials</div>
+</div>
+</div>
+<!-- MODULE 1 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 1</div>
+<div class="module-name">Package Handling &amp; Delivery Protocols</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d2-01"><div class="material-card" data-type="print">
+<div class="mat-index">22</div>
+<div class="mat-body">
+<div class="mat-id">D2-01 · Package Protocols · Protocol Table</div>
+<div class="mat-title">Package Category Protocol Table</div>
+<div class="mat-desc">Five-row table: Standard Package, Food Delivery, Grocery Delivery, High-Value Item, Outgoing/RTS. Each row: intake protocol, storage location, notification method, time window, prohibited practices. Reference during the category walk-through.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 1 start</strong>Walk row by row. Test before revealing each protocol.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d2-02"><div class="material-card" data-type="laminated">
+<div class="mat-index">23</div>
+<div class="mat-body">
+<div class="mat-id">D2-02 · Package Protocols · Quick-Reference</div>
+<div class="mat-title">Package Handling Quick-Reference Card</div>
+<div class="mat-desc">Condensed version of the five-category protocol for posting in the package room. Intake sequence (Confirm → Log → Label → Notify), perishable windows (24hr food / 48hr grocery), release verification steps, RTS procedure. Laminated for package room posting.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-laminated">🔖 Laminated</span>
+<div class="mat-when"><strong>Module 1</strong>Tell agents: "This lives in the package room." For the desk area, the Systems card covers daily package logging.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 2 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 2</div>
+<div class="module-name">Incident Report Documentation</div>
+<div class="module-count">2 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d2-03"><div class="material-card" data-type="print">
+<div class="mat-index">24</div>
+<div class="mat-body">
+<div class="mat-id">D2-03 · Incident Protocols · Field Guide</div>
+<div class="mat-title">Incident Report Field Guide</div>
+<div class="mat-desc">When to file (7 trigger situations), required fields, factual language standard with side-by-side "Never Write This / Write This Instead" examples, escalation protocol after filing. Reference during the documentation drill.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 2 start</strong>Walk through the trigger situations first. Then distribute blank forms.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d2-04"><div class="material-card" data-type="form">
+<div class="mat-index">25</div>
+<div class="mat-body">
+<div class="mat-id">D2-04 · Incident Protocols · Blank Forms × 3</div>
+<div class="mat-title">Blank Incident Report Forms</div>
+<div class="mat-desc">Three blank forms per agent for the Module 2 documentation drill. Three scenarios provided verbally by facilitator. Agents complete individually. Peer review follows for: factual language, complete fields, neutral tone, action documentation.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-form">📝 × 3 Forms</span>
+<div class="mat-when"><strong>Module 2 documentation drill</strong>3 per agent. Individual completion then peer review.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 3 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 3</div>
+<div class="module-name">Emergency Response Protocols</div>
+<div class="module-count">1 material</div>
+</div>
+<a class="material-link" href="printable-materials.html#d2-05"><div class="material-card" data-type="laminated">
+<div class="mat-index">26</div>
+<div class="mat-body">
+<div class="mat-id">D2-05 · Emergency · Reference Card</div>
+<div class="mat-title">Emergency Response Reference Card</div>
+<div class="mat-desc">Three-protocol card: Fire (6 steps), Medical (6 steps), Security (6 steps). Each step numbered and action-specific. Back side: first call for each emergency type, documentation requirements, who meets emergency services at entry. Laminated for desk posting.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-laminated">🔖 Laminated</span>
+<div class="mat-when"><strong>Module 3</strong>After distributing, run the verbal quick-drill: first three steps for each emergency type without looking at the card.</div>
+</div>
+</div></a>
+</div>
+<!-- FLOOR BLOCK -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag floor">Floor Block</div>
+<div class="module-name">Advanced Scenario Drills — On Site</div>
+<div class="module-count">No printed materials — live drills</div>
+</div>
+<div style="padding:14px 18px;background:var(--cream);border-left:4px solid var(--green);font-size:13px;color:var(--gray);margin-bottom:16px">
       This block runs live on property. No handouts required. Facilitator introduces scenarios verbally. Agents respond at actual property locations: desk, package room, lobby, amenity space.
     </div>
-  </div>
-
-  <!-- MODULE 4 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 4</div>
-      <div class="module-name">Shift Log Practicum</div>
-      <div class="module-count">3 materials</div>
-    </div>
-
-    <div class="material-card" data-type="form">
-      <div class="mat-index">27</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-06 · Operations · Log Templates × 3</div>
-        <div class="mat-title">Blank Shift Log Templates</div>
-        <div class="mat-desc">Three blank shift log templates for the Day 2 timed individual assessment. Each template includes: time field, E (Event), D (Detail), O (Outcome) prompts, and language standard reminder at top. Three scenarios read aloud by facilitator; agents write independently.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-form">📝 × 3 Templates</span>
-        <div class="mat-when"><strong>Module 4 practicum start</strong>40 minutes individual. No assistance. Collect all before agents leave.</div>
-      </div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">28</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-07 · Operations · Scoring Rubric (Second Copy)</div>
-        <div class="mat-title">E.D.O. Scoring Rubric — Practicum Copy</div>
-        <div class="mat-desc">Second copy of the E.D.O. scoring rubric (same as D1-11) distributed for peer scoring after the Day 2 practicum. Agents swap papers, score against the rubric, then facilitator walks through the model entry for each scenario.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 4 — after 40 min individual write</strong>For peer scoring. Facilitator then reviews model entries.</div>
-      </div>
-    </div>
-
-    <div class="collect-row">
-      <span style="font-size:16px">⚠️</span>
-      <span class="collect-row-text">Collect all shift log practicum forms before agents leave Day 2. Score and provide written feedback before Day 3 begins.</span>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">29</div>
-      <div class="mat-body">
-        <div class="mat-id">D2-08 · Protocols · Reference Sheet</div>
-        <div class="mat-title">Prohibited Practices Reference</div>
-        <div class="mat-desc">Consolidated list of prohibited actions across package handling, resident interactions, system use, log documentation, and site conduct. Cross-references the 2026 Handbook. Useful end-of-day review sheet for agents to take home.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Day 2 close</strong>Distribute as a take-home review reference before Day 3.</div>
-      </div>
-    </div>
-  </div>
 </div>
-
+<!-- MODULE 4 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 4</div>
+<div class="module-name">Shift Log Practicum</div>
+<div class="module-count">3 materials</div>
+</div>
+<a class="material-link" href="printable-materials.html#d2-06"><div class="material-card" data-type="form">
+<div class="mat-index">27</div>
+<div class="mat-body">
+<div class="mat-id">D2-06 · Operations · Log Templates × 3</div>
+<div class="mat-title">Blank Shift Log Templates</div>
+<div class="mat-desc">Three blank shift log templates for the Day 2 timed individual assessment. Each template includes: time field, E (Event), D (Detail), O (Outcome) prompts, and language standard reminder at top. Three scenarios read aloud by facilitator; agents write independently.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-form">📝 × 3 Templates</span>
+<div class="mat-when"><strong>Module 4 practicum start</strong>40 minutes individual. No assistance. Collect all before agents leave.</div>
+</div>
+</div></a>
+<a class="material-link" href="printable-materials.html#d2-07"><div class="material-card" data-type="print">
+<div class="mat-index">28</div>
+<div class="mat-body">
+<div class="mat-id">D2-07 · Operations · Scoring Rubric (Second Copy)</div>
+<div class="mat-title">E.D.O. Scoring Rubric — Practicum Copy</div>
+<div class="mat-desc">Second copy of the E.D.O. scoring rubric (same as D1-11) distributed for peer scoring after the Day 2 practicum. Agents swap papers, score against the rubric, then facilitator walks through the model entry for each scenario.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 4 — after 40 min individual write</strong>For peer scoring. Facilitator then reviews model entries.</div>
+</div>
+</div></a>
+<div class="collect-row">
+<span style="font-size:16px">⚠️</span>
+<span class="collect-row-text">Collect all shift log practicum forms before agents leave Day 2. Score and provide written feedback before Day 3 begins.</span>
+</div>
+<a class="material-link" href="printable-materials.html#d2-08"><div class="material-card" data-type="print">
+<div class="mat-index">29</div>
+<div class="mat-body">
+<div class="mat-id">D2-08 · Protocols · Reference Sheet</div>
+<div class="mat-title">Prohibited Practices Reference</div>
+<div class="mat-desc">Consolidated list of prohibited actions across package handling, resident interactions, system use, log documentation, and site conduct. Cross-references the 2026 Handbook. Useful end-of-day review sheet for agents to take home.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Day 2 close</strong>Distribute as a take-home review reference before Day 3.</div>
+</div>
+</div></a>
+</div>
+</div>
 <!-- ═══════════════════════════════════════════════════════ DAY 3 ═══ -->
-<div id="day3" class="page-break">
-  <div class="day-header">
-    <div class="day-num">3</div>
-    <div class="day-info">
-      <div class="day-label">Day Three</div>
-      <div class="day-title">Assessment, Launch & Handoff</div>
-      <div class="day-sub">Role Tracks · Site Walk · Capstone Scenarios · Standards Assessment · 30-Day Launch · Supervisor Handoff</div>
-    </div>
-    <div class="day-meta">
-      <div class="day-badge badge-count">6 Materials</div>
-    </div>
-  </div>
-
-  <!-- MODULE 1 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 1</div>
-      <div class="module-name">Role-Specific Tracks</div>
-      <div class="module-count">1 material</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">30</div>
-      <div class="mat-body">
-        <div class="mat-id">D3-01 · Roles · Job Description</div>
-        <div class="mat-title">Role-Specific Job Description</div>
-        <div class="mat-desc">Training edition job description for the agent's assigned role: Concierge Agent, Lead Concierge, Lobby Ambassador, or Package Admin. Covers core responsibilities, performance standards, and watch-outs. Distribute to each agent their own role only.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Module 1 start</strong>1 per agent — their role only. Not all four roles.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLOOR BLOCK 1 -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag floor">Floor Block</div>
-      <div class="module-name">Supervised Site Walk</div>
-      <div class="module-count">1 material</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">31</div>
-      <div class="mat-body">
-        <div class="mat-id">D3-02 · Operations · Site Map</div>
-        <div class="mat-title">Site Floor Plan — Annotated</div>
-        <div class="mat-desc">Property-specific annotated floor plan: entry/exit points, package room, amenity locations, emergency system locations (AED, fire pull stations, extinguishers), concierge desk, elevator banks, stairwell exits. Prepared by site supervisor before Day 3.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Before the site walk</strong>Site supervisor prepares and distributes. Agents bring on the walk and take notes on it.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 2 — ASSESSMENT -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 2</div>
-      <div class="module-name">Standards Assessment</div>
-      <div class="module-count">1 material</div>
-    </div>
-
-    <div class="collect-row">
-      <span style="font-size:16px">⚠️</span>
-      <span class="collect-row-text">Collect all assessment forms before the lunch break on Day 3. Score during Module 3 and return with written feedback before the program closes.</span>
-    </div>
-
-    <div class="material-card" data-type="collect">
-      <div class="mat-index">32</div>
-      <div class="mat-body">
-        <div class="mat-id">D3-03 · Assessment · Written Form — COLLECT</div>
-        <div class="mat-title">Standards Assessment Form — 10 Questions</div>
-        <div class="mat-desc">10-question written assessment covering all three days: H.O.M.E. Values, E.D.O. method (write a full entry), package categories, escalation protocol, A.C.T. application, attendance policy, system identification, emergency response. High-weight: Q2 (E.D.O. entry) and Q7 (A.C.T. scenario). Individual, 60 minutes, no reference materials.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-collect">⚠️ Collect Before Lunch</span>
-        <div class="mat-when"><strong>Module 2</strong>No assistance. Collect before lunch. Score and return with feedback before close.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 3 — 30-DAY LAUNCH -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag">Module 3</div>
-      <div class="module-name">30-Day Excellence Launch</div>
-      <div class="module-count">1 material</div>
-    </div>
-
-    <div class="material-card" data-type="form">
-      <div class="mat-index">33</div>
-      <div class="mat-body">
-        <div class="mat-id">D3-04 · Launch · Commitment Plan — SUBMITTED TO SUPERVISOR</div>
-        <div class="mat-title">30-Day Commitment Plan Form</div>
-        <div class="mat-desc">Four-prompt written plan: primary performance goal for first 30 days / specific actions to take every shift / area requiring most focused development / how agent will know they succeeded at 30-day review. Agent signature and date. Submitted to site supervisor at Module 6 handoff. Referenced at 30-day review.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-collect">📋 Submit to Supervisor</span>
-        <div class="mat-when"><strong>Module 3</strong>10 min silence to complete. Collected by facilitator and given to supervisor at Module 6.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODULE 6 — HANDOFF -->
-  <div class="module-section">
-    <div class="module-header">
-      <div class="module-tag handoff">Module 6 — Handoff</div>
-      <div class="module-name">Supervisor Handoff & Program Close</div>
-      <div class="module-count">2 materials — supervisor distributes</div>
-    </div>
-
-    <div class="material-card" data-type="print">
-      <div class="mat-index">34</div>
-      <div class="mat-body">
-        <div class="mat-id">D3-05 · Launch · Property Reference</div>
-        <div class="mat-title">Property Contact Sheet — Site-Specific</div>
-        <div class="mat-desc">Site-specific contact reference: on-call manager line, emergency contacts, property management contacts, maintenance emergency line, leasing office, key contacts. Prepared by site supervisor before Day 3. Distributed at program close.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-print">🖨 Print</span>
-        <div class="mat-when"><strong>Program close</strong>Supervisor distributes. Agent keeps throughout first 90 days.</div>
-      </div>
-    </div>
-
-    <div class="collect-row" style="border-left-color:var(--gold-dim);background:var(--amber-light)">
-      <span style="font-size:16px">📷</span>
-      <span class="collect-row-text" style="color:var(--amber)">Photograph all final commitment cards before agents leave. These are referenced at the 30-day review. Email photos to Khalif.</span>
-    </div>
-
-    <div class="material-card" data-type="collect">
-      <div class="mat-index">35</div>
-      <div class="mat-body">
-        <div class="mat-id">D3-06 · Launch · Final Commitment Card — PHOTOGRAPH</div>
-        <div class="mat-title">Final Commitment Card — Three-Day Program</div>
-        <div class="mat-desc">Three prompts: the Apex Standard I carry into every shift / the one thing I hold myself accountable for in the first 30 days / the professional I intend to be at Apex. Signature, date, note to "Bring this to your 30-day review." Agent keeps original — facilitator photographs before program closes.</div>
-      </div>
-      <div class="mat-right">
-        <span class="mat-type type-collect">📷 Photograph</span>
-        <div class="mat-when"><strong>Program close — 8 min silence</strong>Agent keeps card. You photograph all cards before dismissal.</div>
-      </div>
-    </div>
-  </div>
+<div class="page-break" id="day3">
+<div class="day-header">
+<div class="day-num">3</div>
+<div class="day-info">
+<div class="day-label">Day Three</div>
+<div class="day-title">Assessment, Launch &amp; Handoff</div>
+<div class="day-sub">Role Tracks · Site Walk · Capstone Scenarios · Standards Assessment · 30-Day Launch · Supervisor Handoff</div>
 </div>
-
+<div class="day-meta">
+<div class="day-badge badge-count">6 Materials</div>
+</div>
+</div>
+<!-- MODULE 1 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 1</div>
+<div class="module-name">Role-Specific Tracks</div>
+<div class="module-count">1 material</div>
+</div>
+<a class="material-link" href="printable-materials.html#d3-01"><div class="material-card" data-type="print">
+<div class="mat-index">30</div>
+<div class="mat-body">
+<div class="mat-id">D3-01 · Roles · Job Description</div>
+<div class="mat-title">Role-Specific Job Description</div>
+<div class="mat-desc">Training edition job description for the agent's assigned role: Concierge Agent, Lead Concierge, Lobby Ambassador, or Package Admin. Covers core responsibilities, performance standards, and watch-outs. Distribute to each agent their own role only.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Module 1 start</strong>1 per agent — their role only. Not all four roles.</div>
+</div>
+</div></a>
+</div>
+<!-- FLOOR BLOCK 1 -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag floor">Floor Block</div>
+<div class="module-name">Supervised Site Walk</div>
+<div class="module-count">1 material</div>
+</div>
+<a class="material-link" href="printable-materials.html#d3-02"><div class="material-card" data-type="print">
+<div class="mat-index">31</div>
+<div class="mat-body">
+<div class="mat-id">D3-02 · Operations · Site Map</div>
+<div class="mat-title">Site Floor Plan — Annotated</div>
+<div class="mat-desc">Property-specific annotated floor plan: entry/exit points, package room, amenity locations, emergency system locations (AED, fire pull stations, extinguishers), concierge desk, elevator banks, stairwell exits. Prepared by site supervisor before Day 3.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Before the site walk</strong>Site supervisor prepares and distributes. Agents bring on the walk and take notes on it.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 2 — ASSESSMENT -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 2</div>
+<div class="module-name">Standards Assessment</div>
+<div class="module-count">1 material</div>
+</div>
+<div class="collect-row">
+<span style="font-size:16px">⚠️</span>
+<span class="collect-row-text">Collect all assessment forms before the lunch break on Day 3. Score during Module 3 and return with written feedback before the program closes.</span>
+</div>
+<a class="material-link" href="printable-materials.html#d3-03"><div class="material-card" data-type="collect">
+<div class="mat-index">32</div>
+<div class="mat-body">
+<div class="mat-id">D3-03 · Assessment · Written Form — COLLECT</div>
+<div class="mat-title">Standards Assessment Form — 10 Questions</div>
+<div class="mat-desc">10-question written assessment covering all three days: H.O.M.E. Values, E.D.O. method (write a full entry), package categories, escalation protocol, A.C.T. application, attendance policy, system identification, emergency response. High-weight: Q2 (E.D.O. entry) and Q7 (A.C.T. scenario). Individual, 60 minutes, no reference materials.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-collect">⚠️ Collect Before Lunch</span>
+<div class="mat-when"><strong>Module 2</strong>No assistance. Collect before lunch. Score and return with feedback before close.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 3 — 30-DAY LAUNCH -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag">Module 3</div>
+<div class="module-name">30-Day Excellence Launch</div>
+<div class="module-count">1 material</div>
+</div>
+<a class="material-link" href="printable-materials.html#d3-04"><div class="material-card" data-type="form">
+<div class="mat-index">33</div>
+<div class="mat-body">
+<div class="mat-id">D3-04 · Launch · Commitment Plan — SUBMITTED TO SUPERVISOR</div>
+<div class="mat-title">30-Day Commitment Plan Form</div>
+<div class="mat-desc">Four-prompt written plan: primary performance goal for first 30 days / specific actions to take every shift / area requiring most focused development / how agent will know they succeeded at 30-day review. Agent signature and date. Submitted to site supervisor at Module 6 handoff. Referenced at 30-day review.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-collect">📋 Submit to Supervisor</span>
+<div class="mat-when"><strong>Module 3</strong>10 min silence to complete. Collected by facilitator and given to supervisor at Module 6.</div>
+</div>
+</div></a>
+</div>
+<!-- MODULE 6 — HANDOFF -->
+<div class="module-section">
+<div class="module-header">
+<div class="module-tag handoff">Module 6 — Handoff</div>
+<div class="module-name">Supervisor Handoff &amp; Program Close</div>
+<div class="module-count">2 materials — supervisor distributes</div>
+</div>
+<a class="material-link" href="printable-materials.html#d3-05"><div class="material-card" data-type="print">
+<div class="mat-index">34</div>
+<div class="mat-body">
+<div class="mat-id">D3-05 · Launch · Property Reference</div>
+<div class="mat-title">Property Contact Sheet — Site-Specific</div>
+<div class="mat-desc">Site-specific contact reference: on-call manager line, emergency contacts, property management contacts, maintenance emergency line, leasing office, key contacts. Prepared by site supervisor before Day 3. Distributed at program close.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-print">🖨 Print</span>
+<div class="mat-when"><strong>Program close</strong>Supervisor distributes. Agent keeps throughout first 90 days.</div>
+</div>
+</div></a>
+<div class="collect-row" style="border-left-color:var(--gold-dim);background:var(--amber-light)">
+<span style="font-size:16px">📷</span>
+<span class="collect-row-text" style="color:var(--amber)">Photograph all final commitment cards before agents leave. These are referenced at the 30-day review. Email photos to Khalif.</span>
+</div>
+<a class="material-link" href="printable-materials.html#d3-06"><div class="material-card" data-type="collect">
+<div class="mat-index">35</div>
+<div class="mat-body">
+<div class="mat-id">D3-06 · Launch · Final Commitment Card — PHOTOGRAPH</div>
+<div class="mat-title">Final Commitment Card — Three-Day Program</div>
+<div class="mat-desc">Three prompts: the Apex Standard I carry into every shift / the one thing I hold myself accountable for in the first 30 days / the professional I intend to be at Apex. Signature, date, note to "Bring this to your 30-day review." Agent keeps original — facilitator photographs before program closes.</div>
+</div>
+<div class="mat-right">
+<span class="mat-type type-collect">📷 Photograph</span>
+<div class="mat-when"><strong>Program close — 8 min silence</strong>Agent keeps card. You photograph all cards before dismissal.</div>
+</div>
+</div></a>
+</div>
+</div>
 <!-- ═══════════════════════════════════════════════════════ SUMMARY ═══ -->
-<div id="summary" class="page-break">
-  <div class="day-header">
-    <div class="day-num">∑</div>
-    <div class="day-info">
-      <div class="day-label">Quick Reference</div>
-      <div class="day-title">Full Distribution Schedule</div>
-      <div class="day-sub">Every material, in order, with distribution trigger and action required</div>
-    </div>
-  </div>
-
-  <div class="spacer"></div>
-
-  <table class="summary-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Material</th>
-        <th>When to Distribute</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td colspan="4" style="background:var(--navy);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 14px">DAY 1</td></tr>
-      <tr><td>1</td><td>H.O.M.E. Values Reference Card</td><td>Pre-staged at every seat before agents arrive</td><td>Agent keeps</td></tr>
-      <tr><td>2</td><td>Apex Standard One-Pager</td><td>Module 1 start</td><td>Agent keeps</td></tr>
-      <tr><td>3</td><td>Luxury Service Mindset Card</td><td>Module 1 — Luxury Mindset slide</td><td>Agent keeps</td></tr>
-      <tr><td>4</td><td>Module 1 Reflection Card</td><td>Module 1 reflection prompt</td><td>Agent keeps</td></tr>
-      <tr><td>5</td><td>Friendly ≠ Familiar Reference Card</td><td>Module 3 — before paired discussion</td><td>Agent keeps</td></tr>
-      <tr><td>6</td><td>Presence Checklist — 10-Point</td><td>Module 3 — paired self-assessment activity</td><td>Agent keeps</td></tr>
-      <tr><td>7</td><td>Shift Expectations One-Pager</td><td>Module 4 start</td><td>Agent keeps</td></tr>
-      <tr><td>8</td><td>Site Tour Template</td><td>Module 4 — tour practice exercise</td><td>Agent completes</td></tr>
-      <tr><td>9</td><td>E.D.O. Reference Card (laminated)</td><td>Module 5 start</td><td>Agent keeps — carry on person</td></tr>
-      <tr><td>10</td><td>Shift Log Non-Negotiables</td><td>Module 5D</td><td>Agent keeps</td></tr>
-      <tr><td>11</td><td>Strong vs. Weak Log Entry Sheet</td><td>Module 5E comparison exercise</td><td>Agent keeps</td></tr>
-      <tr><td>12</td><td>E.D.O. Scoring Rubric</td><td>Module 5F writing drill — peer scoring</td><td>Agent keeps</td></tr>
-      <tr><td>13</td><td>Attendance & Conduct Policy Handout</td><td>Module 6 start</td><td>Agent keeps</td></tr>
-      <tr><td style="color:var(--red);font-weight:700">14</td><td style="color:var(--red);font-weight:700">Conduct Acknowledgment Form ⚠️</td><td>Module 6 end</td><td style="color:var(--red);font-weight:700">COLLECT SIGNED before agents leave</td></tr>
-      <tr><td>15</td><td>Escalation Decision Tree</td><td>Module 7 start</td><td>Agent keeps</td></tr>
-      <tr><td>16</td><td>A.C.T. Reference Card (laminated)</td><td>Module 7 — after scenarios</td><td>Agent keeps — carry on person</td></tr>
-      <tr><td>17</td><td>Response Framework Card</td><td>Module 7 start</td><td>Agent keeps</td></tr>
-      <tr><td>18</td><td>Systems Quick-Reference Card (laminated)</td><td>Module 8 start</td><td>Agent keeps — desk or bag</td></tr>
-      <tr><td>19</td><td>Systems Quick-Check Card</td><td>Module 8D activity</td><td>Agent completes / self-scores</td></tr>
-      <tr><td>20</td><td>90-Day Expectation Overview</td><td>Module 9 start</td><td>Agent keeps through Day 90</td></tr>
-      <tr><td style="color:var(--amber);font-weight:700">21</td><td style="color:var(--amber);font-weight:700">Day 1 Commitment Card 📷</td><td>Module 9 close — 8 min silence</td><td style="color:var(--amber);font-weight:700">Agent keeps. Facilitator photographs all.</td></tr>
-      <tr><td colspan="4" style="background:var(--navy);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 14px">DAY 2</td></tr>
-      <tr><td>22</td><td>Package Category Protocol Table</td><td>Module 1 start</td><td>Agent keeps</td></tr>
-      <tr><td>23</td><td>Package Handling Quick-Reference (laminated)</td><td>Module 1</td><td>Posted in package room</td></tr>
-      <tr><td>24</td><td>Incident Report Field Guide</td><td>Module 2 start</td><td>Agent keeps</td></tr>
-      <tr><td>25</td><td>Blank Incident Report Forms × 3</td><td>Module 2 documentation drill</td><td>Agent completes / peer reviews</td></tr>
-      <tr><td>26</td><td>Emergency Response Reference Card (laminated)</td><td>Module 3</td><td>Agent keeps — desk posting</td></tr>
-      <tr><td>27</td><td>Blank Shift Log Templates × 3</td><td>Module 4 practicum start</td><td>Agent completes — facilitator collects</td></tr>
-      <tr><td>28</td><td>E.D.O. Scoring Rubric — Practicum Copy</td><td>Module 4 — after 40 min write</td><td>Peer scoring</td></tr>
-      <tr><td>29</td><td>Prohibited Practices Reference</td><td>Day 2 close</td><td>Agent keeps — take home review</td></tr>
-      <tr><td colspan="4" style="background:var(--navy);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 14px">DAY 3</td></tr>
-      <tr><td>30</td><td>Role-Specific Job Description</td><td>Module 1 start — their role only</td><td>Agent keeps</td></tr>
-      <tr><td>31</td><td>Site Floor Plan — Annotated</td><td>Before site walk — supervisor prepares</td><td>Agent takes notes on it during walk</td></tr>
-      <tr><td style="color:var(--red);font-weight:700">32</td><td style="color:var(--red);font-weight:700">Standards Assessment Form ⚠️</td><td>Module 2</td><td style="color:var(--red);font-weight:700">COLLECT before lunch. Return scored before close.</td></tr>
-      <tr><td>33</td><td>30-Day Commitment Plan Form</td><td>Module 3 — 10 min silence</td><td>Submit to supervisor at Module 6</td></tr>
-      <tr><td>34</td><td>Property Contact Sheet</td><td>Program close — supervisor distributes</td><td>Agent keeps through Day 90</td></tr>
-      <tr><td style="color:var(--amber);font-weight:700">35</td><td style="color:var(--amber);font-weight:700">Final Commitment Card 📷</td><td>Program close — 8 min silence</td><td style="color:var(--amber);font-weight:700">Agent keeps. Facilitator photographs all.</td></tr>
-    </tbody>
-  </table>
-
-  <div style="background:var(--cream);border-left:4px solid var(--gold);padding:16px 20px;margin-top:24px">
-    <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px">Post-Program — Within 24 Hours of Day 3 Close</div>
-    <div style="font-size:13px;color:var(--charcoal);line-height:1.7">
-      □ All Conduct Acknowledgment Forms filed in personnel folder<br>
-      □ All commitment card photos sent to Khalif<br>
-      □ Assessment scores summary emailed to Khalif<br>
-      □ Any agent flags or remediation notes documented<br>
-      □ Supervisor handoff notes sent to site supervisor<br>
+<div class="page-break" id="summary">
+<div class="day-header">
+<div class="day-num">∑</div>
+<div class="day-info">
+<div class="day-label">Quick Reference</div>
+<div class="day-title">Full Distribution Schedule</div>
+<div class="day-sub">Every material, in order, with distribution trigger and action required</div>
+</div>
+</div>
+<div class="spacer"></div>
+<table class="summary-table">
+<thead>
+<tr>
+<th>#</th>
+<th>Material</th>
+<th>When to Distribute</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr><td colspan="4" style="background:var(--navy);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 14px">DAY 1</td></tr>
+<tr><td>1</td><td>H.O.M.E. Values Reference Card</td><td>Pre-staged at every seat before agents arrive</td><td>Agent keeps</td></tr>
+<tr><td>2</td><td>Apex Standard One-Pager</td><td>Module 1 start</td><td>Agent keeps</td></tr>
+<tr><td>3</td><td>Luxury Service Mindset Card</td><td>Module 1 — Luxury Mindset slide</td><td>Agent keeps</td></tr>
+<tr><td>4</td><td>Module 1 Reflection Card</td><td>Module 1 reflection prompt</td><td>Agent keeps</td></tr>
+<tr><td>5</td><td>Friendly ≠ Familiar Reference Card</td><td>Module 3 — before paired discussion</td><td>Agent keeps</td></tr>
+<tr><td>6</td><td>Presence Checklist — 10-Point</td><td>Module 3 — paired self-assessment activity</td><td>Agent keeps</td></tr>
+<tr><td>7</td><td>Shift Expectations One-Pager</td><td>Module 4 start</td><td>Agent keeps</td></tr>
+<tr><td>8</td><td>Site Tour Template</td><td>Module 4 — tour practice exercise</td><td>Agent completes</td></tr>
+<tr><td>9</td><td>E.D.O. Reference Card (laminated)</td><td>Module 5 start</td><td>Agent keeps — carry on person</td></tr>
+<tr><td>10</td><td>Shift Log Non-Negotiables</td><td>Module 5D</td><td>Agent keeps</td></tr>
+<tr><td>11</td><td>Strong vs. Weak Log Entry Sheet</td><td>Module 5E comparison exercise</td><td>Agent keeps</td></tr>
+<tr><td>12</td><td>E.D.O. Scoring Rubric</td><td>Module 5F writing drill — peer scoring</td><td>Agent keeps</td></tr>
+<tr><td>13</td><td>Attendance &amp; Conduct Policy Handout</td><td>Module 6 start</td><td>Agent keeps</td></tr>
+<tr><td style="color:var(--red);font-weight:700">14</td><td style="color:var(--red);font-weight:700">Conduct Acknowledgment Form ⚠️</td><td>Module 6 end</td><td style="color:var(--red);font-weight:700">COLLECT SIGNED before agents leave</td></tr>
+<tr><td>15</td><td>Escalation Decision Tree</td><td>Module 7 start</td><td>Agent keeps</td></tr>
+<tr><td>16</td><td>A.C.T. Reference Card (laminated)</td><td>Module 7 — after scenarios</td><td>Agent keeps — carry on person</td></tr>
+<tr><td>17</td><td>Response Framework Card</td><td>Module 7 start</td><td>Agent keeps</td></tr>
+<tr><td>18</td><td>Systems Quick-Reference Card (laminated)</td><td>Module 8 start</td><td>Agent keeps — desk or bag</td></tr>
+<tr><td>19</td><td>Systems Quick-Check Card</td><td>Module 8D activity</td><td>Agent completes / self-scores</td></tr>
+<tr><td>20</td><td>90-Day Expectation Overview</td><td>Module 9 start</td><td>Agent keeps through Day 90</td></tr>
+<tr><td style="color:var(--amber);font-weight:700">21</td><td style="color:var(--amber);font-weight:700">Day 1 Commitment Card 📷</td><td>Module 9 close — 8 min silence</td><td style="color:var(--amber);font-weight:700">Agent keeps. Facilitator photographs all.</td></tr>
+<tr><td colspan="4" style="background:var(--navy);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 14px">DAY 2</td></tr>
+<tr><td>22</td><td>Package Category Protocol Table</td><td>Module 1 start</td><td>Agent keeps</td></tr>
+<tr><td>23</td><td>Package Handling Quick-Reference (laminated)</td><td>Module 1</td><td>Posted in package room</td></tr>
+<tr><td>24</td><td>Incident Report Field Guide</td><td>Module 2 start</td><td>Agent keeps</td></tr>
+<tr><td>25</td><td>Blank Incident Report Forms × 3</td><td>Module 2 documentation drill</td><td>Agent completes / peer reviews</td></tr>
+<tr><td>26</td><td>Emergency Response Reference Card (laminated)</td><td>Module 3</td><td>Agent keeps — desk posting</td></tr>
+<tr><td>27</td><td>Blank Shift Log Templates × 3</td><td>Module 4 practicum start</td><td>Agent completes — facilitator collects</td></tr>
+<tr><td>28</td><td>E.D.O. Scoring Rubric — Practicum Copy</td><td>Module 4 — after 40 min write</td><td>Peer scoring</td></tr>
+<tr><td>29</td><td>Prohibited Practices Reference</td><td>Day 2 close</td><td>Agent keeps — take home review</td></tr>
+<tr><td colspan="4" style="background:var(--navy);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 14px">DAY 3</td></tr>
+<tr><td>30</td><td>Role-Specific Job Description</td><td>Module 1 start — their role only</td><td>Agent keeps</td></tr>
+<tr><td>31</td><td>Site Floor Plan — Annotated</td><td>Before site walk — supervisor prepares</td><td>Agent takes notes on it during walk</td></tr>
+<tr><td style="color:var(--red);font-weight:700">32</td><td style="color:var(--red);font-weight:700">Standards Assessment Form ⚠️</td><td>Module 2</td><td style="color:var(--red);font-weight:700">COLLECT before lunch. Return scored before close.</td></tr>
+<tr><td>33</td><td>30-Day Commitment Plan Form</td><td>Module 3 — 10 min silence</td><td>Submit to supervisor at Module 6</td></tr>
+<tr><td>34</td><td>Property Contact Sheet</td><td>Program close — supervisor distributes</td><td>Agent keeps through Day 90</td></tr>
+<tr><td style="color:var(--amber);font-weight:700">35</td><td style="color:var(--amber);font-weight:700">Final Commitment Card 📷</td><td>Program close — 8 min silence</td><td style="color:var(--amber);font-weight:700">Agent keeps. Facilitator photographs all.</td></tr>
+</tbody>
+</table>
+<div style="background:var(--cream);border-left:4px solid var(--gold);padding:16px 20px;margin-top:24px">
+<div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px">Post-Program — Within 24 Hours of Day 3 Close</div>
+<div style="font-size:13px;color:var(--charcoal);line-height:1.7">
+      □ All Conduct Acknowledgment Forms filed in personnel folder<br/>
+      □ All commitment card photos sent to Khalif<br/>
+      □ Assessment scores summary emailed to Khalif<br/>
+      □ Any agent flags or remediation notes documented<br/>
+      □ Supervisor handoff notes sent to site supervisor<br/>
       □ 30-Day Commitment Plans confirmed received by supervisor
     </div>
-  </div>
 </div>
-
+</div>
 </div><!-- /wrapper -->
-
 <script>
 // Smooth scroll for nav tabs
 document.querySelectorAll('.nav-tab[href^="#"]').forEach(tab => {
