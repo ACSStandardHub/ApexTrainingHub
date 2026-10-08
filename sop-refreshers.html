@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SOP Refresher Modules · Apex Training &amp; Development Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;--navy-light:#1e3566;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E2DDD4;--white:#FFFFFF;--charcoal:#1A1A2E;--gray:#6B6B6B;
+  --green:#1A5C2A;--green-light:#DDF3E4;--red:#6B1A1A;--red-light:#FBEBEB;--amber:#7A5A0A;--amber-light:#FEF3DC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--white);min-height:100vh;overflow-x:hidden;line-height:1.5}
+button,input,textarea,select{font:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* HEADER */
+.site-header{position:relative;background:var(--navy-dark);padding:26px 48px 0;border-bottom:1px solid rgba(201,168,76,.15);overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% -10%,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
+.header-inner{position:relative;z-index:1;max-width:1000px;margin:0 auto}
+.back{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--gold);text-decoration:none;margin-bottom:22px;opacity:.85}
+.back:hover{opacity:1;text-decoration:underline}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.75;margin-bottom:12px}
+.site-title{font-family:'EB Garamond',serif;font-size:clamp(32px,5vw,50px);font-weight:400;line-height:1.08;color:var(--white);margin-bottom:10px}
+.site-title em{font-style:italic;color:var(--gold-light)}
+.site-subtitle{font-size:13.5px;font-weight:300;color:rgba(255,255,255,.5);max-width:620px;line-height:1.7;margin-bottom:16px}
+.hdr-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.hchip{font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid rgba(201,168,76,.3);color:var(--gold-light)}
+.hchip.green{background:rgba(26,92,42,.18);color:#4ade80;border-color:rgba(26,92,42,.4)}
+.tabs{display:flex;border-top:1px solid rgba(201,168,76,.1);margin:0 -48px;padding:0 48px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:13px 18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);cursor:pointer;border:0;border-bottom:2px solid transparent;background:none;white-space:nowrap;transition:color .2s}
+.tab:hover{color:rgba(255,255,255,.7)}
+.tab[aria-selected="true"]{color:var(--gold);border-bottom-color:var(--gold)}
+.tab .cnt{display:inline-block;margin-left:6px;font-size:9px;letter-spacing:.06em;color:rgba(255,255,255,.4)}
+.tab[aria-selected="true"] .cnt{color:var(--gold-light)}
+
+/* MAIN */
+.main{max-width:1096px;margin:0 auto;padding:36px 48px 80px}
+.panel{display:none}
+.panel.on{display:block}
+
+/* SHEETS */
+.sheet{background:var(--cream);color:var(--charcoal);border-top:4px solid var(--gold);border-radius:3px;box-shadow:0 20px 50px rgba(0,0,0,.35);overflow:hidden;margin-bottom:22px}
+.sheet-head{background:var(--navy);border-left:6px solid var(--gold);padding:20px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.kicker{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.sh-title{font-family:'EB Garamond',serif;font-size:27px;font-weight:600;color:#fff;line-height:1.15}
+.sh-sub{font-size:12.5px;color:rgba(255,255,255,.55);margin-top:5px}
+.sheet-body{padding:26px 28px 30px}
+.big-num{font-family:'EB Garamond',serif;font-size:58px;line-height:.9;color:rgba(201,168,76,.35)}
+.progress{display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:150px}
+.progress .lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.progress .val{font-family:'EB Garamond',serif;font-size:22px;color:var(--gold)}
+.pbar{width:150px;height:4px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+.pbar span{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+
+h3.mh{font-family:'EB Garamond',serif;font-size:21px;font-weight:600;color:var(--navy);margin:26px 0 10px;line-height:1.2}
+h3.mh:first-child{margin-top:0}
+.lbl-k{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dim);margin:22px 0 8px}
+p.lead{font-size:14.5px;line-height:1.7;margin-bottom:12px;max-width:72ch}
+p.lead strong{color:var(--navy)}
+.small{font-size:12.5px;color:var(--gray)}
+
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:20px;padding:4px 11px;white-space:nowrap;vertical-align:middle}
+.chip.pend{background:var(--amber-light);color:var(--amber);border:1px solid #d9b45a}
+.chip.zero{background:var(--red-light);color:var(--red);border:1px solid #c99}
+.chip.live{background:var(--green-light);color:var(--green);border:1px solid #9cc9a8}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 10px}
+
+/* HOW TO USE */
+.use-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 6px}
+.use{background:var(--white);border-top:3px solid var(--gold);padding:16px 16px 18px}
+.use .n{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dim)}
+.use h4{font-family:'EB Garamond',serif;font-size:19px;color:var(--navy);margin:3px 0 6px}
+.use p{font-size:13px;color:var(--charcoal);line-height:1.55}
+.note{background:var(--navy);border-radius:3px;padding:18px 20px;color:rgba(255,255,255,.82);font-size:13.5px;line-height:1.65;margin-top:6px}
+.note .sig{display:block;margin-top:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.ref-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ref{background:var(--white);border:1px solid var(--cream-dark);padding:14px 16px;cursor:pointer;text-align:left;color:var(--charcoal);border-left:4px solid var(--gold);transition:border-color .15s,transform .15s}
+.ref:hover{transform:translateY(-1px);border-color:var(--gold)}
+.ref .n{font-family:'EB Garamond',serif;font-size:30px;color:var(--gold-dim);line-height:1}
+.ref .t{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--navy);margin:4px 0 4px;letter-spacing:.02em}
+.ref .d{font-size:12px;color:var(--gray);line-height:1.5}
+
+/* CONTENT BLOCKS */
+.quote-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0}
+.quote{background:var(--navy);padding:16px 18px;border-left:4px solid var(--gold)}
+.quote .q{font-family:'EB Garamond',serif;font-style:italic;font-size:18px;color:var(--gold-light);line-height:1.4}
+.quote .c{font-size:12px;color:rgba(255,255,255,.6);margin-top:6px;line-height:1.5}
+.edo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:8px 0 6px}
+.edo-cell{background:var(--navy);padding:16px 14px;border-top:3px solid var(--gold)}
+.edo-l{font-family:'EB Garamond',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1}
+.edo-w{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin:6px 0 5px}
+.edo-d{font-size:12px;color:rgba(255,255,255,.68);line-height:1.5}
+ol.qs{list-style:none;counter-reset:q;display:flex;flex-direction:column;gap:8px;margin:6px 0}
+ol.qs li{counter-increment:q;display:grid;grid-template-columns:28px 1fr;gap:8px;background:var(--white);padding:10px 14px;border-left:3px solid var(--gold);font-size:13.5px;line-height:1.5}
+ol.qs li::before{content:counter(q);font-family:'EB Garamond',serif;font-weight:700;font-size:18px;color:var(--gold-dim);line-height:1.2}
+
+.nn{margin:18px 0 6px;background:var(--white);border:1px solid var(--cream-dark)}
+.nn-h{display:flex;gap:12px;align-items:baseline;padding:13px 16px;border-bottom:1px solid var(--cream-dark)}
+.nn-h .i{font-family:'EB Garamond',serif;font-size:24px;font-weight:700;color:var(--gold-dim);line-height:1}
+.nn-h .t{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:.02em}
+.nn-p{padding:12px 16px 0;font-size:13.5px;line-height:1.6}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 16px 16px}
+.vs-col{border-radius:2px;overflow:hidden;border:1px solid var(--cream-dark);min-width:0}
+.vs-h{padding:7px 12px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff}
+.vs-col.s .vs-h{background:var(--green)}
+.vs-col.w .vs-h{background:var(--red)}
+.vs-b{padding:11px 12px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12.5px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--charcoal)}
+.vs-col.s .vs-b{background:#f3faf5}
+.vs-col.w .vs-b{background:#fdf5f5}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px 16px 4px}
+.three div{background:var(--cream);padding:11px 12px;font-size:12.5px;line-height:1.5}
+.three b{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin-bottom:4px}
+
+ul.prohib{list-style:none;display:flex;flex-direction:column;gap:6px;margin:6px 0}
+ul.prohib li{display:flex;gap:9px;font-size:13px;line-height:1.45;color:var(--red);background:var(--red-light);padding:9px 12px;font-weight:500}
+ul.prohib li::before{content:'✕';font-weight:700;flex-shrink:0}
+ul.ticks{list-style:none;display:flex;flex-direction:column;gap:6px;margin:6px 0}
+ul.ticks li{display:flex;gap:9px;font-size:13.5px;line-height:1.5;background:var(--white);padding:9px 12px;border-left:3px solid var(--gold)}
+
+.tbl{overflow-x:auto;border:1px solid var(--cream-dark);background:var(--white);margin:6px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;vertical-align:top;padding:10px 13px;border-bottom:1px solid var(--cream-dark)}
+tr:last-child td{border-bottom:0}
+th{background:var(--navy);color:var(--gold-light);font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+td.k{font-weight:700;color:var(--navy);white-space:nowrap}
+.w-bar{display:flex;align-items:center;gap:10px}
+.w-bar .b{flex:1;height:6px;background:var(--cream-dark);border-radius:3px;overflow:hidden;min-width:60px}
+.w-bar .b span{display:block;height:100%;background:var(--gold)}
+.w-bar .v{font-family:'EB Garamond',serif;font-weight:700;font-size:16px;color:var(--navy);width:40px;text-align:right}
+
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:6px 0}
+.tier{background:var(--white);border:1px solid var(--cream-dark);border-top:4px solid var(--gold);padding:12px 13px}
+.tier .n{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.tier p{font-size:12.5px;line-height:1.5}
+.tier.t1{border-top-color:var(--green)} .tier.t1 .n{color:var(--green)}
+.tier.t2{border-top-color:var(--navy)} .tier.t2 .n{color:var(--navy)}
+.tier.t3{border-top-color:var(--amber)} .tier.t3 .n{color:var(--amber)}
+.tier.t4{border-top-color:var(--red)} .tier.t4 .n{color:var(--red)}
+
+.steps5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:8px 0}
+.st{background:var(--navy);color:#fff;padding:12px 10px;text-align:center;position:relative}
+.st .n{font-family:'EB Garamond',serif;font-size:22px;color:var(--gold);line-height:1}
+.st .t{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-top:5px}
+.st.key{background:var(--gold);color:var(--navy)}
+.st.key .n{color:var(--navy)}
+.callout{background:var(--amber-light);border-left:4px solid var(--amber);padding:12px 15px;font-size:13px;color:#5a4208;line-height:1.55;margin:8px 0}
+.callout.navy{background:var(--navy);border-left-color:var(--gold);color:rgba(255,255,255,.85)}
+.callout.navy strong{color:var(--gold-light)}
+
+.chain{list-style:none;display:flex;flex-direction:column;margin:6px 0}
+.chain li{position:relative;padding:11px 14px;background:var(--white);border-left:3px solid var(--gold);font-size:13.5px;line-height:1.5}
+.chain li strong{color:var(--navy)}
+.chain li:not(:last-child){margin-bottom:20px}
+.chain li:not(:last-child)::after{content:'↓';position:absolute;left:12px;bottom:-19px;color:var(--gold-dim);font-weight:700}
+.wa{display:flex;flex-direction:column;gap:8px;margin:6px 0}
+.wa .row{display:grid;grid-template-columns:70px 1fr;gap:12px;background:var(--white);border-left:4px solid var(--gold);padding:11px 14px;align-items:start}
+.wa .tag{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.wa .row.weak{border-left-color:var(--red)} .wa .row.weak .tag{color:var(--red)}
+.wa .row.apex{border-left-color:var(--green)} .wa .row.apex .tag{color:var(--green)}
+.wa .txt{font-size:13.5px;line-height:1.55}
+
+/* DRILLS */
+.drill-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:26px 0 6px}
+.drill-head h3.mh{margin:0}
+.drill{background:var(--white);border:1px solid var(--cream-dark);margin:12px 0;overflow:hidden}
+.drill.done{border-color:#9cc9a8}
+.d-top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--cream-dark)}
+.d-id{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:.08em;background:var(--navy);color:var(--gold);padding:4px 9px;border-radius:2px}
+.d-title{font-family:'EB Garamond',serif;font-size:19px;font-weight:600;color:var(--navy);flex:1;line-height:1.2}
+.d-ok{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);display:none}
+.drill.done .d-ok{display:inline}
+.d-scn{margin:14px 16px 0;background:var(--navy-mid);color:var(--cream);font-family:'EB Garamond',serif;font-style:italic;font-size:16px;line-height:1.55;padding:14px 16px;border-left:4px solid var(--gold)}
+.d-scn .tg{display:block;font-family:'Barlow Condensed',sans-serif;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.d-ans{padding:12px 16px 0}
+.d-ans label{display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+.d-ans label span{font-weight:400;letter-spacing:0;text-transform:none;color:var(--gray)}
+textarea,input[type=text],input[type=date],select{width:100%;background:var(--white);border:1.5px solid var(--cream-dark);border-radius:2px;padding:9px 11px;font-size:14px;color:var(--navy);outline:none}
+textarea{resize:vertical;min-height:76px;line-height:1.5}
+textarea:focus,input:focus,select:focus{border-color:var(--gold)}
+.d-act{display:flex;gap:10px;flex-wrap:wrap;padding:12px 16px 16px}
+.btn{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 20px;border:none;border-radius:2px;cursor:pointer;transition:background .15s}
+.btn.pri{background:var(--gold);color:var(--navy)}
+.btn.pri:hover{background:var(--gold-light)}
+.btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+.btn.dark{background:transparent;color:var(--gold-light);border:1px solid rgba(201,168,76,.45)}
+.btn.dark:hover{border-color:var(--gold)}
+.d-reveal{display:none;border-top:1px solid var(--cream-dark)}
+.drill.open .d-reveal{display:block}
+.apex-a{background:var(--green-light);border-left:4px solid var(--green);margin:14px 16px 0;padding:13px 15px}
+.apex-a .h,.coach .h{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.apex-a .h{color:var(--green)}
+.apex-a .b{font-size:13.5px;line-height:1.6;color:var(--navy)}
+.apex-a .b .t{font-family:'EB Garamond',serif;font-weight:700;font-size:15.5px;display:block;margin-bottom:4px}
+.apex-a .b .l{display:block;margin:3px 0}
+.apex-a .b .l b{color:var(--green)}
+.apex-a .b ul{margin:4px 0 0 18px}
+.coach{background:var(--navy);margin:10px 16px 16px;padding:13px 15px;border-left:4px solid var(--gold)}
+.coach .h{color:var(--gold)}
+.coach .b{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.88)}
+
+/* READY CHECKLIST */
+.ready{background:var(--white);border:1px solid var(--cream-dark);margin:6px 0}
+.ready-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;background:var(--navy);flex-wrap:wrap}
+.ready-h .t{font-family:'EB Garamond',serif;font-size:18px;color:#fff}
+.ready-h .c{font-family:'EB Garamond',serif;font-size:18px;color:var(--gold)}
+.ready-item{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;padding:11px 16px;border-bottom:1px solid var(--cream);cursor:pointer;width:100%;text-align:left;background:none;border-left:0;border-right:0;border-top:0;font-size:13.5px;line-height:1.5;color:var(--charcoal)}
+.ready-item:last-child{border-bottom:0}
+.ready-item:hover{background:#faf8f3}
+.box{width:20px;height:20px;border:1.5px solid var(--gold-dim);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;margin-top:1px}
+.ready-item[aria-pressed="true"] .box{background:var(--green);border-color:var(--green)}
+.ready-item[aria-pressed="true"] .box::after{content:'✓'}
+.ready-gate{padding:10px 16px;font-size:12.5px;font-weight:600;background:var(--cream);color:var(--gray)}
+.ready-gate.ok{background:var(--green-light);color:var(--green)}
+.prompt{background:var(--navy);border:1px solid var(--gold-dim);padding:16px 18px;margin-top:12px}
+.prompt .h{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.prompt .b{font-family:'EB Garamond',serif;font-size:16.5px;color:var(--gold-light);line-height:1.5}
+.prompt .b em{color:#fff}
+
+.panel-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:-6px 0 16px}
+
+/* SIGN-OFF */
+.privacy{display:flex;gap:10px;align-items:center;background:var(--green-light);border-left:4px solid var(--green);padding:11px 14px;font-size:13px;color:var(--green);font-weight:600;margin-bottom:16px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.f label{display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-bottom:5px}
+.so-tbl td{vertical-align:middle}
+.so-tbl input{min-width:110px}
+.sigs{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:30px 0 8px}
+.sigs div{border-top:1.5px solid var(--charcoal);padding-top:6px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray)}
+.mgr{border:2px solid var(--navy);margin-top:22px}
+.mgr-h{background:var(--navy);color:var(--gold);font-size:10.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;padding:9px 14px}
+.mgr .fgrid{padding:14px}
+.mgr .full{grid-column:1/-1}
+.so-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+/* FOOTER */
+.foot{border-top:1px solid rgba(201,168,76,.1);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;max-width:1096px;margin:0 auto}
+.foot .b{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,.3)}
+.foot .m{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.28);text-transform:uppercase}
+
+@media(max-width:820px){
+  .site-header{padding:22px 16px 0}
+  .tabs{margin:0 -16px;padding:0 16px}
+  .main{padding:24px 16px 60px}
+  .foot{padding:22px 16px}
+  .sheet-head{padding:18px 18px}
+  .sheet-body{padding:20px 16px 24px}
+  .use-grid,.ref-list,.quote-pair,.edo,.vs,.three,.fgrid,.sigs{grid-template-columns:1fr}
+  .tiers{grid-template-columns:1fr 1fr}
+  .steps5{grid-template-columns:1fr}
+  .st{display:flex;gap:12px;align-items:center;text-align:left;padding:10px 14px}
+  .st .t{margin-top:0}
+  .progress{align-items:flex-start}
+  .d-scn,.apex-a,.coach{margin-left:12px;margin-right:12px}
+  .d-top,.d-ans,.d-act{padding-left:12px;padding-right:12px}
+  .wa .row{grid-template-columns:1fr;gap:4px}
+}
+@media(max-width:420px){.tiers{grid-template-columns:1fr}}
+
+@media print{
+  body{background:#fff;color:#000}
+  .site-header .tabs,.back,.hdr-chips,.panel-actions,.d-act,.so-actions,.foot,.ready-gate,.btn{display:none!important}
+  .site-header{padding:0 0 10px;border:0}
+  .site-header::before{display:none}
+  .eyebrow{color:#8a6e2e;opacity:1}
+  .site-title,.site-title em{color:#0D1F3C}
+  .site-subtitle{color:#444}
+  .main{padding:0;max-width:none}
+  .sheet{box-shadow:none;border:1px solid #ccc;break-inside:auto}
+  .drill{break-inside:avoid}
+  .drill .d-reveal{display:block!important}
+  .d-ans textarea{border:1px solid #bbb;min-height:60px}
+  .sheet-head,.edo-cell,.quote,.note,.coach,.prompt,.st,.callout.navy,.mgr-h,th,.ready-h,.d-scn{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-signoff .site-header{display:none}
+  ::placeholder{color:transparent!important}
+  .fgrid,.sigs,.vs,.quote-pair,.use-grid{grid-template-columns:1fr 1fr!important}
+  .edo,.three{grid-template-columns:repeat(3,1fr)!important}
+  .vs-h,.st,.d-id,.chip,.tier{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-signoff .main>.panel:not(#p-so){display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="back" href="index.html">← Training &amp; Development Lab</a>
+    <div class="eyebrow">Apex Concierge Services · Training &amp; Development Lab</div>
+    <h1 class="site-title">SOP <em>Refresher</em> Modules</h1>
+    <p class="site-subtitle">Drill the standard with any agent, at any point — day 30 or day 300. For Leads and Senior Agents running shadow shifts, refreshers and performance resets.</p>
+    <div class="hdr-chips"><span class="hchip">M5 · Ongoing Development</span><span class="hchip">Lead &amp; Senior Agent Facing</span><span class="hchip green">Live</span></div>
+    <nav class="tabs" role="tablist" aria-label="Refresher sections">
+      <button class="tab" role="tab" data-tab="use" aria-selected="true">How to Use</button>
+      <button class="tab" role="tab" data-tab="r1" aria-selected="false">01 · Shift Log Mastery <span class="cnt" data-cnt="r1"></span></button>
+      <button class="tab" role="tab" data-tab="r2" aria-selected="false">02 · Package Handling <span class="cnt" data-cnt="r2"></span></button>
+      <button class="tab" role="tab" data-tab="r3" aria-selected="false">03 · Incidents &amp; Escalation <span class="cnt" data-cnt="r3"></span></button>
+      <button class="tab" role="tab" data-tab="so" aria-selected="false">Refresher Sign-Off</button>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ============ HOW TO USE ============ -->
+<section class="panel on" id="p-use" role="tabpanel">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <div class="kicker">Before You Begin</div>
+        <div class="sh-title">The operational backbone of every property</div>
+        <div class="sh-sub">Shift logs, packages, incidents. Not supporting skills.</div>
+      </div>
+    </div>
+    <div class="sheet-body">
+      <div class="note">
+        Shift log documentation, package handling and incident reporting are not supporting skills. They are the operational backbone of every Apex property. An agent can have excellent presence, warmth and professionalism and still create liability, erode trust and compromise the contract through poor documentation or careless package management. The standard here is not negotiable, and neither is your role in enforcing it.<br><br>
+        Use these refreshers with any agent at any point. Each one tells you what the standard is, shows what right and wrong look like side by side, and gives you scenario drills to run on a live shift. Training does not end at sign-off. The agent should never just read this. They should demonstrate it.
+        <span class="sig">Regional Concierge Manager</span>
+      </div>
+
+      <h3 class="mh" style="margin-top:26px">How to use these refreshers</h3>
+      <div class="use-grid">
+        <div class="use"><div class="n">01</div><h4>Run as a Drill</h4><p>Do not lecture. Pull up a scenario, read it aloud, and have the agent respond out loud or in writing. Then debrief against the Apex Answer.</p></div>
+        <div class="use"><div class="n">02</div><h4>Use the Live Shift</h4><p>The best coaching happens in the moment. If a package comes in during the drill, pause, process it correctly together, then debrief. If a log entry is due, write it together and score it.</p></div>
+        <div class="use"><div class="n">03</div><h4>Sign Off Before Solo</h4><p>Do not clear an agent for solo shifts until they can demonstrate every readiness item without prompting. The Ready Looks Like checklists are your clearance gate.</p></div>
+      </div>
+
+      <h3 class="mh" style="margin-top:26px">Drill mode, on this page</h3>
+      <ul class="ticks">
+        <li>Each scenario shows first. The agent answers out loud, or types in the box (optional).</li>
+        <li><span>Tap <strong>Reveal Apex Answer</strong> only after the agent commits. Then read the Coach Note.</span></li>
+        <li>The counter on each tab tracks drills revealed this session. Ready checklists are tap-to-check.</li>
+        <li>Nothing is saved. Close the page and it resets. Nothing you type leaves this computer.</li>
+      </ul>
+
+      <h3 class="mh" style="margin-top:26px">The refreshers</h3>
+      <div class="ref-list">
+        <button class="ref" data-go="r1"><div class="n">01</div><div class="t">Shift Log Mastery</div><div class="d">E.D.O. method · non-negotiables · pass-on standards · 5 drills · scoring rubric</div></button>
+        <button class="ref" data-go="r2"><div class="n">02</div><div class="t">Package Handling</div><div class="d">Intake protocol · categories · pickup verification · escalation · 6 drills</div></button>
+        <button class="ref" data-go="r3"><div class="n">03</div><div class="t">Incident Reporting &amp; Escalation</div><div class="d">When to file · the chain · critical-incident phone rule · 3 drills</div></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFRESHER 01 ============ -->
+<section class="panel" id="p-r1" role="tabpanel">
+  <div class="panel-actions"><button class="btn dark" data-print="r1">Print this refresher</button></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div class="big-num">01</div>
+        <div><div class="kicker">Refresher 01</div><div class="sh-title">Shift Log Mastery</div><div class="sh-sub">E.D.O. Method · Non-Negotiables · Pass-On Standards</div></div>
+      </div>
+      <div class="progress"><span class="lbl">Drills revealed</span><span class="val" data-prog="r1">0 / 5</span><div class="pbar"><span data-bar="r1"></span></div></div>
+    </div>
+    <div class="sheet-body">
+      <h3 class="mh">Why this matters</h3>
+      <p class="lead">The shift log is not a task. It is the <strong>official operational record of the shift</strong>, submitted to property management, leasing, maintenance and Apex leadership. It is read by people who were not on the shift. It is a legal document in the event of an incident. It is how management evaluates judgment, professionalism and presence. A log that is vague, incomplete or unprofessional is not a minor issue. It is a performance failure.</p>
+
+      <div class="lbl-k">Two principles every agent must be able to recite</div>
+      <div class="quote-pair">
+        <div class="quote"><div class="q">"If someone did not work the shift, they should still fully understand what happened."</div></div>
+        <div class="quote"><div class="q">"Every shift is marketing."</div><div class="c">Management, leasing and property owners read your log. It reflects Apex's standards, and yours.</div></div>
+      </div>
+
+      <h3 class="mh">The E.D.O. Method</h3>
+      <p class="lead">Every entry. Every time. Non-negotiable.</p>
+      <div class="edo">
+        <div class="edo-cell"><div class="edo-l">E</div><div class="edo-w">Event</div><div class="edo-d">What happened? State it clearly in one sentence. If you can't, you don't have an Event yet.</div></div>
+        <div class="edo-cell"><div class="edo-l">D</div><div class="edo-w">Detail</div><div class="edo-d">Who was involved? What unit or location? Exact time? Specific circumstances?</div></div>
+        <div class="edo-cell"><div class="edo-l">O</div><div class="edo-w">Outcome</div><div class="edo-d">What did you do? Resolved, escalated or pending? If pending: to whom, and why?</div></div>
+      </div>
+      <div class="lbl-k">Three questions before every entry</div>
+      <ol class="qs">
+        <li><span><strong>What happened?</strong> One sentence. If you can't state it clearly, you don't have an Event yet.</span></li>
+        <li><span><strong>Do I have the who, where and when?</strong> Unit number, name, exact time. Every time.</span></li>
+        <li><span><strong>What did I do about it?</strong> Every entry needs an outcome, even if it's "monitoring" or "pending follow-up."</span></li>
+      </ol>
+
+      <h3 class="mh">The four non-negotiables</h3>
+
+      <div class="nn">
+        <div class="nn-h"><span class="i">1</span><span class="t">Entry Consistency — minimum 1 entry per hour</span></div>
+        <p class="nn-p">Gaps indicate one of two things: the agent was not at their post, or nothing happened and they chose not to document it. Neither is acceptable. If nothing occurred, log that explicitly.</p>
+        <div class="vs">
+          <div class="vs-col s"><div class="vs-h">✓ Strong</div><div class="vs-b">12:30 PM — Lobby quiet, minimal foot traffic. Desk coverage maintained. Monitoring cameras — no activity.
+1:15 PM — Monitoring building cameras. No observable activity. Building remains quiet on all floors.</div></div>
+          <div class="vs-col w"><div class="vs-h">✕ Weak</div><div class="vs-b">12:00 PM — nothing
+1:00 PM — (blank)</div></div>
+        </div>
+      </div>
+
+      <div class="nn">
+        <div class="nn-h"><span class="i">2</span><span class="t">Site Tours — minimum 2 per shift, with outcomes</span></div>
+        <p class="nn-p">Every tour must include a timestamp and what was specifically observed. "Tour completed" alone is not a log entry. Tours serve three purposes: visibility, safety and service presence.</p>
+        <div class="vs">
+          <div class="vs-col s"><div class="vs-h">✓ Strong</div><div class="vs-b">7:45 AM — Site tour completed. P2/P3 garage &amp; pet wash clear &amp; secured. Exit doors not fully locking without intentional pressure (see Maintenance Notes). Gym &amp; common areas in working order.</div></div>
+          <div class="vs-col w"><div class="vs-h">✕ Weak</div><div class="vs-b">7:30 AM — site tour conducted
+tour — nothing to report</div></div>
+        </div>
+      </div>
+
+      <div class="nn">
+        <div class="nn-h"><span class="i">3</span><span class="t">Pass-On Notes — required, not optional</span></div>
+        <p class="nn-p">The next agent reads pass-on notes before the shift starts. If your pass-on says "nothing to note" and you had 300+ packages, a perishable in the fridge and two RTS packages, your pass-on failed. All three sections must be completed every shift.</p>
+        <div class="three">
+          <div><b>Concierge Team Notes</b>Outstanding tasks not resolved. Anything the next agent must follow up on. Operational changes or reminders.</div>
+          <div><b>Maintenance Notes</b>Issue flagged and who was notified. Status: resolved, pending or escalated. Service request reference if filed.</div>
+          <div><b>Leasing Notes</b>Resident complaints or requests. Communication gaps. Prospect or new resident interactions.</div>
+        </div>
+        <div class="vs">
+          <div class="vs-col s"><div class="vs-h">✓ Strong pass-on</div><div class="vs-b">CONCIERGE: 370 packages in system at end of shift. 3 perishables in fridge (units 421, 817, 1104). RTS pending: 2 (UPS, FedEx) — both need carrier pickup Friday.
+MAINTENANCE: P3 exit door latch broken — does not lock without intentional pressure. Reported to the maintenance supervisor at 7:45 AM. Service request submitted. Follow-up required.</div></div>
+          <div class="vs-col w"><div class="vs-h">✕ Weak pass-on</div><div class="vs-b">CONCIERGE: Nothing of note.
+MAINTENANCE: N/A</div></div>
+        </div>
+      </div>
+
+      <div class="nn">
+        <div class="nn-h"><span class="i">4</span><span class="t">Professional Tone — objective, third-person, factual</span></div>
+        <p class="nn-p">No first-person voice. No personal opinions. No casual language. No gossip. The log is a legal document and a performance record. Every word is attributed to the agent who wrote it.</p>
+        <div class="vs">
+          <div class="vs-col s"><div class="vs-h">✓ Strong</div><div class="vs-b">9:18 AM — Resident of Unit 146 arrived to speak with the property manager. Property manager was notified and assisted the resident.
+11:30 AM — Concierge conducted site tour. 3rd floor meeting room occupied by scheduled event. No lease violations observed.</div></div>
+          <div class="vs-col w"><div class="vs-h">✕ Weak</div><div class="vs-b">9:18 AM — helped the resident who came in for the manager. He took care of it.
+11:30 AM — did a tour, the meeting is still going on upstairs</div></div>
+        </div>
+      </div>
+
+      <h3 class="mh">Prohibited practices — name these out loud</h3>
+      <ul class="prohib">
+        <li>"Nothing happened" logs without documented tours</li>
+        <li>Copy-pasting entries from prior shifts</li>
+        <li>Excessive highlighting, random colors or cluttered formatting</li>
+        <li>Personal commentary, gossip or emotional language</li>
+        <li>Leaving the Outcome field blank on any entry</li>
+        <li>Writing "N/A" in pass-on sections when anything occurred during the shift</li>
+      </ul>
+
+      <div class="drill-head"><h3 class="mh">Scenario drills</h3><span class="small">Read aloud. Agent answers with Event, Detail and Outcome. Do not show the answer first.</span></div>
+      <div id="drills-r1"></div>
+
+      <h3 class="mh">Shift log scoring rubric</h3>
+      <p class="lead">Every log is scored across seven categories. Share this rubric with the agent. They should know exactly how they are evaluated.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Category</th><th style="width:44%">Weight</th></tr></thead>
+          <tbody id="rubric"></tbody>
+        </table>
+      </div>
+      <div class="lbl-k">The four tiers</div>
+      <div class="tiers">
+        <div class="tier t1"><div class="n">Strong</div><p>Consistent E.D.O. every hour. Tours completed with outcomes. All incidents escalated and documented. Pass-on notes are actionable. Log stands alone.</p></div>
+        <div class="tier t2"><div class="n">Steady</div><p>Most entries time-stamped and complete. Minor gaps in pass-on or tour notes. No pattern of missed escalations. Coaching on one or two areas.</p></div>
+        <div class="tier t3"><div class="n">Needs Coaching</div><p>Entries lack outcomes. Tours missing or undocumented. Pass-on vague or blank. Incidents logged without follow-up. Active coaching plan in place.</p></div>
+        <div class="tier t4"><div class="n">At Risk</div><p>Multiple non-negotiables missed consistently. Blank sections in live logs. No escalation on safety or maintenance items. Written plan with 30-day checkpoint.</p></div>
+      </div>
+
+      <h3 class="mh">Ready looks like — Shift Log</h3>
+      <div class="ready" data-ready="r1"></div>
+      <div class="prompt"><div class="h">Coaching Prompt</div><div class="b">Pull up the agent's most recent log together. Read one entry aloud and ask: <em>"If you were the incoming agent, what questions would you still have after reading this?"</em> Whatever they name, those are the gaps. Rewrite it before the shift closes.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFRESHER 02 ============ -->
+<section class="panel" id="p-r2" role="tabpanel">
+  <div class="panel-actions"><button class="btn dark" data-print="r2">Print this refresher</button></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div class="big-num">02</div>
+        <div><div class="kicker">Refresher 02</div><div class="sh-title">Package Handling</div><div class="sh-sub">Intake Protocol · Categories · Verification · Escalation</div></div>
+      </div>
+      <div class="progress"><span class="lbl">Drills revealed</span><span class="val" data-prog="r2">0 / 6</span><div class="pbar"><span data-bar="r2"></span></div></div>
+    </div>
+    <div class="sheet-body">
+      <div class="chip-row"><span class="chip pend" title="Matches the NHE Speed packet flag. May be updated after leadership review.">Package protocol: Pending approval</span><span class="small">Teach it as written; it may be updated once leadership signs off.</span></div>
+      <h3 class="mh">Why this matters</h3>
+      <p class="lead">Packages are <strong>personal property entrusted to Apex's care</strong>. Mishandling — storing without logging, misclassifying a high-value item, releasing to the wrong person — creates legal liability, destroys resident trust and directly threatens the property contract. Every package that enters the building is a test of the agent's reliability. The standard here is zero shortcuts.</p>
+
+      <h3 class="mh">The standard process — every package, every time</h3>
+      <div class="steps5">
+        <div class="st"><div class="n">01</div><div class="t">Receive</div></div>
+        <div class="st key"><div class="n">02</div><div class="t">Log</div></div>
+        <div class="st"><div class="n">03</div><div class="t">Label</div></div>
+        <div class="st"><div class="n">04</div><div class="t">Store</div></div>
+        <div class="st"><div class="n">05</div><div class="t">Notify</div></div>
+      </div>
+      <ul class="ticks">
+        <li><span><strong>Receive:</strong> confirm recipient name, unit number and package condition before touching anything else.</span></li>
+        <li><span><strong>Log in the system before moving the package anywhere.</strong> System entry is not the last step. It is the second step. This is the most commonly skipped step.</span></li>
+        <li><span><strong>Notify</strong> the resident through the site's channel now, not at end of shift.</span></li>
+      </ul>
+
+      <h3 class="mh">Package categories &amp; handling</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Type</th><th>Protocol</th><th>Coach Note</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Standard</td><td>Log in system + Label + Store on designated shelf + Notify resident.</td><td>The baseline. No shortcuts on any step.</td></tr>
+            <tr><td class="k">Perishable — food delivery</td><td>Log + Label + Refrigerate + Call resident. Dispose after <strong>24 hours</strong> if unclaimed.</td><td>Call, do not just text. A food delivery sitting unrefrigerated is a liability.</td></tr>
+            <tr><td class="k">Perishable — groceries</td><td>Log + Label + Refrigerate + Daily outreach. Escalate to a Lead and dispose after <strong>48 hours</strong>.</td><td>48-hour window, not 24. Different protocol from food delivery. Agents confuse these.</td></tr>
+            <tr><td class="k">High-value</td><td>Log immediately as high-value + Label + Secure storage (not general shelf) + Notify promptly.</td><td>Laptops, electronics, luxury goods. Never on the general shelf. Misclassifying as "standard" is a prohibited practice.</td></tr>
+            <tr><td class="k">Outgoing / RTS</td><td>Verify label and postage. Log. Stage for carrier pickup. Do not accept outgoing without postage.</td><td>If a resident drops off without postage, decline politely and explain. Do not store it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mh">Pickup verification — every handoff</h3>
+      <p class="lead">Before releasing any package, complete these steps in order. There are no exceptions based on how well you know the resident.</p>
+      <ol class="qs">
+        <li><span>Verify the recipient is the resident on file or an authorized guest — by photo ID or system lookup. Never assumed, never on verbal confirmation alone.</span></li>
+        <li><span>Confirm the unit number.</span></li>
+        <li><span>Log the pickup in the system immediately, before the resident leaves.</span></li>
+        <li><span>If anything does not match: hold the package and contact a Lead.</span></li>
+      </ol>
+      <div class="callout navy"><strong>When in doubt:</strong> Log it. Hold it. Escalate. Never guess with someone else's property.</div>
+
+      <h3 class="mh">Prohibited practices — name these out loud</h3>
+      <ul class="prohib">
+        <li>Storing any package without logging it in the system first</li>
+        <li>Misclassifying high-value items as generic "standard" packages</li>
+        <li>Moving a package before the system entry is complete</li>
+        <li>Storing packages in unapproved areas</li>
+        <li>Releasing a package without verifying the recipient's identity</li>
+        <li>Accepting outgoing packages without proper postage</li>
+      </ul>
+
+      <div class="drill-head"><h3 class="mh">Scenario drills</h3><span class="small">Use a real package or the package room if you can. Agent walks every step out loud. Correct in real time.</span></div>
+      <div id="drills-r2"></div>
+
+      <h3 class="mh">Ready looks like — Package Handling</h3>
+      <div class="ready" data-ready="r2"></div>
+      <div class="prompt"><div class="h">Coaching Prompt</div><div class="b">Walk to the package room together. Pick up any package and have the agent walk you through what they would do from the moment it arrived. <em>Watch for the sequence</em> — especially when they log it relative to when they move it.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFRESHER 03 ============ -->
+<section class="panel" id="p-r3" role="tabpanel">
+  <div class="panel-actions"><button class="btn dark" data-print="r3">Print this refresher</button></div>
+  <div class="sheet">
+    <div class="sheet-head">
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div class="big-num">03</div>
+        <div><div class="kicker">Refresher 03</div><div class="sh-title">Incident Reporting &amp; Escalation</div><div class="sh-sub">When to File · The Chain · Critical Incidents · Tier Documentation</div></div>
+      </div>
+      <div class="progress"><span class="lbl">Drills revealed</span><span class="val" data-prog="r3">0 / 3</span><div class="pbar"><span data-bar="r3"></span></div></div>
+    </div>
+    <div class="sheet-body">
+      <h3 class="mh">Why this matters</h3>
+      <p class="lead">An incident report is the official record that <strong>protects the agent and the company</strong>. It lets management spot trends and prevent repeats, keeps leadership informed quickly, and reinforces professionalism. An undocumented escalation, operationally and legally, did not happen.</p>
+      <div class="callout navy"><strong>Call first. Document everything. Support within your role.</strong> Agents are not first responders. Before any escalation, the agent asks: "Can I resolve this within my role and authority?" Yes: resolve and log. No: escalate and log.</div>
+
+      <h3 class="mh">When to file</h3>
+      <div class="chip-row"><span class="chip pend" title="Leadership will finalize whether additional categories warrant incident reports.">When-to-file categories: Pending approval</span></div>
+      <p class="lead">An incident is any event that disrupts operations, poses a risk to resident safety, damages property, or could lead to escalation with property management. Always file for:</p>
+      <ul class="ticks">
+        <li>Any physical altercation, threat or confrontation</li>
+        <li>Any injury to a resident, guest or visitor, even minor (slips, falls, medical emergencies)</li>
+        <li>Any property damage — building systems, equipment or resident belongings</li>
+        <li>Unauthorized entry, theft, security breach, or suspicious activity acted on</li>
+        <li>Any medical emergency, including EMS response</li>
+        <li>A complaint or dispute escalated or unresolved at the desk</li>
+      </ul>
+      <div class="callout"><strong>When in doubt, file.</strong> An unnecessary report is recoverable. A missing one is not. Leadership will finalize whether additional categories warrant reports across all sites.</div>
+
+      <h3 class="mh">The chain</h3>
+      <div class="chip-row"><span class="chip pend" title="Matches the NHE Speed packet flag.">Reporting chain: Pending approval</span></div>
+      <ul class="chain">
+        <li><strong>Agent / Frontline</strong> — completes the Incident Report in Connecteam immediately after the incident.</li>
+        <li><strong>Site Lead / Supervisor</strong> — reviews the submission for accuracy and detail; follows up with the agent if anything needs clarifying.</li>
+        <li><strong>Regional Manager</strong> — escalates to Property Management if necessary; flags Executive Leadership if the situation is serious.</li>
+        <li><strong>Executive Leadership</strong> — final review for high-level escalations, legal considerations or repeated issues.</li>
+      </ul>
+
+      <h3 class="mh">How to file</h3>
+      <ul class="ticks">
+        <li><span><strong>Connecteam → Forms → Incident Report.</strong> The step-by-step questionnaire makes sure no detail is missed.</span></li>
+        <li><span>Write it in <strong>E.D.O.</strong> — Event (facts only, no assumptions), Detail (who, where, when, how), Outcome (resolution, escalation or next steps).</span></li>
+        <li><span>Attach photos, camera stills, system logs or receipts when applicable.</span></li>
+        <li><span>Add your site manager emails listed in the site binder when submitting, so local management has visibility.</span></li>
+        <li><span><strong>Submit before the end of the shift in which the incident occurred.</strong></span></li>
+      </ul>
+
+      <h3 class="mh">The critical-incident phone rule</h3>
+      <div class="callout" style="background:var(--red-light);border-left-color:var(--red);color:var(--red)"><strong>Safety, legal or police involvement:</strong> phone the Regional Manager immediately, then follow up with the written report. The phone call comes first. The report is still required.</div>
+
+      <h3 class="mh">Documenting the tier — weak vs. Apex</h3>
+      <p class="lead">Escalating is not just "telling someone." The log must name who was notified, when, through what channel, and what instruction was received.</p>
+      <div class="wa">
+        <div class="row weak"><span class="tag">Weak</span><span class="txt">"Notified management about the incident." <em>Which manager? Called or messaged? Before or after the resident left?</em></span></div>
+        <div class="row apex"><span class="tag">Apex</span><span class="txt"><strong>"Contacted Lead Concierge M. Torres by phone at 11:42 PM per Tier 2. Instructed to complete incident report and monitor. PM to be briefed at 8 AM — flagged in pass-on."</strong></span></div>
+      </div>
+
+      <h3 class="mh">Write what you observed, not what you concluded</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Never write</th><th>Write instead</th></tr></thead>
+          <tbody>
+            <tr><td>"The resident was drunk."</td><td>"Resident exhibited slurred speech and unsteady gait."</td></tr>
+            <tr><td>"He was being aggressive."</td><td>"Subject moved toward the desk with a raised voice."</td></tr>
+            <tr><td>"She had serious bruising."</td><td>"Concierge observed a small visible abrasion on the resident's knee."</td></tr>
+            <tr><td>"The situation was handled."</td><td>"Supervisor notified at 9:42 PM. Resolved by 9:55 PM."</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="drill-head"><h3 class="mh">Scenario drills</h3><span class="small">Agent states the call first, then the E.D.O. entry. Every answer ends with "and I logged it."</span></div>
+      <div id="drills-r3"></div>
+
+      <h3 class="mh">Ready looks like — Incidents &amp; Escalation</h3>
+      <div class="ready" data-ready="r3"></div>
+      <div class="prompt"><div class="h">Coaching Prompt</div><div class="b">Pick any incident from the last month at this property. Ask the agent: <em>"If this were reviewed tomorrow, would the record show exactly what happened, who you called, and when?"</em> Have them rewrite the escalation line until the answer is yes.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGN-OFF ============ -->
+<section class="panel" id="p-so" role="tabpanel">
+  <div class="sheet" id="signoff">
+    <div class="sheet-head">
+      <div><div class="kicker">Clearance Gate</div><div class="sh-title">Refresher Sign-Off</div><div class="sh-sub">Confirms the agent demonstrated the readiness criteria in a live shift environment — not just that they read the material.</div></div>
+    </div>
+    <div class="sheet-body">
+      <div class="privacy">Nothing you type leaves this computer. This form is not saved — print or save as PDF before closing.</div>
+      <div class="fgrid">
+        <div class="f"><label for="so-agent">Agent name</label><input type="text" id="so-agent" autocomplete="off"></div>
+        <div class="f"><label for="so-prop">Property assignment</label><input type="text" id="so-prop" autocomplete="off"></div>
+        <div class="f"><label for="so-role">Role</label><input type="text" id="so-role" autocomplete="off" placeholder="e.g. Concierge"></div>
+        <div class="f"><label for="so-lead">Lead / Senior Agent name</label><input type="text" id="so-lead" autocomplete="off"></div>
+        <div class="f"><label for="so-start">Start date</label><input type="date" id="so-start"></div>
+        <div class="f"><label for="so-date">Sign-off date</label><input type="date" id="so-date"></div>
+      </div>
+
+      <h3 class="mh" style="margin-top:24px">Refreshers cleared</h3>
+      <div class="tbl">
+        <table class="so-tbl">
+          <thead><tr><th>Refresher</th><th>Date cleared</th><th>Lead initials</th></tr></thead>
+          <tbody>
+            <tr><td class="k">01 — Shift Log Mastery</td><td><input type="date" aria-label="Date cleared, Shift Log Mastery"></td><td><input type="text" maxlength="5" aria-label="Lead initials, Shift Log Mastery"></td></tr>
+            <tr><td class="k">02 — Package Handling</td><td><input type="date" aria-label="Date cleared, Package Handling"></td><td><input type="text" maxlength="5" aria-label="Lead initials, Package Handling"></td></tr>
+            <tr><td class="k">03 — Incident Reporting &amp; Escalation <span class="chip pend" style="margin-left:4px">Draft v1</span></td><td><input type="date" aria-label="Date cleared, Incident Reporting"></td><td><input type="text" maxlength="5" aria-label="Lead initials, Incident Reporting"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top:8px">Refresher 03 is new to the sign-off sheet. Draft v1 · Pending approval by the Regional Concierge Manager.</p>
+
+      <div class="sigs"><div>Agent signature</div><div>Lead / Senior Agent signature</div></div>
+
+      <div class="mgr">
+        <div class="mgr-h">Manager use only</div>
+        <div class="fgrid">
+          <div class="f"><label for="m-by">Trained by</label><input type="text" id="m-by" autocomplete="off"></div>
+          <div class="f"><label for="m-date">Date</label><input type="date" id="m-date"></div>
+          <div class="f"><label for="m-score">Initial log score</label><input type="text" id="m-score" autocomplete="off" placeholder="e.g. 82"></div>
+          <div class="f"><label for="m-tier">Tier assigned</label><select id="m-tier"><option value="">Select tier</option><option>Strong</option><option>Steady</option><option>Needs Coaching</option><option>At Risk</option></select></div>
+          <div class="f"><label for="m-review">30-day review date</label><input type="date" id="m-review"></div>
+          <div class="f full"><label for="m-notes">Notes</label><textarea id="m-notes" rows="3"></textarea></div>
+        </div>
+      </div>
+      <div class="so-actions">
+        <button class="btn pri" id="so-print">Print / Save as PDF</button>
+        <button class="btn ghost" id="so-clear">Clear form</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="b">Apex Concierge Services · Training &amp; Development Lab</span>
+  <span class="m">Internal Use Only · Version 1.0 · October 2026</span>
+</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const DRILLS = {
+  r1: [
+    {id:'S1', title:'Late-Night Noise Complaint',
+      scn:'1:45 AM. Unit 509 calls to report loud music and shouting from Unit 609. How do you log this?',
+      ans:{t:'1:45 AM — Noise Complaint', e:'Resident (Unit 509) reported loud music and shouting from Unit 609.', d:'Complaint received at 1:45 AM. Noise confirmed upon attempted contact with Unit 609.', o:'Called Unit 609, quiet hours policy communicated. Noise ceased at 1:55 AM. Logged for follow-up.'},
+      coach:'Key learning: do not promise enforcement. Communicate the process. Log every step with times.'},
+    {id:'S2', title:'Unauthorized Vendor',
+      scn:'10:20 AM. A housekeeper arrives for Unit 1114 but is not on the guest list. The resident does not answer. What do you log?',
+      ans:{t:'10:20 AM — Unauthorized Vendor', e:'Housekeeper arrived claiming access for Unit 1114.', d:'Vendor not on guest list. No PTE on file. Resident contact attempted — no answer. Voicemail left.', o:'Entry denied. Voicemail left for resident. Vendor instructed to reschedule with confirmed access. Logged for follow-up.'},
+      coach:'Key learning: denial of entry is not a conflict. It is protocol. Log the denial and every step taken.'},
+    {id:'S3', title:'Emergency Maintenance',
+      scn:'11:10 PM. Unit 318 reports a leaking pipe that is getting worse. On-call maintenance arrives at 11:30 PM. What is the log entry?',
+      ans:{t:'11:10 PM — Emergency Maintenance', e:'Resident (Unit 318) reported active leak under kitchen sink, worsening.', d:'On-call maintenance contacted at 11:12 PM. Tech arrived 11:30 PM. Resident notified of ETA.', o:'Leak contained. Resident satisfied. Incident report filed. Flagged in pass-on notes for morning follow-up.'},
+      coach:'Key learning: document every timestamp — who was called, when they arrived, what was done. The incident report is not optional.'},
+    {id:'S4', title:'Package Discrepancy in Log',
+      scn:'3:00 PM. You find a Unit 202 package in the lobby that has not been logged in the system. Walk me through the log entry.',
+      ans:{t:'3:00 PM — Package Discrepancy', e:'Package for Unit 202 found in lobby — not logged in system, no notification sent.', d:'Package located in main lobby, no label, no Yardi entry. Carrier unknown.', o:'Package logged in Yardi immediately. Labeled with unit and date. Stored in package room. Resident notified.'},
+      coach:'Key learning: never move a package before logging it. The log entry and the system entry happen before anything else.'},
+    {id:'S5', title:'Quiet Shift — Prove It',
+      scn:'Your agent’s log for a 4-hour block reads: “Quiet. Nothing to report.” What do you say?',
+      html:'<span class="l">This entry fails the standard. Here is what those four hours actually required:</span><ul><li>At minimum two time-stamped entries noting lobby status, desk coverage and any activity.</li><li>At least one site tour with route, timestamp and specific observations.</li><li>Any packages received, phone calls taken or resident interactions, however routine.</li></ul><span class="l" style="margin-top:8px"><b>A quiet log is written proof that the agent was present and attentive — not that nothing happened.</b></span>',
+      coach:'Send them back to rewrite it before the shift closes. Do not accept “quiet” as documentation.'}
+  ],
+  r2: [
+    {id:'P1', title:'Standard Package',
+      scn:'UPS delivers a medium box for Unit 908. Walk me through every step.',
+      html:'Confirm unit and recipient name. Log in Yardi before moving the package. Label with unit number and date/time. Store on the correct designated shelf. Notify the resident through the designated notification channel. Done — in that order.',
+      coach:'If they say “log it” last, stop them. The system entry happens before the package moves anywhere. Reinforce this every time.'},
+    {id:'P2', title:'Perishable — Food Delivery',
+      scn:'DoorDash delivers sushi at 6:30 PM for Unit 1210. The resident does not answer. What do you do?',
+      html:'Log as perishable and label immediately. Attempt to reach the resident by phone — call, not just a notification. If no answer within 15–30 minutes, refrigerate. Log the storage and every contact attempt. Dispose after 24 hours if unclaimed, documented. Do not wait to be asked.',
+      coach:'The 24-hour clock starts at delivery, not at the first contact attempt. The agent must know the timeline cold.'},
+    {id:'P3', title:'Grocery Delivery',
+      scn:'Instacart delivers groceries for Unit 1402. The resident is unavailable. What is different from the food delivery scenario?',
+      html:'Same intake protocol — log, label, refrigerate immediately. The key difference: the window is <b>48 hours, not 24</b>. Daily outreach required. If unclaimed at 48 hours, escalate to a Lead before disposal. Document every contact attempt in the log.',
+      coach:'Agents frequently apply the 24-hour food rule to groceries. These are different protocols. Test them on the distinction directly.'},
+    {id:'P4', title:'High-Value Item',
+      scn:'A FedEx package arrives for Unit 512. The label shows “Apple Store — MacBook Pro.” The agent starts to put it on the general shelf. What do you say?',
+      html:'Stop. This is a high-value item. It cannot go on the general shelf. Log it in the system as high-value immediately. Secure it in the designated locked or supervised storage area. Notify the resident promptly — do not wait until end of shift. Document the classification in the log entry.',
+      coach:'Misclassifying a high-value item as a standard package is a prohibited practice. Name that clearly. The agent should be able to identify high-value items on sight.'},
+    {id:'P5', title:'Unmatched Recipient',
+      scn:'A package arrives with a name that matches no current leaseholder. The unit number on the label is correct. What is the process?',
+      ans:{e:'Package received for unit with no matching leaseholder name.', d:'Checked current leaseholders — no match. Checked guest list — no match. Contacted resident of the unit for verification.', o:'If resident confirms it is not theirs — check past residents. If unable to confirm, process for RTS and escalate to Lead.'},
+      coach:'The agent should never guess and never store without verification. Log every step. Escalate if unresolved.'},
+    {id:'P6', title:'Resident Disputes a Package',
+      scn:'A resident approaches the desk furious. They say a package has been missing for three days and they know it was delivered. How do you respond — and what do you do?',
+      html:'Apply A.C.T. first.<span class="l"><b>Acknowledge</b> the frustration before doing anything else. Do not get defensive.</span><span class="l"><b>Control</b> the conversation: get the unit number, recipient name and any delivery confirmation details (carrier, tracking, date).</span><span class="l"><b>Transfer or Resolve:</b> begin a package audit immediately — check the system, the room and intake logs for the date in question. Involve the Lead if unresolved. File an incident report.</span><span class="l" style="margin-top:8px"><b>Do not promise the package will be found. Promise a thorough investigation and a follow-up.</b></span>',
+      coach:'This is a system failure scenario. The log is your defense. If the intake was documented correctly, the timeline is clear.'}
+  ],
+  r3: [
+    {id:'I1', title:'Resident Altercation in the Lobby',
+      scn:'11:40 PM. Residents from Units 812 and 814 begin arguing loudly in the lobby over a parking space. One shoves the other. No injuries. You verbally separate them and both leave the lobby separately at 11:48 PM. What is your call, and what do you log?',
+      pre:'This is above desk-level authority. Separate verbally, do not physically intervene, escalate by phone, file an incident report before end of shift.',
+      ans:{t:'11:40 PM — Resident Altercation', e:'Physical altercation between residents of Units 812 and 814 in the main lobby.', d:'Verbal dispute over a parking space escalated; one resident shoved the other. No injuries observed or reported. Concierge verbally separated both parties; both left the lobby separately at 11:48 PM.', o:'Lead Concierge contacted by phone at 11:45 PM; instructed to file an incident report and monitor. Incident report filed in Connecteam before end of shift. Flagged for property management in pass-on.'},
+      coach:'Physical contact means an incident report, every time, even with no injury. The escalation line must name who, when and by what channel. If anyone is hurt, a weapon appears or police are called, it becomes critical: phone the Regional Manager immediately, then file.'},
+    {id:'I2', title:'Slip in the Lobby — No Visible Injury',
+      scn:'4:20 PM. It is raining. A guest of Unit 1007 slips on the wet floor just inside the main entrance and falls. She gets up on her own, says she’s fine and does not want help. You see no visible injury. Does this need a report? What do you log?',
+      pre:'Yes. A fall on the property is an incident even with no visible injury. Offer assistance and EMS; do not diagnose or judge severity. Make the area safe, notify your supervisor, file before end of shift.',
+      ans:{t:'4:20 PM — Guest Slip and Fall, Main Lobby', e:'Guest of Unit 1007 slipped and fell on the wet floor inside the main lobby entrance.', d:'Floor wet near the entrance mat from rain. Guest stood up unassisted at 4:21 PM and stated, “I’m fine, I don’t need anything.” Concierge observed no visible injury. Guest declined medical assistance and EMS.', o:'Wet-floor sign placed at 4:22 PM; floor condition reported to maintenance at 4:24 PM. Supervisor notified by phone at 4:26 PM. Incident report filed in Connecteam with camera still attached before end of shift. Flagged in pass-on.'},
+      coach:'Write what you observed, not what you concluded: “no visible injury,” never “she was not hurt.” Quote her exact words. Do not speculate about fault. A fall with no injury can become a claim days later — the report written today is the record. When in doubt, file.'},
+    {id:'I3', title:'Unauthorized Person in the Garage — 1 AM',
+      scn:'1:05 AM. An unknown person enters through the P1 garage door. They say they’re visiting a friend but can’t give a resident name or unit number. What is your call, and what do you log?',
+      pre:'Do not confront or follow. Keep distance and ask them to leave. If they refuse or the threat is credible, call 911 first — your safety comes first. Notify your supervisor, secure the door, file the report.',
+      ans:{t:'1:05 AM — Unverified Person, Garage Entry', e:'Unidentified individual entered the building through the P1 garage door.', d:'Individual stated they were visiting a friend but could not provide a resident name or unit number. Description: [height, clothing, direction of travel].', o:'Individual asked to leave; exited via garage door at 1:09 AM. Supervisor notified by phone at 1:10 AM. Garage door checked and secured. Incident report filed in Connecteam before end of shift. Flagged for pass-on.'},
+      coach:'Description, not judgment: height, clothing, direction of travel — never “looked suspicious.” Unauthorized entry acted on is always a report. If the person refuses to leave or anything escalates, 911 first, then the Regional Manager by phone.'}
+  ]
+};
+
+const READY = {
+  r1:['Agent can explain what a shift log is used for and who reads it',
+      'Agent can state all three E.D.O. components and apply them to a live event without prompting',
+      'Agent logs at minimum one time-stamped entry per hour — no unexplained gaps',
+      'Agent’s tour entries include route, timestamp and specific observations',
+      'Agent completes all three pass-on sections before the shift closes',
+      'Agent uses professional, third-person, objective language throughout',
+      'Agent knows: corrections are additions, never deletions — never copy-paste prior logs'],
+  r2:['Agent can name all five package categories and the correct protocol for each without prompting',
+      'Agent logs every package in the system before moving it — no exceptions',
+      'Agent knows the difference between the 24-hour (food) and 48-hour (grocery) perishable windows',
+      'Agent can identify a high-value item on sight and knows it cannot go on the general shelf',
+      'Agent verifies recipient identity before releasing any package — regardless of familiarity with the resident',
+      'Agent knows the RTS and unmatched recipient protocols and escalates to a Lead when unresolved',
+      'Agent documents every package interaction in the shift log using E.D.O.'],
+  r3:['Agent can name the always-file categories and applies “when in doubt, file”',
+      'Agent asks “Can I resolve this within my role and authority?” before acting',
+      'Agent can recite the chain: Agent → Site Lead → Regional Manager → Executive Leadership',
+      'Agent knows the critical-incident rule: safety, legal or police — phone the Regional Manager first, then file',
+      'Agent files in Connecteam → Forms → Incident Report before the end of the shift',
+      'Agent’s escalation lines name who was notified, when, by what channel, and the instruction received',
+      'Agent writes observations, not conclusions — no diagnosis, blame or speculation']
+};
+
+const RUBRIC = [
+  ['E.D.O. Structure & Professionalism',15],['Entry Consistency & Policy Compliance',15],['Site Tour Compliance',15],
+  ['Incident Documentation',20],['Package Management',10],['Pass-On Note Quality',15],['Communication & Escalation',10]
+];
+
+/* ---------- HELPERS ---------- */
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+const esc = s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const revealed = {r1:new Set(),r2:new Set(),r3:new Set()};
+
+/* ---------- RENDER DRILLS ---------- */
+function answerHTML(d){
+  let h='';
+  if(d.pre) h+=`<span class="l"><b>The call:</b> ${esc(d.pre)}</span><span class="l" style="margin:8px 0 2px"><b>The entry:</b></span>`;
+  if(d.ans){
+    if(d.ans.t) h+=`<span class="t">${esc(d.ans.t)}</span>`;
+    h+=`<span class="l"><b>Event:</b> ${esc(d.ans.e)}</span><span class="l"><b>Detail:</b> ${esc(d.ans.d)}</span><span class="l"><b>Outcome:</b> ${esc(d.ans.o)}</span>`;
+  }
+  if(d.html) h+=d.html;
+  return h;
+}
+function renderDrills(key){
+  const wrap = document.getElementById('drills-'+key);
+  wrap.innerHTML = DRILLS[key].map((d,i)=>`
+    <div class="drill" data-key="${key}" data-i="${i}">
+      <div class="d-top"><span class="d-id">${d.id}</span><span class="d-title">${esc(d.title)}</span><span class="d-ok">✓ Debriefed</span></div>
+      <div class="d-scn"><span class="tg">Scenario</span>${esc(d.scn)}</div>
+      <div class="d-ans"><label for="ta-${d.id}">Agent's answer <span>— optional; or answer out loud</span></label><textarea id="ta-${d.id}" rows="3" placeholder="Event: … Detail: … Outcome: …"></textarea></div>
+      <div class="d-act"><button class="btn pri" data-reveal>Reveal Apex Answer</button><button class="btn ghost" data-reset hidden>Reset drill</button></div>
+      <div class="d-reveal">
+        <div class="apex-a"><div class="h">Apex Answer</div><div class="b">${answerHTML(d)}</div></div>
+        <div class="coach"><div class="h">Coach Note</div><div class="b">${esc(d.coach)}</div></div>
+      </div>
+    </div>`).join('');
+  $$('.drill',wrap).forEach(el=>{
+    $('[data-reveal]',el).addEventListener('click',()=>{
+      el.classList.add('open','done');
+      revealed[key].add(el.dataset.i);
+      $('[data-reveal]',el).hidden=true; $('[data-reset]',el).hidden=false;
+      updateProgress(key);
+    });
+    $('[data-reset]',el).addEventListener('click',()=>{
+      el.classList.remove('open','done');
+      revealed[key].delete(el.dataset.i);
+      $('textarea',el).value='';
+      $('[data-reveal]',el).hidden=false; $('[data-reset]',el).hidden=true;
+      updateProgress(key);
+    });
+  });
+}
+function updateProgress(key){
+  const n=revealed[key].size, t=DRILLS[key].length;
+  $(`[data-prog="${key}"]`).textContent = `${n} / ${t}`;
+  $(`[data-bar="${key}"]`).style.width = (n/t*100)+'%';
+  $(`[data-cnt="${key}"]`).textContent = `${n}/${t}`;
+}
+
+/* ---------- READY CHECKLISTS ---------- */
+function renderReady(key){
+  const box = $(`[data-ready="${key}"]`);
+  const items = READY[key];
+  box.innerHTML = `<div class="ready-h"><span class="t">Demonstrated without prompting</span><span class="c" data-rc>0 / ${items.length}</span></div>`+
+    items.map(t=>`<button type="button" class="ready-item" aria-pressed="false"><span class="box"></span><span>${esc(t)}</span></button>`).join('')+
+    `<div class="ready-gate" data-gate>Not yet cleared — every item must be demonstrated before solo shifts.</div>`;
+  $$('.ready-item',box).forEach(b=>b.addEventListener('click',()=>{
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true');
+    const n=$$('.ready-item[aria-pressed="true"]',box).length;
+    $('[data-rc]',box).textContent=`${n} / ${items.length}`;
+    const g=$('[data-gate]',box);
+    const ok=n===items.length;
+    g.classList.toggle('ok',ok);
+    g.textContent= ok ? 'All items demonstrated — record it on the Refresher Sign-Off.' : 'Not yet cleared — every item must be demonstrated before solo shifts.';
+  }));
+}
+
+/* ---------- RUBRIC ---------- */
+$('#rubric').innerHTML = RUBRIC.map(([c,w])=>`<tr><td>${esc(c)}</td><td><div class="w-bar"><div class="b"><span style="width:${w*5}%"></span></div><span class="v">${w}%</span></div></td></tr>`).join('');
+
+/* ---------- TABS ---------- */
+function showTab(id){
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected', t.dataset.tab===id ? 'true':'false'));
+  $$('.panel').forEach(p=>p.classList.toggle('on', p.id==='p-'+id));
+  try{ localStorage.setItem('apex-sop-ref-tab', id); }catch(e){}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.go)));
+
+/* ---------- PRINT ---------- */
+$$('[data-print]').forEach(b=>b.addEventListener('click',()=>window.print()));
+$('#so-print').addEventListener('click',()=>{
+  document.body.classList.add('print-signoff');
+  window.print();
+  setTimeout(()=>document.body.classList.remove('print-signoff'),500);
+});
+$('#so-clear').addEventListener('click',()=>{
+  $$('#signoff input, #signoff textarea').forEach(i=>i.value='');
+  $('#m-tier').value='';
+});
+
+/* ---------- INIT ---------- */
+['r1','r2','r3'].forEach(k=>{ renderDrills(k); renderReady(k); updateProgress(k); });
+try{ const last=localStorage.getItem('apex-sop-ref-tab'); if(last && document.getElementById('p-'+last)) showTab(last); }catch(e){}
+</script>
+</body>
+</html>

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escalation, Emergency &amp; De-Escalation Recertification · Apex</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;--navy-light:#1e3566;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E2DDD4;--white:#FFFFFF;--charcoal:#1A1A2E;--gray:#6B6B6B;
+  --green:#1A5C2A;--green-light:#DDF3E4;--red:#6B1A1A;--red-light:#FBEBEB;--amber:#7A5A0A;--amber-light:#FEF3DC;
+  --blue:#1a3a6b;--blue-light:#E6EEF8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--charcoal);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 0 40px;overflow-x:hidden}
+
+/* ── SITE HEADER ── */
+.site-header{width:100%;background:var(--navy-dark);padding:22px 22px 26px;border-bottom:1px solid rgba(201,168,76,0.15);position:relative;overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% -10%,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none}
+.header-inner{position:relative;max-width:800px;margin:0 auto}
+.back-link{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--gold);text-decoration:none;margin-bottom:18px;opacity:0.85}
+.back-link:hover{opacity:1;text-decoration:underline}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:12px}
+.site-title{font-family:'EB Garamond',serif;font-size:clamp(28px,5vw,44px);font-weight:400;line-height:1.1;color:#fff;margin-bottom:10px}
+.site-title em{font-style:italic;color:var(--gold-light)}
+.site-sub{font-size:13.5px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.7;max-width:600px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:9.5px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase}
+.chip-gold{background:rgba(201,168,76,0.14);color:var(--gold-light);border:1px solid rgba(201,168,76,0.4)}
+.chip-green{background:rgba(26,92,42,0.2);color:#86efac;border:1px solid rgba(26,92,42,0.45)}
+.chip .dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* ── HUD ── */
+.topbar{position:sticky;top:0;z-index:50;width:100%;background:var(--navy);border-bottom:3px solid var(--gold);padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
+.tb-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold)}
+.hud-mode{display:flex;align-items:center;gap:18px}
+.hud-train{font-family:'Barlow Condensed',sans-serif;color:#fff;display:flex;align-items:center;gap:10px}
+.hud-phase{font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);padding:4px 10px;border-radius:2px}
+.hud-train-prog{font-size:12px;letter-spacing:0.1em;color:rgba(255,255,255,0.75);text-transform:uppercase}
+.stat{text-align:center;line-height:1}
+.stat-num{font-family:'EB Garamond',serif;font-size:20px;font-weight:700;color:var(--gold)}
+.stat-lbl{font-size:8.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:4px}
+.streak-fire.on .stat-num{color:#f6b64c}
+.progress-rail{width:100%;height:5px;background:var(--navy)}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-light));transition:width .4s ease}
+
+/* ── STAGE / CARD ── */
+.stage{width:100%;max-width:800px;padding:30px 16px 0;display:flex;flex-direction:column;align-items:center}
+.card{width:100%;background:var(--cream);border-radius:4px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.45);border-top:4px solid var(--gold)}
+.card-head{background:var(--navy);padding:20px 26px;border-left:6px solid var(--gold)}
+.ch-kicker{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ch-title{font-family:'EB Garamond',serif;font-size:25px;color:#fff;font-weight:700;line-height:1.15}
+.ch-sub{font-size:12.5px;color:rgba(255,255,255,0.5);margin-top:6px}
+.card-body{padding:26px 26px 30px}
+
+/* ── WELCOME ── */
+.welcome-hero{text-align:center;padding:10px 0 6px}
+.wm{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.36em;text-transform:uppercase;color:var(--gold-dim)}
+.wtitle{font-family:'EB Garamond',serif;font-size:38px;font-weight:700;color:var(--navy);line-height:1.08;margin:10px 0 6px}
+.wtitle em{font-style:italic;color:var(--gold-dim)}
+.wlead{font-size:15px;color:var(--gray);line-height:1.6;max-width:580px;margin:14px auto 0}
+.gold-hr{height:2px;width:70px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto}
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 4px;text-align:left}
+.flow-cell{background:var(--white);border-top:3px solid var(--gold);padding:16px}
+.flow-step{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim)}
+.flow-h{font-family:'EB Garamond',serif;font-size:19px;color:var(--navy);font-weight:700;margin:3px 0 5px}
+.flow-p{font-size:12.5px;color:var(--gray);line-height:1.5}
+.who-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.who-cell{background:var(--navy);padding:14px 16px;border-left:3px solid var(--gold)}
+.who-cell .wl{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold)}
+.who-cell .wt{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;margin-top:4px}
+.name-wrap{margin:26px auto 4px;max-width:420px;text-align:left}
+.name-lbl{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--navy);margin-bottom:8px;display:block}
+.name-input{width:100%;padding:14px 16px;font-family:'Barlow',sans-serif;font-size:16px;color:var(--navy);background:var(--white);border:1.5px solid var(--cream-dark);border-radius:3px;outline:none}
+.name-input:focus{border-color:var(--gold)}
+.privacy{font-size:11.5px;color:var(--gray);margin-top:8px;line-height:1.5}
+
+/* ── BUTTONS ── */
+.btn{font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:14px 30px;border:none;border-radius:3px;cursor:pointer;transition:all .18s}
+.btn-primary{background:var(--gold);color:var(--navy)}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-primary:disabled{background:var(--cream-dark);color:#a8a196;cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-row{display:flex;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+.btn-nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px;flex-wrap:wrap}
+.btn-nav.end{justify-content:flex-end}
+
+/* ── LESSON ── */
+.lead-p{font-size:14.5px;color:var(--charcoal);line-height:1.65;margin-bottom:18px}
+.lead-p strong{color:var(--navy)}
+.isnot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 4px}
+.isnot-col{border-radius:3px;overflow:hidden;border:1px solid var(--cream-dark)}
+.isnot-h{padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#fff}
+.isnot-h.yes{background:var(--green)}
+.isnot-h.no{background:var(--red)}
+.isnot-col ul{list-style:none;background:var(--white);padding:12px 14px;display:flex;flex-direction:column;gap:9px}
+.isnot-col li{font-size:12.5px;line-height:1.45;color:var(--charcoal);display:flex;gap:8px}
+.isnot-col li::before{flex-shrink:0;font-weight:700}
+.isnot-col.yes li::before{content:'✓';color:var(--green)}
+.isnot-col.no li::before{content:'✕';color:var(--red)}
+
+.gold-q{background:var(--navy);border-radius:3px;padding:16px 18px;text-align:center;margin:4px 0 14px;border:1px solid var(--gold-dim)}
+.gold-q .gq-lbl{font-size:9.5px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.gold-q .gq-txt{font-family:'EB Garamond',serif;font-size:19px;font-style:italic;color:var(--gold-light)}
+.tree{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.tree-col{background:var(--white);border-radius:3px;overflow:hidden;border:1px solid var(--cream-dark)}
+.tree-h{padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#fff}
+.tree-h.yes{background:var(--green)}
+.tree-h.no{background:var(--amber)}
+.tree-col ul{list-style:none;padding:12px 14px;display:flex;flex-direction:column;gap:9px}
+.tree-col li{font-size:12.5px;line-height:1.45;color:var(--charcoal);display:flex;gap:8px}
+.tree-col li::before{content:'→';flex-shrink:0;font-weight:700;color:var(--gold-dim)}
+
+.proto{background:var(--white);border:1px solid var(--cream-dark);border-radius:3px;margin-bottom:14px;overflow:hidden}
+.proto-h{padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:10px}
+.proto-h::before{content:'';width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.85);flex-shrink:0}
+.proto-h.fire{background:var(--red)}
+.proto-h.med{background:var(--blue)}
+.proto-h.sec{background:var(--amber)}
+.proto ol{list-style:none;counter-reset:step;padding:12px 16px 14px;display:flex;flex-direction:column;gap:8px}
+.proto ol li{counter-increment:step;position:relative;padding-left:30px;font-size:13px;line-height:1.45;color:var(--charcoal)}
+.proto ol li::before{content:counter(step);position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:'EB Garamond',serif;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center}
+.proto ol li.emph{font-weight:600;color:var(--red)}
+
+.edo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 20px}
+.edo-cell{background:var(--navy);padding:14px 10px;text-align:center;border-top:3px solid var(--gold)}
+.edo-l{font-family:'EB Garamond',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1}
+.edo-w{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#fff;margin:6px 0 4px}
+.edo-d{font-size:11px;color:rgba(255,255,255,0.66);line-height:1.45}
+.tiers{display:flex;flex-direction:column;gap:9px;margin:4px 0 6px}
+.tier{display:flex;gap:12px;background:var(--white);border-left:4px solid var(--gold);padding:11px 14px;align-items:flex-start}
+.tier-n{font-family:'EB Garamond',serif;font-weight:700;font-size:13px;color:var(--gold-dim);flex-shrink:0;width:54px;text-transform:uppercase;letter-spacing:0.06em}
+.tier-b{font-size:13px;line-height:1.5;color:var(--charcoal);min-width:0}
+.tier-b strong{color:var(--navy)}
+
+.reqs{list-style:none;display:flex;flex-direction:column;gap:8px;margin:2px 0 6px}
+.reqs li{display:flex;gap:10px;font-size:13.5px;line-height:1.5;color:var(--charcoal);background:var(--white);padding:10px 13px;border-left:3px solid var(--gold)}
+.mini-h{font-family:'EB Garamond',serif;font-size:18px;color:var(--navy);font-weight:700;margin:22px 0 10px}
+.pill-box{background:var(--navy);border-radius:3px;padding:14px 16px;margin:4px 0}
+.pill-box .pb-lbl{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.pill-box .pb-txt{font-family:'EB Garamond',serif;font-size:16px;color:#fff;font-style:italic}
+.pill-box .pb-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:6px;line-height:1.5}
+.flow-chain{list-style:none;display:flex;flex-direction:column;margin:4px 0 6px}
+.flow-chain li{position:relative;padding:11px 14px 11px 16px;background:var(--white);border-left:3px solid var(--gold);font-size:13px;line-height:1.5;color:var(--charcoal)}
+.flow-chain li strong{color:var(--navy)}
+.flow-chain li:not(:last-child){margin-bottom:20px}
+.flow-chain li:not(:last-child)::after{content:'↓';position:absolute;left:14px;bottom:-18px;color:var(--gold-dim);font-weight:700}
+.recap{list-style:none;display:flex;flex-direction:column;gap:9px;margin:4px 0 8px}
+.recap li{display:flex;gap:10px;font-size:13.5px;line-height:1.5;color:var(--charcoal)}
+.recap li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.keystone{background:var(--navy);border:1px solid var(--gold-dim);border-radius:3px;padding:18px 20px;margin-top:14px;text-align:center}
+.keystone .ks-q{font-family:'EB Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-light);line-height:1.5}
+.note-strip{background:var(--amber-light);border-left:4px solid var(--amber);border-radius:0 3px 3px 0;padding:12px 15px;font-size:12.5px;color:#6a4f0a;line-height:1.5;margin-top:16px}
+.note-strip.red{background:var(--red-light);border-left-color:var(--red);color:var(--red)}
+
+/* ── A.C.T. SCENARIO CARDS ── */
+.sc-grid{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.sc{background:var(--white);border:1px solid var(--cream-dark);border-radius:3px;overflow:hidden}
+.sc.priority{border:2px solid var(--red)}
+.sc-h{background:var(--navy);padding:11px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sc-t{font-family:'EB Garamond',serif;font-size:17px;font-weight:700;color:#fff}
+.sc-n{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold)}
+.sc-flag{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;background:var(--red);color:#fff;padding:4px 9px;border-radius:2px}
+.sc-b{padding:14px 16px 16px}
+.sc-sit{font-family:'EB Garamond',serif;font-style:italic;font-size:15px;color:var(--navy);line-height:1.5;margin-bottom:10px}
+.sc-steps{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.sc-steps li{font-size:13px;line-height:1.5;color:var(--charcoal);display:flex;gap:10px}
+.sc-steps li b{flex-shrink:0;width:16px;font-family:'EB Garamond',serif;color:var(--gold-dim);font-size:15px}
+.say{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.say-col{border-radius:3px;padding:10px 12px;font-size:12.5px;line-height:1.5}
+.say-col .sl{font-size:9.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:5px}
+.say-col.do{background:var(--green-light);border-left:3px solid var(--green)}
+.say-col.do .sl{color:var(--green)}
+.say-col.dont{background:var(--red-light);border-left:3px solid var(--red)}
+.say-col.dont .sl{color:var(--red)}
+.say-col p{font-family:'EB Garamond',serif;font-size:14px;color:var(--charcoal)}
+.say-col p+p{margin-top:6px}
+.act-ready{list-style:none;display:flex;flex-direction:column;gap:7px}
+.act-ready li{display:flex;gap:10px;font-size:13px;line-height:1.5;background:var(--white);padding:9px 12px;border-left:3px solid var(--green)}
+.act-ready li::before{content:'□';color:var(--green);font-weight:700;flex-shrink:0}
+
+/* ── ASSESSMENT ── */
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 4px}
+.ai-cell{background:var(--white);border-top:3px solid var(--gold);padding:16px}
+.ai-part{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold-dim)}
+.ai-h{font-family:'EB Garamond',serif;font-size:19px;color:var(--navy);font-weight:700;margin:3px 0 6px}
+.ai-p{font-size:12.5px;color:var(--gray);line-height:1.5}
+.q-scenario{background:var(--navy-mid);color:var(--cream);font-family:'EB Garamond',serif;font-style:italic;font-size:15px;line-height:1.55;padding:16px 18px;border-radius:3px;border-left:4px solid var(--gold);margin-bottom:18px}
+.q-scenario .qs-tag{display:block;font-family:'Barlow Condensed',sans-serif;font-style:normal;font-size:10px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.q-prompt{font-family:'EB Garamond',serif;font-size:21px;font-weight:600;color:var(--navy);line-height:1.3;margin-bottom:18px}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1.5px solid var(--cream-dark);border-radius:3px;padding:14px 15px;cursor:pointer;transition:all .15s;font-size:14px;line-height:1.45;color:var(--charcoal)}
+.opt:hover:not(.locked){border-color:var(--gold)}
+.opt.locked{cursor:default}
+.opt .mark{flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--cream-dark);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-weight:700;font-size:13px;color:var(--gray)}
+.opt.correct{border-color:var(--green);background:var(--green-light)}
+.opt.correct .mark{background:var(--green);border-color:var(--green);color:#fff}
+.opt.wrong{border-color:var(--red);background:var(--red-light)}
+.opt.wrong .mark{background:var(--red);border-color:var(--red);color:#fff}
+.opt.dim{opacity:0.55}
+.fb{margin-top:18px;border-radius:3px;padding:15px 17px;font-size:13.5px;line-height:1.55;display:none}
+.fb.show{display:block;animation:rise .3s ease}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fb.good{background:var(--green-light);border-left:4px solid var(--green)}
+.fb.bad{background:var(--red-light);border-left:4px solid var(--red)}
+.fb-h{font-weight:700;letter-spacing:0.04em;text-transform:uppercase;font-size:11px;margin-bottom:6px}
+.fb.good .fb-h{color:var(--green)}
+.fb.bad .fb-h{color:var(--red)}
+.fb-b strong{color:var(--navy)}
+
+.entry-form{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field-lbl{font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy)}
+.field-lbl .ftag{color:var(--gold-dim)}
+.field-lbl .fsub{font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray)}
+.field-hint{font-size:11.5px;color:var(--gray);font-style:italic;font-family:'EB Garamond',serif}
+.field input,.field textarea{width:100%;font-family:'Barlow',sans-serif;font-size:15px;color:var(--navy);background:var(--white);border:1.5px solid var(--cream-dark);border-radius:3px;padding:11px 13px;outline:none;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field-time{max-width:200px}
+.rubric{margin-top:16px;background:var(--white);border:1px solid var(--cream-dark);border-radius:3px;overflow:hidden}
+.rubric-head{background:var(--navy);color:#fff;padding:11px 15px;display:flex;justify-content:space-between;align-items:center}
+.rubric-head .rh-t{font-family:'EB Garamond',serif;font-size:15px}
+.rubric-head .rh-s{font-family:'EB Garamond',serif;font-size:17px;color:var(--gold)}
+.rubric-grp-lbl{font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);padding:11px 15px 4px;background:var(--cream)}
+.rubric-item{display:flex;gap:10px;padding:9px 15px;font-size:12.5px;line-height:1.45;border-bottom:1px solid var(--cream);align-items:flex-start}
+.rubric-item:last-child{border-bottom:none}
+.ri-ic{flex-shrink:0;font-weight:700;font-size:13px;width:16px}
+.ri-ic.y{color:var(--green)}
+.ri-ic.n{color:var(--red)}
+.ri-label{color:var(--navy);font-weight:600}
+.ri-tip{color:var(--gray);font-size:11.5px;margin-top:2px}
+.ideal{background:var(--green-light);border-left:4px solid var(--green);border-radius:0 3px 3px 0;padding:12px 15px;margin-top:12px}
+.ideal-lbl{font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.ideal-txt{font-family:'EB Garamond',serif;font-size:14px;color:var(--navy);line-height:1.5;white-space:pre-line}
+
+/* ── RESULTS ── */
+.result-head{text-align:center;padding:8px 0 4px}
+.badge-tier{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;padding:7px 20px;border-radius:2px;margin-bottom:14px}
+.big-score{font-family:'EB Garamond',serif;font-size:64px;font-weight:700;color:var(--navy);line-height:1}
+.big-score span{font-size:30px;color:var(--gray)}
+.result-msg{font-size:14.5px;color:var(--gray);line-height:1.6;max-width:560px;margin:12px auto 0}
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 6px}
+.cat{background:var(--white);border:1px solid var(--cream-dark);border-radius:3px;padding:14px 16px}
+.cat-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:8px}
+.cat-name{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy)}
+.cat-sc{font-family:'EB Garamond',serif;font-weight:700;color:var(--gold-dim)}
+.cat-bar{height:7px;background:var(--cream-dark);border-radius:4px;overflow:hidden}
+.cat-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:4px}
+.cert{background:var(--navy);color:#fff;border:2px solid var(--gold);border-radius:4px;padding:30px 24px;text-align:center;margin-top:14px;position:relative}
+.cert::before,.cert::after{content:'';position:absolute;width:26px;height:26px;border:2px solid var(--gold)}
+.cert::before{top:10px;left:10px;border-right:none;border-bottom:none}
+.cert::after{bottom:10px;right:10px;border-left:none;border-top:none}
+.cert-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold)}
+.cert-kind{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);opacity:0.8;margin-top:6px}
+.cert-title{font-family:'EB Garamond',serif;font-size:23px;color:#fff;margin:8px 0 4px;line-height:1.25}
+.cert-name{font-family:'EB Garamond',serif;font-style:italic;font-size:30px;color:var(--gold-light);margin:14px 0;border-bottom:1px solid rgba(201,168,76,0.35);padding-bottom:12px;display:inline-block;min-width:60%;word-break:break-word}
+.cert-line{font-size:12.5px;color:rgba(255,255,255,0.72);line-height:1.6}
+.cert-meta{display:flex;justify-content:space-around;margin-top:20px;font-size:9px;gap:8px;flex-wrap:wrap}
+.cert-meta div{color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase}
+.cert-meta div span{display:block;color:var(--gold);font-family:'EB Garamond',serif;font-size:17px;margin-top:2px;letter-spacing:0;text-transform:none}
+.cert-valid{margin-top:18px;padding-top:12px;border-top:1px solid rgba(201,168,76,0.3);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-light)}
+
+/* ── FOOTER ── */
+.page-footer{width:100%;max-width:800px;margin-top:30px;padding:20px 16px 0;border-top:1px solid rgba(201,168,76,0.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px}
+.pf-brand{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.35)}
+.pf-meta{font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.3);line-height:1.6}
+.hidden{display:none!important}
+
+@media(max-width:600px){
+  .flow,.isnot,.tree,.edo-row,.ai-grid,.cats,.say,.who-strip{grid-template-columns:1fr}
+  .wtitle{font-size:30px}
+  .card-body{padding:22px 18px 26px}
+  .card-head{padding:18px 18px}
+  .ch-title{font-size:22px}
+  .q-prompt{font-size:19px}
+  .hud-mode{gap:14px}
+  .btn{padding:13px 22px}
+  .btn-nav .btn{flex:1 1 auto}
+  .tier{flex-direction:column;gap:4px}
+}
+@media print{
+  body{background:#fff;color:#000;padding:0}
+  .site-header,.topbar,.progress-rail,.btn-row,.btn-nav,.page-footer,.cats,.result-msg,.back-link{display:none!important}
+  .stage{padding:0;max-width:none}
+  .card{box-shadow:none;border-top:none;background:#fff}
+  .card-head{background:#fff;border-left:4px solid var(--gold)}
+  .ch-title{color:var(--navy)}
+  .cert{background:#fff;color:var(--navy);border:2px solid var(--gold-dim)}
+  .cert-title{color:var(--navy)}
+  .cert-name{color:var(--navy)}
+  .cert-line,.cert-meta div{color:#333}
+  .cert-meta div span{color:var(--gold-dim)}
+  .cert-valid,.cert-kind{color:var(--gold-dim)}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="back-link" href="index.html">← Training &amp; Development Lab</a>
+    <div class="eyebrow">Apex Concierge Services · Training &amp; Development Lab</div>
+    <h1 class="site-title">Escalation, Emergency &amp; <em>De-Escalation</em> Recertification</h1>
+    <p class="site-sub">Annual recertification for every agent, and the required refresher after any escalation miss. Six short lessons, a scored assessment, and a printable certificate.</p>
+    <div class="chips">
+      <span class="chip chip-gold"><span class="dot"></span>Recertification · Annual</span>
+      <span class="chip chip-green"><span class="dot"></span>Module 5 · Ongoing Development</span>
+    </div>
+  </div>
+</header>
+
+<div class="topbar">
+  <span class="tb-title">Recertification · Annual</span>
+  <div class="hud-mode hud-train" id="hudTrain">
+    <span class="hud-phase" id="phaseChip">Welcome</span>
+    <span class="hud-train-prog" id="trainProg"></span>
+  </div>
+  <div class="hud-mode hidden" id="hudAssess">
+    <div class="stat"><div class="stat-num" id="sScore">0</div><div class="stat-lbl">Points</div></div>
+    <div class="stat streak-fire" id="streakBox"><div class="stat-num" id="sStreak">0</div><div class="stat-lbl">Streak</div></div>
+    <div class="stat"><div class="stat-num" id="sProg">0/13</div><div class="stat-lbl">Progress</div></div>
+  </div>
+</div>
+<div class="progress-rail"><div class="progress-fill" id="progFill"></div></div>
+
+<main class="stage">
+  <div class="card"><div id="content"></div></div>
+</main>
+
+<footer class="page-footer">
+  <div class="pf-brand">Apex Concierge Services · Training &amp; Development Lab</div>
+  <div class="pf-meta">Internal Use Only · Escalation, Emergency &amp; De-Escalation Recertification<br>Version 1.0 · October 2026</div>
+</footer>
+
+<script>
+/* =================== CONTENT =================== */
+const LESSONS = [
+  {
+    kicker:"Lesson 01 · Your Role",
+    title:"You Are Not First Responders",
+    html:`
+      <p class="lead-p">When something goes wrong on your shift — a fire alarm, a medical collapse, a threat in the lobby — the residents will look to you. Your value in that moment is not heroics. It is <strong>calm, structure, and communication</strong>. You are the organized, professional point of contact who makes sure the right people get the right information at the right time.</p>
+      <div class="pill-box">
+        <div class="pb-lbl">The Apex Rule for Every Emergency</div>
+        <div class="pb-txt">"Call first. Document everything. Support within your role."</div>
+        <div class="pb-sub">You are not first responders. Do not investigate, do not confront, do not treat. You call the professionals, you keep people safe within your authority, and you create the record.</div>
+      </div>
+      <p class="lead-p" style="margin-top:18px">Be clear on what your job in a crisis is — and what it is not.</p>
+      <div class="isnot">
+        <div class="isnot-col yes">
+          <div class="isnot-h yes">Your Job Is</div>
+          <ul>
+            <li>Call 911 first when life or safety is at risk</li>
+            <li>Notify your supervisor and the correct escalation tier</li>
+            <li>Keep residents and yourself safe within your role</li>
+            <li>Observe and document — times, actions, who you notified</li>
+            <li>Guide responders and residents calmly</li>
+          </ul>
+        </div>
+        <div class="isnot-col no">
+          <div class="isnot-h no">Your Job Is Not</div>
+          <ul>
+            <li>Investigating a fire or a suspicious package yourself</li>
+            <li>Confronting or physically intervening in a threat</li>
+            <li>Providing medical treatment or moving an injured person</li>
+            <li>Deciding a serious event "isn't worth" reporting</li>
+            <li>Handling it verbally and leaving no record</li>
+          </ul>
+        </div>
+      </div>`
+  },
+  {
+    kicker:"Lesson 02 · The Decision",
+    title:"Resolve or Escalate?",
+    html:`
+      <p class="lead-p">Not every situation is a 911 emergency — but every situation forces one decision first. Before you act, ask the single question that governs every escalation at Apex.</p>
+      <div class="gold-q">
+        <div class="gq-lbl">The Only Question That Matters First</div>
+        <div class="gq-txt">"Can I resolve this within my role and authority?"</div>
+      </div>
+      <div class="tree">
+        <div class="tree-col">
+          <div class="tree-h yes">Yes — Resolve</div>
+          <ul>
+            <li>Take action within your role scope</li>
+            <li>Log the event using E.D.O.</li>
+            <li>Note any follow-up required in pass-on</li>
+          </ul>
+        </div>
+        <div class="tree-col">
+          <div class="tree-h no">No — Escalate</div>
+          <ul>
+            <li>Contact your supervisor immediately</li>
+            <li>Provide: what happened, who is involved, what you've done so far</li>
+            <li>Log the escalation — time and who was notified</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mini-h">Always escalate &amp; document — no judgment call</div>
+      <ul class="reqs">
+        <li>Any injury, damage, or physical altercation</li>
+        <li>Any security concern or suspicious person acted upon</li>
+        <li>A resident complaint escalated or unresolved at desk level</li>
+        <li>A policy gray area with no clear answer — escalate <strong>before</strong> acting</li>
+      </ul>
+      <div class="mini-h">When a resident is upset, use A.C.T.</div>
+      <div class="edo-row">
+        <div class="edo-cell"><div class="edo-l">A</div><div class="edo-w">Acknowledge</div><div class="edo-d">Recognize it. Respond, don't react. Let them feel heard.</div></div>
+        <div class="edo-cell"><div class="edo-l">C</div><div class="edo-w">Control</div><div class="edo-d">Control the environment first, then the conversation. Lower your voice.</div></div>
+        <div class="edo-cell"><div class="edo-l">T</div><div class="edo-w">Transfer or Resolve</div><div class="edo-d">Resolve within your authority, or escalate to the right owner.</div></div>
+      </div>
+      <div class="keystone">
+        <div class="ks-q">"Escalation is strength. The agent who escalates correctly protects themselves, the resident, and the company."</div>
+      </div>`
+  },
+  {
+    kicker:"Lesson 03 · Emergency Protocols",
+    title:"Fire · Medical · Security",
+    html:`
+      <p class="lead-p">These three protocols must be <strong>immediate — not recalled</strong>. Don't improvise in the moment. Know your first three actions cold for each.</p>
+      <div class="proto">
+        <div class="proto-h fire">Fire</div>
+        <ol>
+          <li>Call 911 immediately. Do not investigate.</li>
+          <li>Activate the fire alarm if not already triggered.</li>
+          <li>Direct residents to the nearest exit — no elevators.</li>
+          <li>Stage at the assembly point. Do not re-enter.</li>
+          <li>Meet emergency responders at the entrance.</li>
+          <li>Document: alarm time, your actions, who you notified.</li>
+        </ol>
+      </div>
+      <div class="proto">
+        <div class="proto-h med">Medical</div>
+        <ol>
+          <li>Call 911. Provide address, floor, and nature of the emergency.</li>
+          <li>Do not move the individual unless they are in immediate danger.</li>
+          <li>Stay with them — calm and professional. Clear bystanders.</li>
+          <li>Meet EMS at entry. Provide access and information.</li>
+          <li>Document: time, what was observed, who responded.</li>
+        </ol>
+      </div>
+      <div class="proto">
+        <div class="proto-h sec">Security Threat</div>
+        <ol>
+          <li>Do not confront. Maintain distance and a calm demeanor.</li>
+          <li>Call 911 if there is a credible threat to safety.</li>
+          <li>Notify your supervisor — use radio or a secondary line.</li>
+          <li>Observe and document: description, direction, what was said.</li>
+          <li class="emph">Your safety is not secondary to the building's. Remove yourself from danger first.</li>
+        </ol>
+      </div>
+      <div class="note-strip"><strong>The step agents miss most:</strong> on a security threat, protecting yourself comes first. Never try to de-escalate an active physical threat yourself — call 911, do not confront, do not intervene. Your job is communication and documentation.</div>`
+  },
+  {
+    kicker:"Lesson 04 · Tiers & Reporting",
+    title:"Who You Notify — and How You Record It",
+    html:`
+      <p class="lead-p">Escalating isn't just "telling someone." The <strong>tier</strong> must be right, the notification must be <strong>named</strong>, and it must appear in the log — who, when, through what channel, and what you were told to do. An undocumented escalation, operationally and legally, <strong>did not happen</strong>.</p>
+      <div class="mini-h" style="margin-top:0">The reporting flow</div>
+      <ul class="flow-chain">
+        <li><strong>Agent / Frontline</strong> — complete the Incident Report in Connecteam immediately after the event. For critical incidents, notify the Regional Manager by phone <strong>first</strong>, then follow up in writing.</li>
+        <li><strong>Site Lead / Supervisor</strong> — reviews for accuracy and detail; follows up with you if anything needs clarifying.</li>
+        <li><strong>Regional Manager</strong> — escalates to Property Management if needed; flags Executive Leadership when serious.</li>
+        <li><strong>Executive Leadership</strong> — final review for high-level escalations, legal considerations, or repeat issues.</li>
+      </ul>
+      <div class="mini-h">Applying the tier — the standard</div>
+      <div class="tiers">
+        <div class="tier"><div class="tier-n">Weak</div><div class="tier-b">"Notified management about the incident." <em>Which manager? Called or messaged? Before or after the resident left?</em></div></div>
+        <div class="tier"><div class="tier-n">Apex</div><div class="tier-b"><strong>"Contacted Lead Concierge M. Torres by phone at 11:42 PM per Tier 2. Instructed to complete incident report and monitor. PM to be briefed at 8 AM — flagged in pass-on."</strong></div></div>
+      </div>
+      <div class="mini-h">Critical incidents — extra step</div>
+      <ul class="reqs">
+        <li>Safety, legal, or police involvement → <strong>call the Regional Manager by phone immediately</strong>, then submit the written report.</li>
+        <li>File in Connecteam → Forms → Incident Report before the end of your shift — always.</li>
+        <li>Add your site manager emails (listed in the site binder) on submission so local management has visibility.</li>
+      </ul>
+      <div class="note-strip"><strong>When in doubt — file, and escalate up a tier.</strong> An unnecessary report is recoverable. A missing one is not.</div>`
+  },
+  {
+    kicker:"Lesson 05 · A.C.T. in Practice",
+    title:"A.C.T. in Practice — De-Escalation",
+    html:`
+      <p class="lead-p">How you handle pressure is the real performance indicator. This lesson is not about memorizing lines. It is about <strong>composure, decision discipline, and documentation</strong> under conditions that feel real. A.C.T. gives you one structure that holds in every scenario.</p>
+      <div class="edo-row">
+        <div class="edo-cell"><div class="edo-l">A</div><div class="edo-w">Acknowledge</div><div class="edo-d">Recognize what is happening. Name it internally. Do not react — respond.</div></div>
+        <div class="edo-cell"><div class="edo-l">C</div><div class="edo-w">Control</div><div class="edo-d">Control the environment first, then the conversation. Lower your voice. Do not match their energy.</div></div>
+        <div class="edo-cell"><div class="edo-l">T</div><div class="edo-w">Transfer or Resolve</div><div class="edo-d">Resolve within your authority or escalate to the right person. Document the action and the outcome.</div></div>
+      </div>
+      <div class="pill-box">
+        <div class="pb-lbl">Your default under pressure</div>
+        <div class="pb-txt">Composure — not defensiveness, not over-explanation.</div>
+        <div class="pb-sub">Friendly ≠ Familiar. Warmth is required; opinions about other residents, side-taking and personal remarks are not. Never promise enforcement — fines, warnings, evictions and lease action belong to property management.</div>
+      </div>
+      <div class="note-strip red"><strong>Where A.C.T. stops:</strong> A.C.T. is for an upset person. It is not for an active physical threat. The moment safety is at risk, switch to the Security Threat protocol — distance, 911 if credible, notify your supervisor, protect yourself first.</div>
+
+      <div class="mini-h">The six scenario areas</div>
+      <p class="lead-p" style="margin-bottom:12px">Every agent should have handled or role-played each of these with a debrief. The last one matters most for safety.</p>
+      <div class="sc-grid">
+
+        <div class="sc">
+          <div class="sc-h"><span class="sc-t">Late-night noise complaint</span><span class="sc-n">Area 1</span></div>
+          <div class="sc-b">
+            <div class="sc-sit">11:30 PM. A resident calls, furious — the unit above has been loud for two hours. She has called before and is done being polite.</div>
+            <ul class="sc-steps">
+              <li><b>A</b><span>Acknowledge the frustration without dismissing it.</span></li>
+              <li><b>C</b><span>Address the noise with the unit per your site's protocol — professionally, without confrontation. The desk is never left unattended; secure coverage first.</span></li>
+              <li><b>T</b><span>Call her back with an update. If it continues, escalate to management per protocol. Document times, units, actions and outcome.</span></li>
+            </ul>
+            <div class="say">
+              <div class="say-col do"><div class="sl">Say this</div><p>"I understand — that's frustrating this late. I'm addressing it now and I'll call you back with an update."</p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"I'll make sure they get fined tonight."</p><p>"That unit is always a problem."</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc">
+          <div class="sc-h"><span class="sc-t">Smoking violation on tour</span><span class="sc-n">Area 2</span></div>
+          <div class="sc-b">
+            <div class="sc-sit">On tour you find a guest smoking in a stairwell. He's hostile at once: "I'm a guest of a resident. You can't tell me what to do."</div>
+            <ul class="sc-steps">
+              <li><b>A</b><span>Stay calm. You are not in a confrontation — you are applying a policy that protects every resident.</span></li>
+              <li><b>C</b><span>State the policy once, plainly. Do not argue and do not escalate physically.</span></li>
+              <li><b>T</b><span>If he refuses, step away, contact management, and document. Your job is not to win — it is to address, record and escalate.</span></li>
+            </ul>
+            <div class="say">
+              <div class="say-col do"><div class="sl">Say this</div><p>"I understand you're a guest here. This is a non-smoking building — that policy applies to everyone on the property. I'll need to ask you to step outside."</p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"Put that out or I'm calling the cops."</p><p>"Whatever — just don't let anyone see you."</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc">
+          <div class="sc-h"><span class="sc-t">Difficult resident at the desk</span><span class="sc-n">Area 3</span></div>
+          <div class="sc-b">
+            <div class="sc-sit">A resident with a reputation for condescending, out-of-scope demands approaches the desk clearly agitated.</div>
+            <ul class="sc-steps">
+              <li><b>A</b><span>Don't change your baseline because of a reputation. Every interaction starts fresh. Listen fully before responding.</span></li>
+              <li><b>C</b><span>Speak clearly and neutrally. Validate the concern, not the behavior. If it turns abusive, calmly redirect.</span></li>
+              <li><b>T</b><span>Resolve what is in your scope; route the rest to the right owner. Document tone, words, time and outcome.</span></li>
+            </ul>
+            <div class="say">
+              <div class="say-col do"><div class="sl">Say this</div><p>"I hear your frustration. Here's what I'm able to do for you right now."</p><p>"I want to help you, and I'll be able to do that best if we can keep this conversation respectful."</p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"That's not my job."</p><p>"There's nothing I can do."</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc">
+          <div class="sc-h"><span class="sc-t">Escalation decision under threat</span><span class="sc-n">Area 4</span></div>
+          <div class="sc-b">
+            <div class="sc-sit">An agitated non-resident is shouting in the lobby and moving toward the desk. You feel unsafe.</div>
+            <ul class="sc-steps">
+              <li><b>A</b><span>Recognize this has crossed from "upset" to "threat." A.C.T. is no longer the tool — the Security Threat protocol is.</span></li>
+              <li><b>C</b><span>Keep distance. Do not confront. Remove yourself from danger first.</span></li>
+              <li><b>T</b><span>Call 911 if the threat is credible. Notify your supervisor by radio or a second line. Observe and document: description, direction, what was said. Phone the Regional Manager, then file the incident report.</span></li>
+            </ul>
+            <div class="say">
+              <div class="say-col do"><div class="sl">Do this</div><p>Short, calm, from a distance: "I'm getting someone to help with this now." Then make the calls.</p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>Blocking their path, arguing, or following them through the building.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc">
+          <div class="sc-h"><span class="sc-t">Simultaneous pressure — phone, desk, radio</span><span class="sc-n">Area 5</span></div>
+          <div class="sc-b">
+            <div class="sc-sit">The desk phone is ringing, a resident is waiting at the desk, and your radio comes alive — all at once.</div>
+            <ul class="sc-steps">
+              <li><b>A</b><span>Acknowledge every person, briefly, so no one feels ignored. Eye contact and one sentence.</span></li>
+              <li><b>C</b><span>Control the order. Safety first, then resident experience, then team, then admin. Whatever touches safety goes to the front of the line.</span></li>
+              <li><b>T</b><span>Work each item to resolution or handoff. Log every event — pressure is when gaps in the record happen.</span></li>
+            </ul>
+            <div class="say">
+              <div class="say-col do"><div class="sl">Say this</div><p>"I'll be right with you." <em>(to the resident at the desk)</em></p><p>"Thank you for holding — I'll be with you in one moment." <em>(to the caller)</em></p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"One thing at a time!"</p><p>Silencing the radio so you can focus.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc priority">
+          <div class="sc-h"><span class="sc-t">Unauthorized person in the lobby</span><span class="sc-flag">Matters most for safety</span></div>
+          <div class="sc-b">
+            <div class="sc-sit">Someone has been sitting in the lobby for 45 minutes. They didn't check in, don't appear to be waiting for a resident, and become vague when asked who they're visiting.</div>
+            <ul class="sc-steps">
+              <li><b>A</b><span>Approach with genuine hospitality — not accusation. Security is a service, not a confrontation.</span></li>
+              <li><b>C</b><span>Offer to connect them with a resident. If they are evasive, explain the lobby is for residents and authorized guests. No verification, no access — "they said it was approved" is not authorization.</span></li>
+              <li><b>T</b><span>If they refuse to leave or can't be verified, contact management immediately and document a description and direction of travel. If they turn threatening, switch to the Security Threat protocol.</span></li>
+            </ul>
+            <div class="say">
+              <div class="say-col do"><div class="sl">Say this</div><p>"Good afternoon. Can I help you find someone, or let a resident know you're here?"</p><p>"The lobby is for residents and their guests. I'm happy to call up for you."</p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"You need to leave. Now."</p><p>Saying nothing and hoping they go.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-h">Document every significant interaction</div>
+      <p class="lead-p" style="margin-bottom:10px">After every scenario — real or practiced — write the E.D.O. entry before the shift ends. No exceptions. Document what you observed, not what you concluded.</p>
+      <div class="tiers">
+        <div class="tier"><div class="tier-n">Weak</div><div class="tier-b">"Resident was being rude about noise again. Handled it."</div></div>
+        <div class="tier"><div class="tier-n">Apex</div><div class="tier-b"><strong>"11:34 PM — Noise complaint. Resident of Unit 6B reported loud music from Unit 7B for approx. two hours. Concierge contacted Unit 7B at 11:40 PM; volume reduced. Resident of 6B updated by phone 11:44 PM. Flagged for PM in pass-on."</strong></div></div>
+      </div>
+      <div class="mini-h">Ready looks like</div>
+      <ul class="act-ready">
+        <li>Can name A.C.T. and apply it in a live interaction without prompting</li>
+        <li>Has handled or role-played all six scenario areas with a debrief</li>
+        <li>Default under pressure is composure, not defensiveness or over-explanation</li>
+        <li>Documents every significant interaction in E.D.O. before the shift ends</li>
+        <li>Knows when a situation exceeds their authority and escalates without hesitation</li>
+      </ul>`
+  },
+  {
+    kicker:"Lesson 06 · Ready",
+    title:"Before You're Recertified",
+    html:`
+      <p class="lead-p">You've covered the standard. Here's your recap before the assessment:</p>
+      <ul class="recap">
+        <li><strong>Call first. Document everything. Support within your role.</strong> You are not a first responder.</li>
+        <li>Ask <strong>"Can I resolve this within my role?"</strong> — resolve and log, or escalate and log. Escalation is strength.</li>
+        <li>Fire, Medical, Security — 911 first; never investigate, confront, or treat. On a threat, protect yourself first.</li>
+        <li>Escalate to the <strong>right tier</strong>, name who you notified, when, and through what channel.</li>
+        <li>Critical incidents: phone the Regional Manager immediately, then file the Connecteam incident report before end of shift.</li>
+        <li><strong>A.C.T.</strong> for every upset person: Acknowledge, Control, Transfer or Resolve. Composure, not defensiveness.</li>
+        <li>Friendly ≠ Familiar. Never promise enforcement. Document every significant interaction in E.D.O.</li>
+      </ul>
+      <div class="keystone">
+        <div class="ks-q">"If someone reviewed this incident tomorrow, would they know exactly what happened, who I called, and when?"</div>
+      </div>
+      <p class="lead-p" style="margin-top:16px;text-align:center">When you can answer <strong>yes</strong> to that for every emergency and every difficult interaction — you're ready.</p>`
+  }
+];
+
+/* ---- ASSESSMENT: MULTIPLE CHOICE ---- */
+const MC = [
+  { cat:"Knowledge", prompt:"Which statement best describes your role in an emergency?",
+    opts:["Call first, document everything, and support within your role — you are not a first responder","Take charge and resolve the emergency yourself before help arrives","Wait for a resident to call 911 so you don't overstep","Handle it quietly and report it later if it becomes a problem"],
+    correct:0, why:"The Apex rule is <strong>\"Call first. Document everything. Support within your role.\"</strong> You are the organized point of contact — not a first responder." },
+  { cat:"Knowledge", prompt:"What is the single question that governs every escalation decision?",
+    opts:["\"Can I resolve this within my role and authority?\"","\"Will this make the resident angry?\"","\"Is my supervisor available right now?\"","\"Has this ever happened before?\""],
+    correct:0, why:"Every escalation starts here: <strong>can I resolve this within my role?</strong> Yes → resolve and log. No → escalate and log." },
+  { cat:"Knowledge", prompt:"During a fire, what is your FIRST action?",
+    opts:["Call 911 immediately — do not investigate","Investigate the source to confirm it's a real fire","Use the elevator to reach the affected floor","Wait to see if the alarm stops on its own"],
+    correct:0, why:"<strong>Call 911 immediately. Do not investigate.</strong> Then activate the alarm, direct residents to exits (no elevators), and stage at the assembly point." },
+  { cat:"Knowledge", prompt:"For a critical incident involving safety, legal, or police, how do you notify leadership?",
+    opts:["Call the Regional Manager by phone immediately, then follow up with a written report","Submit only the written Connecteam form and wait for a reply","Send a text to a coworker so someone knows","Wait until the next morning's briefing"],
+    correct:0, why:"Critical incidents require a <strong>phone call to the Regional Manager immediately</strong>, followed by the written incident report. Speed of notification protects everyone." },
+  { cat:"Aptitude", scenarioTag:"Scenario · Medical", scenario:"2:10 AM — A resident collapses in the lobby and is unresponsive. You are alone at the desk.",
+    prompt:"What is the correct first sequence of actions?",
+    opts:["Call 911 with address and floor, do not move them unless in danger, stay with them and clear bystanders","Move them to a couch to make them comfortable, then call the front office","Give them water and wait to see if they recover before calling anyone","Search their wallet for emergency contacts before doing anything else"],
+    correct:0, why:"Call 911 first with location and nature of emergency, <strong>do not move</strong> the person unless they're in danger, stay with them, clear bystanders, and meet EMS at entry." },
+  { cat:"Aptitude", scenarioTag:"Scenario · Escalation Under Threat", scenario:"11:30 PM — An agitated non-resident is shouting in the lobby and moving toward the desk. You feel unsafe.",
+    prompt:"What is the correct response?",
+    opts:["Keep distance, call 911 if the threat is credible, notify your supervisor, and remove yourself from danger first","Physically block them from advancing to protect the property","Try to de-escalate the person one-on-one to calm them down","Follow them through the building to document where they go"],
+    correct:0, why:"Do not confront. <strong>Maintain distance, call 911 if credible, notify your supervisor, and protect yourself first.</strong> A.C.T. is for an upset person, not an active threat. Never intervene physically." },
+  { cat:"Aptitude", scenarioTag:"Scenario · Gray Area", scenario:"9:15 PM — A vendor insists a resident 'always lets them up' but isn't on any access list, and the resident won't answer. The vendor is getting frustrated.",
+    prompt:"What is the correct call?",
+    opts:["Escalate before acting — contact your supervisor, explain the situation, and log it. Do not grant access without verification","Let them up this once since they seem to know the resident","Turn them away and don't bother logging it since nothing happened","Give them the resident's spare key to wait inside the unit"],
+    correct:0, why:"A policy gray area with no clear answer means <strong>escalate before acting</strong>. No verification = no access. Contact your supervisor and log the event and the escalation." },
+  { cat:"De-Escalation", scenarioTag:"Scenario · Late-Night Noise", scenario:"11:30 PM Friday — The resident in 6B calls the desk, furious: the unit above has been playing loud music for two hours. She has called three times and says she wants them \"thrown out.\"",
+    prompt:"Which response meets the Apex standard?",
+    opts:["Acknowledge her frustration, address the noise with the unit per site protocol without confrontation, call her back with an update, document it — and escalate to management if it continues","Tell her you'll make sure management fines the unit tonight so she can get some sleep","Explain that noise isn't a concierge matter and she should email the property office in the morning","Agree that the unit upstairs is always a problem and promise to keep an eye on them"],
+    correct:0, why:"A.C.T.: acknowledge, address it, close the loop with an update, document, escalate if it continues. <strong>Never promise enforcement</strong> — fines and lease action belong to management. And <strong>Friendly ≠ Familiar</strong>: no opinions about other residents." },
+  { cat:"De-Escalation", scenarioTag:"Scenario · Smoking on Tour", scenario:"9:20 PM — On tour you find a guest smoking in the 3rd-floor stairwell. \"I'm a guest of a resident. You can't tell me what to do.\" You state the policy; he refuses to put it out.",
+    prompt:"What do you do next?",
+    opts:["Don't escalate physically — step away, contact management, and log the event in E.D.O.","Take the cigarette from him and walk him to the exit","Let it go — he's a guest, not a resident, so it isn't your concern","Keep arguing until he complies so you don't look like you backed down"],
+    correct:0, why:"State the policy once, calmly — it applies to everyone on the property. If he refuses, <strong>do not escalate physically</strong>. Retreat, contact management, and document. Your job is not to win — it's to address, record, and escalate." },
+  { cat:"De-Escalation", scenarioTag:"Scenario · Difficult Resident", scenario:"A resident known for condescending, out-of-scope demands approaches the desk agitated. Partway through, she starts insulting you personally.",
+    prompt:"What is the strongest response?",
+    opts:["Keep your baseline and calmly redirect: \"I want to help you, and I'll be able to do that best if we can keep this conversation respectful.\" Then document tone, words, time, and outcome","Match her tone so she knows you won't be pushed around","Give her shorter answers than usual — she does this every week","Tell her you'll help once she's calmed down, then turn back to your screen"],
+    correct:0, why:"Composure, not defensiveness. Validate the concern without validating the behavior, <strong>redirect calmly</strong>, and <strong>document everything</strong>. A reputation never changes your baseline." },
+  { cat:"De-Escalation", scenarioTag:"Scenario · Simultaneous Pressure", scenario:"8:05 PM — The desk phone is ringing, a resident is waiting at the desk for a package, and your radio crackles: a teammate on tour reports a resident has fallen in the garage and isn't getting up.",
+    prompt:"What is the right sequence?",
+    opts:["Acknowledge the resident at the desk (\"I'll be right with you\"), take the radio call first — confirm 911 is called and prepare to meet EMS at the entry — then return to the phone and the package, and log every event","Handle everything in the order it arrived: phone, then package, then radio","Release the package quickly so the lobby looks under control, then check the radio","Turn the radio down so you can focus on one thing at a time"],
+    correct:0, why:"Control the order: <strong>safety first</strong>, then resident experience, then team, then admin. Acknowledge everyone briefly so no one feels ignored — and log each event once the pressure passes." },
+  { cat:"De-Escalation", scenarioTag:"Scenario · Unauthorized Person", scenario:"2:40 PM — Someone has been sitting in the lobby for 45 minutes. They didn't check in, aren't waiting for any resident you know of, and become vague when asked who they're visiting.",
+    prompt:"What is the correct protocol?",
+    opts:["Approach with hospitality and offer to connect them with a resident; if they can't be verified or refuse to leave, contact management immediately and document a description — and switch to the security protocol if they turn threatening","Leave them alone — approaching a non-resident isn't your role","Let them wait in the resident lounge since they seem calm","Take them by the arm and walk them out of the building"],
+    correct:0, why:"<strong>Security is a service, not a confrontation</strong> — but an unverified person in the lobby is the scenario that matters most for safety. No verification, no access. Escalate to management, document, and never intervene physically." }
+];
+
+/* ---- ASSESSMENT: WRITTEN ESCALATION DRILL ---- */
+const WRITTEN = [
+  {
+    scenarioTag:"Written Drill · Reportable Incident",
+    scenario:"At 11:40 PM, two residents from Units 812 and 814 begin arguing loudly in the lobby over a parking space. One shoves the other. No injuries. You verbally separate them and both de-escalate. This is above desk-level authority — a reportable incident that must be escalated.",
+    prompt:"Write the escalation log entry using E.D.O. Capture what happened — and critically, who you notified, when, and through what channel.",
+    ideal:"11:40 PM — Resident Altercation\nEvent: Physical altercation between residents of Units 812 and 814 in the lobby.\nDetail: Verbal dispute over a parking space escalated; one resident shoved the other. No injuries observed.\nOutcome: Verbally separated both parties; situation de-escalated. Contacted Lead Concierge by phone at 11:45 PM per Tier 2. Incident report filed in Connecteam. Flagged for PM in pass-on."
+  }
+];
+
+/* =================== STATE (memory only — nothing is stored or sent) =================== */
+const totalLessons = LESSONS.length;
+const assessTotal = MC.length + WRITTEN.length;
+let lessonIdx = 0, mcIdx = 0, writtenIdx = 0;
+let points = 0, streak = 0, agentName = "";
+const mcResults = [];
+const writtenResults = [];
+const content = document.getElementById('content');
+const hudTrain = document.getElementById('hudTrain');
+const hudAssess = document.getElementById('hudAssess');
+
+function toTop(){ window.scrollTo({top:document.querySelector('.topbar').offsetTop,behavior:'smooth'}); }
+function setBar(pct){ document.getElementById('progFill').style.width = pct + "%"; }
+function showTrainHUD(chip, prog){
+  hudTrain.classList.remove('hidden'); hudAssess.classList.add('hidden');
+  document.getElementById('phaseChip').textContent = chip;
+  document.getElementById('trainProg').textContent = prog;
+}
+function showAssessHUD(){
+  hudTrain.classList.add('hidden'); hudAssess.classList.remove('hidden');
+  document.getElementById('sScore').textContent = points;
+  document.getElementById('sStreak').textContent = streak;
+  document.getElementById('sProg').textContent = (mcIdx + writtenIdx) + "/" + assessTotal;
+  document.getElementById('streakBox').classList.toggle('on', streak >= 3);
+}
+
+/* =================== WELCOME =================== */
+function renderWelcome(){
+  showTrainHUD("Welcome", ""); setBar(0);
+  content.innerHTML = `
+    <div class="card-body">
+      <div class="welcome-hero">
+        <div class="wm">Annual Recertification</div>
+        <div class="wtitle">Escalation, Emergency &amp; <em>De-Escalation</em></div>
+        <div class="gold-hr"></div>
+        <p class="wlead">Refresh the standard — your role in a crisis, the escalation decision, the Fire / Medical / Security protocols, the reporting tiers, and A.C.T. under pressure. Then prove it: knowledge, judgment, and a written escalation entry that meets the Apex standard.</p>
+      </div>
+      <div class="who-strip">
+        <div class="who-cell"><div class="wl">Annual</div><div class="wt">Every agent recertifies once every 12 months.</div></div>
+        <div class="who-cell"><div class="wl">After an escalation miss</div><div class="wt">Required as a refresher after any missed or late escalation, before the next solo shift.</div></div>
+      </div>
+      <div class="flow">
+        <div class="flow-cell"><div class="flow-step">Part One</div><div class="flow-h">Training</div><div class="flow-p">Six short lessons: your role, resolve-or-escalate, the three emergency protocols, tiers &amp; reporting, A.C.T. in practice, and a recap. No scoring.</div></div>
+        <div class="flow-cell"><div class="flow-step">Part Two</div><div class="flow-h">Assessment</div><div class="flow-p">${MC.length} scored questions on knowledge, judgment and de-escalation, plus one written escalation entry checked for E.D.O. integrity and accountability. 80% recertifies.</div></div>
+      </div>
+      <div class="name-wrap">
+        <label class="name-lbl" for="nameField">Your name (for the certificate only)</label>
+        <input class="name-input" id="nameField" type="text" placeholder="Agent name" autocomplete="off" maxlength="40">
+        <p class="privacy">Nothing you type leaves this computer. Your name and score are not saved or sent anywhere — print or save your certificate before closing the page.</p>
+      </div>
+      <div class="btn-row"><button class="btn btn-primary" id="startBtn" disabled>Begin Training</button></div>
+    </div>`;
+  const field = document.getElementById('nameField'), start = document.getElementById('startBtn');
+  field.addEventListener('input', ()=>{ start.disabled = field.value.trim().length < 2; });
+  field.addEventListener('keydown', e=>{ if(e.key==='Enter' && !start.disabled) beginTraining(); });
+  start.addEventListener('click', beginTraining);
+}
+function beginTraining(){ agentName = document.getElementById('nameField').value.trim(); lessonIdx=0; renderLesson(); toTop(); }
+
+/* =================== TRAINING =================== */
+function renderLesson(){
+  const L = LESSONS[lessonIdx];
+  showTrainHUD("Training", "Lesson " + (lessonIdx+1) + " of " + totalLessons);
+  setBar((lessonIdx/totalLessons)*100);
+  const last = lessonIdx === totalLessons-1;
+  content.innerHTML = `
+    <div class="card-head">
+      <div class="ch-kicker">${L.kicker}</div>
+      <div class="ch-title">${L.title}</div>
+    </div>
+    <div class="card-body">
+      ${L.html}
+      <div class="btn-nav ${lessonIdx===0?'end':''}">
+        ${lessonIdx>0 ? '<button class="btn btn-ghost" id="backBtn">Back</button>' : ''}
+        <button class="btn btn-primary" id="fwdBtn">${last ? 'Begin Assessment →' : 'Continue →'}</button>
+      </div>
+    </div>`;
+  if(lessonIdx>0) document.getElementById('backBtn').addEventListener('click', ()=>{ lessonIdx--; renderLesson(); toTop(); });
+  document.getElementById('fwdBtn').addEventListener('click', ()=>{
+    if(last){ renderAssessIntro(); } else { lessonIdx++; renderLesson(); }
+    toTop();
+  });
+}
+
+/* =================== ASSESSMENT INTRO =================== */
+function renderAssessIntro(){
+  showTrainHUD("Assessment", "Ready to begin"); setBar(0);
+  content.innerHTML = `
+    <div class="card-head">
+      <div class="ch-kicker">Part Two · Recertification Assessment</div>
+      <div class="ch-title">Time to Prove It</div>
+      <div class="ch-sub">Training complete — ${escapeHTML(agentName)}, this next part is scored.</div>
+    </div>
+    <div class="card-body">
+      <p class="lead-p">The assessment has two parts. Read each carefully — the written drill is where the standard really shows.</p>
+      <div class="ai-grid">
+        <div class="ai-cell"><div class="ai-part">Part A · ${MC.length} Questions</div><div class="ai-h">Knowledge, Judgment &amp; De-Escalation</div><div class="ai-p">Multiple choice. Some test what you know; others give you a real situation and ask for the right call. Immediate feedback after each.</div></div>
+        <div class="ai-cell"><div class="ai-part">Part B · ${WRITTEN.length} Drill</div><div class="ai-h">Written Escalation Entry</div><div class="ai-p">Write the log entry for a reportable incident. Graded on <strong>E.D.O. integrity</strong> and a clear <strong>accountability trail</strong> — who you notified, when, and how.</div></div>
+      </div>
+      <div class="note-strip"><strong>How your writing is scored:</strong> each entry is checked for a valid time stamp, a clear Event, specific Detail, an Outcome that names who was notified and closes the loop — plus capitalization, punctuation, professional tone, and factual (non-opinion) language.</div>
+      <p class="lead-p" style="margin-top:16px"><strong>80% or higher</strong> renews your Escalation, Emergency &amp; De-Escalation certification for 12 months.</p>
+      <div class="btn-nav end"><button class="btn btn-primary" id="startAssess">Start Assessment →</button></div>
+    </div>`;
+  document.getElementById('startAssess').addEventListener('click', ()=>{ mcIdx=0; renderMC(); toTop(); });
+}
+
+/* =================== MC =================== */
+function shuffleQ(q){
+  if(q._shuffled) return;
+  const order = q.opts.map((o,i)=>({o,i}));
+  for(let k=order.length-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); [order[k],order[j]]=[order[j],order[k]]; }
+  const origCorrect = q.correct;
+  q.opts = order.map(x=>x.o);
+  q.correct = order.findIndex(x=>x.i===origCorrect);
+  q._shuffled = true;
+}
+function renderMC(){
+  const q = MC[mcIdx];
+  shuffleQ(q);
+  showAssessHUD(); setBar((mcIdx/assessTotal)*100);
+  const scenarioBlock = q.scenario ? `<div class="q-scenario"><span class="qs-tag">${q.scenarioTag||'Scenario'}</span>${q.scenario}</div>` : "";
+  const catLabel = q.cat==="Aptitude" ? "Judgment" : q.cat;
+  const optsHTML = q.opts.map((o,i)=>`<div class="opt" role="button" tabindex="0" data-i="${i}"><div class="mark">${String.fromCharCode(65+i)}</div><div>${o}</div></div>`).join("");
+  content.innerHTML = `
+    <div class="card-head">
+      <div class="ch-kicker">Part A · ${catLabel} · Q${mcIdx+1} of ${MC.length}</div>
+      <div class="ch-title">Make the Call</div>
+    </div>
+    <div class="card-body">
+      ${scenarioBlock}
+      <div class="q-prompt">${q.prompt}</div>
+      <div class="opts" id="opts">${optsHTML}</div>
+      <div class="fb" id="fb"></div>
+      <div class="btn-nav end hidden" id="navWrap"><button class="btn btn-primary" id="nextBtn">${mcIdx===MC.length-1?'Continue to Written Drill →':'Next Question →'}</button></div>
+    </div>`;
+  document.querySelectorAll('.opt').forEach(el=>{
+    el.addEventListener('click', ()=>answerMC(el,q));
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); answerMC(el,q); } });
+  });
+}
+function answerMC(el,q){
+  const opts = document.getElementById('opts');
+  if(opts.classList.contains('answered')) return;
+  opts.classList.add('answered');
+  const chosen = parseInt(el.dataset.i,10);
+  const right = chosen === q.correct;
+  mcResults.push({cat:q.cat, correct:right});
+  document.querySelectorAll('.opt').forEach(o=>{
+    o.classList.add('locked');
+    const oi = parseInt(o.dataset.i,10);
+    if(oi===q.correct) o.classList.add('correct');
+    else if(oi===chosen) o.classList.add('wrong');
+    else o.classList.add('dim');
+  });
+  const fb = document.getElementById('fb');
+  if(right){
+    points += 10; streak += 1;
+    if(streak>=3) points += 2;
+    fb.className="fb good show";
+    fb.innerHTML = `<div class="fb-h">✓ Correct${streak>=3?' — '+streak+' in a row, +2 bonus':''}</div><div class="fb-b">${q.why}</div>`;
+  } else {
+    streak = 0;
+    fb.className="fb bad show";
+    fb.innerHTML = `<div class="fb-h">✕ Not quite</div><div class="fb-b">${q.why}</div>`;
+  }
+  showAssessHUD();
+  document.getElementById('navWrap').classList.remove('hidden');
+  document.getElementById('nextBtn').addEventListener('click', ()=>{
+    if(mcIdx===MC.length-1){ writtenIdx=0; mcIdx=MC.length; renderWritten(); }
+    else { mcIdx++; renderMC(); }
+    toTop();
+  });
+}
+
+/* =================== WRITTEN DRILL =================== */
+function renderWritten(){
+  const w = WRITTEN[writtenIdx];
+  showAssessHUD(); setBar(((MC.length+writtenIdx)/assessTotal)*100);
+  content.innerHTML = `
+    <div class="card-head">
+      <div class="ch-kicker">Part B · ${w.scenarioTag}</div>
+      <div class="ch-title">Write the Entry</div>
+    </div>
+    <div class="card-body">
+      <div class="q-scenario"><span class="qs-tag">The Situation</span>${w.scenario}</div>
+      <div class="q-prompt" style="font-size:18px">${w.prompt}</div>
+      <div class="entry-form">
+        <div class="field field-time">
+          <label class="field-lbl" for="fTime">Time Stamp</label>
+          <span class="field-hint">e.g., 11:40 PM</span>
+          <input id="fTime" type="text" placeholder="0:00 AM/PM" maxlength="12">
+        </div>
+        <div class="field">
+          <label class="field-lbl" for="fEvent"><span class="ftag">E</span> · Event <span class="fsub">— what happened</span></label>
+          <input id="fEvent" type="text" placeholder="What happened?" maxlength="160">
+        </div>
+        <div class="field">
+          <label class="field-lbl" for="fDetail"><span class="ftag">D</span> · Detail <span class="fsub">— who, where, specifics</span></label>
+          <input id="fDetail" type="text" placeholder="Include the unit numbers and specifics." maxlength="200">
+        </div>
+        <div class="field">
+          <label class="field-lbl" for="fOutcome"><span class="ftag">O</span> · Outcome <span class="fsub">— action + who you notified, when, how</span></label>
+          <textarea id="fOutcome" rows="3" placeholder="What did you do? Who did you escalate to — by what channel and when? How is it closed or handed off?" maxlength="300"></textarea>
+        </div>
+      </div>
+      <div id="rubricSlot"></div>
+      <div class="btn-nav end" id="navWrap"><button class="btn btn-primary" id="gradeBtn">Submit Entry for Grading</button></div>
+    </div>`;
+  document.getElementById('gradeBtn').addEventListener('click', ()=>gradeEntry(w));
+}
+
+function gradeEntry(w){
+  const time = document.getElementById('fTime').value.trim();
+  const ev = document.getElementById('fEvent').value.trim();
+  const dt = document.getElementById('fDetail').value.trim();
+  const oc = document.getElementById('fOutcome').value.trim();
+  if(ev.length<2 || dt.length<2 || oc.length<2){
+    document.getElementById('rubricSlot').innerHTML = `<div class="note-strip red">Please complete the Event, Detail, and Outcome fields before submitting.</div>`;
+    return;
+  }
+  const timeValid = /\b\d{1,2}([:.]\d{2})?\s?(a\.?m\.?|p\.?m\.?)(?=\s|$|[^a-z])/i.test(time) || /\b\d{1,2}[:.]\d{2}\b/.test(time);
+  const words = s => s.trim().split(/\s+/).filter(Boolean).length;
+  const specific = /(unit\s*#?\s*\d{1,4}|#\s?\d{2,4}|\b\d{2,4}\b)/i.test(ev+" "+dt);
+  const actionVerb = /\b(logged|notified|informed|escalat\w*|stored|labell?ed|denied|contact\w*|called|filed|secur\w*|submitt?ed|verif\w*|resolv\w*|advised|separated|de-?escalat\w*|report\w*|monitor\w*|documented)\b/i.test(oc);
+  const notifiedWho = /\b(supervisor|lead|manager|regional|property\s*management|pm|911|ems|police|torres|leadership|dispatch)\b/i.test(oc);
+  const channelOrTier = /\b(by phone|by radio|called|phone|radio|per tier|tier\s*\d|connecteam|in writing|incident report|filed)\b/i.test(oc);
+  const closure = /\b(logged|notified|informed|follow[\s-]?up|flagged|pass[\s-]?on|escalat\w*|filed|resolv\w*|secur\w*|documented|monitor\w*|noted)\b/i.test(oc);
+  const cap = s => /^[A-Z0-9"]/.test(s.trim());
+  const ends = s => /[.!?]["']?$/.test(s.trim());
+  const banned = /\b(nothing happened|nothing|stuff|things|idk|lol|nbd|whatever|dunno|kinda|sorta|some people|a guy|that guy|u)\b/i;
+  const opinion = /\b(i think|i feel|i guess|probably|seems|seemed|in my opinion|imo|annoying|rude|weird|crazy)\b/i;
+  const lowerI = /(^|\s)i(\s|'|$)/.test(" "+ev+" "+dt+" "+oc+" ");
+  const allText = ev+" "+dt+" "+oc;
+
+  const edo = [
+    { label:"Time-stamped", pass: timeValid, tip:"Start with a clear time, e.g. \"11:40 PM.\"" },
+    { label:"Event is stated clearly", pass: words(ev)>=3, tip:"Say what happened in a full phrase, not one or two words." },
+    { label:"Detail is specific (unit # / who / where)", pass: specific && words(dt)>=4, tip:"Name the unit numbers and the specifics — who, where, what." },
+    { label:"Action taken within role", pass: actionVerb, tip:"State what you did: separated, secured, contacted, escalated, filed…" },
+    { label:"Accountability trail — who / when / channel", pass: notifiedWho && channelOrTier, tip:"Name who you notified (supervisor, Lead, 911…) and the channel or tier — e.g. \"by phone per Tier 2.\"" },
+    { label:"Entry closes the loop / hands off", pass: closure, tip:"Finish with the record: report filed, flagged for pass-on, monitoring, etc." }
+  ];
+  const wri = [
+    { label:"Proper capitalization", pass: cap(ev)&&cap(dt)&&cap(oc), tip:"Begin each field with a capital letter." },
+    { label:"Complete punctuation", pass: ends(ev)&&ends(dt)&&ends(oc), tip:"End each statement with a period." },
+    { label:"Professional — no slang or filler", pass: !banned.test(allText), tip:"Avoid vague filler like \"stuff,\" \"some people,\" or \"nothing.\"" },
+    { label:"Factual — no opinion or casual voice", pass: !opinion.test(allText) && !lowerI, tip:"Keep it factual. No opinions and no informal first-person \"i.\"" },
+    { label:"Sufficient detail (not too thin)", pass: words(allText)>=16, tip:"A reportable incident needs enough substance for an investigator to act on." }
+  ];
+  const edoPass = edo.filter(c=>c.pass).length;
+  const wriPass = wri.filter(c=>c.pass).length;
+  points += (edoPass + wriPass) * 3;
+  writtenResults.push({edoPass, edoMax:edo.length, wriPass, wriMax:wri.length});
+
+  const rowHTML = arr => arr.map(c=>`
+    <div class="rubric-item">
+      <div class="ri-ic ${c.pass?'y':'n'}">${c.pass?'✓':'✕'}</div>
+      <div><div class="ri-label">${c.label}</div>${c.pass?'':'<div class="ri-tip">'+c.tip+'</div>'}</div>
+    </div>`).join("");
+  document.getElementById('rubricSlot').innerHTML = `
+    <div class="rubric">
+      <div class="rubric-head"><span class="rh-t">Entry Graded</span><span class="rh-s">${edoPass+wriPass}/${edo.length+wri.length}</span></div>
+      <div class="rubric-grp-lbl">E.D.O. &amp; Escalation Integrity</div>
+      ${rowHTML(edo)}
+      <div class="rubric-grp-lbl">Writing &amp; Grammar</div>
+      ${rowHTML(wri)}
+    </div>
+    <div class="ideal">
+      <div class="ideal-lbl">Model Answer</div>
+      <div class="ideal-txt">${w.ideal}</div>
+    </div>`;
+  ['fTime','fEvent','fDetail','fOutcome'].forEach(id=>{ const el=document.getElementById(id); if(el) el.setAttribute('disabled','true'); });
+  writtenIdx++;
+  showAssessHUD();
+  const lastDrill = writtenIdx >= WRITTEN.length;
+  const nav = document.getElementById('navWrap');
+  nav.innerHTML = `<button class="btn btn-primary" id="nextBtn">${lastDrill?'See My Results →':'Next Drill →'}</button>`;
+  document.getElementById('nextBtn').addEventListener('click', ()=>{
+    if(lastDrill){ renderResults(); } else { renderWritten(); }
+    toTop();
+  });
+}
+
+/* =================== RESULTS =================== */
+function renderResults(){
+  showAssessHUD(); setBar(100);
+  document.getElementById('sProg').textContent = assessTotal + "/" + assessTotal;
+
+  const mcCorrect = mcResults.filter(r=>r.correct).length;
+  const byCat = c => mcResults.filter(r=>r.cat===c);
+  const know = byCat("Knowledge"), apt = byCat("Aptitude"), dex = byCat("De-Escalation");
+  const ok = arr => arr.filter(r=>r.correct).length;
+  const edoPass = writtenResults.reduce((a,b)=>a+b.edoPass,0);
+  const edoMax  = writtenResults.reduce((a,b)=>a+b.edoMax,0);
+  const wriPass = writtenResults.reduce((a,b)=>a+b.wriPass,0);
+  const wriMax  = writtenResults.reduce((a,b)=>a+b.wriMax,0);
+  const earnedBase = mcCorrect*10 + (edoPass+wriPass)*3;
+  const maxBase = MC.length*10 + (edoMax+wriMax)*3;
+  const pct = Math.round((earnedBase/maxBase)*100);
+
+  let tier,tierColor,tierBg,msg,certified;
+  if(pct>=93){ tier="Gold Standard"; tierColor="#0D1F3C"; tierBg="var(--gold)"; certified=true;
+    msg="Exceptional. Your knowledge, judgment, de-escalation and documentation all meet the Apex standard. Bring this same composure to every shift."; }
+  else if(pct>=80){ tier="Certified"; tierColor="#fff"; tierBg="var(--green)"; certified=true;
+    msg="Recertified — you meet the Apex standard. Review any flagged items, then run your emergency-protocol and A.C.T. drills on site with your Lead."; }
+  else if(pct>=60){ tier="Coaching Needed"; tierColor="#fff"; tierBg="var(--amber)"; certified=false;
+    msg="Close. Some standards need reinforcement — especially anything flagged in your written entry. Review with your Senior Agent or Lead and re-take."; }
+  else { tier="Not Yet Cleared"; tierColor="#fff"; tierBg="var(--red)"; certified=false;
+    msg="This one needs another pass. Revisit the protocols and A.C.T. with your Lead, then run it again. In an emergency, the standard is not negotiable."; }
+
+  const now = new Date();
+  const fmt = d => d.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+  const dateStr = fmt(now);
+  const due = new Date(now.getTime()); due.setFullYear(due.getFullYear()+1);
+  const dueStr = fmt(due);
+
+  const catCard = (name, c, t) => {
+    const p = t? Math.round((c/t)*100):0;
+    return `<div class="cat"><div class="cat-top"><span class="cat-name">${name}</span><span class="cat-sc">${c}/${t}</span></div><div class="cat-bar"><div class="cat-fill" style="width:${p}%"></div></div></div>`;
+  };
+  const certBlock = certified ? `
+    <div class="cert">
+      <div class="cert-tag">Apex Concierge Services</div>
+      <div class="cert-kind">Recertification · Annual</div>
+      <div class="cert-title">Escalation, Emergency &amp; De-Escalation</div>
+      <div class="cert-line">This certifies that</div>
+      <div class="cert-name">${escapeHTML(agentName)}</div>
+      <div class="cert-line">has completed the annual Escalation, Emergency &amp; De-Escalation recertification and passed the assessment,<br>demonstrating command of the escalation decision, emergency protocols, A.C.T. de-escalation, and the Apex reporting standard.</div>
+      <div class="cert-meta">
+        <div>Score<span>${pct}%</span></div>
+        <div>Tier<span>${tier}</span></div>
+        <div>Date<span>${dateStr}</span></div>
+      </div>
+      <div class="cert-valid">Valid for 12 months · Recertify by ${dueStr}</div>
+    </div>` : "";
+
+  content.innerHTML = `
+    <div class="card-head">
+      <div class="ch-kicker">Assessment Complete</div>
+      <div class="ch-title">${escapeHTML(agentName)}, here's your result</div>
+    </div>
+    <div class="card-body">
+      <div class="result-head">
+        <span class="badge-tier" style="background:${tierBg};color:${tierColor}">${tier}</span>
+        <div class="big-score">${pct}<span>%</span></div>
+        <p class="result-msg">${msg}</p>
+        <p class="result-msg" style="margin-top:8px;font-weight:600;color:var(--navy)">${points} points earned</p>
+      </div>
+      <div class="cats">
+        ${catCard("Knowledge", ok(know), know.length)}
+        ${catCard("Judgment", ok(apt), apt.length)}
+        ${catCard("De-Escalation", ok(dex), dex.length)}
+        ${catCard("E.D.O. &amp; Escalation", edoPass, edoMax)}
+        ${catCard("Writing &amp; Grammar", wriPass, wriMax)}
+      </div>
+      ${certBlock}
+      <div class="btn-row">
+        ${certified ? '<button class="btn btn-primary" id="printBtn">Print / Save Certificate</button>' : ''}
+        <button class="btn btn-ghost" id="retryBtn">Restart from Training</button>
+      </div>
+    </div>`;
+  if(certified) document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+  document.getElementById('retryBtn').addEventListener('click', ()=>{
+    lessonIdx=0; mcIdx=0; writtenIdx=0; points=0; streak=0; mcResults.length=0; writtenResults.length=0; agentName="";
+    renderWelcome(); toTop();
+  });
+}
+
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+renderWelcome();
+</script>
+</body>
+</html>

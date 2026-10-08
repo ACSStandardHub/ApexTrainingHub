@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Senior Agent Peer Coaching Guide · Apex</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;--navy-light:#1e3566;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E2DDD4;--white:#FFFFFF;--charcoal:#1A1A2E;--gray:#6B6B6B;
+  --green:#1A5C2A;--green-light:#DDF3E4;--red:#6B1A1A;--red-light:#FBEBEB;--amber:#7A5A0A;--amber-light:#FEF3DC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--white);min-height:100vh;overflow-x:hidden;line-height:1.6}
+a{color:inherit}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* HEADER */
+.site-header{position:relative;background:var(--navy-dark);padding:28px 64px 34px;border-bottom:1px solid rgba(201,168,76,.15);overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% -10%,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
+.header-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.back{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--gold);text-decoration:none;margin-bottom:26px;opacity:.85}
+.back:hover{opacity:1;text-decoration:underline}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.75;margin-bottom:14px}
+.site-title{font-family:'EB Garamond',serif;font-size:clamp(32px,4.5vw,52px);font-weight:400;line-height:1.08;margin-bottom:12px}
+.site-title em{font-style:italic;color:var(--gold-light)}
+.site-subtitle{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);max-width:600px;line-height:1.7}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
+.chip-green{background:rgba(26,92,42,.2);color:#6fe39a;border:1px solid rgba(26,92,42,.5)}
+.chip-gold{background:rgba(201,168,76,.08);color:var(--gold-light);border:1px solid rgba(201,168,76,.3)}
+.chip-amber{background:var(--amber-light);color:var(--amber);border:1px solid #e3c77a;letter-spacing:.06em;text-transform:none;font-size:11px;font-weight:600}
+
+/* STICKY BAR */
+.bar{position:sticky;top:0;z-index:20;background:rgba(8,20,41,.97);border-bottom:1px solid rgba(201,168,76,.18);backdrop-filter:blur(6px)}
+.bar-inner{max-width:1100px;margin:0 auto;padding:0 64px;display:flex;align-items:center;gap:18px}
+.mnav{display:flex;gap:0;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}
+.mnav::-webkit-scrollbar{display:none}
+.mnav a{padding:14px 11px 12px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.mnav a:hover{color:rgba(255,255,255,.75)}
+.mnav a.active{color:var(--gold);border-bottom-color:var(--gold)}
+.mnav a .tick{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15)}
+.mnav a.done .tick{background:#4ade80}
+.prog{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.prog-txt{font-size:11px;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums;white-space:nowrap}
+.prog-txt b{color:var(--gold-light);font-weight:600}
+.prog-track{width:110px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;width:0;background:var(--gold);transition:width .3s}
+.btn-ghost{background:none;border:1px solid rgba(201,168,76,.35);color:var(--gold-light);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px;border-radius:2px;cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{background:rgba(201,168,76,.1)}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:36px 64px 90px}
+.sheet{background:var(--cream);color:var(--charcoal);border-top:4px solid var(--gold);border-radius:2px;padding:30px 34px;margin-bottom:22px}
+.kicker{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+.sheet h2{font-family:'EB Garamond',serif;font-size:28px;font-weight:500;line-height:1.2;margin-bottom:14px;color:var(--navy)}
+.sheet p{font-size:15px;max-width:72ch}
+.sheet p+p{margin-top:12px}
+.note-sign{margin-top:18px;font-family:'EB Garamond',serif;font-style:italic;font-size:17px;color:var(--navy)}
+
+/* MODES */
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:6px 0 16px}
+.mode-btn{background:#fff;border:1px solid var(--cream-dark);border-radius:2px;padding:14px 16px;text-align:left;cursor:pointer;color:var(--charcoal);display:flex;flex-direction:column;gap:4px}
+.mode-btn .mt{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:.02em;color:var(--navy)}
+.mode-btn .ms{font-size:12.5px;color:var(--gray);line-height:1.45}
+.mode-btn[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy),inset 0 4px 0 var(--gold);background:#fff}
+.mode-panel{background:#fff;border:1px solid var(--cream-dark);border-left:6px solid var(--gold);padding:18px 20px;border-radius:2px}
+.mode-panel h3{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.mode-panel ol{padding-left:20px;font-size:14.5px;max-width:72ch}
+.mode-panel ol li+li{margin-top:5px}
+.gap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.gap-grid button{background:var(--cream);border:1px solid var(--cream-dark);padding:9px 12px;font-size:13px;text-align:left;cursor:pointer;border-radius:2px;color:var(--charcoal)}
+.gap-grid button:hover{border-color:var(--gold-dim)}
+.gap-grid button b{font-family:'Barlow Condensed',sans-serif;color:var(--gold-dim);margin-right:6px}
+.mode-foot{margin-top:12px;font-size:13px;color:var(--gray)}
+.mode-foot button{margin-left:6px}
+
+/* MODULE CARDS */
+.mods-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:34px 0 14px;flex-wrap:wrap}
+.mods-tools h2{font-family:'EB Garamond',serif;font-size:26px;font-weight:400;color:var(--white)}
+.mods-tools .btn-row{display:flex;gap:8px}
+.mod{margin-bottom:12px;border-radius:2px;overflow:hidden;background:var(--cream);color:var(--charcoal)}
+.mod-head{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:16px;align-items:center;background:var(--navy);border:0;border-left:6px solid var(--gold);padding:16px 20px;cursor:pointer;color:var(--white);text-align:left}
+.mod-head:hover{background:var(--navy-mid)}
+.mod-num{font-family:'EB Garamond',serif;font-size:34px;line-height:1;color:var(--gold);min-width:42px}
+.mod-title{font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:700;letter-spacing:.02em;line-height:1.2}
+.mod-count{font-size:11px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums;white-space:nowrap;padding:3px 10px;border:1px solid rgba(255,255,255,.18);border-radius:20px}
+.mod-count.all{color:#6fe39a;border-color:rgba(111,227,154,.45)}
+.chev{width:12px;height:12px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);transition:transform .2s;margin:0 4px 4px}
+.mod.open .chev{transform:rotate(-135deg);margin-bottom:-4px}
+.mod-body{display:none;padding:26px 30px 30px}
+.mod.open .mod-body{display:block}
+.mode-hint{font-size:13px;background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);padding:9px 13px;margin-bottom:20px;max-width:80ch}
+.mode-hint.shadow{background:#E6ECF5;color:var(--navy);border-left-color:var(--navy)}
+.mode-hint.self{background:var(--green-light);color:var(--green);border-left-color:var(--green)}
+.sec{margin-bottom:24px}
+.sec:last-child{margin-bottom:0}
+.sec-label{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:9px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--cream-dark);min-width:30px}
+.teach p{font-size:15px;max-width:76ch}
+.how{display:flex;flex-direction:column;gap:12px}
+.how-item{display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid var(--cream-dark)}
+.how-item:first-child{border-top:0;padding-top:0}
+.how-item h4{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--navy);line-height:1.3}
+.how-item p{font-size:14.5px;max-width:72ch}
+.how-item .pend{margin-top:6px}
+.srcnote{font-size:12.5px;color:var(--gray);margin-top:8px;max-width:72ch;font-style:italic}
+.tiles{display:grid;gap:10px;margin-top:4px}
+.tiles.t3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles.t4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tile{background:var(--navy);color:var(--white);padding:16px 16px 18px;border-radius:2px;border-top:3px solid var(--gold)}
+.tile .L{font-family:'EB Garamond',serif;font-size:38px;line-height:1;color:var(--gold)}
+.tile .N{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin:6px 0 8px}
+.tile p{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.5}
+.ready{list-style:none;display:flex;flex-direction:column;gap:6px}
+.ready label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start;background:#fff;border:1px solid var(--cream-dark);padding:11px 14px;cursor:pointer;font-size:14.5px;border-radius:2px}
+.ready label:hover{border-color:var(--gold-dim)}
+.ready input{width:18px;height:18px;margin-top:3px;accent-color:var(--green)}
+.ready input:checked+span{color:var(--green)}
+.ready label:has(input:checked){background:var(--green-light);border-color:rgba(26,92,42,.3)}
+.reflect{background:var(--navy);color:var(--white);padding:16px 20px;border-radius:2px;border-left:6px solid var(--gold)}
+.reflect .rl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.reflect p{font-size:15px;color:rgba(255,255,255,.88);max-width:76ch}
+.reflect textarea{display:none;width:100%;margin-top:12px;min-height:80px;background:var(--cream);color:var(--charcoal);border:1px solid var(--gold-dim);border-radius:2px;padding:10px 12px;font-size:14.5px;resize:vertical}
+body.mode-self .reflect textarea{display:block}
+.related{font-size:13px;color:var(--gray);margin-top:18px;padding-top:12px;border-top:1px dashed var(--cream-dark)}
+.related a{color:var(--navy);font-weight:600}
+body.mode-self .how-wrap .sec-label .self-tag{display:inline}
+.self-tag{display:none;font-family:'Barlow',sans-serif;letter-spacing:0;text-transform:none;font-weight:500;color:var(--gray);font-size:12.5px}
+
+/* SIGN-OFF */
+#signoff{scroll-margin-top:70px}
+.so-intro{font-size:14.5px;max-width:76ch;margin-bottom:18px}
+.private{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;font-weight:600;color:var(--green);background:var(--green-light);padding:5px 12px;border-radius:20px;margin-bottom:18px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;margin-bottom:22px}
+.fld{display:flex;flex-direction:column;gap:4px}
+.fld span{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy)}
+.fld input,.so-tbl input{background:#fff;border:1px solid var(--cream-dark);border-bottom:1.5px solid var(--navy);border-radius:2px;padding:8px 10px;font-size:14.5px;width:100%;color:var(--charcoal)}
+.tbl-wrap{overflow-x:auto;margin-bottom:22px}
+.so-tbl{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+.so-tbl th{background:var(--navy);color:var(--gold-light);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-align:left;padding:9px 12px}
+.so-tbl td{border-bottom:1px solid var(--cream-dark);padding:6px 12px;vertical-align:middle}
+.so-tbl td:first-child{font-weight:500}
+.so-tbl td.st{font-size:12px;color:var(--gray);white-space:nowrap;font-variant-numeric:tabular-nums}
+.so-tbl td.st.ok{color:var(--green);font-weight:600}
+.so-tbl .w-date{width:150px}.so-tbl .w-init{width:110px}
+.sigs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin:30px 0 18px}
+.sig .line{border-bottom:1.5px solid var(--charcoal);height:40px}
+.sig .cap{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-top:6px;display:flex;justify-content:space-between}
+.so-note{font-size:13.5px;color:var(--charcoal);background:#fff;border-left:4px solid var(--gold);padding:11px 14px;max-width:80ch}
+.so-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{background:var(--navy);color:var(--white);border:1px solid var(--navy);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:11px 18px;border-radius:2px;cursor:pointer}
+.btn:hover{background:var(--navy-light)}
+.btn.light{background:transparent;color:var(--navy)}
+.print-only{display:none}
+
+/* FOOTER */
+.foot{border-top:1px solid rgba(201,168,76,.08);max-width:1100px;margin:0 auto;padding:24px 64px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot .b{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,.35)}
+.foot .m{font-size:10.5px;letter-spacing:.08em;color:rgba(255,255,255,.3)}
+
+@media (max-width:860px){
+  .site-header,.main,.foot{padding-left:16px;padding-right:16px}
+  .bar-inner{padding:0 16px;flex-wrap:wrap;gap:0 12px}
+  .mnav{flex-basis:100%;order:2}
+  .prog{order:1;padding:9px 0 0;width:100%;justify-content:space-between}
+  .prog-track{flex:1}
+  .sheet{padding:22px 18px}
+  .modes,.gap-grid{grid-template-columns:minmax(0,1fr)}
+  .mod-body{padding:20px 16px 24px}
+  .mod-head{grid-template-columns:auto minmax(0,1fr) auto;gap:12px;padding:14px 14px}
+  .mod-head .chev{display:none}
+  .mod-num{font-size:28px;min-width:32px}
+  .mod-title{font-size:18px}
+  .how-item{grid-template-columns:minmax(0,1fr);gap:4px}
+  .tiles.t3,.tiles.t4{grid-template-columns:minmax(0,1fr)}
+  .fields,.sigs{grid-template-columns:minmax(0,1fr)}
+  .so-tbl{min-width:0;font-size:13px}.so-tbl td,.so-tbl th{padding:6px 6px}.so-tbl .w-date{width:84px}.so-tbl .w-init{width:64px}.so-tbl input{padding:6px 6px;font-size:13px}
+  .so-tbl .st{display:none}
+  html{scroll-padding-top:96px}
+}
+@media (min-width:600px) and (max-width:860px){.tiles.t4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media print{
+  @page{margin:14mm}
+  body{background:#fff;color:#000}
+  .bar,.back,.btn,.btn-ghost,.mode-sel,.mods-tools .btn-row,.gap-grid,.so-actions,.foot,.mode-hint,.no-print{display:none!important}
+  .site-header{background:#fff;padding:0 0 12px;border-bottom:2px solid #000}
+  .site-header::before{display:none}
+  .site-title,.site-subtitle,.eyebrow{color:#000}
+  .site-title em{color:#000}
+  .main{padding:12px 0}
+  .sheet,.mod{border:1px solid #999;break-inside:auto}
+  .mod-body{display:block!important}
+  .mod-head{background:#fff!important;color:#000;border-left-color:#000}
+  .mod-head .chev{display:none}
+  .mod-count{color:#000}
+  .tile,.reflect{background:#fff;color:#000;border:1px solid #999}
+  .tile p,.reflect p,.tile .N{color:#000}
+  .mods-tools h2{color:#000}
+  input::placeholder{color:transparent}
+  .so-tbl td.st,.so-tbl th.st{display:none}
+  /* Sign-off sheet only */
+  body.print-signoff .site-header,body.print-signoff .main>*:not(#signoff){display:none!important}
+  body.print-signoff #signoff{border:0;padding:0;margin:0;font-size:12px}
+  body.print-signoff .print-only{display:block}
+  body.print-signoff .private{display:none}
+  body.print-signoff .so-intro{font-size:12px;margin-bottom:10px}
+  body.print-signoff .sheet h2{font-size:22px;margin-bottom:6px}
+  body.print-signoff .fields{gap:6px 14px;margin-bottom:12px}
+  body.print-signoff .fld input,body.print-signoff .so-tbl input{border:0;border-bottom:1px solid #000;padding:3px 4px;font-size:12px;background:#fff}
+  body.print-signoff .so-tbl{min-width:0;font-size:12px}
+  body.print-signoff .so-tbl th{background:#fff;color:#000;border-bottom:1.5px solid #000;padding:5px 8px}
+  body.print-signoff .so-tbl td{padding:3px 8px}
+  body.print-signoff .fields{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  body.print-signoff .sigs{margin:26px 0 10px;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.print-signoff .so-tbl td.st,body.print-signoff .so-tbl th.st{display:none!important}
+  body.print-signoff .so-tbl .w-date{width:130px}body.print-signoff .so-tbl .w-init{width:100px}
+  .tiles.t3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.tiles.t4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .how-item{grid-template-columns:150px minmax(0,1fr)!important}
+  body.print-signoff .so-note{font-size:11.5px;border-left:3px solid #000}
+  /* Reflection responses only */
+  body.print-reflect .site-header,body.print-reflect #signoff,body.print-reflect .main>.sheet{display:none!important}
+  body.print-reflect .mod-body>*:not(.sec-reflect){display:none!important}
+  body.print-reflect .reflect textarea{display:block;border:1px solid #999;min-height:90px}
+}
+</style>
+</head>
+<body class="mode-shadow">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="back" href="index.html">← Training &amp; Development Lab</a>
+    <div class="eyebrow">Apex Concierge Services · Training &amp; Development Lab</div>
+    <h1 class="site-title">Senior Agent <em>Peer Coaching</em> Guide</h1>
+    <p class="site-subtitle">Nine modules for Leads and Senior Agents developing concierge agents on live shifts: what to teach, how to teach it, what ready looks like, and the question to close on.</p>
+    <div class="chips">
+      <span class="chip chip-gold">M3 · Trainer Pipeline</span>
+      <span class="chip chip-green">Live · Web version</span>
+      <span class="chip chip-gold">For Leads &amp; Senior Agents</span>
+    </div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Modules">
+  <div class="bar-inner">
+    <div class="mnav" id="mnav"></div>
+    <div class="prog">
+      <span class="prog-txt"><b id="pDone">0</b> / <span id="pTot">0</span> ready</span>
+      <div class="prog-track" aria-hidden="true"><div class="prog-fill" id="pFill"></div></div>
+      <button class="btn-ghost" id="clearAll" type="button">Clear all</button>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+  <section class="sheet" id="note">
+    <div class="kicker">A note before you begin</div>
+    <h2>Training does not end at sign-off.</h2>
+    <p>This guide exists because training does not end at sign-off. As a Senior Agent or Lead Concierge, you carry something the slide deck cannot deliver: the real-world standard, lived and modeled in front of the agent you are developing.</p>
+    <p>Use this guide as a structure, not a script. Each section tells you what to cover, how to demonstrate it, and what ready looks like before you sign off. The agent you are developing should leave every interaction knowing exactly where they stand and what they are working toward.</p>
+    <p>This guide works for three situations: new hire shadow shifts in the first week after NHE Speed sign-off, performance refreshers when an agent needs a reset, and self-directed review when no Lead is present. The standard is the same in all three.</p>
+    <p class="note-sign">Regional Concierge Manager</p>
+  </section>
+
+  <section class="sheet" id="modes">
+    <div class="kicker">How to use this guide</div>
+    <h2>Choose the situation you are in.</h2>
+    <div class="modes mode-sel" role="group" aria-label="Use mode">
+      <button class="mode-btn" type="button" data-mode="shadow" aria-pressed="true"><span class="mt">New Hire Shadow Shift</span><span class="ms">First 3–5 shifts after NHE Speed sign-off</span></button>
+      <button class="mode-btn" type="button" data-mode="refresh" aria-pressed="false"><span class="mt">Performance Refresher</span><span class="ms">An agent needs a reset in one area</span></button>
+      <button class="mode-btn" type="button" data-mode="self" aria-pressed="false"><span class="mt">Self-Directed Review</span><span class="ms">No Lead present; agent works alone</span></button>
+    </div>
+    <div class="mode-panel" id="modePanel" aria-live="polite"></div>
+  </section>
+
+  <div class="mods-tools">
+    <h2>The nine modules</h2>
+    <div class="btn-row">
+      <button class="btn-ghost" type="button" id="expandAll">Expand all</button>
+      <button class="btn-ghost" type="button" id="collapseAll">Collapse all</button>
+    </div>
+  </div>
+  <div id="mods"></div>
+
+  <section class="sheet" id="signoff">
+    <div class="kicker">Agent Readiness Sign-Off</div>
+    <h2>Cleared for independent operation</h2>
+    <p class="print-only" style="font-size:11px;margin-bottom:6px">Apex Concierge Services · Senior Agent Peer Coaching Guide · Internal Use Only</p>
+    <p class="so-intro">Before an agent is cleared for independent operation, this page must be completed by the Senior Agent or Lead Concierge who conducted the coaching. A signature below indicates the agent has demonstrated each module’s “Ready Looks Like” criteria in a live shift environment.</p>
+    <div class="private">Nothing you type leaves this computer.</div>
+    <div class="fields">
+      <label class="fld"><span>Agent Name</span><input type="text" autocomplete="off"></label>
+      <label class="fld"><span>Property Assignment</span><input type="text" autocomplete="off"></label>
+      <label class="fld"><span>Role</span><input type="text" autocomplete="off"></label>
+      <label class="fld"><span>Lead / Senior Agent Name</span><input type="text" autocomplete="off"></label>
+      <label class="fld"><span>Start Date</span><input type="text" placeholder="MM/DD/YYYY" autocomplete="off"></label>
+      <label class="fld"><span>Sign-Off Date</span><input type="text" placeholder="MM/DD/YYYY" autocomplete="off"></label>
+    </div>
+    <div class="tbl-wrap">
+      <table class="so-tbl">
+        <thead><tr><th>Module</th><th class="st">On screen</th><th class="w-date">Date Cleared</th><th class="w-init">Lead Initials</th></tr></thead>
+        <tbody id="soRows"></tbody>
+      </table>
+    </div>
+    <div class="sigs">
+      <div class="sig"><div class="line"></div><div class="cap"><span>Agent Signature</span><span>Date</span></div></div>
+      <div class="sig"><div class="line"></div><div class="cap"><span>Lead / Senior Agent Signature</span><span>Date</span></div></div>
+    </div>
+    <p class="so-note">This completed form goes to the Regional Manager before the agent’s first solo shift and is referenced at the 30- and 90-day reviews.</p>
+    <div class="so-actions">
+      <button class="btn" type="button" id="printSO">Print sign-off sheet</button>
+      <button class="btn light" type="button" id="clearSO">Clear form</button>
+    </div>
+    <p class="related no-print">On wider screens, the “On screen” column shows how many Ready Looks Like items are checked on this page. It does not print. Leads who sign this sheet are certified under the <a href="trainer-certification.html">Trainer Certification Framework</a> (draft).</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span class="b">Apex Concierge Services · Training &amp; Development Lab</span>
+  <span class="m">Internal Use Only · Senior Agent Peer Coaching &amp; Development Guide · Version 1.0 · October 2026</span>
+</footer>
+
+<script>
+(function(){
+const M=[
+{n:'01',t:'Company Identity & Culture',
+ teach:'The agent needs to understand that Apex is not a staffing arrangement — it is a hospitality operation embedded in luxury residential living. They represent both the property and Apex simultaneously. Residents do not see a company. They see a person. That person is accountable to a standard, not a mood.',
+ how:[
+  {h:'H.O.M.E. Values',p:'Do not recite the values — ask the agent what each one looks like in a real moment.',tiles:'home'},
+  {h:'The Apex Standard',p:'Point to a real moment from the shift. If the desk was unclean, the log was thin, or the greeting was flat — name it directly. “This is what below standard looks like. Here is what standard looks like. Let’s do it again.”'},
+  {h:'Luxury Mindset',p:'Ask: “What is the difference between a resident feeling helped and a resident feeling welcomed?” Let them answer. Then close with this: at Apex, we are not here to process people. We are here to make them feel at home.'}],
+ ready:['Agent can state all four H.O.M.E. values without prompting and give a real example of each','Agent uses Apex language unprompted — no slang, no informal register at the desk','Agent understands the difference between representing Apex and working for a property','Agent can answer: “Why does this role matter?” with substance, not a rehearsed line'],
+ reflect:'Ask the agent: “Which H.O.M.E. value do you lead with naturally — and which one do you have to work for?” Note their answer. Revisit it at the 30-day review.'},
+{n:'02',t:'Client Hierarchy & Roles',
+ teach:'The agent needs to understand the full operational ecosystem before they take a single independent action. Missteps in this area — letting a leasing agent into a unit without authorization, bypassing management on an escalation, making commitments on behalf of maintenance — create liability. The org chart is not an org chart. It is a decision-making map.',
+ how:[
+  {h:'The Ecosystem',p:'Walk the agent through the four partners — Ownership/PM, Leasing, Maintenance, Concierge — and explain what each one is measured on. When they understand what each team’s pressure is, they make better decisions about how to interact with them.'},
+  {h:'Report vs. Support',p:'Clarify this explicitly. The agent reports to Apex leadership and the Site Supervisor. They support residents, property management, leasing, and maintenance. Supporting someone does not mean following their direct instruction when it falls outside of role scope. When in doubt, they escalate up, not out.'},
+  {h:'Live Scenario',p:'Present this situation: “A leasing agent asks you to let a prospect into an amenity space that is currently reserved. The resident who reserved it is on their way down. What do you do?” Walk through the answer together.'}],
+ ready:['Agent can name all four ecosystem partners and what each team’s function is','Agent knows the difference between who they report to and who they support','Agent understands that supporting a department does not mean taking their instruction without question','Agent can correctly identify when a request requires supervisor escalation vs. desk-level handling'],
+ reflect:'Ask: “If a leasing agent and a resident give you conflicting instructions about access, whose direction do you follow?” The correct answer: escalate to your supervisor. Confirm they know this before moving on.'},
+{n:'03',t:'Professional Presence',
+ teach:'Professional presence is not about appearance alone. It is the combination of how the agent looks, how they carry themselves, how they speak, and where they draw the line between warmth and familiarity. It is the first thing a resident registers — before a word is spoken.',
+ how:[
+  {h:'Appearance',p:'Before the shift begins, do a quick side-by-side check. Are both of you in full uniform? Clean, pressed, badge visible? Point out what correct looks like in real time. Do not wait until there is a problem to address it.'},
+  {h:'Energy',p:'Halfway through the shift, ask: “How does the lobby feel right now?” Teach them that they are responsible for the emotional temperature of the space. If it feels flat or off, they can change it. That is a skill, not a personality trait.'},
+  {h:'Communication Tone',p:'Identify one real interaction during the shift and debrief it. What was the phrasing? What was the body language? Where could the response have been sharper, warmer, or more professional? Name it and replace it with the correct language out loud.'},
+  {h:'Friendly ≠ Familiar',p:'This is non-negotiable. Friendly means approachable and warm. Familiar means crossing the professional boundary — nicknames, personal conversations, showing favoritism, sharing opinions about internal matters. Ask them to give you an example of each. If they struggle to name the line, that is the gap to close.'}],
+ ready:['Agent arrives in full, correct uniform every shift — no reminders needed','Agent maintains consistent professional energy across the full shift — start, midpoint, and close','Agent uses professional language with residents at all times — no slang, no informal framing','Agent can name the distinction between friendly and familiar without hesitation','Agent does not engage in personal conversations at the desk during active service hours'],
+ reflect:'Ask: “Give me one example of something that feels friendly but would actually be crossing into familiar.” If they can’t answer, walk them through three examples and ask them to identify why each one crosses the line.'},
+{n:'04',t:'Core Operations',
+ teach:'The desk is a post. Site tours are a service and a security function. Shift handoff is a responsibility, not a courtesy. These are not preferences — they are the operational non-negotiables that separate an Apex agent from someone who is simply present.',
+ how:[
+  {h:'Desk Never Unattended',p:'At some point during the shift, create a moment: you need to step away briefly. Watch how the agent handles coverage. Did they identify a relief? Did they notify you? Did they simply leave? What they do in that moment tells you where they are.'},
+  {h:'Site Tours',p:'Run the first tour together. Walk the exact route and call out what you observe at each stop — out loud. Then send them on the second tour alone. When they return, ask them what they saw. If the answer is vague, run it again and make them tell you in E.D.O. format.'},
+  {h:'Shift Start Protocol',p:'Walk them through the first 15 minutes of a shift in real time. Log check, pass-on review, open items confirmed, site walk. This is not optional. The agent on duty owns everything from clock-in forward.'},
+  {h:'Handoff',p:'Before the end of the shift, have them write and deliver the pass-on verbally to the incoming agent. You observe. Did it cover all open items? Did the incoming agent leave informed or just present?'}],
+ ready:['Agent never leaves the desk without securing coverage and notifying a supervisor if relief is unavailable','Agent completes minimum two site tours per shift and logs both with route, timestamp, and observations','Agent begins each shift with a pass-on review before the outgoing agent leaves','Agent delivers a complete verbal handoff at the end of every shift covering all open items','Agent’s desk setup is clean, organized, and operational from the first minute of shift'],
+ reflect:'Ask after their second independent tour: “If the next agent read only your tour entry, would they know exactly what you checked, what you found, and what needs follow-up?” Have them read their entry aloud and answer the question themselves.',
+ rel:[['sop-library.html','Shift Log SOP'],['shift-log-mastery.html','Shift Log Mastery']]},
+{n:'05',t:'Shift Log Mastery',
+ teach:'The shift log is the most important document an agent produces. It is a legal record, a performance evaluation, and the primary handoff instrument. A weak log is not just an inconvenience — it is a professional failure and a liability. An agent who cannot write a complete E.D.O. entry is not ready to operate independently.',
+ how:[
+  {h:'E.D.O. in Live Conditions',p:'The next time an event occurs on shift — any event, even a routine package or a phone call — stop and walk through it together. “What is the Event? State it in one sentence. Now the Detail — who, what, when, where. Now the Outcome — what did you do and what is the status?” Make them write it, not describe it.'},
+  {h:'Strong vs. Weak',p:'Pull up their last log entry. Read it out loud together. Ask: “Does this entry stand alone? Could the next agent act on this without asking a single question?” If the answer is no, rewrite it together in real time.'},
+  {h:'Non-Negotiables',p:'Cover each of these explicitly: one entry per hour minimum, two tours per shift with observations, pass-on sections completed, professional tone throughout. These are not suggestions. They are scored. Show them the scoring rubric.'},
+  {h:'Pass-On Notes',p:'Before the shift ends, sit with the agent while they write the pass-on. All three sections: Concierge, Maintenance, Leasing. If they write ‘nothing to note’ on a shift where anything happened, send them back to rewrite it. The pass-on is for the next agent, not for you.'}],
+ tiles:'edo',
+ ready:['Agent’s log has a minimum of one entry per hour — no unexplained gaps','Every entry follows E.D.O. — Event clearly stated, Detail complete, Outcome documented','Tour entries include route, timestamp, and specific observations','Pass-on notes cover all three sections with enough detail for the next agent to act independently','Agent uses professional, neutral, factual language throughout — no personal opinions or casual tone','Agent knows: corrections are additions, never deletions'],
+ reflect:'At the end of the shift, have the agent read their entire log entry aloud. Ask: “If you were the incoming agent, what questions would you still have?” Whatever they name — those are the gaps. Fix them before the shift closes.',
+ rel:[['shift-log-mastery.html','Shift Log Mastery (scoring rubric)'],['sop-library.html','Shift Log SOP'],['sop-refreshers.html','SOP Refreshers']]},
+{n:'06',t:'Policies & Accountability',
+ teach:'The most common failure point at Apex is attendance. Not skill. Not attitude. Attendance. An agent who shows up, on time, in uniform, every shift, is ahead of most. This module is about ensuring the agent understands what reliability means — and what the consequences of unreliability are.',
+ how:[
+  {h:'Attendance',p:'Have a direct conversation. Not a warning, not a threat — a clear statement. “Your attendance in the first 90 days defines how leadership sees you. No more than three unexcused absences in any 90-day period. A no-call no-show is treated as a voluntary resignation unless extenuating circumstances apply. This is not a policy I enforce — it is the standard you hold.”'},
+  {h:'Call-Out Procedure',p:'Walk through the exact steps: at least 2–4 hours’ notice (Apex expects as early as possible), call AND text your supervisor and the on-call manager, give a reason and expected return. Ask them to walk it back to you. If they cannot name every step, run it again.',
+   src:'Aligned to NHE Speed wording (October 2026). The original guide read “minimum 2 hours notice” and “one no-call no-show is a terminable offense.”'},
+  {h:'Shift Swap Protocol',p:'Be explicit: a verbal agreement with another agent is not a covered shift. Until a supervisor approves it in Connecteam, the original agent owns that post. If they leave and coverage falls through, the original agent is responsible.',pend:true},
+  {h:'Professional Conduct',p:'Cover the hard lines: no social media posts about residents or property, no personal calls at the desk, no substance use on property, no off-site conduct near the property that reflects on Apex. These are not negotiable based on circumstance.'}],
+ ready:['Agent can walk through the complete call-out procedure without prompting','Agent understands that shift swap approval must come from a supervisor, not a coworker','Agent knows that abandoning a post without coverage is a terminable offense','Agent has signed the conduct acknowledgment form and understands what it covers','Agent demonstrates consistent on-time arrival across the first three weeks'],
+ reflect:'Ask: “You wake up sick the morning of your shift. Walk me through exactly what you do.” Listen for: who they contact, how soon, through which channel, and what they do if they can’t reach someone. Every gap in that answer is a gap to close.',
+ rel:[['nhe-speed-packet.html','NHE Speed packet, Module 2 · Policies']]},
+{n:'07',t:'Real-World Scenarios & A.C.T.',
+ teach:'How an agent handles pressure is the real performance indicator. This module is not about memorizing responses — it is about building composure, decision-making discipline, and documentation habits under conditions that feel real. The A.C.T. framework — Acknowledge, Control, Transfer or Resolve — gives them a structure that holds in every scenario.',
+ how:[
+  {h:'Run Live Scenarios',p:'Use real shift moments, not simulations. When a difficult resident approaches, let the agent handle the first 30 seconds. Then step in, complete the interaction, and debrief immediately after. “What did you notice about your tone? What would you change?”'},
+  {h:'Introduce A.C.T. in the Moment',p:'After a high-pressure interaction, name the framework out loud. “What you just did — that was A.C.T. You acknowledged the frustration before you responded. You controlled the environment by stepping away from the lobby traffic. You transferred it up because it was above your authority. That is the standard.” Or name where it broke down and correct it.'},
+  {h:'Six Scenario Areas',p:'Ensure the agent has encountered or role-played each of these: late-night noise complaint, smoking violation on tour, difficult resident at the desk, escalation decision under threat, simultaneous pressure (phone + desk + radio), and unauthorized person in the lobby. The last one matters most for safety.'},
+  {h:'Document the Outcome',p:'After every scenario — real or practiced — have the agent write the E.D.O. entry. No exceptions. The habit of documenting under pressure is built the same way the skill of responding is: through repetition.'}],
+ tiles:'act',
+ ready:['Agent can name the A.C.T. framework and apply it in a live interaction without prompting','Agent has handled or role-played all six scenario types with debrief','Agent’s default under pressure is composure, not defensiveness or over-explanation','Agent documents every significant interaction in E.D.O. before the shift ends','Agent knows when a situation exceeds their authority and escalates without hesitation'],
+ reflect:'After the next difficult interaction on shift, ask: “Where in A.C.T. did you feel least in control?” That answer tells you exactly where to focus the next coaching session.',
+ rel:[['de-escalation-recert.html','De-escalation recertification']]},
+{n:'08',t:'Systems Overview',
+ teach:'The agent does not need to be a systems expert on Day 1. They need to know what each system is for, where to go when they have a question, and that bypassing or delaying system entry creates real operational problems. Deep training happens at property level with the site supervisor.',
+ how:[
+  {h:'Connecteam',p:'Show them how you use it on a live shift. Schedule check, clock-in, shift swap submission process. The non-negotiable: all scheduling communication goes through Connecteam. Not personal texts. Not verbal agreements. If it is not in Connecteam, it does not exist.'},
+  {h:'Yardi & Packages',p:'Walk them through a package intake from arrival to notification. Scan, log, notify, store. Then walk them through a resident lookup. This is how identity is verified before any package is released or access is granted. Do not skip the verification step.'},
+  {h:'Paylocity',p:'Brief orientation: this is where they see their pay, manage their PTO, and access HR documents. Payroll discrepancies go to a supervisor immediately — not the following pay period.'}],
+ ready:['Agent is logged into and actively using Connecteam before their first solo shift','Agent can process a package intake from receipt to resident notification without assistance','Agent knows how to run a resident lookup in Yardi to verify identity before releasing a package','Agent understands that Connecteam is the only official channel for scheduling and swap requests','Agent has completed onboarding documents in Paylocity and knows where to find their pay information'],
+ reflect:null,
+ rel:[['sop-library.html','Package Handling SOP'],['sop-refreshers.html','Package Handling refresher']]},
+{n:'09',t:'Leadership Mindset & Setting the Tone',
+ teach:'This is not a closing formality. This is the most important thing you pass on. A new agent who understands ownership — not job ownership, character ownership — will outperform an experienced one who does not. How an agent behaves when no one is checking, when the shift is quiet, when a situation is uncomfortable: that is the real Apex Standard. This is what you model. This is what you teach.',
+ how:[
+  {h:'Model It First',p:'You cannot teach this through words. At some point during the shift, do something that does not need to be done and was not asked for. Clean the desk. Fix the chair alignment. Anticipate a resident’s need before they reach the desk. Say nothing about it. Let them watch. Then ask: “What did you notice?”'},
+  {h:'Ownership vs. Blame',p:'Be direct: ownership at Apex means the problem on your shift is your problem until it is resolved or properly handed off. It is not about fault. It is about action. The question is never “Who did this?” The question is “What do I do now?”'},
+  {h:'The 90-Day Window',p:'This is the message you close every coaching session with: the first 90 days are the window. Not because the standards relax after that — they do not. But because the habits formed now are the habits that define the agent they become. Attendance, documentation, composure under pressure, consistent presence. These are built now.'}],
+ ready:['Agent takes action on visible problems without being prompted','Agent holds their own standard — not just when a Lead is present','Agent escalates issues rather than avoiding or minimizing them','Agent can answer: “What does ownership look like on a quiet shift?” with a specific, operational answer','Agent understands that the 90-day window is an opportunity, not a trial period to survive'],
+ reflect:'Close every final coaching session with this: “What is one thing you commit to doing differently on your next solo shift?” Write it down. Give them the paper. You keep a copy. Reference it at the 30-day review.'}
+];
+const TILES={
+ home:{cls:'t4',items:[['H','Hospitality','How did they greet the last resident?'],['O','Ownership','What did they do the last time something went wrong on their watch?'],['M','Mindfulness','What did they notice in the lobby today that no one asked them to notice?'],['E','Excellence','What does their log look like at the end of a quiet shift?']]},
+ edo:{cls:'t3',label:'The E.D.O. standard',items:[['E','Event','What happened? One clear sentence. If you cannot state it in one sentence, you do not have an Event yet.'],['D','Detail','Who was involved? What unit or location? Exact time? What were the specific circumstances?'],['O','Outcome','What did you do? Was it resolved, escalated, or pending? If pending — to whom, and why?']]},
+ act:{cls:'t3',label:'The A.C.T. framework',items:[['A','Acknowledge','Recognize what is happening. Name it internally. Do not react — respond.'],['C','Control','Control the environment first, then the conversation. Lower your voice. Do not match their energy.'],['T','Transfer or Resolve','Resolve within your authority or escalate to the right person. Document both the action and the outcome.']]}
+};
+const MODES={
+ shadow:{t:'New Hire Shadow Shift',steps:['Work through the modules in order across the agent’s first 3–5 shifts after NHE Speed sign-off.','Demonstrate each standard on shift before asking the agent to replicate it.','Use the “Ready Looks Like” checklist at the end of each module to confirm before moving forward.','When all nine modules are cleared, complete the Agent Readiness Sign-Off and send it to the Regional Manager before the first solo shift.'],
+  hint:'Shadow shift: demonstrate this standard first, then have the agent replicate it. Confirm every Ready item before moving on.'},
+ refresh:{t:'Performance Refresher',steps:['Identify the specific area where the agent is falling short.','Go directly to that module and read the coaching notes.','Work the standard on a live shift.','Use the readiness checklist as a documented re-clearance: date and initial that module on the sign-off sheet.'],
+  hint:'Refresher: work this standard on a live shift. The Ready checklist below is the documented re-clearance.'},
+ self:{t:'Self-Directed Review',steps:['Read each module on your own.','Self-assess against the “Ready Looks Like” criteria. Check only what you can do today.','Write your responses to the reflection prompts in the boxes under each module.','Print your responses and submit them to your supervisor. Your supervisor reviews them and schedules a brief check-in if gaps are identified.'],
+  hint:'Self-directed: read the coaching notes as the standard you are held to, check yourself honestly, and answer the reflection prompt below.'}
+};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const state={}; // in-memory only: "mi_ri" -> true
+let mode='shadow';
+
+function tilesHTML(key){const T=TILES[key];return '<div class="tiles '+T.cls+'">'+T.items.map(x=>'<div class="tile"><div class="L">'+x[0]+'</div><div class="N">'+esc(x[1])+'</div><p>'+esc(x[2])+'</p></div>').join('')+'</div>';}
+
+function render(){
+ const wrap=document.getElementById('mods');
+ wrap.innerHTML=M.map((m,i)=>{
+  const how=m.how.map(h=>'<div class="how-item"><h4>'+esc(h.h)+'</h4><div><p>'+esc(h.p)+'</p>'+
+    (h.pend?'<div class="pend"><span class="chip chip-amber">Pending approval</span></div>':'')+
+    (h.src?'<p class="srcnote">'+esc(h.src)+'</p>':'')+
+    (h.tiles?'<div style="margin-top:10px">'+tilesHTML(h.tiles)+'</div>':'')+'</div></div>').join('');
+  const ready=m.ready.map((r,j)=>'<li><label><input type="checkbox" data-k="'+i+'_'+j+'"><span>'+esc(r)+'</span></label></li>').join('');
+  return '<article class="mod'+(i===0?' open':'')+'" id="m'+m.n+'">'+
+   '<button class="mod-head" type="button" aria-expanded="'+(i===0)+'" aria-controls="b'+m.n+'"><span class="mod-num">'+m.n+'</span><span class="mod-title">'+esc(m.t)+'</span><span class="mod-count" data-c="'+i+'">0 / '+m.ready.length+' ready</span><span class="chev" aria-hidden="true"></span></button>'+
+   '<div class="mod-body" id="b'+m.n+'">'+
+    '<p class="mode-hint"></p>'+
+    '<div class="sec teach"><div class="sec-label">What you are teaching</div><p>'+esc(m.teach)+'</p></div>'+
+    '<div class="sec how-wrap"><div class="sec-label">How to teach it <span class="self-tag">· the standard your Lead coaches to</span></div><div class="how">'+how+'</div></div>'+
+    (m.tiles?'<div class="sec"><div class="sec-label">'+esc(TILES[m.tiles].label)+'</div>'+tilesHTML(m.tiles)+'</div>':'')+
+    '<div class="sec"><div class="sec-label">Ready looks like</div><ul class="ready">'+ready+'</ul></div>'+
+    (m.reflect?'<div class="sec sec-reflect"><div class="reflect"><div class="rl">Reflection prompt · Module '+m.n+'</div><p>'+esc(m.reflect)+'</p><textarea aria-label="Your response to the Module '+m.n+' reflection prompt" placeholder="Your response (self-directed review). Stays on this page only."></textarea></div></div>':'')+
+    (m.rel?'<p class="related">Related: '+m.rel.map(r=>'<a href="'+r[0]+'">'+esc(r[1])+'</a>').join(' · ')+'</p>':'')+
+   '</div></article>';
+ }).join('');
+ document.getElementById('mnav').innerHTML=M.map((m,i)=>'<a href="#m'+m.n+'" data-i="'+i+'"><span class="tick"></span>'+m.n+'</a>').join('')+'<a href="#signoff">Sign-off</a>';
+ document.getElementById('soRows').innerHTML=M.map((m,i)=>'<tr><td>'+m.n+' — '+esc(m.t)+'</td><td class="st" data-s="'+i+'"></td><td class="w-date"><input type="text" placeholder="MM/DD" aria-label="Date cleared, module '+m.n+'"></td><td class="w-init"><input type="text" maxlength="4" aria-label="Lead initials, module '+m.n+'"></td></tr>').join('');
+ document.getElementById('pTot').textContent=M.reduce((a,m)=>a+m.ready.length,0);
+}
+
+function update(){
+ let done=0,tot=0;
+ M.forEach((m,i)=>{
+  const d=m.ready.filter((r,j)=>state[i+'_'+j]).length; done+=d; tot+=m.ready.length;
+  const c=document.querySelector('.mod-count[data-c="'+i+'"]'); c.textContent=d+' / '+m.ready.length+' ready'; c.classList.toggle('all',d===m.ready.length);
+  document.querySelector('.mnav a[data-i="'+i+'"]').classList.toggle('done',d===m.ready.length);
+  const s=document.querySelector('td.st[data-s="'+i+'"]'); s.textContent=d===m.ready.length?'All ready':d+' / '+m.ready.length; s.classList.toggle('ok',d===m.ready.length);
+ });
+ document.getElementById('pDone').textContent=done;
+ document.getElementById('pFill').style.width=(tot?done/tot*100:0)+'%';
+}
+
+function setMode(k){
+ mode=k; document.body.classList.remove('mode-shadow','mode-refresh','mode-self'); document.body.classList.add('mode-'+k);
+ document.querySelectorAll('.mode-btn').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===k?'true':'false'));
+ const md=MODES[k];
+ let html='<h3>'+md.t+'</h3><ol>'+md.steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol>';
+ if(k==='refresh') html+='<div class="gap-grid">'+M.map((m,i)=>'<button type="button" data-jump="'+i+'"><b>'+m.n+'</b>'+esc(m.t)+'</button>').join('')+'</div><p class="mode-foot">Choose the module where the gap is. It opens on its own.</p>';
+ if(k==='self') html+='<p class="mode-foot">Your answers stay on this page and are gone when you close it. <button class="btn-ghost" type="button" id="printReflect" style="color:var(--navy);border-color:var(--navy)">Print my responses</button></p>';
+ if(k==='shadow') html+='<p class="mode-foot">The standard is the same in all three situations. Only the route through the guide changes.</p>';
+ document.getElementById('modePanel').innerHTML=html;
+ document.querySelectorAll('.mode-hint').forEach(p=>{p.textContent=md.hint;p.className='mode-hint '+(k==='refresh'?'':k);});
+ try{localStorage.setItem('apexCoachGuide.mode',k);}catch(e){}
+}
+
+function openMod(i,only){
+ document.querySelectorAll('.mod').forEach((el,j)=>{ if(only||j===i){const o=j===i; el.classList.toggle('open',o); el.querySelector('.mod-head').setAttribute('aria-expanded',o);} });
+}
+
+render();
+let saved='shadow'; try{saved=localStorage.getItem('apexCoachGuide.mode')||'shadow';}catch(e){}
+setMode(MODES[saved]?saved:'shadow'); update();
+
+document.addEventListener('click',e=>{
+ const h=e.target.closest('.mod-head');
+ if(h){const el=h.parentElement; const o=!el.classList.contains('open'); el.classList.toggle('open',o); h.setAttribute('aria-expanded',o); return;}
+ const mb=e.target.closest('.mode-btn'); if(mb){setMode(mb.dataset.mode);return;}
+ const j=e.target.closest('[data-jump]'); if(j){const i=+j.dataset.jump; openMod(i,true); document.getElementById('m'+M[i].n).scrollIntoView(); return;}
+ const na=e.target.closest('.mnav a[data-i]'); if(na){openMod(+na.dataset.i,false);}
+ if(e.target.id==='printReflect'){document.body.classList.add('print-reflect'); window.print();}
+});
+document.addEventListener('change',e=>{const c=e.target.closest('input[data-k]'); if(!c) return; state[c.dataset.k]=c.checked; if(!c.checked) delete state[c.dataset.k]; update();});
+document.getElementById('clearAll').addEventListener('click',()=>{for(const k in state) delete state[k]; document.querySelectorAll('input[data-k]').forEach(c=>c.checked=false); update();});
+document.getElementById('expandAll').addEventListener('click',()=>document.querySelectorAll('.mod').forEach(el=>{el.classList.add('open');el.querySelector('.mod-head').setAttribute('aria-expanded','true');}));
+document.getElementById('collapseAll').addEventListener('click',()=>document.querySelectorAll('.mod').forEach(el=>{el.classList.remove('open');el.querySelector('.mod-head').setAttribute('aria-expanded','false');}));
+document.getElementById('printSO').addEventListener('click',()=>{document.body.classList.add('print-signoff'); window.print();});
+document.getElementById('clearSO').addEventListener('click',()=>document.querySelectorAll('#signoff input').forEach(x=>x.value=''));
+window.addEventListener('afterprint',()=>document.body.classList.remove('print-signoff','print-reflect'));
+
+// active module in nav
+const links=[...document.querySelectorAll('.mnav a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){const id=en.target.id; links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id)); const a=links.find(a=>a.getAttribute('href')==='#'+id); if(a&&a.scrollIntoView){const nav=a.parentElement; nav.scrollLeft=a.offsetLeft-nav.clientWidth/2+a.clientWidth/2;}}});},{rootMargin:'-140px 0px -60% 0px'});
+document.querySelectorAll('.mod,#signoff').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>

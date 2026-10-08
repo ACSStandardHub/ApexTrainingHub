@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Concierge Development Track · Apex</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;--navy-light:#1e3566;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E2DDD4;--white:#FFFFFF;--charcoal:#1A1A2E;--gray:#6B6B6B;
+  --green:#1A5C2A;--green-light:#DDF3E4;--red:#6B1A1A;--red-light:#FBEBEB;--amber:#7A5A0A;--amber-light:#FEF3DC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--white);min-height:100vh;overflow-x:hidden}
+a{color:inherit}
+
+/* HEADER */
+.site-header{position:relative;background:var(--navy-dark);padding:22px 22px 0;border-bottom:1px solid rgba(201,168,76,0.15);overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% -10%,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none}
+.header-inner{position:relative;max-width:1000px;margin:0 auto}
+.back-link{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--gold);text-decoration:none;margin-bottom:18px;opacity:0.85}
+.back-link:hover{opacity:1;text-decoration:underline}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:12px}
+.site-title{font-family:'EB Garamond',serif;font-size:clamp(30px,5vw,48px);font-weight:400;line-height:1.08;color:#fff;margin-bottom:10px}
+.site-title em{font-style:italic;color:var(--gold-light)}
+.site-sub{font-size:13.5px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.7;max-width:620px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 26px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:9.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1.4}
+.chip .dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.chip-amber{background:rgba(122,90,10,0.22);color:#fcd34d;border:1px solid rgba(122,90,10,0.5)}
+.chip-gold{background:rgba(201,168,76,0.12);color:var(--gold-light);border:1px solid rgba(201,168,76,0.35)}
+.tabs{display:flex;border-top:1px solid rgba(201,168,76,0.1);overflow-x:auto;margin:0 -22px;padding:0 22px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:13px 16px;font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap}
+.tab:hover{color:rgba(255,255,255,0.7)}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* MAIN */
+.main{max-width:1044px;margin:0 auto;padding:30px 22px 60px}
+.panel{display:none}
+.panel.active{display:block}
+.sheet{background:var(--cream);color:var(--charcoal);border-radius:4px;border-top:4px solid var(--gold);box-shadow:0 20px 50px rgba(0,0,0,0.4);overflow:hidden;margin-bottom:22px}
+.sheet-head{background:var(--navy);padding:18px 24px;border-left:6px solid var(--gold)}
+.kicker{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.sheet-title{font-family:'EB Garamond',serif;font-size:24px;font-weight:700;color:#fff;line-height:1.2}
+.sheet-sub{font-size:12.5px;color:rgba(255,255,255,0.55);margin-top:6px;line-height:1.5}
+.sheet-body{padding:24px}
+.lead-p{font-size:14.5px;line-height:1.65;margin-bottom:16px}
+.lead-p strong{color:var(--navy)}
+.mini-h{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin:20px 0 10px}
+.note{background:var(--amber-light);border-left:4px solid var(--amber);border-radius:0 3px 3px 0;padding:12px 15px;font-size:12.5px;color:#6a4f0a;line-height:1.55;margin-top:14px}
+.note.green{background:var(--green-light);border-left-color:var(--green);color:var(--green)}
+.src{font-size:11px;color:var(--gray);font-style:italic;margin-top:14px;line-height:1.5}
+.pend{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:var(--amber-light);color:var(--amber);border:1px solid rgba(122,90,10,0.35);padding:2px 7px;border-radius:10px;vertical-align:middle;margin-left:4px}
+
+/* PATH */
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:6px 0 4px;counter-reset:st}
+.path-step{position:relative;background:var(--white);border:1px solid var(--cream-dark);padding:16px 14px 14px;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:background .15s}
+.path-step:hover{background:#fffdf7}
+.path-step+.path-step{border-left:none}
+.path-step::after{content:'→';position:absolute;right:-9px;top:50%;transform:translateY(-50%);z-index:2;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.path-step:last-child::after{display:none}
+.ps-num{font-family:'EB Garamond',serif;font-size:30px;color:rgba(138,110,46,0.35);line-height:1}
+.ps-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin:4px 0 4px;letter-spacing:0.02em}
+.ps-desc{font-size:12px;color:var(--gray);line-height:1.45}
+.ps-link{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-top:8px}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.pillar{background:var(--navy);padding:14px 14px;border-top:3px solid var(--gold)}
+.pillar-h{font-family:'EB Garamond',serif;font-size:18px;color:var(--gold-light);font-weight:600}
+.pillar-p{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;margin-top:4px}
+.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lvl{background:var(--white);border:1px solid var(--cream-dark);padding:10px 12px;border-top:3px solid var(--cream-dark)}
+.lvl.l3{border-top-color:var(--green)}
+.lvl.l4{border-top-color:var(--gold)}
+.lvl-n{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim)}
+.lvl-t{font-family:'EB Garamond',serif;font-size:16px;font-weight:700;color:var(--navy)}
+.lvl-p{font-size:11.5px;color:var(--gray);line-height:1.45;margin-top:3px}
+
+/* STAGES */
+.stage-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.stage-btn{font-family:'Barlow',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:9px 14px;border:1px solid rgba(201,168,76,0.35);background:transparent;color:rgba(255,255,255,0.65);border-radius:2px;cursor:pointer}
+.stage-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.stage-panel{display:none}
+.stage-panel.active{display:block}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.st-box{background:var(--white);border:1px solid var(--cream-dark);border-left:4px solid var(--gold);padding:14px 16px}
+.st-box.wide{grid-column:1 / -1}
+.st-box.gate{border-left-color:var(--navy);background:#fbfaf6}
+.st-box h4{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
+.st-box ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.st-box li{font-size:13px;line-height:1.5;display:flex;gap:9px}
+.st-box li::before{content:'—';color:var(--gold-dim);flex-shrink:0}
+.st-box p{font-size:13.5px;line-height:1.6}
+.st-box a{color:var(--navy);font-weight:600}
+.timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
+.tl{background:var(--cream);padding:8px 9px;border-top:2px solid var(--gold)}
+.tl b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)}
+.tl span{font-size:11px;color:var(--gray);line-height:1.35;display:block;margin-top:2px}
+
+/* SELF-ASSESSMENT */
+.dim{background:var(--white);border:1px solid var(--cream-dark);margin-bottom:12px}
+.dim-h{padding:12px 16px;border-bottom:1px solid var(--cream-dark);display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.dim-t{font-family:'EB Garamond',serif;font-size:19px;font-weight:700;color:var(--navy)}
+.dim-q{font-size:12px;color:var(--gray);margin-top:2px;line-height:1.45}
+.dim-sel{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim)}
+.anchors{display:grid;grid-template-columns:repeat(4,1fr)}
+.anc{background:none;border:none;border-right:1px solid var(--cream-dark);padding:12px 12px 14px;text-align:left;cursor:pointer;font-family:inherit;color:var(--charcoal);transition:background .12s}
+.anc:last-child{border-right:none}
+.anc:hover{background:#fbf8ef}
+.anc .an{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim)}
+.anc .at{font-size:12px;line-height:1.45;margin-top:4px;display:block}
+.anc.on{background:var(--navy);color:#fff}
+.anc.on .an{color:var(--gold)}
+.res{display:none;margin-top:18px}
+.res.show{display:block}
+.bars{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.bar-row{display:grid;grid-template-columns:200px 1fr 64px;gap:12px;align-items:center}
+.bar-l{font-size:12.5px;font-weight:600;color:var(--navy)}
+.bar-t{height:10px;background:var(--cream-dark);border-radius:5px;overflow:hidden}
+.bar-f{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold))}
+.bar-row.low .bar-f{background:var(--amber)}
+.bar-row.low .bar-l{color:var(--amber)}
+.bar-v{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);text-align:right}
+.focus{background:var(--navy);color:#fff;padding:18px 20px;border-left:6px solid var(--gold);margin-bottom:10px}
+.focus .fl{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold)}
+.focus .ft{font-family:'EB Garamond',serif;font-size:22px;color:var(--gold-light);margin:4px 0 6px}
+.focus .fp{font-size:13px;color:rgba(255,255,255,0.78);line-height:1.55}
+.focus a.go{display:inline-block;margin-top:12px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:10px 16px;text-decoration:none;border-radius:2px}
+
+/* PLAN FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.fld{display:flex;flex-direction:column;gap:5px;min-width:0}
+.fld label{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy)}
+.fld input,.fld select,.fld textarea{width:100%;font-family:'Barlow',sans-serif;font-size:14px;color:var(--navy);background:var(--white);border:1.5px solid var(--cream-dark);border-radius:3px;padding:9px 11px;outline:none}
+.fld textarea{resize:vertical;min-height:62px}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold)}
+.goal{background:var(--white);border:1px solid var(--cream-dark);border-left:4px solid var(--gold);padding:14px;margin-bottom:10px}
+.goal-n{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+.goal-grid{display:grid;grid-template-columns:2fr 1.4fr 1fr;gap:10px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--cream-dark);background:var(--white)}
+table.log{width:100%;border-collapse:collapse;min-width:620px}
+table.log th{background:var(--navy);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-align:left;padding:9px 10px}
+table.log td{border-top:1px solid var(--cream-dark);padding:6px}
+table.log td input,table.log td select{width:100%;font-family:'Barlow',sans-serif;font-size:13px;color:var(--navy);border:1px solid var(--cream-dark);border-radius:2px;padding:7px 8px;background:#fff}
+table.log td.rm{width:40px;text-align:center}
+.x{background:none;border:none;color:var(--red);font-size:16px;cursor:pointer;padding:4px 8px}
+.checkins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ci{background:var(--white);border:1px solid var(--cream-dark);border-top:3px solid var(--gold);padding:12px;display:flex;flex-direction:column;gap:8px}
+.ci-h{font-family:'EB Garamond',serif;font-size:19px;font-weight:700;color:var(--navy)}
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}
+.sig div{border-top:1px solid var(--charcoal);padding-top:6px;font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray)}
+.privacy{font-size:12px;color:var(--green);background:var(--green-light);border-left:4px solid var(--green);padding:10px 14px;margin-bottom:16px;line-height:1.5}
+
+.btn{font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:12px 22px;border:none;border-radius:3px;cursor:pointer}
+.btn-primary{background:var(--gold);color:var(--navy)}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.print-only{display:none}
+
+/* FOOTER */
+.page-footer{max-width:1000px;margin:0 auto;padding:22px 16px 34px;border-top:1px solid rgba(201,168,76,0.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px}
+.pf-brand{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.35)}
+.pf-meta{font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.3);line-height:1.6}
+
+@media(max-width:760px){
+  .path{grid-template-columns:1fr 1fr}
+  .path-step:nth-child(3){border-left:1px solid var(--cream-dark)}
+  .path-step:nth-child(2)::after{display:none}
+  .path-step:nth-child(n+3){border-top:none}
+  .pillars,.levels{grid-template-columns:1fr 1fr}
+  .st-grid{grid-template-columns:1fr}
+  .timeline{grid-template-columns:repeat(3,1fr)}
+  .anchors{grid-template-columns:1fr 1fr}
+  .anc:nth-child(2){border-right:none}
+  .anc:nth-child(-n+2){border-bottom:1px solid var(--cream-dark)}
+  .bar-row{grid-template-columns:1fr 60px}
+  .bar-row .bar-t{grid-column:1 / -1;grid-row:2}
+  .form-grid,.checkins{grid-template-columns:1fr}
+  .goal-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .path,.pillars,.levels,.anchors{grid-template-columns:1fr}
+  .path-step{border-left:1px solid var(--cream-dark)!important;border-top:none}
+  .path-step:first-child{border-top:1px solid var(--cream-dark)}
+  .path-step::after{display:none}
+  .anc{border-right:none;border-bottom:1px solid var(--cream-dark)}
+  .anc:last-child{border-bottom:none}
+  .timeline{grid-template-columns:1fr 1fr}
+  .sheet-body{padding:18px}
+  .main{padding:24px 14px 50px}
+  .sheet-head{padding:16px 18px}
+  .sig{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .site-header .tabs,.back-link,.btn-row,.page-footer,.stage-tabs,.no-print{display:none!important}
+  .site-header{background:#fff;border:none;padding:0 0 10px}
+  .site-header::before{display:none}
+  .site-title{color:var(--navy)}
+  .site-sub{color:#444}
+  .chip-amber{color:var(--amber);border-color:var(--amber);background:#fff}
+  .chip-gold{color:var(--gold-dim);border-color:var(--gold-dim);background:#fff}
+  .eyebrow{color:var(--gold-dim)}
+  .main{padding:0}
+  .sheet{box-shadow:none;border-top:2px solid var(--gold-dim);break-inside:auto}
+  .sheet-head{background:#fff;border-left:4px solid var(--gold-dim)}
+  .sheet-title{color:var(--navy)}
+  .sheet-sub{color:#444}
+  .tbl-wrap{overflow:visible}
+  table.log{min-width:0}
+  table.log th{background:#fff;color:var(--navy);border-bottom:1px solid #000}
+  .print-only{display:block}
+  .focus{background:#fff;color:#000;border:1px solid var(--gold-dim)}
+  .focus .ft{color:var(--navy)}
+  .focus .fp{color:#333}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="back-link" href="index.html">← Training &amp; Development Lab</a>
+    <div class="eyebrow">Apex Concierge Services · Training &amp; Development Lab</div>
+    <h1 class="site-title">Lead Concierge <em>Development</em> Track</h1>
+    <p class="site-sub">The path from Concierge to Senior Agent to Lead Concierge — and on to Trainer Certified. What each stage means, how it is measured, how to grow, and the gate to the next.</p>
+    <div class="chips">
+      <span class="chip chip-amber"><span class="dot"></span>Draft v1 · Pending approval by the Regional Concierge Manager</span>
+      <span class="chip chip-gold"><span class="dot"></span>Module 5 · Ongoing Development</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="overview" role="tab">The Path</button>
+      <button class="tab" data-tab="stages" role="tab">Stages</button>
+      <button class="tab" data-tab="assess" role="tab">Lead Self-Assessment</button>
+      <button class="tab" data-tab="plan" role="tab">90-Day Lead Plan</button>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- ===================== OVERVIEW ===================== -->
+  <section class="panel active" id="p-overview">
+    <div class="sheet">
+      <div class="sheet-head">
+        <div class="kicker">The Path</div>
+        <div class="sheet-title">Four stages. One standard.</div>
+        <div class="sheet-sub">Every stage is measured against the same Apex Professional Standards Framework (APSF). The standard does not change as you move up. What changes is how many people you hold to it.</div>
+      </div>
+      <div class="sheet-body">
+        <div class="path">
+          <button class="path-step" data-goto="s1"><div class="ps-num">01</div><div class="ps-name">Concierge</div><div class="ps-desc">Certified through NHE Speed. Runs the post to the Apex Standard.</div><div class="ps-link">View stage →</div></button>
+          <button class="path-step" data-goto="s2"><div class="ps-num">02</div><div class="ps-name">Senior Agent</div><div class="ps-desc">Peer coach. Develops new hires on shadow shifts.</div><div class="ps-link">View stage →</div></button>
+          <button class="path-step" data-goto="s3"><div class="ps-num">03</div><div class="ps-name">Lead Concierge</div><div class="ps-desc">Owns the site standard, the escalations and the sign-offs.</div><div class="ps-link">View stage →</div></button>
+          <button class="path-step" data-goto="s4"><div class="ps-num">04</div><div class="ps-name">Trainer Certified</div><div class="ps-desc">Delivers NHE Speed and scores against APSF.</div><div class="ps-link">View stage →</div></button>
+        </div>
+
+        <div class="mini-h">How leaders are expected to lead</div>
+        <div class="pillars">
+          <div class="pillar"><div class="pillar-h">Lead by example</div><div class="pillar-p">Model the behavior and professionalism you expect from your team.</div></div>
+          <div class="pillar"><div class="pillar-h">Foster collaboration</div><div class="pillar-p">Create an environment where team members share ideas and support one another.</div></div>
+          <div class="pillar"><div class="pillar-h">Commit to growth</div><div class="pillar-p">Embrace feedback, refine processes, and inspire your team to keep improving.</div></div>
+        </div>
+
+        <div class="mini-h">The four APSF levels — used at every stage</div>
+        <div class="levels">
+          <div class="lvl"><div class="lvl-n">Level 1</div><div class="lvl-t">Incomplete</div><div class="lvl-p">The standard was not met. The work fails its basic purpose.</div></div>
+          <div class="lvl"><div class="lvl-n">Level 2</div><div class="lvl-t">Developing</div><div class="lvl-p">Partially met. Would not hold up under pressure, handoff or review.</div></div>
+          <div class="lvl l3"><div class="lvl-n">Level 3</div><div class="lvl-t">Apex Standard</div><div class="lvl-p">The expectation and the certification threshold — not extra credit.</div></div>
+          <div class="lvl l4"><div class="lvl-n">Level 4</div><div class="lvl-t">Witness Quality</div><div class="lvl-p">Could stand in a review unedited. Sustained Level 4 identifies future leaders.</div></div>
+        </div>
+
+        <div class="mini-h">Scoring rules that carry into leadership</div>
+        <ul class="st-box" style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:13px;line-height:1.5"><strong>No averaging.</strong>&nbsp;Every dimension is scored on its own. A 4 in one cannot cover a 1 in another.</li>
+          <li style="font-size:13px;line-height:1.5"><strong>The lowest dimension is the coaching priority.</strong>&nbsp;Coaching always starts there.</li>
+          <li style="font-size:13px;line-height:1.5"><strong>Score the work, not the person.</strong>&nbsp;A profile is the pattern across at least three scored samples.</li>
+          <li style="font-size:13px;line-height:1.5"><strong>Evidence rule.</strong>&nbsp;Every score below Level 3 cites the specific entry, or absence, behind it.</li>
+        </ul>
+
+        <div class="note">This track is <strong>Draft v1</strong>. The stage definitions draw on approved Apex sources; the gates between stages and the Lead self-assessment anchors are new and pending approval by the Regional Concierge Manager.</div>
+        <p class="src">Grounded in: Apex Professional Standards Framework v1.0 (levels, scoring rules, usage map, Competency 05 draft dimensions) · Senior Agent Peer Coaching Guide · The Heart of the Apex Standard ("Your Role as a Leader") · NHE Speed packet (path from day one, 90-day milestone).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STAGES ===================== -->
+  <section class="panel" id="p-stages">
+    <div class="stage-tabs" role="tablist">
+      <button class="stage-btn active" data-stage="s1">01 · Concierge</button>
+      <button class="stage-btn" data-stage="s2">02 · Senior Agent</button>
+      <button class="stage-btn" data-stage="s3">03 · Lead Concierge</button>
+      <button class="stage-btn" data-stage="s4">04 · Trainer Certified</button>
+    </div>
+
+    <!-- STAGE 1 -->
+    <div class="stage-panel active" id="s1">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div class="kicker">Stage 01</div>
+          <div class="sheet-title">Concierge</div>
+          <div class="sheet-sub">The foundation every leader is built on. Nobody skips it.</div>
+        </div>
+        <div class="sheet-body">
+          <div class="st-grid">
+            <div class="st-box wide">
+              <h4>What it means</h4>
+              <p>Cleared through NHE Speed — 80% or higher on the final assessment, then a Lead sign-off after showing readiness on shift. The concierge runs the post to the Apex Standard: the same H.O.M.E. values at 8 AM, at midnight, and on a quiet overnight. The first 90 days are the performance window.</p>
+              <div class="timeline">
+                <div class="tl"><b>Days 1–3</b><span>Shadow</span></div>
+                <div class="tl"><b>Days 4–7</b><span>Supported</span></div>
+                <div class="tl"><b>Week 2</b><span>Solo + check-ins</span></div>
+                <div class="tl"><b>Weeks 3–4</b><span>Full operation</span></div>
+                <div class="tl"><b>Day 30</b><span>Formal review</span></div>
+                <div class="tl"><b>Day 90</b><span>Full evaluation</span></div>
+              </div>
+            </div>
+            <div class="st-box">
+              <h4>What you're measured on</h4>
+              <ul>
+                <li>Attendance, log quality, resident feedback and presence</li>
+                <li>Documentation Excellence (APSF Competency 01): Level 3 on all five dimensions plus a passing Witness Test at the 30-day field confirmation</li>
+                <li>Quarterly audit: 2–3 sampled logs per quarter keep certification current</li>
+                <li>Annual Escalation, Emergency &amp; De-Escalation recertification</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Readiness signals</h4>
+              <ul>
+                <li>Clean attendance, strong logs, no conduct flags</li>
+                <li>Holds the standard when no Lead is present</li>
+                <li>Takes action on visible problems without being prompted</li>
+                <li>Escalates without hesitation — and documents it</li>
+                <li>Level 4 (Witness Quality) entries start to appear in audits</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Development activities</h4>
+              <ul>
+                <li><a href="shift-log-mastery.html">Shift Log Mastery</a> — move from Level 3 to Level 4</li>
+                <li><a href="sop-refreshers.html">SOP Refreshers</a> — packages, incidents, the desk</li>
+                <li><a href="de-escalation-recert.html">De-Escalation Recertification</a> — annual</li>
+                <li><a href="excellence-academy.html">Excellence Academy</a> — when eligible and nominated</li>
+              </ul>
+            </div>
+            <div class="st-box gate">
+              <h4>Gate to Senior Agent <span class="pend">Proposed</span></h4>
+              <ul>
+                <li>Day-90 full evaluation complete: clean attendance, strong logs, no conduct flags, supervisor endorsement — the Excellence Academy eligibility standard</li>
+                <li>Excellence Academy completed</li>
+                <li>Endorsed by the Regional Concierge Manager</li>
+              </ul>
+            </div>
+          </div>
+          <p class="src">Sources: NHE Speed packet (sign-off, path from today, Day-90 Excellence Academy eligibility) · APSF 2.9 certification and 3.2 quarterly audit · Peer Coaching Guide Module 09 "Ready Looks Like".</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div class="stage-panel" id="s2">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div class="kicker">Stage 02</div>
+          <div class="sheet-title">Senior Agent</div>
+          <div class="sheet-sub">The real-world standard, lived and modeled in front of the agent you are developing.</div>
+        </div>
+        <div class="sheet-body">
+          <div class="st-grid">
+            <div class="st-box wide">
+              <h4>What it means</h4>
+              <p>The Senior Agent is a peer coach. Training does not end at sign-off — the Senior Agent carries it onto the floor. They coach new hires through the nine modules of the Peer Coaching Guide across the first 3–5 shifts, run performance refreshers when an agent needs a reset, and complete the Agent Readiness Sign-Off that goes to the Regional Manager before a new hire's first solo shift. They demonstrate each standard before asking the agent to replicate it.</p>
+            </div>
+            <div class="st-box">
+              <h4>What you're measured on</h4>
+              <ul>
+                <li>Your own APSF profile — still Level 3 or higher on every dimension, no averaging</li>
+                <li>The agents you clear: do they hold the standard at their 30-day field confirmation?</li>
+                <li>Sign-offs completed module by module against "Ready Looks Like" — not on impression</li>
+                <li>Coaching that names the dimension and level, never general feedback</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Readiness signals</h4>
+              <ul>
+                <li>A sustained Level 4 (Witness Quality) profile — APSF names this as the marker for Documentation Mentor candidates</li>
+                <li>Coaches by dimension: "this entry is a 2 on Outcome Quality — here's what a 3 looks like"</li>
+                <li>Names A.C.T. out loud in debriefs, and where it broke down</li>
+                <li>Agents they sign off still meet the standard at 30 days</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Development activities</h4>
+              <ul>
+                <li><a href="coaching-guide.html">Peer Coaching Guide</a> — all nine modules, three use modes</li>
+                <li>Score anonymized logs on the APSF rubric, then compare with your Lead</li>
+                <li>Shadow a Lead's site walk and coach block</li>
+                <li><a href="de-escalation-recert.html">De-Escalation Recertification</a> — model it, don't just pass it</li>
+              </ul>
+            </div>
+            <div class="st-box gate">
+              <h4>Gate to Lead Concierge <span class="pend">Proposed</span></h4>
+              <ul>
+                <li>Sustained Level 4 profile across at least three scored samples</li>
+                <li>At least one complete Agent Readiness Sign-Off whose new hire passed the 30-day field confirmation</li>
+                <li>Lead self-assessment at Level 3 or higher on Shift Ownership and Judgment Modeling</li>
+                <li>Endorsed by the Regional Concierge Manager</li>
+              </ul>
+            </div>
+          </div>
+          <p class="src">Sources: Senior Agent Peer Coaching Guide (note before you begin, how to use, sign-off sheet) · APSF 1.5 scoring rules and 3.1 usage map (live coaching, leadership development).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div class="stage-panel" id="s3">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div class="kicker">Stage 03</div>
+          <div class="sheet-title">Lead Concierge</div>
+          <div class="sheet-sub">You are the champion of the Apex Standard at your site. Your guidance sets the tone for the team.</div>
+        </div>
+        <div class="sheet-body">
+          <div class="st-grid">
+            <div class="st-box wide">
+              <h4>What it means</h4>
+              <p>The Lead owns the site's standard. In the reporting chain — Agent → Site Lead → Regional Manager → Executive Leadership — the Lead receives escalations, reviews incident reports for accuracy and detail, and follows up when something needs clarifying. The Lead runs the NHE Speed site shadow, initials the walk checklist, and clears new hires for solo only after they show readiness on shift. The Lead leads by example, fosters collaboration, and commits to growth.</p>
+            </div>
+            <div class="st-box">
+              <h4>What you're measured on <span class="pend">Draft</span></h4>
+              <ul>
+                <li><strong>APSF Competency 05 — Operational Leadership</strong> (draft dimensions):</li>
+                <li>Coaching Against Standards</li>
+                <li>Audit Calibration</li>
+                <li>Shift Ownership</li>
+                <li>Facilitation Readiness</li>
+                <li>Judgment Modeling</li>
+                <li>Site outcomes: audit scores, new-hire 30-day results, open loops in pass-on</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Readiness signals for trainer</h4>
+              <ul>
+                <li>Level 3 or higher on all five Operational Leadership dimensions</li>
+                <li>Level 4 on Facilitation Readiness and Audit Calibration</li>
+                <li>Scores logs within one level of the Regional Concierge Manager</li>
+                <li>The site holds the standard on the Lead's days off</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Development activities</h4>
+              <ul>
+                <li><a href="#" data-jump="assess">Lead Self-Assessment</a> — find your lowest dimension</li>
+                <li><a href="#" data-jump="plan">90-Day Lead Plan</a> — build it around that dimension</li>
+                <li><a href="coaching-guide.html">Peer Coaching Guide</a> — coach your Senior Agents to coach</li>
+                <li><a href="nhe-facilitator-flow.html">NHE Speed Facilitator Flow</a> — learn the live segments</li>
+              </ul>
+            </div>
+            <div class="st-box gate">
+              <h4>Gate to Trainer Certified</h4>
+              <ul>
+                <li>Meets the criteria on the <a href="trainer-certification.html">Trainer Certification</a> page</li>
+                <li>A completed 90-day Lead plan with all three check-ins signed</li>
+              </ul>
+            </div>
+          </div>
+          <p class="src">Sources: The Heart of the Apex Standard ("Your Role as a Leader") · Incident Reporting SOP (reporting flow) · NHE Speed packet (site shadow, sign-off) · APSF 4.2 competency roadmap (05 Operational Leadership, draft) and 3.3 calibration requirement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div class="stage-panel" id="s4">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div class="kicker">Stage 04</div>
+          <div class="sheet-title">Trainer Certified</div>
+          <div class="sheet-sub">If it cannot be run cold by someone who has never met the author, it is not finished.</div>
+        </div>
+        <div class="sheet-body">
+          <div class="st-grid">
+            <div class="st-box wide">
+              <h4>What it means</h4>
+              <p>A Trainer Certified leader delivers the live segments of NHE Speed — kickoff, coach block and sign-off — and scores work against APSF with calibration to the Regional Concierge Manager. APSF calls these leaders "Trainer Qualified": people who can inherit and operate the framework without rebuilding it. Training can start at any hour; a certified trainer can run it on any shift.</p>
+            </div>
+            <div class="st-box">
+              <h4>What you're measured on</h4>
+              <ul>
+                <li>New-hire outcomes: final assessment results and 30-day field confirmations</li>
+                <li>Scoring calibration against the Regional Concierge Manager</li>
+                <li>Fidelity to the program — delivered as written, pending items flagged as pending</li>
+              </ul>
+            </div>
+            <div class="st-box">
+              <h4>Development activities</h4>
+              <ul>
+                <li><a href="trainer-certification.html">Trainer Certification</a> — the full criteria</li>
+                <li><a href="cofacilitator.html">Co-Facilitator App</a> — co-run a session first</li>
+                <li><a href="nhe-facilitator-flow.html">NHE Speed Facilitator Flow</a></li>
+              </ul>
+            </div>
+            <div class="st-box gate wide">
+              <h4>Keeping it</h4>
+              <ul>
+                <li>Certification is maintained by continued delivery and quarterly calibration. If calibration drifts, re-calibrate before the next session.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="src">Sources: APSF 1.2 culture loop and 4.2 design-for-inheritance principle · NHE Speed program structure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SELF-ASSESSMENT ===================== -->
+  <section class="panel" id="p-assess">
+    <div class="sheet">
+      <div class="sheet-head">
+        <div class="kicker">Lead Self-Assessment · Draft v1</div>
+        <div class="sheet-title">Operational Leadership — where are you now?</div>
+        <div class="sheet-sub">Rate yourself Level 1–4 on each of the five draft dimensions of APSF Competency 05. Score the work, not the person: think of the last two weeks of real shifts.</div>
+      </div>
+      <div class="sheet-body">
+        <p class="privacy">Nothing you select leaves this computer. Ratings are not saved — they clear when you close or reload the page.</p>
+        <div id="dims"></div>
+        <div class="btn-row no-print">
+          <button class="btn btn-primary" id="seeResult">See my profile</button>
+          <button class="btn btn-ghost" id="resetAssess">Clear ratings</button>
+        </div>
+        <div class="note hidden-msg" id="assessMsg" style="display:none">Rate all five dimensions to see your profile.</div>
+        <div class="res" id="assessRes"></div>
+        <p class="src">Dimensions: APSF v1.0, Section 4.2 (Competency 05 — Operational Leadership, draft). Level anchors on this page are new and pending approval by the Regional Concierge Manager.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 90-DAY PLAN ===================== -->
+  <section class="panel" id="p-plan">
+    <div class="sheet">
+      <div class="sheet-head">
+        <div class="kicker">90-Day Lead Development Plan · Draft v1</div>
+        <div class="sheet-title">One focus. Three goals. Three check-ins.</div>
+        <div class="sheet-sub">Build the plan around your lowest Operational Leadership dimension. Review it with the Regional Concierge Manager at 30, 60 and 90 days.</div>
+      </div>
+      <div class="sheet-body">
+        <p class="privacy no-print">Nothing you type leaves this computer. This plan is not saved — use Print / Save as PDF before you close the page.</p>
+
+        <div class="mini-h" style="margin-top:0">The basics</div>
+        <div class="form-grid">
+          <div class="fld"><label for="pName">Lead</label><input id="pName" type="text" autocomplete="off"></div>
+          <div class="fld"><label for="pSite">Site</label><input id="pSite" type="text" autocomplete="off"></div>
+          <div class="fld"><label for="pStart">Plan start date</label><input id="pStart" type="date"></div>
+        </div>
+        <div class="form-grid" style="margin-top:12px">
+          <div class="fld"><label for="pFocus">Focus dimension</label>
+            <select id="pFocus">
+              <option value="">Choose…</option>
+              <option>Coaching Against Standards</option>
+              <option>Audit Calibration</option>
+              <option>Shift Ownership</option>
+              <option>Facilitation Readiness</option>
+              <option>Judgment Modeling</option>
+            </select>
+          </div>
+          <div class="fld"><label for="pNow">Current level</label>
+            <select id="pNow"><option value="">—</option><option>Level 1 · Incomplete</option><option>Level 2 · Developing</option><option>Level 3 · Apex Standard</option><option>Level 4 · Witness Quality</option></select>
+          </div>
+          <div class="fld"><label for="pTarget">Target level by day 90</label>
+            <select id="pTarget"><option value="">—</option><option>Level 2 · Developing</option><option>Level 3 · Apex Standard</option><option>Level 4 · Witness Quality</option></select>
+          </div>
+        </div>
+        <div class="fld" style="margin-top:12px"><label for="pWhy">Why this dimension — the evidence</label><textarea id="pWhy" placeholder="Cite the specific moment, entry or audit result. Evidence, not impression."></textarea></div>
+
+        <div class="mini-h">Three goals</div>
+        <div id="goals"></div>
+
+        <div class="mini-h">Coaching sessions logged</div>
+        <p class="lead-p" style="font-size:13px;margin-bottom:10px">Every coaching conversation you run with an agent or Senior Agent. Use initials, not full names.</p>
+        <div class="tbl-wrap">
+          <table class="log" id="logTbl">
+            <thead><tr><th style="width:130px">Date</th><th style="width:90px">Initials</th><th>Module / dimension coached</th><th>Outcome / next step</th><th class="no-print" style="width:40px"></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="btn-row no-print" style="margin-top:10px"><button class="btn btn-ghost" id="addRow">+ Add session</button></div>
+
+        <div class="mini-h">Check-ins with the Regional Concierge Manager</div>
+        <div class="checkins" id="checkins"></div>
+
+        <div class="sig">
+          <div>Lead signature &amp; date</div>
+          <div>Regional Concierge Manager signature &amp; date</div>
+        </div>
+        <p class="print-only src">Draft v1 · Pending approval by the Regional Concierge Manager · Apex Concierge Services · Internal Use Only</p>
+
+        <div class="btn-row no-print">
+          <button class="btn btn-primary" id="printPlan">Print / Save as PDF</button>
+          <button class="btn btn-ghost" id="clearPlan">Clear plan</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="page-footer">
+  <div class="pf-brand">Apex Concierge Services · Training &amp; Development Lab</div>
+  <div class="pf-meta">Internal Use Only · Lead Concierge Development Track<br>Draft v1 · Version 1.0 · October 2026</div>
+</footer>
+
+<script>
+/* ===== Tabs ===== */
+const tabs = document.querySelectorAll('.tab');
+function showTab(id){
+  tabs.forEach(t=>t.classList.toggle('active', t.dataset.tab===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', p.id==='p-'+id));
+  try{ localStorage.setItem('apexLeadTab', id); }catch(e){}
+}
+tabs.forEach(t=>t.addEventListener('click', ()=>showTab(t.dataset.tab)));
+function showStage(id){
+  document.querySelectorAll('.stage-btn').forEach(b=>b.classList.toggle('active', b.dataset.stage===id));
+  document.querySelectorAll('.stage-panel').forEach(p=>p.classList.toggle('active', p.id===id));
+}
+document.querySelectorAll('.stage-btn').forEach(b=>b.addEventListener('click', ()=>showStage(b.dataset.stage)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click', ()=>{ showTab('stages'); showStage(b.dataset.goto); window.scrollTo({top:0,behavior:'smooth'}); }));
+document.querySelectorAll('[data-jump]').forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); showTab(a.dataset.jump); window.scrollTo({top:0,behavior:'smooth'}); }));
+try{ const last = localStorage.getItem('apexLeadTab'); if(last && document.getElementById('p-'+last)) showTab(last); }catch(e){}
+
+/* ===== Self-assessment (memory only) ===== */
+const DIMS = [
+  { name:"Coaching Against Standards",
+    q:"Do you coach to the written standard — by dimension and level — or by general impression?",
+    a:["Feedback is general (\"good job,\" \"tighten it up\") or doesn't happen. Corrections aren't tied to a standard.",
+       "Names the problem, but not the dimension or level. Coaching is reactive — after something goes wrong.",
+       "Coaches by dimension and level, starts with the lowest dimension, and demonstrates before asking the agent to replicate.",
+       "Level 3, plus agents you coach hold the standard at their 30-day review. Coaching is documented and followed up."],
+    action:"Run one Peer Coaching Guide module this week — with a new hire or as a refresher — and name the dimension and level out loud.",
+    link:"coaching-guide.html", linkText:"Open the Peer Coaching Guide" },
+  { name:"Audit Calibration",
+    q:"When you score a log against APSF, how close are you to the Regional Concierge Manager?",
+    a:["Doesn't score logs, or scores on impression rather than the rubric.",
+       "Uses the rubric, but lands more than one level apart from the Regional Concierge Manager, or skips the evidence.",
+       "Scores within one level of the Regional Concierge Manager, cites the entry for every score below Level 3, and applies the Witness Test.",
+       "Consistently calibrated. Can calibrate others, and flags anchors that proved ambiguous."],
+    action:"Score three anonymized logs on the APSF rubric, with evidence for every score below Level 3, then compare with the Regional Concierge Manager.",
+    link:"shift-log-mastery.html", linkText:"Open Shift Log Mastery" },
+  { name:"Shift Ownership",
+    q:"Do open items at your site end — resolved, transferred, or re-flagged — or do they drift?",
+    a:["Problems pass to the next shift. Open loops have no owner.",
+       "Owns your own shift's tasks; site-level issues wait for someone else.",
+       "Owns the site's open items to closure or a documented handoff. Pass-on items are tracked across shifts. The desk is never uncovered.",
+       "Level 3, plus fixes what caused the problem. The site runs to standard on your days off."],
+    action:"Run the SOP refreshers with your team and track every pass-on open item to a documented ending for two weeks.",
+    link:"sop-refreshers.html", linkText:"Open SOP Refreshers" },
+  { name:"Facilitation Readiness",
+    q:"Could you run a segment of NHE Speed today, at any hour, without the author in the room?",
+    a:["Not yet able to run a training segment.",
+       "Can run a site walk with prompts; relies on reading the script.",
+       "Runs the site shadow and coach-block scenarios to standard, signs off against \"Ready Looks Like,\" and debriefs with A.C.T.",
+       "Can run any NHE Speed segment cold, on any shift, and can coach another facilitator."],
+    action:"Co-facilitate one NHE Speed segment, then review the trainer certification criteria with the Regional Concierge Manager.",
+    link:"trainer-certification.html", linkText:"Open Trainer Certification" },
+  { name:"Judgment Modeling",
+    q:"Does your team see — and copy — how you make escalation calls?",
+    a:["Escalation calls are inconsistent, or not documented.",
+       "Makes correct calls, but the reasoning stays in your head. The team can't see it.",
+       "Applies the right tier every time, documents who, when and how, and talks the team through the call.",
+       "Level 3, plus borderline calls go up one tier with the reasoning recorded — and the team adopts the pattern."],
+    action:"Complete the recertification yourself, then debrief one real escalation with your team out loud: the call, the tier, the reasoning.",
+    link:"de-escalation-recert.html", linkText:"Open De-Escalation Recertification" }
+];
+const LEVEL_NAMES = ["Incomplete","Developing","Apex Standard","Witness Quality"];
+const ratings = new Array(DIMS.length).fill(0);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function renderDims(){
+  document.getElementById('dims').innerHTML = DIMS.map((d,i)=>`
+    <div class="dim">
+      <div class="dim-h"><div><div class="dim-t">${d.name}</div><div class="dim-q">${d.q}</div></div><div class="dim-sel" id="sel${i}">${ratings[i]?('Level '+ratings[i]+' · '+LEVEL_NAMES[ratings[i]-1]):'Not rated'}</div></div>
+      <div class="anchors" role="radiogroup" aria-label="${d.name}">
+        ${d.a.map((t,l)=>`<button class="anc${ratings[i]===l+1?' on':''}" role="radio" aria-checked="${ratings[i]===l+1}" data-d="${i}" data-l="${l+1}"><span class="an">Level ${l+1} · ${LEVEL_NAMES[l]}</span><span class="at">${t}</span></button>`).join('')}
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.anc').forEach(b=>b.addEventListener('click', ()=>{
+    ratings[+b.dataset.d] = +b.dataset.l;
+    renderDims();
+    if(document.getElementById('assessRes').classList.contains('show')) renderResult();
+  }));
+}
+function renderResult(){
+  const msg = document.getElementById('assessMsg');
+  const res = document.getElementById('assessRes');
+  if(ratings.some(r=>!r)){ msg.style.display='block'; res.classList.remove('show'); return; }
+  msg.style.display='none';
+  const min = Math.min(...ratings);
+  const lows = DIMS.map((d,i)=>({d,i})).filter(x=>ratings[x.i]===min);
+  const allAt3 = ratings.every(r=>r>=3);
+  res.innerHTML = `
+    <div class="mini-h">Your profile — five scores, no average</div>
+    <div class="bars">
+      ${DIMS.map((d,i)=>`<div class="bar-row${ratings[i]===min?' low':''}"><div class="bar-l">${d.name}</div><div class="bar-t"><div class="bar-f" style="width:${ratings[i]*25}%"></div></div><div class="bar-v">Level ${ratings[i]}</div></div>`).join('')}
+    </div>
+    ${lows.map(x=>`
+      <div class="focus">
+        <div class="fl">${lows.length>1?'Tied lowest dimension':'Lowest dimension'} · your coaching priority</div>
+        <div class="ft">${x.d.name} — Level ${min} · ${LEVEL_NAMES[min-1]}</div>
+        <div class="fp"><strong>Next action:</strong> ${x.d.action}</div>
+        <a class="go no-print" href="${x.d.link}">${x.d.linkText} →</a>
+      </div>`).join('')}
+    <div class="note ${allAt3?'green':''}">${allAt3
+      ? 'Level 3 or higher on all five dimensions. Confirm it with the Regional Concierge Manager — and keep building toward Level 4 on Facilitation Readiness and Audit Calibration.'
+      : 'Any dimension below Level 3 comes first. A 4 elsewhere does not cover it.'}</div>
+    <div class="btn-row no-print"><button class="btn btn-primary" id="toPlan">Build my 90-day plan around ${esc(lows[0].d.name)} →</button></div>`;
+  res.classList.add('show');
+  document.getElementById('toPlan').addEventListener('click', ()=>{
+    document.getElementById('pFocus').value = lows[0].d.name;
+    document.getElementById('pNow').selectedIndex = min;
+    showTab('plan'); window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
+document.getElementById('seeResult').addEventListener('click', ()=>{ renderResult(); const r=document.getElementById('assessRes'); (r.classList.contains('show')?r:document.getElementById('assessMsg')).scrollIntoView({behavior:'smooth',block:'start'}); });
+document.getElementById('resetAssess').addEventListener('click', ()=>{ ratings.fill(0); renderDims(); document.getElementById('assessRes').classList.remove('show'); document.getElementById('assessMsg').style.display='none'; });
+renderDims();
+
+/* ===== 90-day plan (memory only) ===== */
+function renderGoals(){
+  document.getElementById('goals').innerHTML = [1,2,3].map(n=>`
+    <div class="goal">
+      <div class="goal-n">Goal ${n}</div>
+      <div class="goal-grid">
+        <div class="fld"><label for="g${n}a">The goal</label><textarea id="g${n}a" placeholder="What will be different — observable, on shift."></textarea></div>
+        <div class="fld"><label for="g${n}b">How it's measured</label><textarea id="g${n}b" placeholder="Audit score, sign-offs, open loops closed…"></textarea></div>
+        <div class="fld"><label for="g${n}c">By</label><select id="g${n}c"><option value="">—</option><option>Day 30</option><option>Day 60</option><option>Day 90</option></select></div>
+      </div>
+    </div>`).join('');
+}
+function addRow(){
+  const tb = document.querySelector('#logTbl tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><input type="date" aria-label="Session date"></td><td><input type="text" maxlength="5" aria-label="Agent initials"></td><td><input type="text" aria-label="Module or dimension coached"></td><td><input type="text" aria-label="Outcome or next step"></td><td class="rm no-print"><button class="x" title="Remove row" aria-label="Remove row">×</button></td>`;
+  tr.querySelector('.x').addEventListener('click', ()=>{ if(tb.rows.length>1) tr.remove(); else tr.querySelectorAll('input').forEach(i=>i.value=''); });
+  tb.appendChild(tr);
+}
+function renderCheckins(){
+  document.getElementById('checkins').innerHTML = [30,60,90].map(d=>`
+    <div class="ci">
+      <div class="ci-h">Day ${d}</div>
+      <div class="fld"><label for="c${d}d">Date held</label><input id="c${d}d" type="date"></div>
+      <div class="fld"><label for="c${d}s">Status</label><select id="c${d}s"><option value="">—</option><option>On track</option><option>Needs support</option><option>Off track</option>${d===90?'<option>Plan complete</option>':''}</select></div>
+      <div class="fld"><label for="c${d}n">Evidence &amp; notes</label><textarea id="c${d}n"></textarea></div>
+      <div class="fld"><label for="c${d}x">Next step</label><input id="c${d}x" type="text"></div>
+    </div>`).join('');
+}
+function resetPlan(){
+  document.querySelectorAll('#p-plan input, #p-plan textarea').forEach(el=>el.value='');
+  document.querySelectorAll('#p-plan select').forEach(el=>el.selectedIndex=0);
+  document.querySelector('#logTbl tbody').innerHTML='';
+  for(let i=0;i<4;i++) addRow();
+}
+renderGoals(); renderCheckins(); for(let i=0;i<4;i++) addRow();
+document.getElementById('addRow').addEventListener('click', addRow);
+document.getElementById('printPlan').addEventListener('click', ()=>window.print());
+document.getElementById('clearPlan').addEventListener('click', ()=>{ if(confirm('Clear everything in this plan?')) resetPlan(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Trainer Certification Framework · Apex</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;--navy-light:#1e3566;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E2DDD4;--white:#FFFFFF;--charcoal:#1A1A2E;--gray:#6B6B6B;
+  --green:#1A5C2A;--green-light:#DDF3E4;--red:#6B1A1A;--red-light:#FBEBEB;--amber:#7A5A0A;--amber-light:#FEF3DC;
+  --l1:#6B1A1A;--l2:#7A5A0A;--l3:#1A5C2A;--l4:#0D1F3C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--white);min-height:100vh;overflow-x:hidden;line-height:1.6}
+a{color:inherit}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.site-header{position:relative;background:var(--navy-dark);padding:28px 64px 34px;border-bottom:1px solid rgba(201,168,76,.15);overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% -10%,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none}
+.header-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.back{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--gold);text-decoration:none;margin-bottom:26px;opacity:.85}
+.back:hover{opacity:1;text-decoration:underline}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.75;margin-bottom:14px}
+.site-title{font-family:'EB Garamond',serif;font-size:clamp(32px,4.5vw,52px);font-weight:400;line-height:1.08;margin-bottom:12px}
+.site-title em{font-style:italic;color:var(--gold-light)}
+.site-subtitle{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);max-width:620px;line-height:1.7}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:9.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
+.chip-gold{background:rgba(201,168,76,.08);color:var(--gold-light);border:1px solid rgba(201,168,76,.3)}
+.chip-amber{background:var(--amber-light);color:var(--amber);border:1px solid #e3c77a;letter-spacing:.04em;text-transform:none;font-size:11.5px;font-weight:600;white-space:normal}
+
+.bar{position:sticky;top:0;z-index:20;background:rgba(8,20,41,.97);border-bottom:1px solid rgba(201,168,76,.18)}
+.bar-inner{max-width:1100px;margin:0 auto;padding:0 64px;display:flex;overflow-x:auto;scrollbar-width:none}
+.bar-inner::-webkit-scrollbar{display:none}
+.bar a{padding:14px 14px 12px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap}
+.bar a:hover{color:rgba(255,255,255,.75)}
+.bar a.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+.main{max-width:1100px;margin:0 auto;padding:30px 64px 90px}
+.draft{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;background:var(--amber-light);color:var(--amber);border-left:6px solid var(--amber);padding:16px 20px;border-radius:2px;margin-bottom:22px}
+.draft b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:17px;letter-spacing:.04em;color:#5c4307}
+.draft p{font-size:13.5px;color:#5c4307;max-width:80ch}
+.draft svg{margin-top:3px}
+.sheet{background:var(--cream);color:var(--charcoal);border-top:4px solid var(--gold);border-radius:2px;padding:30px 34px;margin-bottom:22px;scroll-margin-top:60px}
+.kicker{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+.sheet h2{font-family:'EB Garamond',serif;font-size:28px;font-weight:500;line-height:1.2;margin-bottom:14px;color:var(--navy)}
+.sheet h3{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin:22px 0 8px}
+.sheet p{font-size:15px;max-width:74ch}
+.sheet p+p{margin-top:10px}
+.small{font-size:13px!important;color:var(--gray)}
+.sheet a{color:var(--navy);font-weight:600}
+
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.cardw{background:#fff;border:1px solid var(--cream-dark);border-top:3px solid var(--navy);padding:16px 18px;border-radius:2px}
+.cardw h4{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.cardw p{font-size:14px}
+
+/* eligibility */
+.elig{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.elig li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;background:#fff;border:1px solid var(--cream-dark);padding:12px 16px;border-radius:2px}
+.elig .ck{width:22px;height:22px;border:1.5px solid var(--green);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.elig strong{display:block;font-weight:600;color:var(--navy);font-size:15px}
+.elig span.d{font-size:14px}
+.elig .src{display:block;font-size:12px;color:var(--gray);margin-top:3px}
+
+/* pathway */
+.path{list-style:none;display:flex;flex-direction:column;gap:0;margin-top:8px;position:relative}
+.path li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;position:relative;padding-bottom:18px}
+.path li::before{content:'';position:absolute;left:27px;top:52px;bottom:0;width:2px;background:var(--cream-dark)}
+.path li:last-child::before{display:none}
+.path .st-n{width:54px;height:54px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:'EB Garamond',serif;font-size:26px;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold)}
+.path li:last-child .st-n{background:var(--gold);color:var(--navy)}
+.path .st-b{background:#fff;border:1px solid var(--cream-dark);padding:14px 18px;border-radius:2px}
+.path h4{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.path p{font-size:14.5px}
+.path dl{display:grid;grid-template-columns:90px minmax(0,1fr);gap:4px 12px;margin-top:10px;font-size:13.5px}
+.path dt{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:var(--gold-dim);padding-top:1px}
+
+/* rubric */
+.levels-key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 22px}
+.lk{padding:10px 12px;border-radius:2px;color:#fff;font-size:12.5px;line-height:1.4}
+.lk b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.03em}
+.lk.l1{background:var(--l1)}.lk.l2{background:var(--l2)}.lk.l3{background:var(--l3)}.lk.l4{background:var(--l4);border:1px solid var(--gold)}
+.dim{margin-bottom:16px;border:1px solid var(--cream-dark);border-radius:2px;overflow:hidden;background:#fff}
+.dim-h{background:var(--navy);border-left:6px solid var(--gold);color:#fff;padding:13px 18px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.dim-h .dn{font-family:'EB Garamond',serif;font-size:24px;color:var(--gold);line-height:1}
+.dim-h h4{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.02em}
+.dim-h p{flex-basis:100%;font-size:13.5px;color:rgba(255,255,255,.72);max-width:none}
+.anc{display:grid;grid-template-columns:150px minmax(0,1fr);border-top:1px solid var(--cream-dark)}
+.anc:first-of-type{border-top:0}
+.anc .lv{padding:12px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;line-height:1.25;border-left:5px solid}
+.anc .lv small{display:block;font-family:'Barlow',sans-serif;font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.anc.l1 .lv{color:var(--l1);border-color:var(--l1);background:var(--red-light)}
+.anc.l2 .lv{color:var(--l2);border-color:var(--l2);background:var(--amber-light)}
+.anc.l3 .lv{color:var(--l3);border-color:var(--l3);background:var(--green-light)}
+.anc.l4 .lv{color:var(--l4);border-color:var(--gold);background:#EEF0F5}
+.anc .tx{padding:12px 16px;font-size:14px}
+.anc .tx i{display:block;color:var(--gray);margin-top:4px;font-size:13px}
+
+.verdict{background:var(--navy);color:#fff;border-left:6px solid var(--gold);padding:22px 24px;border-radius:2px;margin-top:6px}
+.verdict .q{font-family:'EB Garamond',serif;font-style:italic;font-size:26px;line-height:1.3;color:var(--gold-light);margin:6px 0 10px}
+.verdict p{color:rgba(255,255,255,.82);font-size:14.5px}
+.verdict ul{margin:10px 0 0 18px;font-size:14px;color:rgba(255,255,255,.82)}
+.verdict ul li+li{margin-top:4px}
+.rules{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.rules li{background:#fff;border:1px solid var(--cream-dark);border-left:4px solid var(--navy);padding:11px 16px;font-size:14.5px;border-radius:2px}
+.rules b{color:var(--navy)}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--cream-dark);border-radius:2px;background:#fff;margin-top:8px}
+table.t{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+table.t th{background:var(--navy);color:var(--gold-light);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:9px 14px}
+table.t td{padding:10px 14px;border-top:1px solid var(--cream-dark);vertical-align:top}
+table.t td:first-child{font-weight:600;color:var(--navy);width:30%}
+.trig{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px}
+.trig li{background:var(--red-light);border-left:4px solid var(--red);padding:10px 14px;font-size:14px;border-radius:2px}
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px;counter-reset:r}
+.road div{background:#fff;border:1px solid var(--cream-dark);border-top:3px solid var(--green);padding:14px 16px;font-size:14px;border-radius:2px;counter-increment:r}
+.road div::before{content:counter(r);display:block;font-family:'EB Garamond',serif;font-size:26px;color:var(--green);line-height:1;margin-bottom:6px}
+
+/* scorecard */
+.private{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;font-weight:600;color:var(--green);background:var(--green-light);padding:5px 12px;border-radius:20px;margin-bottom:18px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 16px;margin-bottom:18px}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld>span{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy)}
+.fld input,.fld select,.fld textarea,.sc-ev textarea{background:#fff;border:1px solid var(--cream-dark);border-bottom:1.5px solid var(--navy);border-radius:2px;padding:8px 10px;font-size:14.5px;width:100%;color:var(--charcoal)}
+.prechk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;background:#fff;border:1px solid var(--cream-dark);padding:12px 16px;border-radius:2px;margin-bottom:20px}
+.prechk .hd{grid-column:1/-1;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.prechk .hd em{font-style:normal;font-family:'Barlow',sans-serif;letter-spacing:0;text-transform:none;font-weight:600;color:var(--gray)}
+.prechk label{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;font-size:13.5px;cursor:pointer;align-items:start}
+.prechk input{width:16px;height:16px;margin-top:3px;accent-color:var(--green)}
+.sc-dim{background:#fff;border:1px solid var(--cream-dark);border-radius:2px;margin-bottom:10px;padding:14px 16px}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sc-top h4{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--navy)}
+.sc-top h4 span{color:var(--gold-dim);margin-right:6px}
+.lvls{display:flex;gap:6px;flex-wrap:wrap}
+.lvls input{position:absolute;opacity:0;pointer-events:none}
+.lvls label{border:1.5px solid var(--cream-dark);background:var(--cream);border-radius:20px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;color:var(--charcoal)}
+.lvls label:hover{border-color:var(--navy)}
+.lvls input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px}
+.lvls input:checked+label.l1{background:var(--l1);border-color:var(--l1);color:#fff}
+.lvls input:checked+label.l2{background:var(--l2);border-color:var(--l2);color:#fff}
+.lvls input:checked+label.l3{background:var(--l3);border-color:var(--l3);color:#fff}
+.lvls input:checked+label.l4{background:var(--l4);border-color:var(--gold);color:var(--gold-light)}
+.sc-ev{margin-top:10px}
+.sc-ev textarea{min-height:54px;resize:vertical;font-size:14px}
+.warn{display:none;margin-top:6px;font-size:12.5px;font-weight:600;color:var(--red);background:var(--red-light);padding:6px 10px;border-radius:2px}
+.sc-dim.need .warn{display:block}
+.sc-dim.need textarea{border-color:var(--red)}
+.sc-dim.low{box-shadow:inset 4px 0 0 var(--gold)}
+.lowtag{display:none;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--navy);padding:3px 9px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.sc-dim.low .lowtag{display:inline-block}
+
+.vt{background:var(--navy);color:#fff;border-radius:2px;padding:16px 18px;margin:16px 0 10px;border-left:6px solid var(--gold)}
+.vt .q{font-family:'EB Garamond',serif;font-style:italic;font-size:21px;color:var(--gold-light);margin-bottom:10px}
+.vt .pf{display:flex;gap:8px;margin-bottom:10px}
+.vt .pf button{border:1.5px solid rgba(255,255,255,.3);background:transparent;color:#fff;padding:7px 20px;border-radius:2px;font-weight:700;letter-spacing:.14em;font-size:12px;cursor:pointer}
+.vt .pf button[aria-pressed="true"][data-v="PASS"]{background:var(--green);border-color:#6fe39a}
+.vt .pf button[aria-pressed="true"][data-v="FAIL"]{background:var(--red);border-color:#e88}
+.vt input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.25);border-radius:2px;padding:8px 10px;color:#fff;font-size:14px}
+.vt input::placeholder{color:rgba(255,255,255,.45)}
+
+.result{border-radius:2px;padding:18px 20px;margin:16px 0;border:1px solid var(--cream-dark);background:#fff}
+.result .rh{font-family:'EB Garamond',serif;font-size:26px;line-height:1.2;margin-bottom:6px}
+.result.met{border-left:8px solid var(--green);background:var(--green-light)}
+.result.met .rh{color:var(--green)}
+.result.not{border-left:8px solid var(--red);background:var(--red-light)}
+.result.not .rh{color:var(--red)}
+.result.pending{border-left:8px solid var(--gray)}
+.result.pending .rh{color:var(--gray)}
+.result ul{margin:6px 0 0 18px;font-size:14px}
+.profile{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:12px}
+.pcell{background:#fff;border:1px solid var(--cream-dark);padding:8px;border-radius:2px;text-align:center}
+.pcell .pn{font-size:11px;line-height:1.25;color:var(--gray);min-height:28px}
+.pcell .pv{font-family:'EB Garamond',serif;font-size:26px;line-height:1.1;color:var(--navy)}
+.pcell.lowc{border-color:var(--gold);box-shadow:inset 0 3px 0 var(--gold)}
+
+details.cal{background:#fff;border:1px solid var(--cream-dark);border-radius:2px;margin:16px 0;padding:0 16px}
+details.cal summary{cursor:pointer;padding:12px 0;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--navy)}
+details.cal summary small{font-family:'Barlow',sans-serif;font-weight:400;font-size:13px;color:var(--gray);margin-left:6px}
+/*cal*/.cal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px 18px;padding-bottom:14px}
+.cal-log h5{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.cal-log table{width:100%;border-collapse:collapse;font-size:12.5px}
+.cal-log th{font-weight:600;color:var(--gray);text-align:left;padding:3px 4px;font-size:11px}
+.cal-log td{padding:3px 4px;border-top:1px solid var(--cream-dark)}
+.cal-log select{border:1px solid var(--cream-dark);border-radius:2px;padding:2px 3px;font-size:12.5px;background:var(--cream);width:100%;min-width:66px}
+.cal-log td.g{text-align:center;font-weight:700;width:26px}
+.cal-log td.g.ok{color:var(--green)}.cal-log td.g.bad{color:var(--red)}
+#calRes{font-size:14px;font-weight:600;padding-bottom:14px}
+.sigs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin:28px 0 14px}
+.sig .line{border-bottom:1.5px solid var(--charcoal);height:40px}
+.sig .cap{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);margin-top:6px;display:flex;justify-content:space-between;gap:10px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{background:var(--navy);color:var(--white);border:1px solid var(--navy);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:11px 18px;border-radius:2px;cursor:pointer}
+.btn:hover{background:var(--navy-light)}
+.btn.light{background:transparent;color:var(--navy)}
+.print-only{display:none}
+
+.foot{border-top:1px solid rgba(201,168,76,.08);max-width:1100px;margin:0 auto;padding:24px 64px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot .b{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,.35)}
+.foot .m{font-size:10.5px;letter-spacing:.08em;color:rgba(255,255,255,.3)}
+
+@media (max-width:860px){
+  .site-header,.main,.foot{padding-left:16px;padding-right:16px}
+  .bar-inner{padding:0 8px}
+  .sheet{padding:22px 16px}
+  .grid3,.road,.trig,.levels-key,.fields,.prechk,.sigs,.cal-grid{grid-template-columns:minmax(0,1fr)}
+  .anc{grid-template-columns:minmax(0,1fr)}
+  .anc .lv{border-left-width:5px;padding:8px 14px}
+  .profile{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+  .pcell{padding:6px 3px}.pcell .pn{font-size:10px;min-height:38px}
+  .path li{grid-template-columns:40px minmax(0,1fr);gap:12px}
+  .path .st-n{width:40px;height:40px;font-size:20px}
+  .path li::before{left:19px;top:40px}
+  .path dl{grid-template-columns:minmax(0,1fr)}
+  .verdict .q{font-size:22px}
+  table.t{min-width:0}table.t thead{display:none}table.t tr{display:block;border-top:1px solid var(--cream-dark)}table.t tr:first-child{border-top:0}table.t td{display:block;width:auto!important;border-top:0;padding:4px 14px}table.t td:first-child{padding-top:12px}table.t td:last-child{padding-bottom:12px}
+}
+@media (min-width:600px) and (max-width:860px){.levels-key,.fields,.prechk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media print{
+  @page{margin:13mm}
+  body{background:#fff;color:#000}
+  .bar,.back,.actions,.foot,.no-print{display:none!important}
+  .site-header{background:#fff;padding:0 0 10px;border-bottom:2px solid #000}
+  .site-header::before{display:none}
+  .site-title,.site-subtitle,.eyebrow,.site-title em{color:#000}
+  .main{padding:10px 0}
+  .sheet{border:1px solid #999;padding:16px}
+  .dim,.path li,.anc,.sc-dim,.verdict{break-inside:avoid}
+  .dim-h,.verdict,.vt{background:#fff!important;color:#000;border:1px solid #999}
+  .dim-h p,.verdict p,.verdict ul,.verdict .q,.vt .q,.dim-h .dn{color:#000}
+  .path .st-n{background:#fff;color:#000}
+  .vt .pf button{color:#000;border-color:#999}
+  .vt .pf button[aria-pressed="true"]{color:#fff}
+  .vt input{color:#000;border-color:#999}
+  input::placeholder,textarea::placeholder{color:transparent}
+  body.print-card .site-header,body.print-card .main>*:not(#scorecard){display:none!important}
+  body.print-card #scorecard{border:0;padding:0;font-size:12px}
+  body.print-card .print-only{display:block}
+  body.print-card .private{display:none}
+  body.print-card .sc-dim{padding:8px 10px;margin-bottom:6px}
+  body.print-card .lvls label{padding:2px 8px;font-size:11px}
+  body.print-card .lvls input:not(:checked)+label{opacity:.45}
+  body.print-card .sc-ev textarea{min-height:34px;font-size:12px}
+  body.print-card details.cal:not([open]){display:none}
+  .lvls label,.vt .pf button,.result,.pcell,.lk,.anc .lv,.cal-log td.g{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-card .fields{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px 12px;margin-bottom:10px}
+  body.print-card .prechk{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:8px 12px;margin-bottom:10px}
+  body.print-card .sigs{grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:20px 0 6px}
+  body.print-card .cal-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  body.print-card .cal-log select{min-width:0;font-size:10.5px}body.print-card .cal-log td{font-size:10.5px;padding:2px}
+  body.print-card .result{padding:10px 14px;margin:10px 0}body.print-card .result .rh{font-size:20px}
+  body.print-card .vt{padding:10px 14px;margin:10px 0 6px}body.print-card .vt .q{font-size:17px;margin-bottom:6px}
+  body.print-card .fld input,body.print-card .fld select{padding:4px 6px;font-size:12px}
+  .levels-key{grid-template-columns:repeat(4,minmax(0,1fr))!important}.anc{grid-template-columns:150px minmax(0,1fr)!important}.grid3,.road{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="back" href="index.html">← Training &amp; Development Lab</a>
+    <div class="eyebrow">Apex Concierge Services · Training &amp; Development Lab</div>
+    <h1 class="site-title">Trainer <em>Certification</em> Framework</h1>
+    <p class="site-subtitle">How a Lead or Senior Agent is certified to facilitate NHE Speed and to coach new hires with the Peer Coaching Guide: who is eligible, the path to certification, the rubric, and how certification is kept.</p>
+    <div class="chips">
+      <span class="chip chip-gold">M3 · Trainer Pipeline</span>
+      <span class="chip chip-amber">Draft v1 · Pending approval by the Regional Concierge Manager</span>
+    </div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Sections">
+  <div class="bar-inner" id="secnav">
+    <a href="#overview">Overview</a>
+    <a href="#eligibility">Eligibility</a>
+    <a href="#pathway">Pathway</a>
+    <a href="#rubric">Rubric</a>
+    <a href="#scoring">Scoring &amp; verdict</a>
+    <a href="#maintenance">Maintenance</a>
+    <a href="#scorecard">Scorecard</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <div class="draft" role="note">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1 21h22L12 2zm0 6 1 7h-2l1-7zm0 9.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z" fill="#7A5A0A"/></svg>
+    <div>
+      <b>Draft v1 · Pending approval by the Regional Concierge Manager</b>
+      <p>This is a new framework. Nothing on this page is policy until it is approved. It is built on existing Apex systems: the Apex Professional Standards Framework (levels, scoring rules and the draft Competency 05 dimensions), the NHE Speed Facilitator Flow, the Senior Agent Peer Coaching Guide, and the 90-day eligibility standard in the NHE Speed packet.</p>
+    </div>
+  </div>
+
+  <section class="sheet" id="overview">
+    <div class="kicker">Purpose</div>
+    <h2>One standard for the people who teach the standard.</h2>
+    <p>Every new hire meets Apex through a trainer. If trainers teach to different standards, new hires leave with different standards. Certification makes sure every Lead or Senior Agent who runs NHE Speed or signs an Agent Readiness Sign-Off teaches, coaches and scores the same way the Regional Manager would.</p>
+    <p>Trainers are scored on APSF Competency 05, Operational Leadership, using the same four levels every agent already knows: Incomplete, Developing, Apex Standard, Witness Quality.</p>
+    <div class="grid3">
+      <div class="cardw"><h4>What certification allows</h4><p>Lead an NHE Speed run as facilitator. Coach new hires through their shadow shifts with the <a href="coaching-guide.html">Peer Coaching Guide</a> and sign the Agent Readiness Sign-Off.</p></div>
+      <div class="cardw"><h4>Who certifies</h4><p>The Regional Concierge Manager observes, scores, calibrates and signs. Certification is recorded on the observation scorecard at the end of this page.</p></div>
+      <div class="cardw"><h4>The threshold</h4><p>Level 3 Apex Standard or higher on all five Operational Leadership dimensions, plus a PASS on the Verdict Test. The same rule APSF uses for agents.</p></div>
+    </div>
+  </section>
+
+  <section class="sheet" id="eligibility">
+    <div class="kicker">Before you start</div>
+    <h2>Eligibility</h2>
+    <p>A candidate must meet all six before Stage 1. The Regional Manager confirms them on the scorecard.</p>
+    <ul class="elig">
+      <li><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 5 9l5-6" fill="none" stroke="#1A5C2A" stroke-width="2"/></svg></span><div><strong>Past 90 days in role</strong><span class="d">Day 90 full evaluation complete. Probation is over.</span><span class="src">From the NHE Speed 90-day path.</span></div></li>
+      <li><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 5 9l5-6" fill="none" stroke="#1A5C2A" stroke-width="2"/></svg></span><div><strong>Clean attendance</strong><span class="d">No no-call no-shows and no unexcused absences in the last 90 days. Call-outs follow the procedure.</span><span class="src">From the Excellence Academy eligibility standard.</span></div></li>
+      <li><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 5 9l5-6" fill="none" stroke="#1A5C2A" stroke-width="2"/></svg></span><div><strong>Own logs at Level 3 Apex Standard</strong><span class="d">Level 3 or higher on all five APSF Documentation dimensions (E.D.O. Integrity, Outcome Quality, Escalation Judgment, Continuity, Professional Communication) in the most recent audit, and a passing Witness Test.</span><span class="src">From APSF Competency 01. You cannot coach a standard your own log does not meet.</span></div></li>
+      <li><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 5 9l5-6" fill="none" stroke="#1A5C2A" stroke-width="2"/></svg></span><div><strong>No active conduct flags</strong><span class="d">No open conduct, confidentiality or Friendly ≠ Familiar issues on file.</span><span class="src">From the Excellence Academy eligibility standard.</span></div></li>
+      <li><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 5 9l5-6" fill="none" stroke="#1A5C2A" stroke-width="2"/></svg></span><div><strong>Supervisor endorsement</strong><span class="d">The candidate’s Site Lead or supervisor recommends them to the Regional Manager.</span><span class="src">From the Excellence Academy eligibility standard.</span></div></li>
+      <li><span class="ck" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 5 9l5-6" fill="none" stroke="#1A5C2A" stroke-width="2"/></svg></span><div><strong>Refreshers and certification complete</strong><span class="d">Both <a href="sop-refreshers.html">SOP refreshers</a> (Shift Log Mastery and Package Handling) completed, and the <a href="de-escalation-recert.html">Escalation, Emergency &amp; De-Escalation certification</a> passed (current within 12 months).</span><span class="src">A trainer teaches all four NHE Speed modules, so they hold every agent-level certification first.</span></div></li>
+    </ul>
+  </section>
+
+  <section class="sheet" id="pathway">
+    <div class="kicker">Certification pathway</div>
+    <h2>Five stages, in order.</h2>
+    <p>Each stage is cleared before the next begins. NHE Speed can start at any hour, so any stage can run on an evening or overnight start.</p>
+    <ol class="path">
+      <li><span class="st-n">1</span><div class="st-b"><h4>Observe</h4><p>Watch one full NHE Speed run, kickoff to sign-off, following along in the <a href="nhe-facilitator-flow.html">Facilitator Flow</a> block by block.</p>
+        <dl><dt>Evidence</dt><dd>Notes on each block’s “Before you move on” checks, plus one question per block.</dd><dt>Clears when</dt><dd>The candidate debriefs the run with the Regional Manager.</dd></dl></div></li>
+      <li><span class="st-n">2</span><div class="st-b"><h4>Co-facilitate</h4><p>Co-facilitate a run with the Regional Manager using the Facilitator Flow. The candidate owns the coach block’s entry review, at least two required scenarios, and the in-person handoff to the shadow Lead.</p>
+        <dl><dt>Evidence</dt><dd>Regional Manager notes on the blocks the candidate led.</dd><dt>Clears when</dt><dd>The Regional Manager confirms the candidate is ready to lead.</dd></dl>
+        <p class="small" style="margin-top:8px">The legacy 3-day <a href="cofacilitator.html">Co-Facilitator App</a> stays available as a reference for talk tracks.</p></div></li>
+      <li><span class="st-n">3</span><div class="st-b"><h4>Lead under observation</h4><p>Lead a full run. The Regional Manager observes and scores it on the scorecard below. Then coach that hire’s shadow shifts with the <a href="coaching-guide.html">Peer Coaching Guide</a> and submit the Agent Readiness Sign-Off.</p>
+        <dl><dt>Evidence</dt><dd>Completed scorecard and the hire’s Agent Readiness Sign-Off.</dd><dt>Clears when</dt><dd>Level 3+ on all five dimensions and a Verdict Test PASS.</dd></dl></div></li>
+      <li><span class="st-n">4</span><div class="st-b"><h4>Calibrate</h4><p>Score three anonymized shift logs on your own against APSF Competency 01. The Regional Manager scores the same three.</p>
+        <dl><dt>Evidence</dt><dd>Both sets of scores, with evidence for every score below Level 3.</dd><dt>Clears when</dt><dd>Within one level of the Regional Manager on every dimension of every log, with the same Witness Test verdict.</dd></dl></div></li>
+      <li><span class="st-n">5</span><div class="st-b"><h4>Certified</h4><p>The Regional Manager signs the scorecard. The trainer may lead NHE Speed runs and sign Agent Readiness Sign-Offs. Maintenance begins.</p>
+        <dl><dt>Evidence</dt><dd>Signed scorecard on file.</dd><dt>Kept by</dt><dd>Annual re-observation and quarterly re-calibration.</dd></dl></div></li>
+    </ol>
+  </section>
+
+  <section class="sheet" id="rubric">
+    <div class="kicker">Evaluation rubric · APSF Competency 05 · Operational Leadership</div>
+    <h2>Five dimensions, four levels.</h2>
+    <p>The dimensions are the draft Competency 05 set from the APSF roadmap. Each is scored on the same four universal levels used everywhere at Apex.</p>
+    <div class="levels-key">
+      <div class="lk l1"><b>Level 1 · Incomplete</b>The standard was not met.</div>
+      <div class="lk l2"><b>Level 2 · Developing</b>Partly met. Would not hold up alone.</div>
+      <div class="lk l3"><b>Level 3 · Apex Standard</b>The expectation and the certification threshold.</div>
+      <div class="lk l4"><b>Level 4 · Witness Quality</b>Could be used to train other trainers.</div>
+    </div>
+    <div id="rubricDims"></div>
+  </section>
+
+  <section class="sheet" id="scoring">
+    <div class="kicker">Scoring rules</div>
+    <h2>Scored the way APSF scores a log.</h2>
+    <ul class="rules">
+      <li><b>No averaging.</b> Each dimension is scored on its own and reported as five scores, not one number. A 4 in Facilitation Readiness cannot make up for a 1 in Judgment Modeling.</li>
+      <li><b>Certification threshold:</b> Level 3 or higher on all five dimensions, plus a PASS on the Verdict Test.</li>
+      <li><b>The lowest dimension is the development focus.</b> Feedback after every observation starts there.</li>
+      <li><b>Evidence rule.</b> Every score below Level 3 cites the specific moment, or the absence, that justifies it. If the observer cannot point to it, the score does not stand.</li>
+      <li><b>Score the observation, not the person.</b> Levels describe what was seen on one run. Certification rests on the Stage 3 observation plus the Stage 4 calibration.</li>
+    </ul>
+    <h3>The Verdict Test</h3>
+    <div class="verdict">
+      <div class="kicker" style="color:var(--gold)">Asked after the five dimensions are scored</div>
+      <div class="q">“Would I put a new hire in front of this trainer alone tomorrow?”</div>
+      <p>PASS or FAIL, with one sentence of justification. This is a separate judgment, not a summary of the scores. A trainer can reach Level 3 on paper and still fail it. A run fails the Verdict Test when, despite adequate scores, the trainer:</p>
+      <ul>
+        <li>taught something that contradicts an SOP and did not correct it before the hire left;</li>
+        <li>cleared a checklist or sign-off item they did not actually observe;</li>
+        <li>crossed Friendly ≠ Familiar or broke confidentiality in front of the hire;</li>
+        <li>left the post, or the hire, without coverage.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sheet" id="maintenance">
+    <div class="kicker">Keeping certification</div>
+    <h2>Maintenance, suspension and the road back</h2>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th>Requirement</th><th>Standard</th></tr></thead>
+        <tbody>
+          <tr><td>Annual re-observation</td><td>One full NHE Speed run observed and scored by the Regional Manager within 12 months of certification, then every year. Same scorecard, same threshold.</td></tr>
+          <tr><td>Quarterly re-calibration</td><td>Each quarter, alongside the quarterly audit, score three anonymized logs. Stay within one level of the Regional Manager on every dimension.</td></tr>
+          <tr><td>Own documentation</td><td>Kept through quarterly audit sampling, as APSF does for every agent. The trainer’s own logs stay at Level 3 or higher.</td></tr>
+          <tr><td>Standing</td><td>Certified trainers stay eligible for the Excellence Academy standard: clean attendance, strong logs, no conduct flags.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>What triggers suspension</h3>
+    <ul class="trig">
+      <li>Own logs drop below Level 3 on any APSF Documentation dimension in a quarterly audit, or fail the Witness Test.</li>
+      <li>Calibration more than one level off the Regional Manager in two consecutive quarters.</li>
+      <li>Trainee audit pattern: two or more agents this trainer signed off score Level 1–2 on the same dimension at their 30-day review.</li>
+      <li>A Verdict Test FAIL on any observed run, an active conduct flag, or a no-call no-show.</li>
+    </ul>
+    <p style="margin-top:12px">While suspended, the trainer does not lead NHE Speed runs or sign Agent Readiness Sign-Offs. They may co-facilitate with the Regional Manager.</p>
+    <h3>The road back</h3>
+    <div class="road">
+      <div>Targeted work on the dimension that triggered the suspension, with the Regional Manager. Own-log issues follow the APSF remediation pathway.</div>
+      <div>Re-check against the same anchors: re-audit, re-calibration, or a co-facilitated run followed by an observed lead run.</div>
+      <div>The Regional Manager reinstates on a scorecard marked “Reinstatement.” Remediation is the road back to certified, not a separate credential.</div>
+    </div>
+  </section>
+
+  <section class="sheet" id="scorecard">
+    <div class="kicker">Observation scorecard</div>
+    <h2>Score a run</h2>
+    <p class="print-only" style="font-size:11px;margin-bottom:6px">Apex Concierge Services · Trainer Certification Framework · Draft v1 · Pending approval by the Regional Concierge Manager · Internal Use Only</p>
+    <p class="no-print" style="margin-bottom:12px">For the Regional Manager. Pick a level for each dimension, add evidence, then give the verdict. The result updates as you go.</p>
+    <div class="private">Nothing you type leaves this computer.</div>
+    <div class="fields">
+      <label class="fld"><span>Candidate</span><input type="text" autocomplete="off"></label>
+      <label class="fld"><span>Role</span><select><option value="">Select</option><option>Lead Concierge</option><option>Senior Agent</option></select></label>
+      <label class="fld"><span>Property</span><input type="text" autocomplete="off"></label>
+      <label class="fld"><span>Observer</span><input type="text" autocomplete="off" placeholder="Regional Concierge Manager"></label>
+      <label class="fld"><span>Date</span><input type="text" autocomplete="off" placeholder="MM/DD/YYYY"></label>
+      <label class="fld"><span>Stage</span><select id="stage"><option value="">Select</option><option>Stage 3 · Lead under observation</option><option>Stage 4 · Calibration</option><option>Annual re-observation</option><option>Reinstatement</option></select></label>
+    </div>
+    <div class="prechk" id="prechk">
+      <div class="hd">Eligibility confirmed <em id="preCount">0 / 6</em></div>
+      <label><input type="checkbox"><span>Past 90 days in role</span></label>
+      <label><input type="checkbox"><span>Clean attendance, last 90 days</span></label>
+      <label><input type="checkbox"><span>Own logs Level 3+ on all five dimensions, Witness Test PASS</span></label>
+      <label><input type="checkbox"><span>No active conduct flags</span></label>
+      <label><input type="checkbox"><span>Supervisor endorsement</span></label>
+      <label><input type="checkbox"><span>SOP refreshers and Escalation &amp; Emergency certification complete</span></label>
+    </div>
+
+    <div id="scDims"></div>
+
+    <div class="vt">
+      <div class="q">“Would I put a new hire in front of this trainer alone tomorrow?”</div>
+      <div class="pf" role="group" aria-label="Verdict Test">
+        <button type="button" data-v="PASS" aria-pressed="false">PASS</button>
+        <button type="button" data-v="FAIL" aria-pressed="false">FAIL</button>
+      </div>
+      <input type="text" id="vtWhy" aria-label="Verdict justification" placeholder="One sentence of justification">
+    </div>
+
+    <div class="result pending" id="result" aria-live="polite"></div>
+
+    <details class="cal" id="cal">
+      <summary>Stage 4 calibration check <small>Three anonymized logs, APSF Competency 01</small></summary>
+      <div class="cal-grid" id="calGrid"></div>
+      <div id="calRes"></div>
+    </details>
+
+    <label class="fld" style="margin-top:6px"><span>Development focus and next step</span><textarea id="nextStep" rows="2" placeholder="Start with the lowest dimension."></textarea></label>
+
+    <div class="sigs">
+      <div class="sig"><div class="line"></div><div class="cap"><span>Observer · Regional Concierge Manager</span><span>Date</span></div></div>
+      <div class="sig"><div class="line"></div><div class="cap"><span>Candidate</span><span>Date</span></div></div>
+    </div>
+    <div class="actions">
+      <button class="btn" type="button" id="printCard">Print / Save PDF</button>
+      <button class="btn light" type="button" id="clearCard">Clear scorecard</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span class="b">Apex Concierge Services · Training &amp; Development Lab</span>
+  <span class="m">Internal Use Only · Trainer Certification Framework · Draft v1 · October 2026 · Pending approval by the Regional Concierge Manager</span>
+</footer>
+
+<script>
+(function(){
+const D=[
+{k:'cas',t:'Coaching Against Standards',d:'Coaches to named standards (APSF dimensions and levels, E.D.O., A.C.T., H.O.M.E.), never to general impressions.',
+ a:['Feedback is general or missing: “Good job,” “Be more careful.” A weak practice entry passes without comment. No standard is named.',
+    'Names the problem but not the standard. Rewrites the entry for the hire instead of having the hire rewrite it. Coaches what is most visible, not the weakest Outcome.',
+    'In the coach block, takes the hire’s weakest practice entry and coaches it to all four Outcome parts: action, who was notified by name and channel, status, next step with owner. Names the dimension and level. The hire rewrites it.',
+    'Level 3, plus ties the gap to the hire’s 30-day focus area and writes it down. Teaches from a real moment on the hire’s own shadow shift. The hire can explain the standard back unprompted.'],
+ ex:['','','“This is a 2 on Outcome Quality. Here is what a 3 looks like. Now you write it.”','']},
+{k:'ac',t:'Audit Calibration',d:'Scores documentation against APSF the way the Regional Manager would, with evidence.',
+ a:['Scores by impression or gives one overall score. Cannot cite the entry behind a score below Level 3. Misses a Witness Test failure such as an open loop or a silent escalation.',
+    'Mostly in range, but more than one level off the Regional Manager on at least one dimension. Evidence is vague: “Outcome is weak.”',
+    'Scores each entry by dimension name, independently, with no averaging. Every score below Level 3 quotes the entry or names the absence. Within one level of the Regional Manager on every dimension, with the same Witness Test verdict.',
+    'Level 3, plus matches the Regional Manager exactly on most dimensions. Explains borderline calls, such as why a log at Level 3 can still fail the Witness Test, and flags anchors that scored ambiguously for the quarterly review.'],
+ ex:['','','“E.D.O. Integrity 3. Outcome Quality 2: the 9:40 PM leak entry names no recipient and no WO#.”','']},
+{k:'so',t:'Shift Ownership',d:'Owns the post, the room and the hire’s day while training. Nothing slips because training is happening.',
+ a:['Training pulls the trainer off post with no coverage arranged. Own log is thin or batch-written on training days. Kickoff starts with materials missing.',
+    'Desk is covered, but own entries lag the hour or tours go undocumented on training days. The “Have ready before kickoff” list is partly done; credentials or the acknowledgment form are chased mid-run.',
+    'Every “Have ready before kickoff” item is in place before the hire arrives. Desk coverage is set before the run. Own log meets one entry per hour, two documented tours and a complete pass-on, training day or not. Open items are closed or handed off by name.',
+    'Level 3, plus anticipates: the shadow-block Lead is confirmed in advance and site conditions are planned for (overnight package process, after-hours access). Leaves the hire’s next Lead a written handoff: focus area, open items, first shadow shifts scheduled.'],
+ ex:['','','','']},
+{k:'fr',t:'Facilitation Readiness',d:'Runs NHE Speed by the Facilitator Flow: block order, elapsed-time pacing, checks and adjustments.',
+ a:['Skips blocks or “Before you move on” checks. Lectures through self-guided modules. Runs out of time and cuts the coach block or the site shadow. Coaches during the final assessment.',
+    'Follows the order but loses time and reads slides aloud. Adjustments are made late and ad hoc. One or more block checks are missed.',
+    'Keeps time by elapsed minutes from kickoff in the Facilitator Flow, never by clock times, so the day works from any start. Clears every block’s checks before moving on. Uses the documented 8-hour or up-to-10-hour adjustments when needed. Stays hands-off during the assessment and reviews the score and 30-day focus at sign-off.',
+    'Level 3, plus runs an evening or overnight start cleanly: an on-site Lead lined up for the shadow, the property walked as it runs at that hour. Absorbs a disruption (a late hire, a live desk incident) without dropping a required scenario or check.'],
+ ex:['','','','']},
+{k:'jm',t:'Judgment Modeling',d:'Models escalation and decision-making out loud, so the hire learns how to think, not just what to say.',
+ a:['Gives answers that contradict an SOP (“Just let them in”). Fills policy gaps with personal opinion. Comments on residents, clients or internal matters in front of the hire.',
+    'Right answers with no reasoning. Debriefs scenarios as right or wrong without A.C.T. Inconsistent on when to escalate.',
+    'Debriefs each scenario with A.C.T.: what the hire acknowledged, how they took control, why they transferred or resolved. Closes with “and I logged it.” Answers policy-silent questions with “Let me check with my supervisor.” Models the line: Call first. Document everything. Support within your role.',
+    'Level 3, plus thinks out loud on borderline calls and teaches the when-in-doubt rule: escalate up one tier and record why. Turns a live moment on shift into the lesson, in front of the hire.'],
+ ex:['','','','']}
+];
+const LV=['Incomplete','Developing','Apex Standard','Witness Quality'];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+document.getElementById('rubricDims').innerHTML=D.map((x,i)=>'<div class="dim"><div class="dim-h"><span class="dn">0'+(i+1)+'</span><h4>'+esc(x.t)+'</h4><p>'+esc(x.d)+'</p></div>'+
+ x.a.map((t,j)=>'<div class="anc l'+(j+1)+'"><div class="lv"><small>Level '+(j+1)+'</small>'+LV[j]+'</div><div class="tx">'+esc(t)+(x.ex[j]?'<i>Looks like: '+esc(x.ex[j])+'</i>':'')+'</div></div>').join('')+'</div>').join('');
+
+document.getElementById('scDims').innerHTML=D.map((x,i)=>'<div class="sc-dim" id="sd'+i+'"><div class="sc-top"><h4><span>0'+(i+1)+'</span>'+esc(x.t)+'<span class="lowtag">Development focus</span></h4><div class="lvls" role="radiogroup" aria-label="'+esc(x.t)+' level">'+
+ LV.map((l,j)=>'<input type="radio" name="lv'+i+'" id="lv'+i+'_'+(j+1)+'" value="'+(j+1)+'"><label class="l'+(j+1)+'" for="lv'+i+'_'+(j+1)+'">'+(j+1)+' · '+l+'</label>').join('')+
+ '</div></div><div class="sc-ev"><textarea data-ev="'+i+'" aria-label="Evidence for '+esc(x.t)+'" placeholder="Evidence: the specific moment or absence observed"></textarea><div class="warn">Evidence required. A score below Level 3 must cite the specific moment or absence, or it does not stand.</div></div></div>').join('');
+
+// calibration grid
+const CD=['E.D.O. Integrity','Outcome Quality','Escalation','Continuity','Communication'];
+const opt=(ph)=>'<option value="">'+ph+'</option>'+[1,2,3,4].map(n=>'<option>'+n+'</option>').join('');
+const vopt='<option value="">—</option><option>PASS</option><option>FAIL</option>';
+document.getElementById('calGrid').innerHTML=['A','B','C'].map(L=>'<div class="cal-log"><h5>Log '+L+'</h5><table><thead><tr><th>Dimension</th><th>Cand.</th><th>RM</th><th></th></tr></thead><tbody>'+
+ CD.map((d,i)=>'<tr><td>'+d+'</td><td><select data-cal="'+L+i+'c" aria-label="Log '+L+' '+d+' candidate">'+opt('–')+'</select></td><td><select data-cal="'+L+i+'r" aria-label="Log '+L+' '+d+' Regional Manager">'+opt('–')+'</select></td><td class="g" data-g="'+L+i+'"></td></tr>').join('')+
+ '<tr><td>Witness Test</td><td><select data-cal="'+L+'wc" aria-label="Log '+L+' Witness Test candidate">'+vopt+'</select></td><td><select data-cal="'+L+'wr" aria-label="Log '+L+' Witness Test Regional Manager">'+vopt+'</select></td><td class="g" data-g="'+L+'w"></td></tr></tbody></table></div>').join('');
+
+let verdict=null;
+const sc=()=>D.map((x,i)=>{const r=document.querySelector('input[name="lv'+i+'"]:checked');return r?+r.value:null;});
+
+function update(){
+ const s=sc();
+ const ev=D.map((x,i)=>document.querySelector('textarea[data-ev="'+i+'"]').value.trim());
+ s.forEach((v,i)=>document.getElementById('sd'+i).classList.toggle('need',v!==null&&v<3&&!ev[i]));
+ const scored=s.filter(v=>v!==null);
+ const min=scored.length?Math.min(...scored):null;
+ s.forEach((v,i)=>document.getElementById('sd'+i).classList.toggle('low',scored.length===5&&v===min&&min<4));
+ const R=document.getElementById('result');
+ const prof='<div class="profile">'+D.map((x,i)=>'<div class="pcell'+(scored.length===5&&s[i]===min&&min<4?' lowc':'')+'"><div class="pn">'+esc(x.t)+'</div><div class="pv">'+(s[i]||'–')+'</div></div>').join('')+'</div>';
+ const missingEv=s.map((v,i)=>v!==null&&v<3&&!ev[i]?D[i].t:null).filter(Boolean);
+ const lowNames=scored.length===5&&min<4?D.filter((x,i)=>s[i]===min).map(x=>x.t):[];
+ let cls,head,items=[];
+ if(scored.length<5||!verdict){
+  cls='pending';head='Score all five dimensions and the Verdict Test';
+  items.push((5-scored.length)+' dimension'+(5-scored.length===1?'':'s')+' left to score.'+(verdict?'':' Verdict Test not yet given.'));
+ } else {
+  const below=D.filter((x,i)=>s[i]<3).map(x=>x.t+' (Level '+s[D.indexOf(x)]+')');
+  const met=below.length===0&&verdict==='PASS';
+  cls=met?'met':'not';head=met?'Certification threshold met':'Certification threshold not met';
+  if(below.length) items.push('Below Level 3: '+below.join(', ')+'.');
+  items.push('Verdict Test: '+verdict+'.');
+  if(lowNames.length) items.push('Development focus (lowest dimension, Level '+min+'): '+lowNames.join(', ')+'.');
+  else items.push('All five dimensions at Level 4 Witness Quality.');
+ }
+ if(missingEv.length) items.push('Evidence missing for: '+missingEv.join(', ')+'. These scores do not stand until evidence is cited.');
+ R.className='result '+cls;
+ R.innerHTML='<div class="rh">'+head+'</div><ul>'+items.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>'+prof;
+ const pc=[...document.querySelectorAll('#prechk input')].filter(c=>c.checked).length;
+ document.getElementById('preCount').textContent=pc+' / 6'+(pc===6?' · eligible':'');
+}
+
+function calUpdate(){
+ let n=0,ok=0,vn=0,vok=0;
+ ['A','B','C'].forEach(L=>{
+  CD.forEach((d,i)=>{const c=document.querySelector('[data-cal="'+L+i+'c"]').value,r=document.querySelector('[data-cal="'+L+i+'r"]').value,g=document.querySelector('[data-g="'+L+i+'"]');
+   if(c&&r){n++;const good=Math.abs(c-r)<=1;if(good)ok++;g.textContent=good?'✓':'✗';g.className='g '+(good?'ok':'bad');}else{g.textContent='';g.className='g';}});
+  const c=document.querySelector('[data-cal="'+L+'wc"]').value,r=document.querySelector('[data-cal="'+L+'wr"]').value,g=document.querySelector('[data-g="'+L+'w"]');
+  if(c&&r){vn++;const good=c===r;if(good)vok++;g.textContent=good?'✓':'✗';g.className='g '+(good?'ok':'bad');}else{g.textContent='';g.className='g';}
+ });
+ const el=document.getElementById('calRes');
+ if(n<15||vn<3){el.style.color='var(--gray)';el.textContent='Within one level: '+ok+' of '+n+' scored · verdicts matching: '+vok+' of '+vn+'. Complete all 15 dimension pairs and 3 verdicts.';}
+ else{const pass=ok===15&&vok===3;el.style.color=pass?'var(--green)':'var(--red)';el.textContent=(pass?'Calibration cleared. ':'Calibration not cleared. ')+'Within one level on '+ok+' of 15; Witness Test verdicts match on '+vok+' of 3.';}
+}
+
+document.getElementById('scorecard').addEventListener('change',e=>{ if(e.target.matches('[data-cal]')) calUpdate(); update(); });
+document.getElementById('scorecard').addEventListener('input',e=>{ if(e.target.matches('textarea[data-ev]')) update(); });
+document.querySelectorAll('.vt .pf button').forEach(b=>b.addEventListener('click',()=>{
+ verdict=b.dataset.v; document.querySelectorAll('.vt .pf button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false')); update();}));
+document.getElementById('printCard').addEventListener('click',()=>{document.body.classList.add('print-card');window.print();});
+window.addEventListener('afterprint',()=>document.body.classList.remove('print-card'));
+document.getElementById('clearCard').addEventListener('click',()=>{
+ document.querySelectorAll('#scorecard input[type=text],#scorecard textarea').forEach(x=>x.value='');
+ document.querySelectorAll('#scorecard input[type=radio],#scorecard input[type=checkbox]').forEach(x=>x.checked=false);
+ document.querySelectorAll('#scorecard select').forEach(x=>x.value='');
+ verdict=null; document.querySelectorAll('.vt .pf button').forEach(x=>x.setAttribute('aria-pressed','false'));
+ update(); calUpdate();
+});
+document.getElementById('stage').addEventListener('change',e=>{ if(e.target.value.indexOf('Stage 4')===0) document.getElementById('cal').open=true; });
+
+// section nav highlight
+const links=[...document.querySelectorAll('#secnav a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));const a=links.find(a=>a.getAttribute('href')==='#'+en.target.id);if(a){const n=a.parentElement;n.scrollLeft=a.offsetLeft-n.clientWidth/2+a.clientWidth/2;}}});},{rootMargin:'-80px 0px -60% 0px'});
+document.querySelectorAll('.main>section').forEach(s=>io.observe(s));
+
+update(); calUpdate();
+})();
+</script>
+</body>
+</html>

@@ -85,7 +85,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
 .cc-note b{color:rgba(255,255,255,0.85);font-weight:600}
 
 /* FOOTER */
-.hub-footer{border-top:1px solid rgba(201,168,76,0.08);margin:0 -64px;padding:24px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.hub-footer{border-top:1px solid rgba(201,168,76,0.08);margin:0;padding:24px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
 .footer-brand{font-family:'EB Garamond',serif;font-size:14px;font-style:italic;color:rgba(255,255,255,0.18)}
 .footer-meta{font-size:9.5px;letter-spacing:0.08em;color:rgba(255,255,255,0.13)}
 
@@ -94,7 +94,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
   .module-tabs{padding-left:22px;margin-left:-22px;margin-right:-22px}
   .module-intro{grid-template-columns:1fr}
   .tools-grid{grid-template-columns:1fr}
-  .hub-footer{padding-left:22px;margin-left:-22px;margin-right:-22px}
+  .hub-footer{padding-left:22px;padding-right:22px}
 }
 </style>
 </head>
@@ -164,6 +164,15 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
         </div>
         <div class="tool-card-footer"><span class="tool-tag">PDF · Print</span><span class="tool-arrow">→</span></div>
       </a>
+      <a class="tool-card" href="agent-assessment-scorecard.html">
+        <div class="tool-card-accent amber"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Current Program · Trainer Fills</div>
+          <div class="tool-name">Agent Assessment Scorecard</div>
+          <p class="tool-desc">Trainer scorecard for the end of NHE Speed, site shadow and solo clearance: module checkpoints, coach block, emergency drill, final assessment out of 20, observed standards by APSF level, and the readiness decision with a 30-day focus. Saves PDF + Word to the employee's 02_Training folder. Draft v1.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">Fill · Sign · Save</span><span class="tool-arrow">→</span></div>
+      </a>
     </div>
     <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Original 3-day NHO · source material</div><div class="section-rule-line"></div></div>
     <div class="tools-grid">
@@ -208,8 +217,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
     <div class="coming-soon-grid">
       <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">New Hire Tracking Dashboard</div><div class="coming-note">NHE Speed steps per trainee, 30 / 90-day and 6-month dates. Confidential — runs locally, not on this site.</div></div>
       <a class="coming-card live" href="review-forms.html" style="text-decoration:none"><div class="coming-label">Live · Open →</div><div class="coming-name">Milestone Review Forms</div><div class="coming-note">30-day, 90-day, 6-month and 1-year reviews. Saves PDF + Word to the employee's file.</div></a>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Agent Assessment Scorecard</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Cohort History Log</div></div>
+      <div class="coming-card"><div class="coming-label">Planned · Ops Command Center</div><div class="coming-name">Cohort History Log</div><div class="coming-note">Who trained when, with whom, and how they finished. Personnel data, so it will live in the Command Center, not on this site.</div></div>
     </div>
   </section>
 
@@ -221,11 +229,27 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
         <div class="module-name">Training Materials Library</div>
         <p class="module-desc">Master repository for all Apex training documents — SOPs, reference guides, policy handouts, and supplemental materials. Organized for facilitator access and ConnectTeam deployment.</p>
       </div>
-      <div><span class="status-badge status-building"><span class="status-dot"></span>Building</span></div>
+      <div><span class="status-badge status-active"><span class="status-dot"></span>Active</span></div>
     </div>
     <div class="tools-grid">
-      <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Reference Library</div><div class="tool-name">SOP Document Library</div><p class="tool-desc">Shift Log, Package Handling, Incident Report, and Emergency Response SOPs — searchable and formatted for ConnectTeam deployment.</p></div><div class="tool-card-footer"><span class="tool-tag">Coming Soon</span></div></div>
-      <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Reference Library</div><div class="tool-name">Policy Reference Hub</div><p class="tool-desc">Attendance, conduct, coverage, and escalation policies — cross-referenced to the 2026 Handbook.</p></div><div class="tool-card-footer"><span class="tool-tag">Coming Soon</span></div></div>
+      <a class="tool-card" href="sop-library.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Reference Library · Agents &amp; Leads</div>
+          <div class="tool-name">SOP Document Library</div>
+          <p class="tool-desc">Shift Log, Package Handling, Incident Reporting and Emergency Response SOPs. Search across all four, quick cards, numbered steps, and print any single SOP. Formatted to paste into the Connecteam Knowledge Base.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">4 SOPs · Searchable</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="policy-hub.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Reference Library · Agents &amp; Leads</div>
+          <div class="tool-name">Policy Reference Hub</div>
+          <p class="tool-desc">28 plain-language policy cards: attendance, conduct and boundaries, desk coverage, escalation, appearance, devices and recording, safety, and your rights. Filter by category, search, and print. Cross-referenced to the APEX 2026 Handbook.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">28 Policies · Handbook-Linked</span><span class="tool-arrow">→</span></div>
+      </a>
     </div>
   </section>
 
@@ -237,11 +261,27 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
         <div class="module-name">Trainer Development Pipeline</div>
         <p class="module-desc">System for developing, certifying, and supporting Apex facilitators. Peer coach guides, trainer certification frameworks, and facilitation standards — built to make training leadership scalable.</p>
       </div>
-      <div><span class="status-badge status-building"><span class="status-dot"></span>Building</span></div>
+      <div><span class="status-badge status-active"><span class="status-dot"></span>Active</span></div>
     </div>
     <div class="tools-grid">
-      <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Coaching Guide</div><div class="tool-name">Senior Agent Peer Coaching Guide</div><p class="tool-desc">Nine-module coaching guide for senior agents developing new hires. What to teach, how to teach it, what ready looks like, and reflection prompts.</p></div><div class="tool-card-footer"><span class="tool-tag">Document Ready · Web Version Coming</span></div></div>
-      <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Certification</div><div class="tool-name">Trainer Certification Framework</div><p class="tool-desc">Criteria, evaluation rubric, and sign-off process for certifying Apex trainers to facilitate the NHE Speed program.</p></div><div class="tool-card-footer"><span class="tool-tag">Planned</span></div></div>
+      <a class="tool-card" href="coaching-guide.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Coaching Guide · Senior Agents &amp; Leads</div>
+          <div class="tool-name">Senior Agent Peer Coaching Guide</div>
+          <p class="tool-desc">All nine modules: what to teach, how to teach it, what ready looks like, and reflection prompts. Switch between shadow-shift, refresher and self-review modes, tick off readiness live, and print the Agent Readiness Sign-Off.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">9 Modules · Sign-Off Sheet</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="trainer-certification.html">
+        <div class="tool-card-accent amber"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Certification · Draft v1</div>
+          <div class="tool-name">Trainer Certification Framework</div>
+          <p class="tool-desc">Eligibility, a five-stage path (observe, co-facilitate, lead under observation, calibrate, certified), APSF-level rubric on five leadership dimensions, the Verdict Test, upkeep rules, and a fillable observation scorecard. Pending your approval.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">Rubric · Scorecard</span><span class="tool-arrow">→</span></div>
+      </a>
     </div>
   </section>
 
@@ -271,7 +311,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
       <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">New Hire Progress Tracker</div><div class="coming-note">Every NHE Speed step through solo clearance, with 30 / 90-day and 6-month dates and trainer notes.</div></div>
       <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">Coaching &amp; Recognition Log</div><div class="coming-note">Replaces Flag &amp; Remediation Notes: coaching by APSF standard, recognition, and a follow-up check (Improved / Partly / Not yet) for coaching transfer.</div></div>
       <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">Monthly T&amp;D Impact Summary</div><div class="coming-note">Replaces the Cohort Completion Report: hires started and onboarded, modules delivered, coaching transfer rate, recognition, reviews.</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Assessment Score Log</div></div>
+      <div class="coming-card"><div class="coming-label">Planned · Ops Command Center</div><div class="coming-name">Assessment Score Log</div><div class="coming-note">Final assessment scores and lowest-area focus from the Agent Assessment Scorecard (M1), logged per trainee in the Command Center.</div></div>
     </div>
   </section>
 
@@ -283,14 +323,54 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
         <div class="module-name">Ongoing Development</div>
         <p class="module-desc">Excellence Academy pathway and continuing education. SOP refreshers, skill-specific training modules, and leadership development resources for agents ready to grow beyond onboarding.</p>
       </div>
-      <div><span class="status-badge status-planned"><span class="status-dot"></span>Planned</span></div>
+      <div><span class="status-badge status-active"><span class="status-dot"></span>Active</span></div>
     </div>
-    <div class="coming-soon-grid">
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Excellence Academy Pathway</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">SOP Refresher Modules</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Shift Log Mastery Series</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Lead Concierge Development Track</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">De-Escalation Recertification</div></div>
+    <div class="tools-grid">
+      <a class="tool-card" href="sop-refreshers.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Refresher · Run by Leads</div>
+          <div class="tool-name">SOP Refresher Modules</div>
+          <p class="tool-desc">Drill-based refreshers for any agent at day 30 or day 300: Shift Log Mastery, Package Handling, and Incidents &amp; Escalation. Scenario drills with Apex answers and coach notes, readiness checklists, and a printable sign-off.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">3 Refreshers · Drills</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="shift-log-mastery.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Self-Paced · Agent-Facing</div>
+          <div class="tool-name">Shift Log Mastery Series</div>
+          <p class="tool-desc">"Your Shift Log Is Your Witness." Five episodes, one per APSF documentation dimension, each with a lesson, a calibration exercise and a fix-it drill, then the Witness Test on a full sample log. Printable completion certificate.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">5 Episodes + Final</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="de-escalation-recert.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Recertification · Annual</div>
+          <div class="tool-name">Escalation, Emergency &amp; De-Escalation</div>
+          <p class="tool-desc">Yearly recertification for every agent, and after any escalation miss: your role in a crisis, resolve or escalate, Fire / Medical / Security, A.C.T. de-escalation in six scenarios, tiers and reporting. 80% certifies for 12 months.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">12 Questions + Written Entry</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="lead-development.html">
+        <div class="tool-card-accent amber"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Leadership · Draft v1</div>
+          <div class="tool-name">Lead Concierge Development Track</div>
+          <p class="tool-desc">Concierge → Senior Agent → Lead → Trainer Certified: what each stage means, what it is measured on, and the gate to the next. Includes a Lead self-assessment and a fillable 90-day Lead plan. Pending your approval.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">4 Stages · 90-Day Plan</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="excellence-academy.html">
+        <div class="tool-card-accent"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Pathway · Excellence Academy</div>
+          <div class="tool-name">Excellence Academy Pathway</div>
+          <p class="tool-desc">What the Academy is, who is eligible at day 90, how nomination works, the 12-week structure and six leadership dimensions, and where graduates go next. Opens the live Academy app.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">12 Weeks · Cohort I Complete</span><span class="tool-arrow">→</span></div>
+      </a>
     </div>
   </section>
 
@@ -308,7 +388,10 @@ function showModule(id,btn){
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  try{history.replaceState(null,'','#'+id)}catch(e){}
 }
+function fromHash(){var id=(location.hash||'').slice(1);if(/^m[1-5]$/.test(id)){var b=document.querySelectorAll('.m-tab')[+id[1]-1];if(b&&!b.classList.contains('active'))showModule(id,b);}}
+fromHash();window.addEventListener('hashchange',fromHash);
 </script>
 </body>
 </html>

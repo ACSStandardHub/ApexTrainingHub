@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excellence Academy Pathway · Apex</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;--navy-light:#1e3566;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E2DDD4;--white:#FFFFFF;--charcoal:#1A1A2E;--gray:#6B6B6B;
+  --green:#1A5C2A;--green-light:#DDF3E4;--red:#6B1A1A;--red-light:#FBEBEB;--amber:#7A5A0A;--amber-light:#FEF3DC;
+  --line:rgba(201,168,76,0.18);--line-strong:rgba(201,168,76,0.45);
+  --w-dim:rgba(255,255,255,0.68);--w-mute:rgba(255,255,255,0.42);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--white);min-height:100vh;overflow-x:hidden;font-weight:300}
+a{color:inherit}
+
+/* HEADER / HERO */
+.hero{position:relative;padding:22px 22px 54px;border-bottom:1px solid var(--line);overflow:hidden;background:linear-gradient(165deg,var(--navy-dark) 55%,rgba(201,168,76,0.07) 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% -10%,rgba(201,168,76,0.10) 0%,transparent 70%);pointer-events:none}
+.wrap{position:relative;max-width:1000px;margin:0 auto}
+.back-link{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--gold);text-decoration:none;margin-bottom:26px;opacity:0.85}
+.back-link:hover{opacity:1;text-decoration:underline}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:16px}
+.crest{font-family:'EB Garamond',serif;font-size:13px;letter-spacing:0.5em;color:var(--gold);opacity:0.6;margin-bottom:10px;text-transform:uppercase}
+.site-title{font-family:'EB Garamond',serif;font-size:clamp(36px,6.5vw,64px);font-weight:400;line-height:1.04;color:#fff;margin-bottom:14px}
+.site-title em{font-style:italic;color:var(--gold-light)}
+.site-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.7;max-width:600px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:9.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1.4}
+.chip .dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.chip-green{background:rgba(26,92,42,0.22);color:#86efac;border:1px solid rgba(26,92,42,0.55)}
+.chip-gold{background:rgba(201,168,76,0.12);color:var(--gold-light);border:1px solid rgba(201,168,76,0.35)}
+.chip-amber{background:rgba(122,90,10,0.22);color:#fcd34d;border:1px solid rgba(122,90,10,0.5)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
+.btn{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:16px 30px;border-radius:2px;text-decoration:none;transition:all .18s;border:none;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 10px 30px rgba(201,168,76,0.18)}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-line{border:1px solid var(--line-strong);color:var(--gold-light);font-size:13px;padding:14px 22px}
+.btn-line:hover{border-color:var(--gold);color:#fff}
+.cta-note{font-size:11.5px;color:var(--w-mute);margin-top:12px}
+
+/* SECTIONS */
+.sec{padding:50px 22px;border-bottom:1px solid var(--line)}
+.sec.alt{background:var(--navy)}
+.label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.label::before{content:'';width:28px;height:1px;background:var(--gold)}
+.h2{font-family:'EB Garamond',serif;font-size:clamp(26px,4vw,36px);font-weight:400;color:#fff;line-height:1.15;margin-bottom:16px}
+.h2 em{font-style:italic;color:var(--gold-light)}
+.body{font-size:15px;color:var(--w-dim);line-height:1.75;max-width:680px;margin-bottom:16px}
+.body strong{color:#fff;font-weight:600}
+.gold-rule{width:48px;height:2px;background:var(--gold);margin:26px 0}
+
+.isnot{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:22px;border-radius:3px;overflow:hidden}
+.col{padding:22px 22px}
+.col.is{background:rgba(201,168,76,0.08);border:1px solid var(--line)}
+.col.not{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+.col h4{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;margin-bottom:12px}
+.col.is h4{color:var(--gold)}
+.col.not h4{color:var(--w-mute)}
+.col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.col li{font-size:14px;color:var(--w-dim);line-height:1.55;display:flex;gap:10px}
+.col.is li::before{content:'—';color:var(--gold);flex-shrink:0}
+.col.not li::before{content:'×';color:var(--w-mute);flex-shrink:0}
+
+.quote{border-left:3px solid var(--gold);padding:20px 26px;margin:26px 0 0;background:rgba(201,168,76,0.05);border-radius:0 3px 3px 0}
+.quote p{font-family:'EB Garamond',serif;font-size:22px;font-style:italic;color:#fff;line-height:1.45}
+.quote cite{display:block;margin-top:8px;font-size:10.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);font-style:normal;font-weight:600}
+
+/* ELIGIBILITY */
+.elig{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.el{background:var(--navy-mid);border:1px solid var(--line);border-top:3px solid var(--gold);padding:18px 16px}
+.el-n{font-family:'EB Garamond',serif;font-size:30px;color:var(--gold);opacity:0.4;line-height:1}
+.el-h{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#fff;margin:6px 0 6px}
+.el-p{font-size:13px;color:var(--w-dim);line-height:1.55}
+.note{margin-top:18px;padding:13px 16px;border-left:3px solid var(--gold-dim);background:rgba(255,255,255,0.03);font-size:12.5px;color:var(--w-dim);line-height:1.6;max-width:760px}
+.note strong{color:#fff;font-weight:600}
+
+/* NOMINATION */
+.steps{list-style:none;counter-reset:s;margin-top:18px;max-width:760px}
+.steps li{counter-increment:s;display:flex;gap:18px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:'EB Garamond',serif;font-size:28px;color:var(--gold-dim);line-height:1;min-width:38px}
+.steps h4{font-size:15px;font-weight:600;color:#fff;margin-bottom:3px}
+.steps p{font-size:13.5px;color:var(--w-dim);line-height:1.6}
+
+/* DIMENSIONS */
+.dims{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.dim{background:var(--navy-light);border:1px solid var(--line);padding:18px 18px;position:relative;overflow:hidden}
+.dim::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.dim-k{font-family:'EB Garamond',serif;font-size:44px;color:var(--gold);opacity:0.13;position:absolute;right:14px;top:6px;line-height:1}
+.dim h4{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-light);margin-bottom:4px;position:relative}
+.dim p{font-size:12.5px;color:var(--w-dim);line-height:1.55;position:relative}
+
+/* RHYTHM */
+.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.rh{border:1px solid var(--line);padding:16px 18px;background:rgba(255,255,255,0.02)}
+.rh h4{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.rh p{font-size:13px;color:var(--w-dim);line-height:1.55}
+
+/* WEEKS */
+.phase{margin-top:30px}
+.phase-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.phase-n{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold)}
+.phase-t{font-family:'EB Garamond',serif;font-size:20px;color:#fff;font-style:italic}
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wk{background:var(--navy-mid);border:1px solid var(--line);padding:16px 16px 14px;display:flex;flex-direction:column}
+.wk.special{background:rgba(201,168,76,0.08);border-color:var(--line-strong)}
+.wk-n{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dim)}
+.wk-t{font-family:'EB Garamond',serif;font-size:19px;font-weight:600;color:#fff;margin:3px 0 6px;line-height:1.2}
+.wk-f{font-size:12.5px;color:var(--w-dim);line-height:1.55;flex:1}
+.wk-c{margin-top:10px;padding-top:9px;border-top:1px dashed rgba(201,168,76,0.25);font-size:12px;color:var(--gold-light);line-height:1.5}
+.wk-c b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;font-weight:700}
+.seq{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.seq span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:var(--gold);color:var(--navy);padding:3px 8px;border-radius:2px}
+.seq i{color:var(--gold);font-style:normal;font-size:12px}
+
+/* NEXT */
+.next{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.nx{display:flex;flex-direction:column;background:var(--cream);color:var(--charcoal);border-top:4px solid var(--gold);text-decoration:none;border-radius:3px;overflow:hidden;transition:transform .18s}
+.nx:hover{transform:translateY(-2px)}
+.nx-h{background:var(--navy);border-left:6px solid var(--gold);padding:16px 20px}
+.nx-k{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold)}
+.nx-t{font-family:'EB Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-top:3px}
+.nx-b{padding:16px 20px 18px;font-size:13.5px;line-height:1.6;flex:1}
+.nx-go{padding:0 20px 18px;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim)}
+
+/* COHORT */
+.cohort{display:flex;gap:22px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));border:1px solid var(--line-strong);padding:26px 26px;border-radius:3px;margin-top:20px}
+.cohort-badge{font-family:'EB Garamond',serif;font-size:46px;color:var(--gold);line-height:1;min-width:80px;text-align:center}
+.cohort-txt h4{font-family:'EB Garamond',serif;font-size:24px;color:#fff;font-weight:500}
+.cohort-txt p{font-size:13.5px;color:var(--w-dim);line-height:1.6;margin-top:4px;max-width:560px}
+.final-cta{text-align:center;padding:56px 22px}
+.final-cta .h2{margin-bottom:8px}
+.final-cta .body{margin:0 auto 24px}
+
+/* FOOTER */
+.page-footer{max-width:1000px;margin:0 auto;padding:22px 22px 34px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px}
+.pf-brand{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.35)}
+.pf-meta{font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.3);line-height:1.6}
+
+@media(max-width:820px){
+  .elig{grid-template-columns:1fr 1fr}
+  .dims,.weeks,.rhythm{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .isnot,.elig,.dims,.weeks,.rhythm,.next{grid-template-columns:1fr}
+  .sec{padding:40px 16px}
+  .hero{padding:22px 16px 44px}
+  .btn{width:100%;text-align:center}
+  .cta-row{flex-direction:column;align-items:stretch}
+  .quote p{font-size:19px}
+  .cohort{padding:20px}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .back-link,.cta-row,.cta-note,.final-cta,.page-footer .no-print{display:none!important}
+  .hero,.sec,.sec.alt{background:#fff;border-color:#ccc}
+  .hero::before{display:none}
+  .site-title,.h2,.wk-t,.phase-t,.cohort-txt h4,.steps h4{color:var(--navy)}
+  .site-sub,.body,.col li,.el-p,.dim p,.rh p,.wk-f,.steps p,.note,.cohort-txt p{color:#333}
+  .el,.dim,.wk,.rh,.col,.cohort{background:#fff!important;border-color:#bbb}
+  .el-h,.dim h4{color:var(--navy)}
+  .wk-c{color:#333}
+  .chip{background:#fff;color:#333;border-color:#999}
+  .sec{break-inside:avoid-page}
+  .wk,.el,.dim{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back-link" href="index.html">← Training &amp; Development Lab</a>
+    <div class="eyebrow">Apex Concierge Services · Training &amp; Development Lab</div>
+    <div class="crest">Apex Excellence Academy</div>
+    <h1 class="site-title">Excellence Academy <em>Pathway</em></h1>
+    <p class="site-sub">A 12-week leadership development program for Apex concierge professionals. Built for the shift. Designed for the long game.</p>
+    <div class="chips">
+      <span class="chip chip-green"><span class="dot"></span>Cohort I · 2026 · Complete</span>
+      <span class="chip chip-gold"><span class="dot"></span>Module 5 · Ongoing Development</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="https://acsstandardhub.github.io/apex-excellence-academy/AEA_App.html" target="_blank" rel="noopener">Open the Academy app →</a>
+      <a class="btn btn-line" href="https://acsstandardhub.github.io/apex-excellence-academy/AEA_Leadership_Self_Assessment.html" target="_blank" rel="noopener">Leadership Self-Assessment →</a>
+    </div>
+    <p class="cta-note">Both open in a new tab. Participants use the app on shift, from any phone or browser.</p>
+  </div>
+</header>
+
+<!-- WHAT IT IS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="label">What the Academy is</div>
+    <h2 class="h2">Leadership, practiced <em>on shift</em>.</h2>
+    <p class="body">The Apex Excellence Academy develops the agents who will lead Apex sites next. It is executive in tone and site-ready in practice: every week has one theme, one field challenge carried out on real shifts, and one honest reflection. There is no classroom and no homework. The work is the shift.</p>
+    <div class="isnot">
+      <div class="col is">
+        <h4>The Academy is</h4>
+        <ul>
+          <li>Twelve weeks, one theme per week</li>
+          <li>Applied on live shifts at your own site</li>
+          <li>Measured across six leadership dimensions</li>
+          <li>Facilitated by the Regional Concierge Manager, with a 1:1 pulse check</li>
+          <li>A step toward Senior Agent, Lead and trainer roles</li>
+        </ul>
+      </div>
+      <div class="col not">
+        <h4>The Academy is not</h4>
+        <ul>
+          <li>An academic course or a lecture series</li>
+          <li>Homework outside your shift</li>
+          <li>A reward for tenure alone</li>
+          <li>A replacement for the Apex Standard — it builds on it</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote">
+      <p>"The future site leaders at Apex are sitting somewhere in our company right now — performing well, operating with integrity, and not waiting to be asked."</p>
+      <cite>The Leadership Seed · Apex New Hire Experience</cite>
+    </div>
+  </div>
+</section>
+
+<!-- WHO / ELIGIBILITY -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="label">Who it's for</div>
+    <h2 class="h2">Agents who have proven the <em>foundation</em>.</h2>
+    <p class="body">The Academy is for concierge agents who have completed the New Hire Experience, held the standard through their first 90 days, and are ready to grow beyond onboarding. Eligibility is assessed at the <strong>Day-90 full evaluation</strong>, the end of probation.</p>
+    <div class="elig">
+      <div class="el"><div class="el-n">01</div><div class="el-h">Clean attendance</div><div class="el-p">No pattern of tardiness, unexcused absences or no-call / no-shows across the first 90 days.</div></div>
+      <div class="el"><div class="el-n">02</div><div class="el-h">Strong logs</div><div class="el-p">Shift logs at the Apex Standard — E.D.O. on every entry, complete pass-ons, escalations documented.</div></div>
+      <div class="el"><div class="el-n">03</div><div class="el-h">No conduct flags</div><div class="el-p">Clean against the conduct, device, confidentiality and fraternization standards.</div></div>
+      <div class="el"><div class="el-n">04</div><div class="el-h">Supervisor endorsement</div><div class="el-p">A Site Lead or supervisor puts their name behind the agent.</div></div>
+    </div>
+    <p class="note"><strong>Source:</strong> NHE Speed packet, "Your path from today" — Day 90: trajectory and Excellence Academy eligibility. The Academy app does not set separate criteria.</p>
+  </div>
+</section>
+
+<!-- NOMINATION -->
+<section class="sec">
+  <div class="wrap">
+    <div class="label">How nomination works</div>
+    <h2 class="h2">Nominated, not <em>self-enrolled</em>.</h2>
+    <div class="chips" style="margin:0 0 6px"><span class="chip chip-amber"><span class="dot"></span>Draft v1 · Pending approval by the Regional Concierge Manager</span></div>
+    <ol class="steps">
+      <li><div><h4>Endorsement at Day 90 or later</h4><p>The Site Lead or supervisor confirms the four eligibility criteria at the agent's Day-90 full evaluation, or at any later review.</p></div></li>
+      <li><div><h4>Regional review</h4><p>The Regional Concierge Manager reviews the evidence: the agent's documentation profile, attendance and conduct record, and the endorsement.</p></div></li>
+      <li><div><h4>Cohort placement</h4><p>Confirmed agents are placed in the next cohort and given access to the Academy app.</p></div></li>
+      <li><div><h4>Baseline</h4><p>The agent completes the Leadership Self-Assessment — 18 questions across the six dimensions — so growth is measured from a real starting point.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- DIMENSIONS -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="label">What the Academy measures</div>
+    <h2 class="h2">Six leadership <em>dimensions</em>.</h2>
+    <p class="body">Every week, every scenario and every reflection builds one of six dimensions. The app shows each participant their full profile across all six.</p>
+    <div class="dims">
+      <div class="dim"><div class="dim-k">1</div><h4>Presence &amp; Professionalism</h4><p>How you show up before you say a word. Uniform, energy, the shift-start ritual.</p></div>
+      <div class="dim"><div class="dim-k">2</div><h4>Communication &amp; Tone</h4><p>Regulate first, then respond. Word choice, volume, and what your silence communicates.</p></div>
+      <div class="dim"><div class="dim-k">3</div><h4>Operational Discipline</h4><p>The invisible work — logs, handoffs, follow-through. If it isn't documented, it didn't happen.</p></div>
+      <div class="dim"><div class="dim-k">4</div><h4>Ownership &amp; Problem-Solving</h4><p>From explaining to owning. Root cause before reaction. Your name on the outcome.</p></div>
+      <div class="dim"><div class="dim-k">5</div><h4>Delegation &amp; Coaching</h4><p>Stop fixing. Start developing. The question instead of the answer.</p></div>
+      <div class="dim"><div class="dim-k">6</div><h4>Judgment &amp; Decision-Making</h4><p>Prioritization, escalation thresholds, and owning the call.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section class="sec">
+  <div class="wrap">
+    <div class="label">Program structure</div>
+    <h2 class="h2">Twelve weeks. One theme at a <em>time</em>.</h2>
+    <p class="body">Each week follows the same rhythm inside the Academy app.</p>
+    <div class="rhythm">
+      <div class="rh"><h4>Week Feed</h4><p>The week's theme, its focus, and one field challenge to carry out on shift.</p></div>
+      <div class="rh"><h4>Scenario Trainer</h4><p>Real situations, honest choices, sharp feedback — practiced on your phone between tasks.</p></div>
+      <div class="rh"><h4>Weekly Reflection</h4><p>An honest end-of-week account, shared with the facilitator.</p></div>
+      <div class="rh"><h4>My Commitment</h4><p>One active focus at a time, with a history of past commitments.</p></div>
+      <div class="rh"><h4>My Progress</h4><p>Your profile across all six leadership dimensions.</p></div>
+      <div class="rh"><h4>Facilitator view</h4><p>The facilitator tracks cohort activity and the gap that shapes the next week's content.</p></div>
+    </div>
+
+    <p class="note" style="margin-top:26px">Phase labels below are for orientation on this page. The app itself runs week by week.</p>
+
+    <div class="phase">
+      <div class="phase-h"><span class="phase-n">Weeks 1–3</span><span class="phase-t">Foundation</span></div>
+      <div class="weeks">
+        <div class="wk"><div class="wk-n">Week 1</div><div class="wk-t">Presence &amp; Professionalism</div><div class="wk-f">How you show up before you say a word. Uniform standard. Energy management. The shift-start ritual.</div><div class="wk-c"><b>Field challenge</b>For five consecutive shifts, be fully set — desk clean, log reviewed, building status known — before the first thing asks something of you.</div></div>
+        <div class="wk"><div class="wk-n">Week 2</div><div class="wk-t">Communication &amp; Tone</div><div class="wk-f">Regulate first, then respond. Word choice, volume, and what your silence communicates. Translating competence into presence.</div><div class="wk-c"><b>Field challenge</b>Identify one interaction per shift where you redirect a conversation — log what you said and how it landed.</div></div>
+        <div class="wk"><div class="wk-n">Week 3</div><div class="wk-t">Operational Discipline</div><div class="wk-f">The invisible work. Shift logs, handoffs, follow-through. If it isn't documented, it didn't happen.</div><div class="wk-c"><b>Field challenge</b>End every shift this week with a complete log — detailed enough that anyone could pick up exactly where you left off.</div></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><span class="phase-n">Week 4</span><span class="phase-t">Pulse check</span></div>
+      <div class="weeks">
+        <div class="wk special"><div class="wk-n">Week 4</div><div class="wk-t">Pulse Check — 1:1s</div><div class="wk-f">Individual coaching conversations with the facilitator. No group content this week.</div><div class="wk-c"><b>Field challenge</b>Be honest in your 1:1. Come with one thing you're proud of and one thing you're working through.</div></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><span class="phase-n">Weeks 5–9</span><span class="phase-t">Development</span></div>
+      <div class="weeks">
+        <div class="wk"><div class="wk-n">Week 5</div><div class="wk-t">Vocal Presence</div><div class="wk-f">Communicating with your team, not just to residents. Briefing up. Speaking first. Making your thinking audible.</div><div class="wk-c"><b>Field challenge</b>Each shift this week, say one thing out loud to your team that you would normally have kept to yourself.</div></div>
+        <div class="wk"><div class="wk-n">Week 6</div><div class="wk-t">Ownership &amp; Problem-Solving</div><div class="wk-f">The shift from explaining to owning. Root cause before reaction. Your name on the outcome.</div><div class="wk-c"><b>Field challenge</b>When something goes wrong, write one sentence: what you'll do differently. No context. No explanation. Just the move.</div></div>
+        <div class="wk"><div class="wk-n">Week 7</div><div class="wk-t">Delegation &amp; Coaching</div><div class="wk-f">Stop fixing. Start developing. The question instead of the answer. Trusting someone else's outcome.</div><div class="wk-c"><b>Field challenge</b>Delegate one task this week that you'd normally absorb. Let the outcome be theirs.</div></div>
+        <div class="wk"><div class="wk-n">Week 8</div><div class="wk-t">Reading the Room</div><div class="wk-f">Environmental scanning. Anticipating before being asked. The concierge who knows before the resident does.</div><div class="wk-c"><b>Field challenge</b>At shift start each day, write three things you observe that haven't been said yet.</div></div>
+        <div class="wk"><div class="wk-n">Week 9</div><div class="wk-t">Judgment &amp; Decision-Making</div><div class="wk-f">Escalation thresholds. Owning the call. The prioritization sequence:
+          <div class="seq"><span>Safety</span><i>→</i><span>Resident Experience</span><i>→</i><span>Team</span><i>→</i><span>Admin</span></div></div><div class="wk-c"><b>Field challenge</b>After every significant decision, write one sentence explaining your reasoning. Build the habit of knowing why.</div></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><span class="phase-n">Week 10</span><span class="phase-t">Integration</span></div>
+      <div class="weeks">
+        <div class="wk special"><div class="wk-n">Week 10</div><div class="wk-t">Integration — Putting It Together</div><div class="wk-f">All six dimensions active at once. This is what leadership looks like at full capacity.</div><div class="wk-c"><b>Field challenge</b>Lead one full shift this week as if it were your evaluation. Log everything. Own everything.</div></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><span class="phase-n">Weeks 11–12</span><span class="phase-t">Evaluation &amp; completion</span></div>
+      <div class="weeks">
+        <div class="wk special"><div class="wk-n">Week 11</div><div class="wk-t">Evaluation Week I</div><div class="wk-f">Formal evaluation. Weeks 1–10 in action. The facilitator is watching with intention.</div><div class="wk-c"><b>Field challenge</b>Show up as the version of yourself you've been building toward. No performance — just application.</div></div>
+        <div class="wk special"><div class="wk-n">Week 12</div><div class="wk-t">Evaluation Week II + Completion</div><div class="wk-f">Final evaluation. Program completion. Recognition of growth across all dimensions.</div><div class="wk-c"><b>Field challenge</b>Finish strong. The last shift matters as much as the first.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT NEXT -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="label">What graduates do next</div>
+    <h2 class="h2">Completion opens the <em>next role</em>.</h2>
+    <p class="body">Graduates keep the same standard — quarterly log audits and the annual de-escalation recertification still apply. What changes is the scope of what they carry.</p>
+    <div class="next">
+      <a class="nx" href="lead-development.html">
+        <div class="nx-h"><div class="nx-k">Leadership path</div><div class="nx-t">Senior Agent → Lead Concierge</div></div>
+        <div class="nx-b">Coach new hires on shadow shifts, then own a site's standard. Stages, readiness signals, a Lead self-assessment and a 90-day development plan.</div>
+        <div class="nx-go">Lead Concierge Development Track →</div>
+      </a>
+      <a class="nx" href="trainer-certification.html">
+        <div class="nx-h"><div class="nx-k">Training path</div><div class="nx-t">Trainer Certified</div></div>
+        <div class="nx-b">Deliver NHE Speed's live segments and score work against the Apex Professional Standards Framework, calibrated to the Regional Concierge Manager.</div>
+        <div class="nx-go">Trainer Certification →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COHORT -->
+<section class="sec">
+  <div class="wrap">
+    <div class="label">Cohort status</div>
+    <h2 class="h2">Cohort I is <em>complete</em>.</h2>
+    <div class="cohort">
+      <div class="cohort-badge">I</div>
+      <div class="cohort-txt">
+        <h4>Cohort I · 2026 — Complete</h4>
+        <p>The first cohort has finished the twelve weeks, and graduates have moved into leadership roles. The next cohort will be announced by the Regional Concierge Manager. Agents who meet the Day-90 criteria should speak with their Site Lead about endorsement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="h2">Enter the <em>Academy</em>.</h2>
+    <p class="body">Week feed, scenario trainer, reflections, commitments and your leadership profile — in one app.</p>
+    <a class="btn btn-gold" href="https://acsstandardhub.github.io/apex-excellence-academy/AEA_App.html" target="_blank" rel="noopener">Open the Academy app →</a>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <div class="pf-brand">Apex Concierge Services · Training &amp; Development Lab</div>
+  <div class="pf-meta">Internal Use Only · Excellence Academy Pathway<br>Version 1.0 · October 2026</div>
+</footer>
+
+</body>
+</html>
