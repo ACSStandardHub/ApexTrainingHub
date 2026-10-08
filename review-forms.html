@@ -68,6 +68,36 @@ textarea{resize:vertical;min-height:62px;line-height:1.45}
 .save .btn{color:var(--burg);border-color:#cdb9a2} .save .btn.pri{background:var(--burg);border-color:var(--burg);color:#fff}
 #msg{font-size:13px;margin-top:8px;color:var(--ok);font-weight:600} #msg.err{color:#b3261e}
 .meter{height:5px;background:rgba(255,255,255,.08);width:150px;border-radius:99px;overflow:hidden} .meter i{display:block;height:100%;background:var(--gold)}
+[hidden]{display:none!important}
+/* annual review (1-year) */
+#reqPill{cursor:pointer}
+.grid.a3 label>span:first-child{display:block}
+.lead{font-size:12.5px;color:var(--muted);line-height:1.5;margin:-2px 0 10px}
+.verify{border:1px solid var(--line);background:#fff;padding:9px 12px;margin:8px 0 4px}
+.verify .checks{margin:4px 0 2px}
+.scale{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11.5px;color:var(--muted);margin:0 0 10px}
+.scale b{color:var(--burg)}
+.comp{border:1px solid var(--line);background:#fff;padding:10px 12px 12px;margin-bottom:8px}
+.comp h4{margin:0 0 8px;font:700 14px 'Barlow';color:var(--ink)} .comp h4 i{font-style:normal;color:var(--burg);margin-right:5px}
+.comp .rt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.comp .rt label{display:flex;flex-direction:column;justify-content:space-between;gap:3px;font:700 10.5px 'Barlow';letter-spacing:.06em;text-transform:uppercase;color:var(--muted);min-width:0}
+.comp .rt label.mg{color:var(--burg)} .comp .rt label.mg select{border-color:#c9a3ad}
+.comp .rt label.em select{background:#f4f2ec}
+.comp textarea{min-height:44px}
+@media (max-width:380px){.comp .rt{grid-template-columns:1fr}}
+.avgs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.avg{border:1px solid var(--line);background:#fff;padding:10px 12px}
+.avg small{display:block;font:700 10.5px 'Barlow';letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.avg b{font:700 24px 'Barlow Condensed';color:var(--ink)} .avg.mg small{color:var(--burg)}
+.avg span{font-size:12px;color:var(--muted);margin-left:6px}
+@media (max-width:420px){.avgs{grid-template-columns:1fr}}
+.subh{font:700 12px 'Barlow';letter-spacing:.1em;text-transform:uppercase;color:var(--burg);margin:16px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.dt{display:flex;gap:6px;align-items:center;flex-wrap:wrap} .dt input{max-width:190px}
+.dt .btn{color:var(--burg);border-color:#cdb9a2;padding:6px 10px;font-size:12px}
+.acknote{font-size:12.5px;line-height:1.5;background:#f6ecee;border-left:3px solid var(--burg);padding:8px 12px;margin:4px 0 12px;color:var(--ink)}
+.need{box-shadow:inset 4px 0 0 #c0841a} .fld.need{box-shadow:none;border-left:4px solid #c0841a;padding-left:8px;margin-left:-12px}
+.need>span:first-child::after,.comp.need h4::after{content:'Required';margin-left:8px;font:700 9.5px 'Barlow';letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#c0841a;padding:1px 6px;border-radius:2px;vertical-align:1px}
+.reqlist{font-size:12.5px;color:#8a5a00;margin:4px 0 2px}
 </style>
 </head>
 <body>
@@ -78,7 +108,7 @@ textarea{resize:vertical;min-height:62px;line-height:1.45}
  <nav class="tabs" id="tabs"></nav>
 </div></header>
 <main><div class="wrap">
- <div class="bar"><span class="pill" id="draftState">New review</span><div class="meter" title="How much of the form is filled in"><i id="meter" style="width:0"></i></div><span class="grow"></span>
+ <div class="bar"><span class="pill" id="draftState">New review</span><div class="meter" title="How much of the form is filled in"><i id="meter" style="width:0"></i></div><span class="pill warn" id="reqPill" hidden title="Jump to the next required item"></span><span class="grow"></span>
   <button class="btn" id="newBtn" type="button">Start a new review</button></div>
  <form class="sheet" id="sheet" autocomplete="off" onsubmit="return false"></form>
  <p class="note"><b>Privacy:</b> nothing you type leaves this computer. This page has no server and sends no data anywhere. Drafts are kept in this browser until you start a new review, and finished reviews are written straight to the folder you choose. Use it on your own computer, not a shared one.</p>
@@ -98,15 +128,17 @@ var DEF={
   secs:[{h:'Performance over the previous 90 days',f:[['results','Results and progress since the 90-day review',5],['attend','Attendance reliability and consistency'],['strongc','Strongest competency demonstrated'],['gap','Performance gap requiring attention']]},
    {h:'Growth conversation',qs:['What accomplishment are you most proud of?','Where have you improved since your 90-day review?','What feedback have you acted on?','What responsibility are you ready to own?','What skill do you want to build next?','What support or exposure would help you grow?']},
    {h:'Development roadmap',f:[['goal','Growth goal'],['skill','Competency or skill to develop'],['steps','Action steps and resources'],['measure','Success measure and target date'],['shared','Shared commitment and next checkpoint'],['@rating']]}]},
- '1y':{tab:'1-Year',tabSub:'Takeoff',title:'1-Year Review',sub:'Takeoff • Paylocity self-assessment and annual manager review',days:365,file:'1_Year',next:730,
-  secs:[{h:'Before the meeting',checks:[['pre1','Self-assessment assigned through Paylocity'],['pre2','Full-year attendance, documentation, coaching and performance history reviewed'],['pre3','Self-assessment compared with objective manager evidence'],['pre4','Recommendation prepared on recognition, compensation, responsibility and advancement']]},
-   {h:'Annual review conversation',qs:['How would you summarize your first year?','Which results best demonstrate your impact?','Which competency has grown the most?','Where do you still need development?','What responsibility are you ready to take on?','What should your next year at Apex look like?']},
-   {h:'Manager evaluation',f:[['year','Year in review and objective evidence',5],['align','Employee and manager assessment alignment'],['ready','Readiness for expanded responsibility'],['comprec','Compensation or advancement recommendation'],['@rating']]},
-   {h:'Takeoff plan',f:[['agoal','Primary annual goal'],['acomp','Competencies and development actions'],['ameas','Success measures and checkpoints']]}]}
+ '1y':{tab:'1-Year',tabSub:'Annual review',title:'Annual Performance Review',sub:'Stage 2 • Manager-led 1:1 after the Paylocity self-assessment • Suggested meeting time 20 to 30 minutes',days:365,file:'1_Year',next:730,annual:true,secs:[]}
 };
 var CLOSE=[['c_strength','Strength recognized'],['c_improve','Improvement priority'],['c_commit','Measurable commitment'],['c_follow','Training or management follow-up'],['c_comp','Compensation decision']];
 var DOCS=[['d_journal','Paylocity journal'],['d_form','Review form'],['d_ack','Employee acknowledgment'],['d_pay','Payroll or rate change'],['d_follow','Follow-up scheduled']];
 var RATINGS=['Exceeds expectations','Meets expectations','Needs improvement'];
+// ---- Annual review (1-year): aligned with the Paylocity Annual Employee Self-Assessment
+var COMPS=['Professional Presence & Service Excellence','Reliability & Accountability','Operational Excellence & SOP Compliance','Communication & Teamwork','Initiative & Problem-Solving'];
+var APSF=[['1','1 — Incomplete'],['2','2 — Developing'],['3','3 — Apex Standard'],['4','4 — Witness Quality'],['NA','N/A — cannot be determined']];
+var APSF_L=['Incomplete','Developing','Apex Standard','Witness Quality'];
+var PAY_ST=['Not Submitted','Submitted — Incomplete','Submitted — Complete'];
+var ADOCS=[['d_paystat','Paylocity self-assessment status recorded'],['d_form','Review form completed'],['d_ack','Employee acknowledgment'],['d_journal','Paylocity journal entry'],['d_follow','Follow-up checkpoint scheduled']];
 
 var $=function(s){return document.querySelector(s);};
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -139,9 +171,98 @@ function fieldHTML(f){
  if(f[0]==='@rating') return '<div class="fld"><span>Overall assessment</span><div class="rating">'+RATINGS.map(function(r){return '<label class="'+(R.a.rating===r?'on':'')+'"><input type="radio" name="rating" value="'+r+'"'+(R.a.rating===r?' checked':'')+'>'+r+'</label>';}).join('')+'</div></div>';
  return '<label class="fld"><span>'+esc(f[1])+'</span><textarea data-k="'+f[0]+'" rows="'+(f[2]||3)+'">'+esc(R.a[f[0]]||'')+'</textarea></label>';
 }
+// ---- Annual review form (1-year only)
+function ta(k,label,rows,ph,hint){ return '<label class="fld" data-f="'+k+'"><span>'+esc(label)+'</span><textarea data-k="'+k+'" rows="'+(rows||2)+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'>'+esc(R.a[k]||'')+'</textarea>'+(hint?'<span class="hint">'+hint+'</span>':'')+'</label>'; }
+function dateFld(k,label,btns){ return '<div class="fld" data-f="'+k+'"><span>'+esc(label)+'</span><div class="dt"><input type="date" data-k="'+k+'" value="'+esc(R.a[k]||'')+'">'+(btns||[]).map(function(b){return '<button type="button" class="btn" data-qd="'+k+':'+b[0]+'">'+b[1]+'</button>';}).join('')+'</div></div>'; }
+function aopts(v){ return '<option value="">Choose…</option>'+APSF.map(function(o){return '<option value="'+o[0]+'"'+(v===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join(''); }
+function yearBefore(s){ if(!s) return ''; var p=s.split('-'); return (+p[0]-1)+'-'+p[1]+'-'+p[2]; }
+function aDefaults(){ var a=R.a; if(!a.props) a.props=R.site?[R.site]:[]; if(!a.per_to&&R.reviewDate) a.per_to=R.reviewDate; if(!a.per_from&&a.per_to) a.per_from=yearBefore(a.per_to); }
+function annualHTML(){
+ aDefaults(); var a=R.a, h='';
+ h+='<div class="sec">1 · Employee &amp; Review Information</div>';
+ h+='<div class="grid a3"><label data-f="employee"><span>Employee name</span><input data-h="employee" value="'+esc(R.employee)+'" placeholder="First Last"></label><label data-f="position"><span>Position</span><input data-k="position" value="'+esc(a.position||'')+'" placeholder="e.g. Concierge"></label>'+
+  '<label data-f="hireDate"><span>Hire date</span><input type="date" data-h="hireDate" value="'+esc(R.hireDate)+'"></label><label data-f="reviewDate"><span>Annual review date</span><input type="date" data-h="reviewDate" value="'+esc(R.reviewDate)+'"></label>'+
+  '<label data-f="period"><span>Review period</span><span class="dt" style="flex-wrap:nowrap"><input type="date" data-k="per_from" value="'+esc(a.per_from||'')+'" aria-label="Review period start"><span style="font-weight:400">to</span><input type="date" data-k="per_to" value="'+esc(a.per_to||'')+'" aria-label="Review period end"></span></label>'+
+  '<label data-f="manager"><span>Reviewing manager</span><input data-h="manager" value="'+esc(R.manager)+'"></label></div>';
+ h+='<div class="fld" data-f="props" style="margin-top:10px"><span>Assigned property or properties</span><div class="checks">'+SITES.map(function(st){return '<label><input type="checkbox" data-p="'+esc(st)+'"'+(a.props.indexOf(st)>=0?' checked':'')+'>'+esc(st)+'</label>';}).join('')+'</div></div>';
+ h+='<div class="two"><label class="fld" data-f="pay_status"><span>Paylocity self-assessment status</span><select data-k="pay_status" id="payStatus"><option value="">Choose…</option>'+PAY_ST.map(function(o){return '<option value="'+o+'"'+(a.pay_status===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select></label>'+
+  '<label class="fld"><span>Self-assessment completion date</span><input type="date" data-k="pay_date" value="'+esc(a.pay_date||'')+'"></label></div>';
+ h+='<div class="verify"><b style="font-size:12.5px;color:var(--burg)">Before marking it complete</b><div class="hint" style="margin-top:1px">Paylocity lets employees submit with blanks. Check both in Paylocity first — <i>Submitted — Complete</i> unlocks once both are confirmed.</div><div class="checks" style="flex-direction:column;gap:4px"><label><input type="checkbox" data-c="pay_v1"'+(a.pay_v1?' checked':'')+'>All five competencies have an employee rating</label><label><input type="checkbox" data-c="pay_v2"'+(a.pay_v2?' checked':'')+'>Both mandatory reflection questions are answered</label></div></div>';
+
+ h+='<div class="sec">2 · Employee Perspective &amp; 1:1 Discussion</div><p class="lead">Optional. Jot short notes from the conversation — the employee\'s own answers stay in Paylocity, so there\'s no need to copy them here.</p>';
+ h+=ta('e_acc','A. Greatest Accomplishment',2,'What achievement or contribution did they identify? Your discussion notes')+ta('e_grow','B. Opportunity for Growth',2,'What do they want to improve or develop? Your discussion notes')+ta('e_supp','C. Management Support & Feedback',2,'What feedback or support did they ask for? Your discussion notes');
+
+ h+='<div class="sec">3 · APSF Performance Evaluation</div>';
+ h+='<div class="scale"><span><b>1</b> Incomplete</span><span><b>2</b> Developing</span><span><b>3</b> Apex Standard</span><span><b>4</b> Witness Quality</span><span><b>N/A</b> can\'t be determined — left out of averages</span></div>';
+ h+=COMPS.map(function(c,i){ var n=i+1; return '<div class="comp" data-f="mr'+n+'"><h4><i>'+n+'.</i>'+esc(c)+'</h4><div class="rt"><label class="em">Employee self-rating (Paylocity)<select data-k="es'+n+'">'+aopts(a['es'+n]||'')+'</select></label><label class="mg">Manager rating<select data-k="mr'+n+'">'+aopts(a['mr'+n]||'')+'</select></label></div><textarea data-k="mc'+n+'" rows="2" placeholder="Manager comments / supporting examples">'+esc(a['mc'+n]||'')+'</textarea></div>'; }).join('');
+ h+='<p class="lead" style="margin-top:6px">A difference between the two ratings is a talking point, not a deficiency. The manager rating is your own evaluation.</p>';
+
+ h+='<div class="sec">4 · Overall Performance Assessment</div>';
+ h+='<div class="avgs"><div class="avg"><small>Average employee self-rating</small><b id="avgE">—</b><span id="avgEn"></span></div><div class="avg mg"><small>Average manager rating</small><b id="avgM">—</b><span id="avgMn"></span></div></div>';
+ h+='<label class="fld"><span>Employee\'s overall self-rating label (as shown in Paylocity)</span><select data-k="emp_label" style="max-width:320px"><option value="">Not recorded</option>'+APSF_L.map(function(o){return '<option'+(a.emp_label===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select></label>';
+ h+='<div class="fld" data-f="det"><span>Overall manager performance determination</span><div class="rating" id="detBox">'+APSF_L.map(function(o,i){return '<label class="'+(a.det===o?'on':'')+'"><input type="radio" name="det" value="'+o+'"'+(a.det===o?' checked':'')+'>'+(i+1)+' — '+o+'</label>';}).join('')+'</div><span class="hint">Choose this yourself. Averages are shown as numbers only and are not rounded into a category, and your determination stands independently of the self-rating.</span></div>';
+ h+=ta('strengths','Key strengths demonstrated',2)+ta('improve','Areas requiring improvement',2)+ta('summary',"Manager's final performance summary",3);
+
+ h+='<div class="sec">5 · Professional Development &amp; Commitments</div><p class="lead">Keep each goal specific, achievable and measurable.</p>';
+ h+='<div class="subh">Performance goal</div>'+ta('pg_desc','Goal description',2)+'<div class="two">'+ta('pg_steps','Action steps',2)+ta('pg_meas','Success measures',2)+'</div>'+dateFld('pg_date','Target completion date');
+ h+='<div class="subh">Professional growth goal</div>'+ta('gg_obj','Development objective',2)+'<div class="two">'+ta('gg_supp','Training or support required',2)+ta('gg_meas','Success measures',2)+'</div>'+dateFld('gg_date','Target completion date');
+ h+='<div class="subh">Follow-up</div>'+dateFld('c_next','Next performance checkpoint',[['90','In 90 days'],['182','In 6 months']])+'<div class="two">'+ta('mgr_commit','Manager commitments',2)+ta('emp_commit','Employee commitments',2)+'</div>';
+
+ h+='<div class="sec">6 · Annual Review Closeout</div>';
+ h+=ta('fin_sum','Final discussion summary',2)+ta('emp_resp','Employee comments or response',2,'Anything the employee wants on the record, in their words');
+ h+='<div class="acknote"><b>Acknowledgment</b> means the review was discussed with and received by the employee. It does not mean the employee agrees with every rating.</div>';
+ h+=dateFld('date_done','Date completed',[['0','Today']]);
+ h+='<div class="fld"><span>Documentation status</span><div class="checks">'+ADOCS.map(function(c){return '<label><input type="checkbox" data-c="'+c[0]+'"'+(a[c[0]]?' checked':'')+'>'+esc(c[1])+'</label>';}).join('')+'</div><span class="hint">Compensation recommendations and approvals are handled separately and are not part of this employee-facing record.</span></div>';
+ return h;
+}
+function avgOf(p){ var v=[],na=0; for(var i=1;i<=5;i++){ var x=R.a[p+i]; if(/^[1-4]$/.test(x||'')) v.push(+x); else if(x==='NA') na++; } return {n:v.length,na:na,v:v.length?(v.reduce(function(s,x){return s+x;},0)/v.length).toFixed(2):''}; }
+function avgText(o){ return o.v?o.v+' / 4.00 ('+o.n+' rated'+(o.na?', '+o.na+' N/A':'')+')':'Not rated'; }
+function aMissing(){ var a=R.a, m=[];
+ if(!R.employee.trim()) m.push(['employee','employee name']); if(!(a.position||'').trim()) m.push(['position','position']);
+ if(!R.reviewDate) m.push(['reviewDate','annual review date']); if(!a.per_from||!a.per_to) m.push(['period','review period']);
+ if(!(R.manager||'').trim()) m.push(['manager','reviewing manager']); if(!a.pay_status) m.push(['pay_status','Paylocity self-assessment status']);
+ COMPS.forEach(function(c,i){ if(!a['mr'+(i+1)]) m.push(['mr'+(i+1),'manager rating — '+c]); });
+ if(!a.det) m.push(['det','overall manager determination']); if(!(a.summary||'').trim()) m.push(['summary',"manager's final summary"]);
+ if(!(a.pg_desc||'').trim()) m.push(['pg_desc','performance goal']); if(!(a.gg_obj||'').trim()) m.push(['gg_obj','professional growth objective']);
+ if(!a.c_next) m.push(['c_next','next performance checkpoint']);
+ return m; }
+function annualRefresh(){
+ var a=R.a, ok=a.pay_v1&&a.pay_v2, sel=$('#payStatus');
+ if(sel){ var o=sel.querySelector('option[value="Submitted — Complete"]'); if(o){ o.disabled=!ok; o.text=ok?'Submitted — Complete':'Submitted — Complete (confirm both checks first)'; }
+  if(!ok&&a.pay_status==='Submitted — Complete'){ a.pay_status='Submitted — Incomplete'; sel.value=a.pay_status; save(); } }
+ var e=avgOf('es'), g=avgOf('mr'); if($('#avgE')){ $('#avgE').textContent=e.v?e.v:'—'; $('#avgEn').textContent=e.v?'/ 4.00 · '+e.n+' rated'+(e.na?', '+e.na+' N/A':''):'no ratings yet'; $('#avgM').textContent=g.v?g.v:'—'; $('#avgMn').textContent=g.v?'/ 4.00 · '+g.n+' rated'+(g.na?', '+g.na+' N/A':''):'no ratings yet'; }
+ var m=aMissing(), keys={}; m.forEach(function(x){keys[x[0]]=1;});
+ $('#sheet').querySelectorAll('[data-f]').forEach(function(el){ el.classList.toggle('need',!!keys[el.getAttribute('data-f')]); });
+ var p=$('#reqPill'); p.hidden=false; p.className='pill '+(m.length?'warn':'ok'); p.textContent=m.length?m.length+' required item'+(m.length>1?'s':'')+' left':'Required items complete';
+ var l=$('#reqList'); if(l) l.textContent=m.length?'Still needed before saving: '+m.map(function(x){return x[1];}).join(' · '):'';
+}
+function aInfo(){ var a=R.a; return [['Employee',R.employee],['Position',a.position],['Assigned Properties',(a.props||[]).join(', ')],['Reviewing Manager',R.manager],['Hire Date',mdy(R.hireDate)],['Annual Review Date',mdy(R.reviewDate)],['Review Period',a.per_from||a.per_to?mdy(a.per_from)+' – '+mdy(a.per_to):''],['Date Completed',mdy(a.date_done)],['Paylocity Self-Assessment',a.pay_status],['Self-Assessment Completed',mdy(a.pay_date)]]; }
+function rl(v){ var o=APSF.filter(function(x){return x[0]===v;})[0]; return o?(v==='NA'?'N/A':o[1]):'—'; }
+function aBlocks(){ var a=R.a, out=[], T=function(k,l){ out.push({label:l,text:a[k]||''}); };
+ out.push({sec:'1 · Employee & Review Information'}); out.push({grid:aInfo()});
+ out.push({kv:[['Self-assessment check','All five competencies rated: '+(a.pay_v1?'Yes':'Not confirmed')+'   •   Mandatory reflection questions answered: '+(a.pay_v2?'Yes':'Not confirmed')]]});
+ out.push({sec:'2 · Employee Perspective & 1:1 Discussion'}); out.push({note:"Manager discussion notes. The employee's full self-assessment responses remain on file in Paylocity."});
+ T('e_acc','A. Greatest Accomplishment'); T('e_grow','B. Opportunity for Growth'); T('e_supp','C. Management Support & Feedback');
+ out.push({sec:'3 · APSF Performance Evaluation'}); out.push({note:'APSF scale: 1 Incomplete • 2 Developing • 3 Apex Standard • 4 Witness Quality • N/A = could not be determined (excluded from averages). Employee self-ratings are as submitted in Paylocity; manager ratings are the manager\'s own evaluation.'});
+ out.push({apsf:COMPS.map(function(c,i){ var n=i+1; return [c,rl(a['es'+n]),rl(a['mr'+n]),a['mc'+n]||'']; })});
+ out.push({sec:'4 · Overall Performance Assessment'});
+ out.push({kv:[['Average employee self-rating (Paylocity)',avgText(avgOf('es'))],['Average manager rating',avgText(avgOf('mr'))],["Employee's overall self-rating (Paylocity)",a.emp_label||'Not recorded'],['Overall manager performance determination',a.det||'—']]});
+ out.push({note:"Averages use numeric ratings only and are not rounded into a category. The manager's determination is made independently of the employee's self-rating."});
+ T('strengths','Key strengths demonstrated'); T('improve','Areas requiring improvement'); T('summary',"Manager's final performance summary");
+ out.push({sec:'5 · Professional Development & Commitments'});
+ out.push({sub:'Performance Goal'}); T('pg_desc','Goal description'); T('pg_steps','Action steps'); T('pg_meas','Success measures'); out.push({kv:[['Target completion date',mdy(a.pg_date)||'—']]});
+ out.push({sub:'Professional Growth Goal'}); T('gg_obj','Development objective'); T('gg_supp','Training or support required'); T('gg_meas','Success measures'); out.push({kv:[['Target completion date',mdy(a.gg_date)||'—']]});
+ out.push({sub:'Follow-Up'}); out.push({kv:[['Next performance checkpoint',mdy(a.c_next)||'—']]}); T('mgr_commit','Manager commitments'); T('emp_commit','Employee commitments');
+ out.push({sec:'6 · Annual Review Closeout'}); T('fin_sum','Final discussion summary'); T('emp_resp','Employee comments or response');
+ out.push({kv:[['Date completed',mdy(a.date_done)||'—']]});
+ out.push({label:'Documentation status',checks:ADOCS.map(function(c){return [c[1],!!a[c[0]]];})});
+ out.push({note:'Acknowledgment: signatures confirm the review was discussed with and received by the employee. They do not necessarily mean the employee agrees with every rating.'});
+ out.push({sigs:true});
+ return out; }
 function render(){
  var D=DEF[type], h='';
  h+='<div class="s-head"><img src="'+LOGO+'" alt="Apex Concierge Services"><h2>'+esc(D.title)+'</h2><div class="m">'+esc(D.sub)+'</div></div>';
+ if(D.annual) h+=annualHTML(); else {
  h+='<div class="grid"><label>Employee<input data-h="employee" value="'+esc(R.employee)+'" placeholder="First Last"></label><label>Manager<input data-h="manager" value="'+esc(R.manager)+'"></label>'+
    '<label>Review date<input type="date" data-h="reviewDate" value="'+esc(R.reviewDate)+'"></label><label>Hire date<input type="date" data-h="hireDate" value="'+esc(R.hireDate)+'"></label>'+
    '<label>Site<select data-h="site"><option value="">Choose…</option>'+SITES.map(function(s){return '<option'+(s===R.site?' selected':'')+'>'+s+'</option>';}).join('')+'</select></label>'+
@@ -156,29 +277,34 @@ function render(){
  h+='<div class="sec">Review closeout record</div>'+CLOSE.map(function(c){return fieldHTML(c);}).join('');
  h+='<label class="fld"><span>Compensation effective date (if applicable)</span><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input type="date" data-k="c_eff" value="'+esc(R.a.c_eff||'')+'" style="max-width:200px"><button type="button" class="btn" id="sunBtn" style="color:var(--burg);border-color:#cdb9a2">Use the Sunday after the review</button></div><span class="hint">Pay increases take effect the Sunday after the completed review.</span></label>';
  h+='<div class="fld"><span>Documentation completed</span><div class="checks">'+DOCS.map(function(c){return '<label><input type="checkbox" data-c="'+c[0]+'"'+(R.a[c[0]]?' checked':'')+'>'+esc(c[1])+'</label>';}).join('')+'</div></div>';
- h+='<div class="two">'+['emp','mgr'].map(function(w){ var s=R.sig[w]; return '<div class="sig"><b>'+(w==='emp'?'Employee':'Manager')+' signature</b><canvas data-sig="'+w+'"></canvas><div class="row"><input data-sn="'+w+'" value="'+esc(s.name||'')+'" placeholder="Printed name"><input type="date" data-sd="'+w+'" value="'+esc(s.date||'')+'"><button type="button" class="btn" data-sc="'+w+'" style="color:var(--burg);border-color:#cdb9a2">Clear</button></div></div>'; }).join('')+'</div>';
+ }
+ h+='<div class="two">'+['emp','mgr'].map(function(w){ var s=R.sig[w]; return '<div class="sig"><b>'+(w==='emp'?'Employee':'Manager')+(D.annual?' acknowledgment':' signature')+'</b><canvas data-sig="'+w+'"></canvas><div class="row"><input data-sn="'+w+'" value="'+esc(s.name||'')+'" placeholder="Printed name"><input type="date" data-sd="'+w+'" value="'+esc(s.date||'')+'"><button type="button" class="btn" data-sc="'+w+'" style="color:var(--burg);border-color:#cdb9a2">Clear</button></div></div>'; }).join('')+'</div>';
  h+='<label class="checks" style="margin-top:8px"><label><input type="checkbox" data-c="c_declined"'+(R.a.c_declined?' checked':'')+'>Employee reviewed the form but declined to sign</label></label>';
  h+='<div class="save"><h3>Save the finished review</h3><div class="hint" style="margin-bottom:6px">Saves a PDF and an editable Word copy to <b>Active_Employees › [Last_First] › 01_Reviews</b>. Pick your Active_Employees folder once; the browser remembers it.</div>'+
    '<div class="row"><button type="button" class="btn" id="pickBtn">Choose Active_Employees folder</button><select id="empSel"><option value="">Employee folder…</option></select><span class="hint" id="dirName"></span></div>'+
-   '<div class="row"><button type="button" class="btn pri" id="saveBtn">Save PDF + Word to employee file</button><button type="button" class="btn" id="dlPdf">Download PDF</button><button type="button" class="btn" id="dlDocx">Download Word</button></div><div id="msg"></div></div>';
- $('#sheet').innerHTML=h; tabs(); sigs(); folders(); meter(); stateLine();
+   '<div class="row"><button type="button" class="btn pri" id="saveBtn">Save PDF + Word to employee file</button><button type="button" class="btn" id="dlPdf">Download PDF</button><button type="button" class="btn" id="dlDocx">Download Word</button></div>'+(D.annual?'<div class="reqlist" id="reqList"></div>':'')+'<div id="msg"></div></div>';
+ $('#sheet').innerHTML=h; tabs(); sigs(); folders(); if(D.annual) annualRefresh(); else $('#reqPill').hidden=true; meter(); stateLine();
 }
 function stateLine(){ var e=$('#draftState'); if(!e) return; e.className='pill'+(R.saved?' ok':R.employee?' warn':''); e.textContent=R.saved?'Saved '+R.saved:R.employee?'Draft · '+R.employee+' · '+DEF[type].tab:'New '+DEF[type].tab+' review'; }
-function meter(){ var all=$('#sheet').querySelectorAll('textarea'), n=0; all.forEach(function(t){ if(t.value.trim()) n++; }); var p=all.length?Math.round(100*n/all.length):0; $('#meter').style.width=p+'%'; }
+function meter(){ if(DEF[type].annual){ var tot=11+COMPS.length, left=aMissing().length; $('#meter').style.width=Math.round(100*(tot-left)/tot)+'%'; return; } var all=$('#sheet').querySelectorAll('textarea'), n=0; all.forEach(function(t){ if(t.value.trim()) n++; }); var p=all.length?Math.round(100*n/all.length):0; $('#meter').style.width=p+'%'; }
 $('#sheet').addEventListener('input',function(e){ var t=e.target, k;
- if((k=t.getAttribute('data-h'))){ R[k]=t.value; if(k==='hireDate'&&t.value){ R.milestone=addDays(t.value,DEF[type].days); var m=$('[data-h="milestone"]'); if(m) m.value=R.milestone; if(!R.a.c_next){ R.a.c_next=addDays(t.value,DEF[type].next); var n=$('[data-k="c_next"]'); if(n) n.value=R.a.c_next; } } if(k==='employee'){ R.sig.emp.name=R.sig.emp.name||''; matchFolder(); } }
+ if((k=t.getAttribute('data-h'))){ var old=R[k]; R[k]=t.value; if(DEF[type].annual&&k==='manager'&&(!R.sig.mgr.name||R.sig.mgr.name===old)){ R.sig.mgr.name=t.value; var sn=$('[data-sn="mgr"]'); if(sn) sn.value=t.value; } if(DEF[type].annual&&k==='reviewDate'&&t.value){ var A=R.a; if(!A.per_to||A.per_to===old){ if(!A.per_from||A.per_from===yearBefore(A.per_to)) { A.per_from=yearBefore(t.value); var f1=$('[data-k="per_from"]'); if(f1) f1.value=A.per_from; } A.per_to=t.value; var f2=$('[data-k="per_to"]'); if(f2) f2.value=A.per_to; } } if(k==='hireDate'&&t.value){ R.milestone=addDays(t.value,DEF[type].days); var m=$('[data-h="milestone"]'); if(m) m.value=R.milestone; if(!R.a.c_next&&!DEF[type].annual){ R.a.c_next=addDays(t.value,DEF[type].next); var n=$('[data-k="c_next"]'); if(n) n.value=R.a.c_next; } } if(k==='employee'){ R.sig.emp.name=R.sig.emp.name||''; matchFolder(); } }
  else if((k=t.getAttribute('data-k'))) R.a[k]=t.value;
  else if((k=t.getAttribute('data-sn'))) R.sig[k].name=t.value;
  else if((k=t.getAttribute('data-sd'))) R.sig[k].date=t.value;
- R.saved=''; save(); meter(); tabs(); });
+ if(DEF[type].annual) annualRefresh(); R.saved=''; save(); meter(); tabs(); });
 $('#sheet').addEventListener('change',function(e){ var t=e.target, k;
  if(t.name==='rating'){ R.a.rating=t.value; $('#sheet').querySelectorAll('.rating label').forEach(function(l){ l.classList.toggle('on',l.querySelector('input').checked); }); }
  else if((k=t.getAttribute('data-c'))) R.a[k]=t.checked;
  else if(t.id==='empSel'){ R.folder=t.value; if(t.value&&!R.employee){ var p=t.value.split('_'); R.employee=(p.slice(1).join(' ')+' '+p[0]).trim(); var e2=$('[data-h="employee"]'); if(e2) e2.value=R.employee; } }
  else if(t.getAttribute('data-h')) R[t.getAttribute('data-h')]=t.value;
- R.saved=''; save(); });
+ else if(t.name==='det'){ R.a.det=t.value; $('#detBox').querySelectorAll('label').forEach(function(l){ l.classList.toggle('on',l.querySelector('input').checked); }); }
+ else if((k=t.getAttribute('data-p'))!=null){ var ps=R.a.props||[]; ps=ps.filter(function(x){return x!==k;}); if(t.checked) ps.push(k); R.a.props=SITES.filter(function(x){return ps.indexOf(x)>=0;}).concat(ps.filter(function(x){return SITES.indexOf(x)<0;})); }
+ else if((k=t.getAttribute('data-k'))) R.a[k]=t.value;
+ R.saved=''; save(); if(DEF[type].annual){ annualRefresh(); meter(); } });
 $('#sheet').addEventListener('click',function(e){ var t=e.target;
  if(t.id==='sunBtn'){ R.a.c_eff=nextSunday(R.reviewDate); $('[data-k="c_eff"]').value=R.a.c_eff; save(); }
+ var qd=t.getAttribute('data-qd'); if(qd){ var q2=qd.split(':'), base=q2[1]==='0'?ymd(new Date()):(R.reviewDate||ymd(new Date())); R.a[q2[0]]=addDays(base,+q2[1]); var qi=$('[data-k="'+q2[0]+'"]'); if(qi) qi.value=R.a[q2[0]]; R.saved=''; save(); annualRefresh(); meter(); }
  var sc=t.getAttribute('data-sc'); if(sc){ R.sig[sc].img=''; save(); sigs(); }
  if(t.id==='pickBtn') pickDir(true);
  if(t.id==='saveBtn') saveToFolder();
@@ -227,8 +353,8 @@ function matchFolder(){ var sel=$('#empSel'); if(!sel||!SUBS.length||R.folder) r
  var hit=SUBS.filter(function(n){return n.toLowerCase()===want;})[0]||SUBS.filter(function(n){var l=n.toLowerCase(); return p.last&&l.indexOf(p.last.toLowerCase())===0&&l.indexOf(p.first.toLowerCase().slice(0,3))>=0;})[0];
  if(hit){ sel.value=hit; R.folder=hit; save(); } }
 function clean(s){ return String(s||'').replace(/[^A-Za-z0-9'’-]+/g,'_').replace(/['’]/g,'').replace(/^_+|_+$/g,''); }
-function fname(ext){ var p=nameParts(); return 'HR_'+clean(p.first)+'_'+clean(p.last||'Employee')+'_'+DEF[type].file+'_Milestone_Review_'+(R.reviewDate||ymd(new Date()))+'.'+ext; }
-function missing(){ var m=[]; if(!R.employee.trim()) m.push('employee name'); if(!R.reviewDate) m.push('review date'); if(DEF[type].secs.some(function(s){return (s.f||[]).some(function(f){return f[0]==='@rating';});})&&!R.a.rating) m.push('overall assessment'); return m; }
+function fname(ext){ var p=nameParts(); return 'HR_'+clean(p.first)+'_'+clean(p.last||'Employee')+(DEF[type].annual?'_Annual_Performance_Review_':'_'+DEF[type].file+'_Milestone_Review_')+(R.reviewDate||ymd(new Date()))+'.'+ext; }
+function missing(){ if(DEF[type].annual) return aMissing().map(function(x){return x[1];}); var m=[]; if(!R.employee.trim()) m.push('employee name'); if(!R.reviewDate) m.push('review date'); if(DEF[type].secs.some(function(s){return (s.f||[]).some(function(f){return f[0]==='@rating';});})&&!R.a.rating) m.push('overall assessment'); return m; }
 async function saveToFolder(){
  var m=missing(); if(m.length){ msg('Add the '+m.join(', ')+' first.',true); return; }
  if(!window.showDirectoryPicker){ var a=await buildPdf(), b=await buildDocx(); dl(a,fname('pdf')); dl(b,fname('docx')); msg('Downloaded both files — move them into the employee\'s 01_Reviews folder.'); markSaved('downloaded'); return; }
@@ -253,7 +379,7 @@ function err(e){ console.error(e); msg('Something went wrong: '+(e&&e.message||e
 
 // ---- content model shared by PDF + Word
 function blocks(){
- var D=DEF[type], out=[];
+ var D=DEF[type], out=[]; if(D.annual) return aBlocks();
  D.secs.forEach(function(s){ out.push({sec:s.h});
   if(s.qs) s.qs.forEach(function(q,i){ out.push({q:(i+1)+'. '+q,a:R.a['q'+s.h.slice(0,3)+i]||''}); });
   if(s.f) s.f.forEach(function(f){ if(f[0]==='@rating') out.push({rating:R.a.rating||''}); else out.push({label:f[1],text:R.a[f[0]]||''}); });
@@ -281,12 +407,29 @@ function buildPdf(){ return new Promise(function(res){
  doc.setFont('helvetica','bold'); doc.setFontSize(19); doc.setTextColor.apply(doc,BURG); doc.text(wa(DEF[type].title.toUpperCase()),W/2,y+16,{align:'center'}); y+=24;
  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor.apply(doc,MUTED); doc.text(wa(DEF[type].sub),W/2,y+8,{align:'center'}); y+=20;
  // info grid
- var I=info(), ch=34; doc.setDrawColor(220,214,200); doc.setLineWidth(.6);
- for(var r=0;r<3;r++){ for(var c=0;c<2;c++){ var it=I[r*2+c], x=M+c*cw/2; doc.setFillColor(244,242,236); doc.rect(x,y,cw/2,ch,'FD');
+ function grid(I,maxL){ doc.setDrawColor(220,214,200); doc.setLineWidth(.6);
+  for(var r=0;r<I.length/2;r++){ doc.setFont('helvetica','normal'); doc.setFontSize(9.5); var L=[0,1].map(function(c){ return doc.splitTextToSize(wa(I[r*2+c][1]||'—'),cw/2-18).slice(0,maxL); }), ch=34+(Math.max(L[0].length,L[1].length)-1)*11.5; ensure(ch);
+   for(var c=0;c<2;c++){ var it=I[r*2+c], x=M+c*cw/2; doc.setDrawColor(220,214,200); doc.setFillColor(244,242,236); doc.rect(x,y,cw/2,ch,'FD');
    doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor.apply(doc,INK); doc.text(wa(it[0]),x+9,y+12);
-   doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.text(doc.splitTextToSize(wa(it[1]||'—'),cw/2-18)[0],x+9,y+26); } y+=ch; }
- y+=10;
+   doc.setFont('helvetica','normal'); doc.setFontSize(9.5); L[c].forEach(function(l,j){ doc.text(l,x+9,y+26+j*11.5); }); } y+=ch; } }
+ if(!DEF[type].annual){ grid(info(),1); y+=10; }
  blocks().forEach(function(b){
+  if(b.grid){ grid(b.grid,3); y+=8; return; }
+  if(b.sub){ ensure(34); y+=6; text(b.sub.toUpperCase(),9.5,'bold',BURG); doc.setDrawColor(220,214,200); doc.setLineWidth(.6); doc.line(M,y+1,M+cw,y+1); y+=7; return; }
+  if(b.note){ ensure(20); text(b.note,8.5,'italic',MUTED); y+=5; return; }
+  if(b.kv){ b.kv.forEach(function(r){ doc.setFont('helvetica','normal'); doc.setFontSize(9.5); var lw=200, L=doc.splitTextToSize(wa(r[1]||'—'),cw-lw-8); ensure(L.length*12.8+4);
+    doc.setFont('helvetica','bold'); doc.setTextColor.apply(doc,BURG); doc.splitTextToSize(wa(r[0]),lw).forEach(function(l,j){ doc.text(l,M,y+9.5+j*12.8); });
+    doc.setFont('helvetica','normal'); doc.setTextColor.apply(doc,INK); L.forEach(function(l,j){ doc.text(l,M+lw+8,y+9.5+j*12.8); }); y+=Math.max(L.length,doc.splitTextToSize(wa(r[0]),lw).length)*12.8+3; }); y+=4; return; }
+  if(b.apsf){ var c1=cw*.46, c2=cw*.27, hh=24;
+   function ahead(){ doc.setFillColor(244,242,236); doc.setDrawColor(220,214,200); doc.setLineWidth(.6); doc.rect(M,y,cw,hh,'FD');
+    doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor.apply(doc,INK); doc.text('COMPETENCY',M+8,y+15); doc.text('EMPLOYEE SELF-RATING',M+c1+8,y+15); doc.setTextColor.apply(doc,BURG); doc.text('MANAGER RATING',M+c1+c2+8,y+15); y+=hh; }
+   ensure(hh+60); ahead();
+   b.apsf.forEach(function(r,i){ doc.setFontSize(9.5); var N=doc.splitTextToSize(wa((i+1)+'. '+r[0]),c1-16), C=r[3]?doc.splitTextToSize(wa('Manager comments: '+r[3]),cw-24):[], rh=Math.max(N.length,1)*12.5+10, tot=rh+(C.length?C.length*12+8:0); if(y+tot>H-60){ doc.addPage(); y=M; ahead(); }
+    doc.setDrawColor(220,214,200); doc.rect(M,y,cw,tot);
+    doc.setFont('helvetica','bold'); doc.setTextColor.apply(doc,INK); N.forEach(function(l,j){ doc.text(l,M+8,y+14+j*12.5); });
+    doc.setFont('helvetica','normal'); doc.text(wa(r[1]),M+c1+8,y+14); doc.setFont('helvetica','bold'); doc.setTextColor.apply(doc,BURG); doc.text(wa(r[2]),M+c1+c2+8,y+14);
+    if(C.length){ doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor.apply(doc,INK); C.forEach(function(l,j){ doc.text(l,M+12,y+rh+6+j*12); }); }
+    y+=tot; }); y+=10; return; }
   if(b.sec){ ensure(40); y+=8; doc.setFillColor.apply(doc,BURG); doc.rect(M,y,cw,20,'F'); doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(255,255,255); doc.text(wa(b.sec.toUpperCase()),M+9,y+14); y+=28; return; }
   if(b.q!=null){ ensure(30); text(b.q,9.5,'bold',INK); text(b.a||'—',9.5,'normal',b.a?INK:MUTED,M+12,cw-12); y+=5; return; }
   if(b.rating!=null){ ensure(26); doc.setFont('helvetica','bold'); doc.setFontSize(9.5); doc.setTextColor.apply(doc,BURG); doc.text('Overall assessment',M,y+10); var x=M+110;
@@ -313,10 +456,21 @@ function buildDocx(){
  var kids=[new P({alignment:X.AlignmentType.CENTER,children:[new X.ImageRun({data:b64ToBytes(LOGO),transformation:{width:150,height:78}})]}),
   para(DEF[type].title.toUpperCase(),{bold:true,size:36,color:BC,align:X.AlignmentType.CENTER,after:40}),
   para(DEF[type].sub,{size:17,color:'6E6E76',align:X.AlignmentType.CENTER,after:200})];
- var I=info(), border={style:X.BorderStyle.SINGLE,size:4,color:'DCD6C8'}, rows=[];
- for(var r=0;r<3;r++) rows.push(new X.TableRow({children:[0,1].map(function(c){ var it=I[r*2+c]; return new X.TableCell({width:{size:50,type:X.WidthType.PERCENTAGE},shading:{fill:'F4F2EC',type:X.ShadingType.CLEAR,color:'auto'},margins:{top:80,bottom:80,left:140,right:140},borders:{top:border,bottom:border,left:border,right:border},children:[para(it[0],{bold:true,size:16,after:20}),para(it[1]||'—',{size:19,after:0})]}); })}));
- kids.push(new X.Table({width:{size:100,type:X.WidthType.PERCENTAGE},rows:rows}));
+ var border={style:X.BorderStyle.SINGLE,size:4,color:'DCD6C8'}, BD={top:border,bottom:border,left:border,right:border};
+ function gridTable(I){ var rows=[];
+ for(var r=0;r<I.length/2;r++) rows.push(new X.TableRow({children:[0,1].map(function(c){ var it=I[r*2+c]; return new X.TableCell({width:{size:50,type:X.WidthType.PERCENTAGE},shading:{fill:'F4F2EC',type:X.ShadingType.CLEAR,color:'auto'},margins:{top:80,bottom:80,left:140,right:140},borders:{top:border,bottom:border,left:border,right:border},children:[para(it[0],{bold:true,size:16,after:20}),para(it[1]||'—',{size:19,after:0})]}); })}));
+ return new X.Table({width:{size:100,type:X.WidthType.PERCENTAGE},rows:rows}); }
+ if(!DEF[type].annual) kids.push(gridTable(info()));
+ function cell(children,o){ o=o||{}; return new X.TableCell({width:o.w?{size:o.w,type:X.WidthType.PERCENTAGE}:undefined,columnSpan:o.span,shading:o.fill?{fill:o.fill,type:X.ShadingType.CLEAR,color:'auto'}:undefined,margins:{top:70,bottom:70,left:120,right:120},borders:BD,children:children}); }
  blocks().forEach(function(b){
+  if(b.grid){ kids.push(gridTable(b.grid)); kids.push(para(' ',{after:60,size:8})); return; }
+  if(b.sub){ kids.push(new P({keepNext:true,spacing:{before:200,after:100},border:{bottom:{style:X.BorderStyle.SINGLE,size:4,color:'DCD6C8'}},children:[run(b.sub.toUpperCase(),{bold:true,color:BC,size:19})]})); return; }
+  if(b.note){ kids.push(para(b.note,{italics:true,color:'6E6E76',size:17,after:120})); return; }
+  if(b.kv){ b.kv.forEach(function(r,i){ kids.push(new P({spacing:{after:i===b.kv.length-1?140:40},children:[run(r[0]+':  ',{bold:true,color:BC}),run(r[1]||'—')]})); }); return; }
+  if(b.apsf){ var rows=[new X.TableRow({tableHeader:true,children:[cell([para('COMPETENCY',{bold:true,size:15,after:0})],{w:46,fill:'F4F2EC'}),cell([para('EMPLOYEE SELF-RATING',{bold:true,size:15,after:0})],{w:27,fill:'F4F2EC'}),cell([para('MANAGER RATING',{bold:true,size:15,color:BC,after:0})],{w:27,fill:'F4F2EC'})]})];
+   b.apsf.forEach(function(r,i){ rows.push(new X.TableRow({cantSplit:true,children:[cell([para((i+1)+'. '+r[0],{bold:true,after:0})],{w:46}),cell([para(r[1],{after:0})],{w:27}),cell([para(r[2],{bold:true,color:BC,after:0})],{w:27})]}));
+    if(r[3]) rows.push(new X.TableRow({cantSplit:true,children:[cell(String(r[3]).split('\n').map(function(l,j){ return new P({spacing:{after:0},children:j===0?[run('Manager comments:  ',{bold:true,size:18,color:'6E6E76'}),run(l,{size:18})]:[run(l,{size:18})]}); }),{span:3})]})); });
+   kids.push(new X.Table({width:{size:100,type:X.WidthType.PERCENTAGE},rows:rows})); kids.push(para(' ',{after:80,size:8})); return; }
   if(b.sec){ kids.push(new P({spacing:{before:280,after:120},shading:{type:X.ShadingType.CLEAR,fill:BC,color:'auto'},children:[run(' '+b.sec.toUpperCase(),{bold:true,color:'FFFFFF',size:20})]})); return; }
   if(b.q!=null){ kids.push(para(b.q,{bold:true,after:20})); kids.push(new P({spacing:{after:120},indent:{left:240},children:[run(b.a||'—',{color:b.a?'1D2230':'6E6E76'})]})); return; }
   if(b.rating!=null){ kids.push(new P({spacing:{after:140},children:[run('Overall assessment   ',{bold:true,color:BC})].concat(RATINGS.map(function(rt){ return run((rt===b.rating?'☒ ':'☐ ')+rt+'     ',{bold:rt===b.rating}); }))})); return; }
