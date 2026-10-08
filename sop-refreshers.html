@@ -482,21 +482,22 @@ MAINTENANCE: N/A</div></div>
       <div class="progress"><span class="lbl">Drills revealed</span><span class="val" data-prog="r2">0 / 6</span><div class="pbar"><span data-bar="r2"></span></div></div>
     </div>
     <div class="sheet-body">
-      <div class="chip-row"><span class="chip pend" title="Matches the NHE Speed packet flag. May be updated after leadership review.">Package protocol: Pending approval</span><span class="small">Teach it as written; it may be updated once leadership signs off.</span></div>
+      
       <h3 class="mh">Why this matters</h3>
       <p class="lead">Packages are <strong>personal property entrusted to Apex's care</strong>. Mishandling — storing without logging, misclassifying a high-value item, releasing to the wrong person — creates legal liability, destroys resident trust and directly threatens the property contract. Every package that enters the building is a test of the agent's reliability. The standard here is zero shortcuts.</p>
 
       <h3 class="mh">The standard process — every package, every time</h3>
       <div class="steps5">
         <div class="st"><div class="n">01</div><div class="t">Receive</div></div>
-        <div class="st key"><div class="n">02</div><div class="t">Log</div></div>
-        <div class="st"><div class="n">03</div><div class="t">Label</div></div>
+        <div class="st"><div class="n">02</div><div class="t">Label</div></div>
+        <div class="st key"><div class="n">03</div><div class="t">Log</div></div>
         <div class="st"><div class="n">04</div><div class="t">Store</div></div>
         <div class="st"><div class="n">05</div><div class="t">Notify</div></div>
       </div>
       <ul class="ticks">
         <li><span><strong>Receive:</strong> confirm recipient name, unit number and package condition before touching anything else.</span></li>
-        <li><span><strong>Log in the system before moving the package anywhere.</strong> System entry is not the last step. It is the second step. This is the most commonly skipped step.</span></li>
+        <li><span><strong>Label</strong> with unit number, date and time received.</span></li>
+        <li><span><strong>Log in the system and on the package intake sheet before the package goes to storage.</strong> This is the most commonly skipped step.</span></li>
         <li><span><strong>Notify</strong> the resident through the site's channel now, not at end of shift.</span></li>
       </ul>
 
@@ -505,10 +506,10 @@ MAINTENANCE: N/A</div></div>
         <table>
           <thead><tr><th>Type</th><th>Protocol</th><th>Coach Note</th></tr></thead>
           <tbody>
-            <tr><td class="k">Standard</td><td>Log in system + Label + Store on designated shelf + Notify resident.</td><td>The baseline. No shortcuts on any step.</td></tr>
-            <tr><td class="k">Perishable — food delivery</td><td>Log + Label + Call the resident (call, don't just text). No answer in 15–30 min: refrigerate. Dispose after <strong>24 hours</strong> if unclaimed.</td><td>Call, do not just text. A food delivery sitting unrefrigerated is a liability.</td></tr>
-            <tr><td class="k">Perishable — groceries</td><td>Log + Label + Refrigerate + Daily outreach. Escalate to a Lead and dispose after <strong>48 hours</strong>.</td><td>48-hour window, not 24. Different protocol from food delivery. Agents confuse these.</td></tr>
-            <tr><td class="k">High-value</td><td>Log immediately as high-value + Label + Secure storage (not general shelf) + Notify promptly.</td><td>Laptops, electronics, luxury goods. Never on the general shelf. Misclassifying as "standard" is a prohibited practice.</td></tr>
+            <tr><td class="k">Standard</td><td>Label + Log (system + intake sheet) + Store on designated shelf + Notify resident.</td><td>The baseline. No shortcuts on any step.</td></tr>
+            <tr><td class="k">Perishable — food delivery</td><td>Label + Log + Call the resident (call, don't just text). No answer in 15–30 min: refrigerate. Dispose after <strong>24 hours</strong> if unclaimed.</td><td>Call, do not just text. A food delivery sitting unrefrigerated is a liability.</td></tr>
+            <tr><td class="k">Perishable — groceries</td><td>Label + Log + Refrigerate + Daily outreach. Escalate to a Lead and dispose after <strong>48 hours</strong>.</td><td>48-hour window, not 24. Different protocol from food delivery. Agents confuse these.</td></tr>
+            <tr><td class="k">High-value</td><td>Label + Log immediately as high-value + Secure storage (not general shelf) + Notify promptly.</td><td>Laptops, electronics, luxury goods. Never on the general shelf. Misclassifying as "standard" is a prohibited practice.</td></tr>
             <tr><td class="k">Outgoing / RTS</td><td>Verify label and postage. Log. Stage for carrier pickup. Do not accept outgoing without postage.</td><td>If a resident drops off without postage, decline politely and explain. Do not store it.</td></tr>
           </tbody>
         </table>
@@ -517,8 +518,8 @@ MAINTENANCE: N/A</div></div>
       <h3 class="mh">Pickup verification — every handoff</h3>
       <p class="lead">Before releasing any package, complete these steps in order. There are no exceptions based on how well you know the resident.</p>
       <ol class="qs">
-        <li><span>Verify the recipient is the resident on file or an authorized guest — by photo ID or system lookup. Never assumed, never on verbal confirmation alone.</span></li>
-        <li><span>Confirm the unit number.</span></li>
+        <li><span>Run a system lookup to verify the recipient is the resident on file or an authorized guest. Photo ID is not required. Never assumed, never on verbal confirmation alone.</span></li>
+        <li><span>Read the package label and confirm the name and unit match the resident's system record before handover.</span></li>
         <li><span>Log the pickup in the system immediately, before the resident leaves.</span></li>
         <li><span>If anything does not match: hold the package and contact a Lead.</span></li>
       </ol>
@@ -710,7 +711,7 @@ const DRILLS = {
   r2: [
     {id:'P1', title:'Standard Package',
       scn:'UPS delivers a medium box for Unit 908. Walk me through every step.',
-      html:'Confirm unit and recipient name. Log in Yardi before moving the package. Label with unit number and date/time. Store on the correct designated shelf. Notify the resident through the designated notification channel. Done — in that order.',
+      html:'Confirm unit and recipient name. Label with unit number and date/time. Log it in Yardi and on the package intake sheet before it goes to storage. Store on the correct designated shelf. Notify the resident through the designated notification channel. Done — in that order.',
       coach:'If they say “log it” last, stop them. The system entry happens before the package moves anywhere. Reinforce this every time.'},
     {id:'P2', title:'Perishable — Food Delivery',
       scn:'DoorDash delivers sushi at 6:30 PM for Unit 1210. The resident does not answer. What do you do?',
@@ -761,7 +762,7 @@ const READY = {
       'Agent uses professional, third-person, objective language throughout',
       'Agent knows: corrections are additions, never deletions — never copy-paste prior logs'],
   r2:['Agent can name all five package categories and the correct protocol for each without prompting',
-      'Agent logs every package in the system before moving it — no exceptions',
+      'Agent labels, then logs every package in the system and on the intake sheet before storage — no exceptions',
       'Agent knows the difference between the 24-hour (food) and 48-hour (grocery) perishable windows',
       'Agent can identify a high-value item on sight and knows it cannot go on the general shelf',
       'Agent verifies recipient identity before releasing any package — regardless of familiarity with the resident',

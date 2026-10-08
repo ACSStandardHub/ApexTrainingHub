@@ -160,6 +160,10 @@ body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);fo
 @media(max-width:768px){
   .wrapper,.sticky-nav{padding-left:20px;padding-right:20px}
   .day-header{padding:24px 20px;margin:0 -20px}
+  .day-header{flex-wrap:wrap}
+  .day-meta{margin-left:0;flex-wrap:wrap}
+  .module-header{flex-wrap:wrap}
+  .module-time{margin-left:0;white-space:normal}
   .content-row{grid-template-columns:1fr}
   .method-grid{grid-template-columns:1fr 1fr}
   .cover{padding:36px 24px}
@@ -667,10 +671,10 @@ body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);fo
     <table class="assessment-table">
       <thead><tr><th>Category</th><th>Intake Protocol</th><th>Window</th><th>Prohibited</th></tr></thead>
       <tbody>
-        <tr><td>Standard Package</td><td>Confirm → Log → Label → Notify</td><td>72 hours</td><td>Releasing without ID verification</td></tr>
-        <tr><td>Food Delivery</td><td>Confirm → Log → Notify immediately</td><td>24 hours</td><td>Holding beyond window without contact</td></tr>
-        <tr><td>Grocery Delivery</td><td>Confirm → Log → Refrigerate if needed → Notify</td><td>48 hours</td><td>Storing perishables outside climate control</td></tr>
-        <tr><td>High-Value Item</td><td>Confirm → Log → Supervisor notification → Secure storage</td><td>Immediate contact required</td><td>Accepting without supervisor awareness</td></tr>
+        <tr><td>Standard Package</td><td>Receive → Label → Log → Store → Notify</td><td>72 hours</td><td>Releasing without a system lookup and label check</td></tr>
+        <tr><td>Food Delivery</td><td>Receive → Label → Log → Call → Refrigerate if no answer</td><td>24 hours</td><td>Holding beyond window without contact</td></tr>
+        <tr><td>Grocery Delivery</td><td>Receive → Label → Log → Refrigerate → Notify</td><td>48 hours</td><td>Storing perishables outside climate control</td></tr>
+        <tr><td>High-Value Item</td><td>Receive → Label → Log → Supervisor notification → Secure storage</td><td>Immediate contact required</td><td>Accepting without supervisor awareness</td></tr>
         <tr><td>Outgoing / RTS</td><td>Log → Label RTS → Stage in designated area → Carrier handoff</td><td>Per carrier schedule</td><td>Disposing without documentation</td></tr>
       </tbody>
     </table>

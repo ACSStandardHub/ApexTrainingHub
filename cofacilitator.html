@@ -503,6 +503,12 @@ function handleTopbarNext() {
   navigate(1);
 }
 
+function updateTopbarNextButton() {
+  const btn = document.getElementById('topbarNextBtn');
+  if (!btn) return;
+  btn.textContent = isFinalSection() ? 'Finish ✓' : 'Next →';
+}
+
 function showCompletionPrompt() {
   reportDownloaded = false;
 
@@ -1002,7 +1008,7 @@ function renderD1M6() {
     ])}
     ${script('"You wake up sick the morning of your shift. Walk me through exactly what you do — step by step." [Let an agent respond. Close gaps against the slide.] The last point is the most important: the procedure is what makes it excused. The reason alone does not.')}
     ${bullets("Call-Out Procedure — The Five Required Steps", [
-      "1. Call out minimum 2 hours before shift begins — no exceptions.",
+      "1. Call out at least 2–4 hours before shift begins — no exceptions.",
       "2. Text AND call — do not rely on a single form of communication.",
       "3. Contact direct supervisor AND the on-call manager line — both.",
       "4. Provide a reason and estimated return-to-duty status.",
@@ -1114,7 +1120,7 @@ function renderD2M1() {
       ["Package Category Protocol Table","1 per agent","Module 1 start"],
       ["Package Handling Quick-Reference (laminated)","1 per agent — for the package room","Module 1"],
     ])}
-    ${script('"Log it in the system BEFORE you move the package anywhere. System entry is not the last step — it is the second step. If a package disappears between intake and storage and you have no log entry, you have no record it was ever received."')}
+    ${script('"Label it, then log it in the system and on the package intake sheet BEFORE it goes to storage. If a package disappears between intake and storage and you have no log entry, you have no record it was ever received."')}
     ${bullets("Five Categories — Facilitation Notes", [
       "Standard: Baseline. Walk through step by step. No shortcuts on any step.",
       "Food Delivery vs. Grocery Delivery: test the 24/48 hour distinction explicitly. Run it until automatic.",

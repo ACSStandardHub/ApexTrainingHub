@@ -528,23 +528,22 @@ mark.hit.cur{background:var(--gold);box-shadow:0 0 0 2px var(--navy)}
     <div class="kicker">SOP 02 · Chain of Custody</div>
     <h2 class="sop-title">Package Handling SOP</h2>
     <div class="sop-meta"><b>Owner:</b> Regional Concierge Manager · <b>Version</b> 1.0 · <b>Source:</b> SOP Refresher Module §02; NHE Speed Packet, Module 4</div>
-    <div class="sop-actions"><span class="chip pend">Pending approval</span><button class="btn-ghost" type="button" data-toggle>Collapse all</button><button class="btn-print" type="button" data-print>Print this SOP</button></div>
+    <div class="sop-actions"><span class="chip live">Live</span><button class="btn-ghost" type="button" data-toggle>Collapse all</button><button class="btn-print" type="button" data-print>Print this SOP</button></div>
   </div>
   <div class="sheet-body">
     <p class="purpose"><strong>Purpose.</strong> Packages are personal property entrusted to Apex's care. Mishandling — storing without logging, misclassifying a high-value item, releasing to the wrong person — creates legal liability, destroys resident trust, and directly threatens the property contract. The standard is zero shortcuts.</p>
     <p class="applies"><strong>Applies to:</strong> every agent who receives, stores, releases or returns a package. Leads clear agents on this SOP before solo shifts.</p>
-    <div class="pend-note"><strong>Pending approval.</strong> The package protocol is flagged pending approval in the NHE Speed packet. Follow it on shift today; it may be updated once leadership signs off.</div>
 
     <aside class="quick" aria-label="Quick card">
       <h3>Quick card · Packages</h3>
       <ul>
-        <li><b>Receive → Log → Label → Store → Notify.</b></li>
-        <li><b>Log before it moves.</b> No package leaves the desk unlogged.</li>
+        <li><b>Receive → Label → Log → Store → Notify.</b></li>
+        <li><b>Log before it moves to storage</b> — in the system and on the package intake sheet.</li>
         <li>Food delivery: <b>call</b>, refrigerate, dispose after <b>24 hrs</b> unclaimed.</li>
         <li>Groceries: daily outreach, <b>48 hrs</b>, Lead before disposal.</li>
         <li>High-value: <b>secured storage</b>. Never the general shelf.</li>
         <li>Outgoing / RTS: <b>no postage, no acceptance</b>.</li>
-        <li>Verify identity before release — <b>every time</b>.</li>
+        <li>Release: <b>system lookup every time</b>, then read the label against the record.</li>
         <li>Anything doesn't match? <b>Hold it. Call your Lead.</b></li>
       </ul>
     </aside>
@@ -554,12 +553,12 @@ mark.hit.cur{background:var(--gold);box-shadow:0 0 0 2px var(--navy)}
       <div class="step-body">
         <div class="proc">
           <div><div class="pn">01</div><div class="pt">Receive</div><div class="pd">Confirm recipient name and unit number against current leaseholder records, and check package condition, before anything else.</div></div>
-          <div class="key"><div class="pn">02</div><div class="pt">Log</div><div class="pd">Enter it in the system (Yardi or your site's package system) before the package moves anywhere. Never skipped.</div></div>
-          <div><div class="pn">03</div><div class="pt">Label</div><div class="pd">Unit number, date and time received.</div></div>
+          <div><div class="pn">02</div><div class="pt">Label</div><div class="pd">Unit number, date and time received.</div></div>
+          <div class="key"><div class="pn">03</div><div class="pt">Log</div><div class="pd">Enter it in the system (Yardi or your site's package system) and record it on the package intake sheet, before it moves to storage. Never skipped.</div></div>
           <div><div class="pn">04</div><div class="pt">Store</div><div class="pd">On the designated shelf or storage for its category. Approved areas only.</div></div>
           <div><div class="pn">05</div><div class="pt">Notify</div><div class="pd">Contact the resident through the site's channel now — not at end of shift.</div></div>
         </div>
-        <div class="rule red">Log it in the system before you move it anywhere. The system entry is the second step — it comes before the package moves. This is the most commonly skipped step.</div>
+        <div class="rule red">Log it in the system and on the package intake sheet before it goes to storage. No package sits on a shelf unlogged. This is the most commonly skipped step.</div>
       </div>
     </details>
 
@@ -569,10 +568,10 @@ mark.hit.cur{background:var(--gold);box-shadow:0 0 0 2px var(--navy)}
         <div class="tbl-wrap"><table>
           <thead><tr><th>Category</th><th>Protocol</th><th>Timeline &amp; critical distinction</th></tr></thead>
           <tbody>
-            <tr><td>Standard</td><td>Log + Label + store on designated shelf + Notify resident.</td><td>The baseline. No shortcuts on any step.</td></tr>
-            <tr><td>Perishable — food delivery<br><span class="note">DoorDash, UberEats</span></td><td>Log as perishable + Label + <strong>call</strong> the resident — call, don't just text. No answer in 15–30 minutes: refrigerate. Log the storage and every contact attempt.</td><td>Dispose after <strong>24 hours</strong> if unclaimed, documented. The clock starts at delivery, not at the first contact attempt.</td></tr>
-            <tr><td>Perishable — groceries<br><span class="note">Instacart, AmazonFresh</span></td><td>Log + Label + Refrigerate + daily outreach. Document every contact attempt.</td><td><strong>48 hours</strong>, not 24. If unclaimed at 48 hours, escalate to your Lead before disposal.</td></tr>
-            <tr><td>High-value<br><span class="note">laptops, electronics, luxury goods</span></td><td>Log as high-value immediately + Label + secure in the designated locked or supervised storage + Notify resident promptly. Record the classification in the log entry.</td><td>Never on the general shelf. Classifying high-value as “standard” or “other” is a prohibited practice.</td></tr>
+            <tr><td>Standard</td><td>Label + Log + store on designated shelf + Notify resident.</td><td>The baseline. No shortcuts on any step.</td></tr>
+            <tr><td>Perishable — food delivery<br><span class="note">DoorDash, UberEats</span></td><td>Label + Log as perishable + <strong>call</strong> the resident — call, don't just text. No answer in 15–30 minutes: refrigerate. Log the storage and every contact attempt.</td><td>Dispose after <strong>24 hours</strong> if unclaimed, documented. The clock starts at delivery, not at the first contact attempt.</td></tr>
+            <tr><td>Perishable — groceries<br><span class="note">Instacart, AmazonFresh</span></td><td>Label + Log + Refrigerate + daily outreach. Document every contact attempt.</td><td><strong>48 hours</strong>, not 24. If unclaimed at 48 hours, escalate to your Lead before disposal.</td></tr>
+            <tr><td>High-value<br><span class="note">laptops, electronics, luxury goods</span></td><td>Label + Log as high-value immediately + secure in the designated locked or supervised storage + Notify resident promptly. Record the classification in the log entry.</td><td>Never on the general shelf. Classifying high-value as “standard” or “other” is a prohibited practice.</td></tr>
             <tr><td>Outgoing / RTS</td><td>Verify label and postage + Log + stage for carrier pickup.</td><td>No postage, no acceptance. Decline politely, explain, and offer alternatives. Do not store it.</td></tr>
           </tbody>
         </table></div>
@@ -585,13 +584,13 @@ mark.hit.cur{background:var(--gold);box-shadow:0 0 0 2px var(--navy)}
       <div class="step-body">
         <p>Complete these in order before releasing any package. There are no exceptions based on how well you know the resident.</p>
         <ol>
-          <li>Verify the recipient is the resident on file or an authorized guest — by <strong>photo ID or system lookup</strong>, before you retrieve the package.</li>
-          <li>Confirm the unit number verbally.</li>
+          <li>Run a <strong>system lookup</strong> to verify the recipient is the resident on file or an authorized guest, before you retrieve the package. Photo ID is not required.</li>
+          <li>Before handover, <strong>read the package label</strong> and confirm the name and unit match the resident's system record.</li>
           <li>Log the pickup in the system immediately — before the resident leaves.</li>
           <li>If anything does not match: hold the package and contact your Lead.</li>
         </ol>
         <div class="rule">Log it. Hold it. Escalate. Never guess with someone else's property.</div>
-        <p class="note">Never release on verbal confirmation alone, and never release under pressure.</p>
+        <p class="note">Never release on verbal confirmation alone, never skip the label check, and never release under pressure.</p>
       </div>
     </details>
 
@@ -658,7 +657,7 @@ mark.hit.cur{background:var(--gold);box-shadow:0 0 0 2px var(--navy)}
           <li>Moving a package before the system entry is complete</li>
           <li>Classifying a high-value item as “standard” or “other”</li>
           <li>Storing packages in unapproved areas (the fridge is for perishables only)</li>
-          <li>Releasing a package without verifying identity, or on verbal confirmation</li>
+          <li>Releasing a package without a system lookup, on verbal confirmation alone, or without reading the label against the record</li>
           <li>Accepting outgoing packages without proper postage</li>
           <li>Removing any package, mail or supplies from the premises (Handbook: Standards of Conduct)</li>
         </ul>

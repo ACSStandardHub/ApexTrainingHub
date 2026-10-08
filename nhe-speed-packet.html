@@ -645,25 +645,26 @@ O: Individual asked to leave; exited via garage door at 1:09 AM. Supervisor noti
     <p class="lede">Chain of custody for every package, the incident report standard, and your role when something goes wrong.</p>
   </div>
   <div class="block">
-    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="k">Packages</div><span class="chip pend" title="May be updated after leadership review">Pending approval</span></div>
-    <p class="quote">Log it in the system before you move it anywhere.</p>
+    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="k">Packages</div></div>
+    <p class="quote">Log it before it moves to storage — in the system and on the package intake sheet.</p>
     <ol class="steps">
-      <li><span><strong>Confirm</strong>: recipient name and unit against current leaseholder records.</span></li>
-      <li><span><strong>Log</strong>: enter it in the system before it moves. Never skipped.</span></li>
+      <li><span><strong>Receive</strong>: confirm recipient name and unit against current leaseholder records, and check the package's condition.</span></li>
       <li><span><strong>Label</strong>: unit number, date and time received.</span></li>
+      <li><span><strong>Log</strong>: enter it in the system and record it on the package intake sheet, before it moves to storage. Never skipped.</span></li>
+      <li><span><strong>Store</strong>: designated shelf or storage for its category. Approved areas only.</span></li>
       <li><span><strong>Notify</strong>: contact the resident through the site's channel now, not at end of shift.</span></li>
     </ol>
     <div class="tbl-wrap"><table>
       <tr><th>Category</th><th>Protocol</th><th>Critical distinction</th></tr>
-      <tr><td><strong>Standard</strong></td><td>Log → Label → Shelf → Notify</td><td>The baseline. No shortcuts.</td></tr>
-      <tr><td><strong>Food delivery</strong><br><span class="small">DoorDash, UberEats</span></td><td>Log → Refrigerate → <strong>Call</strong></td><td>Call, don't just text. No answer in 15–30 min: fridge and log. Dispose after <strong>24 hrs</strong> unclaimed, documented.</td></tr>
-      <tr><td><strong>Grocery delivery</strong><br><span class="small">Instacart, AmazonFresh</span></td><td>Log → Refrigerate → Daily outreach</td><td><strong>48 hrs</strong>. Outreach every day. Escalate to your Lead before disposal.</td></tr>
-      <tr><td><strong>High-value</strong><br><span class="small">electronics, luxury goods</span></td><td>Log as high-value → Secured storage → Notify promptly</td><td>Never on the general shelf.</td></tr>
+      <tr><td><strong>Standard</strong></td><td>Label → Log → Shelf → Notify</td><td>The baseline. No shortcuts.</td></tr>
+      <tr><td><strong>Food delivery</strong><br><span class="small">DoorDash, UberEats</span></td><td>Label → Log → <strong>Call</strong> → Refrigerate if no answer</td><td>Call, don't just text. No answer in 15–30 min: fridge and log. Dispose after <strong>24 hrs</strong> unclaimed, documented.</td></tr>
+      <tr><td><strong>Grocery delivery</strong><br><span class="small">Instacart, AmazonFresh</span></td><td>Label → Log → Refrigerate → Daily outreach</td><td><strong>48 hrs</strong>. Outreach every day. Escalate to your Lead before disposal.</td></tr>
+      <tr><td><strong>High-value</strong><br><span class="small">electronics, luxury goods</span></td><td>Label → Log as high-value → Secured storage → Notify promptly</td><td>Never on the general shelf.</td></tr>
       <tr><td><strong>Outgoing / RTS</strong></td><td>Verify postage → Log → Stage for carrier</td><td>No postage, no acceptance. Decline politely and offer alternatives.</td></tr>
     </table></div>
     <div class="grid2">
-      <div class="panel"><h3>Release</h3><p>Verify identity by photo ID or system lookup before you retrieve the package, every time, however well you know them. If anything doesn't match, hold it and call your Lead. Never release under pressure.</p></div>
-      <div class="panel"><h3>Never</h3><ul><li>Store a package unlogged</li><li>Classify high-value as standard or "other"</li><li>Release on verbal confirmation</li><li>Accept outgoing without postage</li><li>Store in unapproved areas (fridge is for perishables only)</li></ul></div>
+      <div class="panel"><h3>Release</h3><p>Run a system lookup on the resident before you retrieve the package, every time, however well you know them. Photo ID is not required. Before handover, read the package label and confirm the name and unit match the resident's system record. Log the pickup. If anything doesn't match, hold it and call your Lead. Never release under pressure.</p></div>
+      <div class="panel"><h3>Never</h3><ul><li>Store a package unlogged</li><li>Classify high-value as standard or "other"</li><li>Release on verbal confirmation without a system lookup</li><li>Hand over without reading the label against the system record</li><li>Accept outgoing without postage</li><li>Store in unapproved areas (fridge is for perishables only)</li></ul></div>
     </div>
     <p class="small">Package room vs. system is reconciled daily. A potentially missing package is investigated through intake records, audits and carrier tracking. Name not on the lease? Check the guest list, contact the unit, check past residents, then RTS and escalate to a Lead.</p>
   </div>
@@ -940,7 +941,7 @@ const CP={
   {q:'At 2 AM nothing has happened for an hour. Your entry is:',o:['"Quiet night."','No entry needed','"2:00 AM — Lobby quiet. Desk coverage maintained. Cameras monitored, no activity."'],a:2,why:'At least one entry per hour, and say what you checked. "Quiet night" is never acceptable.'},
   {q:'Your relief hasn\'t arrived and your shift is over. You:',o:['Leave a note and go','Notify your supervisor and stay at the desk','Ask a resident to watch the desk'],a:1,why:'The desk is never unattended. Abandoning a post is a terminable offense.'}],
  m4:[
-  {q:'A DoorDash order arrives and the resident doesn\'t answer. What\'s the protocol?',o:['Log, refrigerate, call (not just text); dispose after 24 hrs, documented','Leave it on the shelf for 48 hrs','Text once and hold it at the desk'],a:0,why:'Food: call, refrigerate, 24-hour window. Groceries are the 48-hour, daily-outreach protocol.'},
+  {q:'A DoorDash order arrives and the resident doesn\'t answer. What\'s the protocol?',o:['Log, then call (not just text); no answer in 15–30 min, refrigerate; dispose after 24 hrs, documented','Leave it on the shelf for 48 hrs','Text once and hold it at the desk'],a:0,why:'Food: call first, refrigerate if no answer, 24-hour window. Groceries are the 48-hour, daily-outreach protocol.'},
   {q:'You\'re unsure whether an event needs an incident report. You:',o:['Skip it unless asked','File it. An unnecessary report is recoverable; a missing one isn\'t','Mention it verbally to the next shift'],a:1,why:'When in doubt, file.'},
   {q:'A resident collapses in the lobby. After calling 911, you:',o:['Move them to a couch','Don\'t move them unless there\'s immediate danger; stay with them and clear bystanders','Look through their wallet for contacts'],a:1,why:'Call first, don\'t move them, stay calm, clear space for EMS, document.'}]
 };
@@ -1014,7 +1015,7 @@ const MC=[
  {q:'Your relief is 30 minutes late and your shift has ended. You:',o:['Leave; your shift is over','Stay at the desk and notify your supervisor','Lock the package room and leave'],a:1,cat:'Desk'},
  {q:'Minimum shift log standard:',o:['One entry per shift plus pass-on','One entry per hour, two logged tours, all three pass-on sections','Entries only when something happens'],a:1,cat:'Shift log'},
  {q:'Which entry meets the Apex standard?',o:['"10 PM — tour done, all good."','"10:02 PM — Tour of lobby, floors 2–6, gym, P1 garage. Gym door not latching; maintenance notified via WO #3310 at 10:15 PM. Pending — flagged for pass-on."','"10 PM — I walked around and things seemed fine."'],a:1,cat:'Shift log'},
- {q:'A package arrives. When must it go into the system?',o:['Before it moves anywhere','At the end of your shift','After the resident picks it up'],a:0,cat:'Packages'},
+ {q:'A package arrives. When must it go into the system?',o:['Before it moves to storage','At the end of your shift','After the resident picks it up'],a:0,cat:'Packages'},
  {q:'An Instacart grocery order goes unclaimed. The protocol is:',o:['Dispose at 24 hours','Daily outreach; escalate to your Lead before disposal at 48 hours','Hold indefinitely'],a:1,cat:'Packages'},
  {q:'A FedEx box labeled "Apple Store — MacBook Pro" arrives. You:',o:['Shelve it with standard packages','Log it as high-value, put it in secured storage, notify promptly','Leave it at the desk for quick pickup'],a:1,cat:'Packages'},
  {q:'The fire alarm sounds and you smell smoke. Your first action:',o:['Go find the source','Call 911, then your supervisor','Wait to see if the alarm stops'],a:1,cat:'Emergencies'},

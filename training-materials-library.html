@@ -108,7 +108,7 @@ body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);fo
 .spacer{height:24px}
 
 /* FILTER BAR */
-.filter-bar{background:var(--cream);padding:16px 56px;margin:0 -56px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--cream-dark)}
+.filter-bar{background:var(--cream);padding:16px 56px;margin:0;display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--cream-dark)}
 .filter-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);margin-right:4px}
 .filter-btn{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--cream-dark);background:white;color:var(--gray);transition:all 0.2s;font-family:'Barlow',sans-serif}
 .filter-btn:hover,.filter-btn.active{background:var(--navy);color:var(--gold);border-color:var(--navy)}
@@ -118,7 +118,10 @@ body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);fo
 @media(max-width:768px){
   .wrapper,.sticky-nav{padding-left:20px;padding-right:20px}
   .day-header{padding:24px 20px;margin:0 -20px}
-  .filter-bar{padding:12px 20px;margin:0 -20px}
+  .filter-bar{padding:12px 20px;margin:0}
+  .summary-table td:first-child{white-space:normal}
+  .summary-table th,.summary-table td{padding:8px 9px}
+  html,body{overflow-x:hidden}
   .mat-right{display:none}
   .material-card{grid-template-columns:auto 1fr}
   .cover{padding:36px 24px}
@@ -548,7 +551,7 @@ body{font-family:'Barlow',sans-serif;background:#ECEAE5;color:var(--charcoal);fo
 <div class="mat-body">
 <div class="mat-id">D2-02 · Package Protocols · Quick-Reference</div>
 <div class="mat-title">Package Handling Quick-Reference Card</div>
-<div class="mat-desc">Condensed version of the five-category protocol for posting in the package room. Intake sequence (Confirm → Log → Label → Notify), perishable windows (24hr food / 48hr grocery), release verification steps, RTS procedure. Laminated for package room posting.</div>
+<div class="mat-desc">Condensed version of the five-category protocol for posting in the package room. Intake sequence (Receive → Label → Log → Store → Notify), perishable windows (24hr food / 48hr grocery), release verification steps, RTS procedure. Laminated for package room posting.</div>
 </div>
 <div class="mat-right">
 <span class="mat-type type-laminated">🔖 Laminated</span>
