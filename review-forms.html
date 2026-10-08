@@ -150,7 +150,7 @@ function nextSunday(s){ var p=(s||ymd(new Date())).split('-'), d=new Date(+p[0],
 var store={get:function(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},del:function(k){try{localStorage.removeItem(k);}catch(e){}}};
 
 var type=(store.get('rv.type')||'30'), R=null;
-function blank(t){ return {type:t,employee:'',manager:'Khalif Joyce',reviewDate:ymd(new Date()),hireDate:'',site:'',shift:'',milestone:'',a:{},sig:{emp:{name:'',date:'',img:''},mgr:{name:'Khalif Joyce',date:'',img:''}},folder:'',saved:''}; }
+function blank(t){ return {type:t,employee:'',manager:'',reviewDate:ymd(new Date()),hireDate:'',site:'',shift:'',milestone:'',a:{},sig:{emp:{name:'',date:'',img:''},mgr:{name:'',date:'',img:''}},folder:'',saved:''}; }
 function load(t){ R=store.get('rv.draft.'+t)||blank(t); R.a=R.a||{}; R.sig=R.sig||blank(t).sig; }
 function save(){ store.set('rv.draft.'+type,R); stateLine(); }
 
@@ -263,7 +263,7 @@ function render(){
  var D=DEF[type], h='';
  h+='<div class="s-head"><img src="'+LOGO+'" alt="Apex Concierge Services"><h2>'+esc(D.title)+'</h2><div class="m">'+esc(D.sub)+'</div></div>';
  if(D.annual) h+=annualHTML(); else {
- h+='<div class="grid"><label>Employee<input data-h="employee" value="'+esc(R.employee)+'" placeholder="First Last"></label><label>Manager<input data-h="manager" value="'+esc(R.manager)+'"></label>'+
+ h+='<div class="grid"><label>Employee<input data-h="employee" value="'+esc(R.employee)+'" placeholder="First Last"></label><label>Manager<input data-h="manager" value="'+esc(R.manager)+'" placeholder="First Last"></label>'+
    '<label>Review date<input type="date" data-h="reviewDate" value="'+esc(R.reviewDate)+'"></label><label>Hire date<input type="date" data-h="hireDate" value="'+esc(R.hireDate)+'"></label>'+
    '<label>Site<select data-h="site"><option value="">Choose…</option>'+SITES.map(function(s){return '<option'+(s===R.site?' selected':'')+'>'+s+'</option>';}).join('')+'</select></label>'+
    '<label>Shift<input data-h="shift" value="'+esc(R.shift)+'" placeholder="e.g. 3:00 PM–11:00 PM"></label>'+
