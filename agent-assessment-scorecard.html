@@ -373,7 +373,7 @@ function render(){
  h+='<div class="pfoot ponly"><span>Apex Concierge Services · Agent Assessment Scorecard · Internal Use Only</span><span>Draft v1 · Pending approval by the Regional Concierge Manager</span></div>';
 
  // save
- h+='<div class="save"><h3>Save the finished scorecard</h3><div class="hint">Saves a PDF and an editable Word copy to <b>Active_Employees › [Last_First] › 02_Training</b> (the folder is created if it isn\'t there). Pick your Active_Employees folder once; the browser remembers it. Works in Chrome or Edge; other browsers download the files instead.</div>'+
+ h+='<div class="save"><h3>Save the finished scorecard</h3><div class="hint">Saves a PDF and an editable Word copy to <b>Active_Employees › [Last_First] › 04_Training</b> (the folder is created if it isn\'t there). Pick your Active_Employees folder once; the browser remembers it. Works in Chrome or Edge; other browsers download the files instead.</div>'+
   '<div class="row"><button type="button" class="btn" id="pickBtn">Choose Active_Employees folder</button><select id="empSel" aria-label="Employee folder"><option value="">Employee folder…</option></select><span class="hint" id="dirName"></span></div>'+
   '<div class="row"><button type="button" class="btn pri" id="saveBtn">Save PDF + Word to employee folder</button><button type="button" class="btn" id="dlPdf">Download PDF</button><button type="button" class="btn" id="dlDocx">Download Word</button><button type="button" class="btn" id="printBtn2">Print / Save PDF</button></div>'+
   '<div class="reqlist" id="reqList"></div><div id="msg" role="status"></div></div>';
@@ -476,8 +476,8 @@ sheet.addEventListener('click',function(e){ var t=e.target, fd=t.getAttribute('d
  if(t.id==='pickBtn') pickDir(true);
  if(t.id==='saveBtn') saveToFolder();
  if(t.id==='printBtn2') doPrint();
- if(t.id==='dlPdf'){ if(!gate()) return; dl(buildPdf(),fname('pdf')); msg('Downloaded '+fname('pdf')+'. Move it into the employee\'s 02_Training folder.'); }
- if(t.id==='dlDocx'){ if(!gate()) return; dl(buildDocx(),fname('docx')); msg('Downloaded '+fname('docx')+'. Move it into the employee\'s 02_Training folder.'); }
+ if(t.id==='dlPdf'){ if(!gate()) return; dl(buildPdf(),fname('pdf')); msg('Downloaded '+fname('pdf')+'. Move it into the employee\'s 04_Training folder.'); }
+ if(t.id==='dlDocx'){ if(!gate()) return; dl(buildDocx(),fname('docx')); msg('Downloaded '+fname('docx')+'. Move it into the employee\'s 04_Training folder.'); }
 });
 function doPrint(){ update(); window.print(); }
 $('#printBtn').onclick=doPrint;
@@ -535,17 +535,17 @@ function gate(){ var r=[], np=nameParts(); if(!np.first||!np.last) r.push('the t
  if(r.length){ msg('Add '+r.join(', ')+' first.',true); return false; } return true; }
 async function saveToFolder(){
  if(!gate()) return;
- if(!window.showDirectoryPicker){ dl(buildPdf(),fname('pdf')); setTimeout(function(){ dl(buildDocx(),fname('docx')); },400); msg('Downloaded both files. Move them into the trainee\'s 02_Training folder.'); markSaved('downloaded'); return; }
+ if(!window.showDirectoryPicker){ dl(buildPdf(),fname('pdf')); setTimeout(function(){ dl(buildDocx(),fname('docx')); },400); msg('Downloaded both files. Move them into the trainee\'s 04_Training folder.'); markSaved('downloaded'); return; }
  try{
   var dir=await pickDir(false); if(!dir) return;
   var f=S.folder; if(!f||f==='__new'){ var p=nameParts(); f=clean(p.last)+'_'+clean(p.first); }
-  var emp=await dir.getDirectoryHandle(f,{create:true}), tr=await emp.getDirectoryHandle('02_Training',{create:true});
+  var emp=await dir.getDirectoryHandle(f,{create:true}), tr=await emp.getDirectoryHandle('04_Training',{create:true});
   var pdfName=fname('pdf'), docName=fname('docx'), n=1;
   async function exists(nm){ try{ await tr.getFileHandle(nm); return true; }catch(e){ return false; } }
   while(await exists(pdfName)||await exists(docName)){ n++; pdfName=fname('pdf').replace(/\.pdf$/,'_v'+n+'.pdf'); docName=fname('docx').replace(/\.docx$/,'_v'+n+'.docx'); }
   await write(tr,pdfName,buildPdf()); await write(tr,docName,buildDocx());
-  S.folder=f; markSaved(f+' › 02_Training'); await folders(true);
-  msg('Saved '+pdfName+' and the Word copy to '+f+' › 02_Training.');
+  S.folder=f; markSaved(f+' › 04_Training'); await folders(true);
+  msg('Saved '+pdfName+' and the Word copy to '+f+' › 04_Training.');
  }catch(e){ err(e); }
 }
 async function write(dir,name,blob){ var fh=await dir.getFileHandle(name,{create:true}); var w=await fh.createWritable(); await w.write(blob); await w.close(); }
