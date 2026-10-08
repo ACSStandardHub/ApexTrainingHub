@@ -155,6 +155,8 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--cha
 .keystone{background:var(--navy);border:1px solid var(--gold-dim);border-radius:3px;padding:18px 20px;margin-top:14px;text-align:center}
 .keystone .ks-q{font-family:'EB Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-light);line-height:1.5}
 .note-strip{background:var(--amber-light);border-left:4px solid var(--amber);border-radius:0 3px 3px 0;padding:12px 15px;font-size:12.5px;color:#6a4f0a;line-height:1.5;margin-top:16px}
+.pend{display:inline-block;font-family:'Barlow',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:var(--amber-light);color:var(--amber);border:1px solid rgba(122,90,10,0.45);padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.chip-amber{background:rgba(122,90,10,0.22);color:#fcd34d;border:1px solid rgba(122,90,10,0.5)}
 .note-strip.red{background:var(--red-light);border-left-color:var(--red);color:var(--red)}
 
 /* ── A.C.T. SCENARIO CARDS ── */
@@ -308,6 +310,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--cha
     <p class="site-sub">Annual recertification for every agent, and the required refresher after any escalation miss. Six short lessons, a scored assessment, and a printable certificate.</p>
     <div class="chips">
       <span class="chip chip-gold"><span class="dot"></span>Recertification · Annual</span>
+      <span class="chip chip-amber"><span class="dot"></span>Cadence pending approval</span>
       <span class="chip chip-green"><span class="dot"></span>Module 5 · Ongoing Development</span>
     </div>
   </div>
@@ -506,13 +509,13 @@ const LESSONS = [
           <div class="sc-b">
             <div class="sc-sit">11:30 PM. A resident calls, furious — the unit above has been loud for two hours. She has called before and is done being polite.</div>
             <ul class="sc-steps">
-              <li><b>A</b><span>Acknowledge the frustration without dismissing it.</span></li>
-              <li><b>C</b><span>Address the noise with the unit per your site's protocol — professionally, without confrontation. The desk is never left unattended; secure coverage first.</span></li>
-              <li><b>T</b><span>Call her back with an update. If it continues, escalate to management per protocol. Document times, units, actions and outcome.</span></li>
+              <li><b>A</b><span>Acknowledge the frustration without dismissing it. Do not promise enforcement.</span></li>
+              <li><b>C</b><span>Document it: log the call, the unit, the time and the nature of the complaint.</span></li>
+              <li><b>T</b><span>Escalate: call the on-call supervisor. Follow up with the reporting resident within 15 minutes. Never knock on a door alone for noise.</span></li>
             </ul>
             <div class="say">
-              <div class="say-col do"><div class="sl">Say this</div><p>"I understand — that's frustrating this late. I'm addressing it now and I'll call you back with an update."</p></div>
-              <div class="say-col dont"><div class="sl">Not this</div><p>"I'll make sure they get fined tonight."</p><p>"That unit is always a problem."</p></div>
+              <div class="say-col do"><div class="sl">Say this</div><p>"I'm going to document this and contact the on-call supervisor. I'll follow up within 15 minutes."</p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"I'll make sure they get fined tonight."</p><p>"I'll go up and knock on their door right now."</p></div>
             </div>
           </div>
         </div>
@@ -568,15 +571,15 @@ const LESSONS = [
         <div class="sc">
           <div class="sc-h"><span class="sc-t">Simultaneous pressure — phone, desk, radio</span><span class="sc-n">Area 5</span></div>
           <div class="sc-b">
-            <div class="sc-sit">The desk phone is ringing, a resident is waiting at the desk, and your radio comes alive — all at once.</div>
+            <div class="sc-sit">Phone ringing, a resident at the desk, maintenance on the radio, a delivery driver at the door. All at once.</div>
             <ul class="sc-steps">
-              <li><b>A</b><span>Acknowledge every person, briefly, so no one feels ignored. Eye contact and one sentence.</span></li>
-              <li><b>C</b><span>Control the order. Safety first, then resident experience, then team, then admin. Whatever touches safety goes to the front of the line.</span></li>
-              <li><b>T</b><span>Work each item to resolution or handoff. Log every event — pressure is when gaps in the record happen.</span></li>
+              <li><b>A</b><span>Acknowledge the resident in front of you: "One moment, please."</span></li>
+              <li><b>C</b><span>Phone: take the caller's name and callback number. Radio: "Copy, responding shortly." Door: a hand signal.</span></li>
+              <li><b>T</b><span>Return to the resident with full attention. No visible stress. Safety always comes first. Log every item before the shift ends.</span></li>
             </ul>
             <div class="say">
-              <div class="say-col do"><div class="sl">Say this</div><p>"I'll be right with you." <em>(to the resident at the desk)</em></p><p>"Thank you for holding — I'll be with you in one moment." <em>(to the caller)</em></p></div>
-              <div class="say-col dont"><div class="sl">Not this</div><p>"One thing at a time!"</p><p>Silencing the radio so you can focus.</p></div>
+              <div class="say-col do"><div class="sl">Say this</div><p>"One moment, please." <em>(to the resident)</em></p><p>"Copy, responding shortly." <em>(on the radio)</em></p></div>
+              <div class="say-col dont"><div class="sl">Not this</div><p>"One thing at a time!"</p><p>Letting the phone ring out or turning the radio down.</p></div>
             </div>
           </div>
         </div>
@@ -602,7 +605,7 @@ const LESSONS = [
       <p class="lead-p" style="margin-bottom:10px">After every scenario — real or practiced — write the E.D.O. entry before the shift ends. No exceptions. Document what you observed, not what you concluded.</p>
       <div class="tiers">
         <div class="tier"><div class="tier-n">Weak</div><div class="tier-b">"Resident was being rude about noise again. Handled it."</div></div>
-        <div class="tier"><div class="tier-n">Apex</div><div class="tier-b"><strong>"11:34 PM — Noise complaint. Resident of Unit 6B reported loud music from Unit 7B for approx. two hours. Concierge contacted Unit 7B at 11:40 PM; volume reduced. Resident of 6B updated by phone 11:44 PM. Flagged for PM in pass-on."</strong></div></div>
+        <div class="tier"><div class="tier-n">Apex</div><div class="tier-b"><strong>"11:34 PM — Noise complaint. Resident of Unit 6B reported loud music from Unit 7B for approx. two hours. On-call supervisor notified by phone 11:36 PM. Resident of 6B updated by phone 11:48 PM. Pending supervisor follow-up — flagged for PM in pass-on."</strong></div></div>
       </div>
       <div class="mini-h">Ready looks like</div>
       <ul class="act-ready">
@@ -662,8 +665,8 @@ const MC = [
     correct:0, why:"A policy gray area with no clear answer means <strong>escalate before acting</strong>. No verification = no access. Contact your supervisor and log the event and the escalation." },
   { cat:"De-Escalation", scenarioTag:"Scenario · Late-Night Noise", scenario:"11:30 PM Friday — The resident in 6B calls the desk, furious: the unit above has been playing loud music for two hours. She has called three times and says she wants them \"thrown out.\"",
     prompt:"Which response meets the Apex standard?",
-    opts:["Acknowledge her frustration, address the noise with the unit per site protocol without confrontation, call her back with an update, document it — and escalate to management if it continues","Tell her you'll make sure management fines the unit tonight so she can get some sleep","Explain that noise isn't a concierge matter and she should email the property office in the morning","Agree that the unit upstairs is always a problem and promise to keep an eye on them"],
-    correct:0, why:"A.C.T.: acknowledge, address it, close the loop with an update, document, escalate if it continues. <strong>Never promise enforcement</strong> — fines and lease action belong to management. And <strong>Friendly ≠ Familiar</strong>: no opinions about other residents." },
+    opts:["Acknowledge her without promising enforcement, document the call, contact the on-call supervisor, and follow up with her within 15 minutes","Go up and knock on the unit's door yourself right away, then call her back once the music stops","Tell her you'll make sure management fines the unit tonight so she can get some sleep","Log the call and tell her the property office will deal with it in the morning"],
+    correct:0, why:"The Apex approach: <strong>no enforcement promises</strong>. Document the call, unit, time and nature, <strong>call the on-call supervisor</strong>, and <strong>follow up with the resident within 15 minutes</strong>. Never knock on a door alone for noise — and a log with no escalation and no follow-up leaves her waiting until morning." },
   { cat:"De-Escalation", scenarioTag:"Scenario · Smoking on Tour", scenario:"9:20 PM — On tour you find a guest smoking in the 3rd-floor stairwell. \"I'm a guest of a resident. You can't tell me what to do.\" You state the policy; he refuses to put it out.",
     prompt:"What do you do next?",
     opts:["Don't escalate physically — step away, contact management, and log the event in E.D.O.","Take the cigarette from him and walk him to the exit","Let it go — he's a guest, not a resident, so it isn't your concern","Keep arguing until he complies so you don't look like you backed down"],
@@ -672,10 +675,10 @@ const MC = [
     prompt:"What is the strongest response?",
     opts:["Keep your baseline and calmly redirect: \"I want to help you, and I'll be able to do that best if we can keep this conversation respectful.\" Then document tone, words, time, and outcome","Match her tone so she knows you won't be pushed around","Give her shorter answers than usual — she does this every week","Tell her you'll help once she's calmed down, then turn back to your screen"],
     correct:0, why:"Composure, not defensiveness. Validate the concern without validating the behavior, <strong>redirect calmly</strong>, and <strong>document everything</strong>. A reputation never changes your baseline." },
-  { cat:"De-Escalation", scenarioTag:"Scenario · Simultaneous Pressure", scenario:"8:05 PM — The desk phone is ringing, a resident is waiting at the desk for a package, and your radio crackles: a teammate on tour reports a resident has fallen in the garage and isn't getting up.",
+  { cat:"De-Escalation", scenarioTag:"Scenario · Simultaneous Pressure", scenario:"8:05 PM — The desk phone is ringing, a resident is waiting at the desk for a package, maintenance is calling you on the radio, and a delivery driver is at the door. All at once.",
     prompt:"What is the right sequence?",
-    opts:["Acknowledge the resident at the desk (\"I'll be right with you\"), take the radio call first — confirm 911 is called and prepare to meet EMS at the entry — then return to the phone and the package, and log every event","Handle everything in the order it arrived: phone, then package, then radio","Release the package quickly so the lobby looks under control, then check the radio","Turn the radio down so you can focus on one thing at a time"],
-    correct:0, why:"Control the order: <strong>safety first</strong>, then resident experience, then team, then admin. Acknowledge everyone briefly so no one feels ignored — and log each event once the pressure passes." },
+    opts:["Tell the resident \"One moment, please,\" take the caller's name and callback number, answer the radio \"Copy, responding shortly,\" signal the driver — then return to the resident with full attention","Answer the phone and resolve the caller's issue completely while the resident waits","Handle everything in the order it arrived, finishing each item before you acknowledge the next","Let the phone ring out and turn the radio down so you can focus on the resident"],
+    correct:0, why:"The Apex sequence: <strong>acknowledge the resident in front of you</strong>, take the caller's <strong>name and callback number</strong>, answer the radio <strong>\"Copy, responding shortly,\"</strong> then <strong>return to the resident</strong> — no visible stress. Safety always comes first: if any of those calls is a safety issue, it goes first. Log every item." },
   { cat:"De-Escalation", scenarioTag:"Scenario · Unauthorized Person", scenario:"2:40 PM — Someone has been sitting in the lobby for 45 minutes. They didn't check in, aren't waiting for any resident you know of, and become vague when asked who they're visiting.",
     prompt:"What is the correct protocol?",
     opts:["Approach with hospitality and offer to connect them with a resident; if they can't be verified or refuse to leave, contact management immediately and document a description — and switch to the security protocol if they turn threatening","Leave them alone — approaching a non-resident isn't your role","Let them wait in the resident lounge since they seem calm","Take them by the arm and walk them out of the building"],
@@ -730,8 +733,8 @@ function renderWelcome(){
         <p class="wlead">Refresh the standard — your role in a crisis, the escalation decision, the Fire / Medical / Security protocols, the reporting tiers, and A.C.T. under pressure. Then prove it: knowledge, judgment, and a written escalation entry that meets the Apex standard.</p>
       </div>
       <div class="who-strip">
-        <div class="who-cell"><div class="wl">Annual</div><div class="wt">Every agent recertifies once every 12 months.</div></div>
-        <div class="who-cell"><div class="wl">After an escalation miss</div><div class="wt">Required as a refresher after any missed or late escalation, before the next solo shift.</div></div>
+        <div class="who-cell"><div class="wl">Annual <span class="pend">Pending approval</span></div><div class="wt">Every agent recertifies once every 12 months.</div></div>
+        <div class="who-cell"><div class="wl">After an escalation miss <span class="pend">Pending approval</span></div><div class="wt">Required as a refresher after any missed or late escalation, before the next solo shift.</div></div>
       </div>
       <div class="flow">
         <div class="flow-cell"><div class="flow-step">Part One</div><div class="flow-h">Training</div><div class="flow-p">Six short lessons: your role, resolve-or-escalate, the three emergency protocols, tiers &amp; reporting, A.C.T. in practice, and a recap. No scoring.</div></div>
@@ -792,7 +795,8 @@ function renderAssessIntro(){
         <div class="ai-cell"><div class="ai-part">Part B · ${WRITTEN.length} Drill</div><div class="ai-h">Written Escalation Entry</div><div class="ai-p">Write the log entry for a reportable incident. Graded on <strong>E.D.O. integrity</strong> and a clear <strong>accountability trail</strong> — who you notified, when, and how.</div></div>
       </div>
       <div class="note-strip"><strong>How your writing is scored:</strong> each entry is checked for a valid time stamp, a clear Event, specific Detail, an Outcome that names who was notified and closes the loop — plus capitalization, punctuation, professional tone, and factual (non-opinion) language.</div>
-      <p class="lead-p" style="margin-top:16px"><strong>80% or higher</strong> renews your Escalation, Emergency &amp; De-Escalation certification for 12 months.</p>
+      <p class="lead-p" style="margin-top:16px"><strong>80% or higher</strong> renews your Escalation, Emergency &amp; De-Escalation certification for 12 months. <span class="pend">Pending approval</span></p>
+      <p class="lead-p" style="font-size:12.5px;color:var(--gray);margin-top:-8px">The 12-month cadence and the after-a-miss refresher are proposed. Current APSF practice keeps certification current through quarterly audits, with no annual re-test unless audit scores fall below standard.</p>
       <div class="btn-nav end"><button class="btn btn-primary" id="startAssess">Start Assessment →</button></div>
     </div>`;
   document.getElementById('startAssess').addEventListener('click', ()=>{ mcIdx=0; renderMC(); toTop(); });
@@ -1025,7 +1029,7 @@ function renderResults(){
         <div>Tier<span>${tier}</span></div>
         <div>Date<span>${dateStr}</span></div>
       </div>
-      <div class="cert-valid">Valid for 12 months · Recertify by ${dueStr}</div>
+      <div class="cert-valid">Proposed validity: 12 months · Recertify by ${dueStr} (pending approval)</div>
     </div>` : "";
 
   content.innerHTML = `
