@@ -1,0 +1,1277 @@
+<title>Apex NHE Speed Packet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: workbook app — navy masthead, sticky module rail (left on desktop, scroll strip on phone), one module open at a time; print shows every module in order. */
+:root{
+  --paper:#F6F2E9; --surface:#FFFFFF; --sunk:#EFE9DC;
+  --ink:#0B1729; --ink-2:#4B5162; --line:#E0D7C5;
+  --gold:#9A7628; --gold-hi:#C9A84C; --gold-wash:#F4EAD0;
+  --band:#0B1729; --band-ink:#F3ECDD; --band-mute:#B9B2A3;
+  --teal:#1E5D58; --teal-wash:#DDEEEB;
+  --pend:#8A3B12; --pend-wash:#FBE7D8;
+  --ok:#1F6B3A; --ok-wash:#E1F0E5; --bad:#8B1E1E; --bad-wash:#F7E2E2;
+  --f-display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --f-body:"Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0B1729; --surface:#122039; --sunk:#0F1B31;
+  --ink:#EEE7D7; --ink-2:#A8AFBD; --line:#26375A;
+  --gold:#D9BA64; --gold-hi:#D9BA64; --gold-wash:#2A2A26;
+  --band:#060E1C; --band-ink:#F3ECDD; --band-mute:#9AA0AD;
+  --teal:#7CC8C0; --teal-wash:#12322F;
+  --pend:#F2A774; --pend-wash:#3A2415;
+  --ok:#82D49C; --ok-wash:#123220; --bad:#F09C9C; --bad-wash:#3B1818;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0B1729; --surface:#122039; --sunk:#0F1B31;
+  --ink:#EEE7D7; --ink-2:#A8AFBD; --line:#26375A;
+  --gold:#D9BA64; --gold-hi:#D9BA64; --gold-wash:#2A2A26;
+  --band:#060E1C; --band-ink:#F3ECDD; --band-mute:#9AA0AD;
+  --teal:#7CC8C0; --teal-wash:#12322F;
+  --pend:#F2A774; --pend-wash:#3A2415;
+  --ok:#82D49C; --ok-wash:#123220; --bad:#F09C9C; --bad-wash:#3B1818;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:2.1rem}
+h3{font-size:1.45rem;margin-top:.2rem}
+p{margin:0}
+ul,ol{margin:0;padding-left:1.2rem}
+li+li{margin-top:.25rem}
+strong{font-weight:600}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+
+/* masthead */
+.mast{background:var(--band);color:var(--band-ink);padding-block:28px 24px;padding-inline:clamp(16px,4vw,48px)}
+.mast-in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-end;justify-content:space-between}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+.mast .eyebrow{color:var(--gold-hi)}
+.mast h1{font-size:clamp(2.2rem,5vw,3.4rem);margin-top:6px}
+.mast h1 em{font-style:italic;color:var(--gold-hi);font-weight:500}
+.mast p{color:var(--band-mute);max-width:52ch;margin-top:8px;font-size:.95rem}
+.meter{min-width:min(280px,100%)}
+.meter-row{display:flex;justify-content:space-between;font-size:.8rem;color:var(--band-mute);font-variant-numeric:tabular-nums}
+.meter-bar{height:6px;border-radius:3px;background:#22324F;margin-top:6px;overflow:hidden}
+.meter-bar span{display:block;height:100%;width:0;background:var(--gold-hi);transition:width .4s}
+.who{margin-top:10px;font-size:.85rem;color:var(--band-ink)}
+.cand{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.cand label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi)}
+.cand select{flex:1;min-width:150px;background:var(--band);color:var(--band-ink);border:1px solid #3A4A6A;border-radius:8px;padding:6px 10px;font-size:.88rem}
+.mbtn{border:1px solid #3A4A6A;background:transparent;color:var(--band-ink);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:.82rem;white-space:nowrap}
+.mbtn.gold{background:var(--gold-hi);border-color:var(--gold-hi);color:#0B1729;font-weight:600}
+.mbtn.warn{border-color:#C46A3A;color:#F2A774}
+.savebar{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+#saveStat{font-size:.78rem;color:var(--band-mute)}
+details.recs{margin-top:8px;font-size:.82rem}
+details.recs summary{cursor:pointer;color:var(--band-mute)}
+details.recs .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+#recMsg{margin-top:6px;color:var(--band-mute);font-size:.78rem}
+.gatechk{list-style:none;padding:0;display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+.gatechk li{display:flex;gap:10px;align-items:center}
+.gatechk .g{width:20px;text-align:center;font-weight:600}
+
+/* shell */
+.shell{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,48px);padding-block:28px 64px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:40px;align-items:start}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:flex;flex-direction:column;gap:2px}
+.rail-h{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin:14px 0 6px 10px}
+.rail-h:first-child{margin-top:0}
+.nav{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;text-align:left;background:none;border:0;border-radius:8px;padding:8px 10px;cursor:pointer;color:var(--ink)}
+.nav:hover{background:var(--sunk)}
+.nav[aria-current="true"]{background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.nav .t{font-size:.92rem;line-height:1.25}
+.nav .m{font-size:.72rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--line)}
+.dot.done{background:var(--ok);border-color:var(--ok)}
+
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.chip.live{background:var(--gold-wash);color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.chip.self{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink-2)}
+.chip.shadow{background:var(--teal-wash);color:var(--teal);box-shadow:inset 0 0 0 1px var(--teal)}
+.chip.pend{background:var(--pend-wash);color:var(--pend);box-shadow:inset 0 0 0 1px var(--pend);letter-spacing:.06em;text-transform:none;font-size:.72rem;font-weight:500}
+
+/* sections */
+.sec{display:none;flex-direction:column;gap:28px;min-width:0}
+.sec.on{display:flex}
+.sec-head{display:flex;flex-direction:column;gap:10px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.sec-head .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lede{font-size:1.08rem;color:var(--ink-2);max-width:62ch}
+.block{display:flex;flex-direction:column;gap:12px;min-width:0}
+.block>p,.block>ul,.block>ol{max-width:68ch}
+.k{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.quote{font-family:var(--f-display);font-size:1.55rem;line-height:1.3;font-style:italic;border-left:2px solid var(--gold-hi);padding-left:18px;max-width:40ch}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.home .letter{font-family:var(--f-display);font-size:2.6rem;line-height:1;color:var(--gold)}
+.home h4{margin:0;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.home .tag{font-family:var(--f-display);font-style:italic;font-size:1.1rem}
+.small{font-size:.86rem;color:var(--ink-2)}
+.miss{font-size:.84rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:8px}
+
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:600;background:var(--sunk)}
+td.time{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
+
+.vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.vs .panel h4{margin:0;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase}
+.weak h4{color:var(--bad)} .strong h4{color:var(--ok)}
+.weak{border-color:var(--bad)} .strong{border-color:var(--ok)}
+.log{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.86rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+
+.edo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.edo .letter{font-family:var(--f-display);font-size:2.4rem;line-height:1;color:var(--gold)}
+
+.steps{counter-reset:s;list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;margin:0}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:700;font-size:1.25rem;color:var(--gold);line-height:1.3}
+
+.callout{background:var(--gold-wash);border-radius:var(--r);padding:16px 20px;font-size:.95rem}
+.callout.pendbox{background:var(--pend-wash);color:var(--ink)}
+.callout.pendbox strong{color:var(--pend)}
+
+/* interactive */
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--paper);border-radius:8px;padding:9px 16px;cursor:pointer;font-weight:500;font-size:.92rem}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+input[type=text],textarea,select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:.95rem;width:100%;text-transform:none;letter-spacing:0}
+textarea{min-height:64px;resize:vertical;line-height:1.45}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.reveal-body{border-top:1px dashed var(--line);padding-top:10px}
+
+.q{display:flex;flex-direction:column;gap:8px;padding:16px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q .stem{font-weight:500}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer;background:var(--surface);text-align:left;width:100%}
+.opt:hover{border-color:var(--ink-2)}
+.opt.right{border-color:var(--ok);background:var(--ok-wash)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-wash)}
+.opt input{margin-top:5px;accent-color:var(--gold-hi)}
+.fb{font-size:.88rem;padding:8px 12px;border-radius:8px}
+.fb.good{background:var(--ok-wash);color:var(--ok)}
+.fb.no{background:var(--bad-wash);color:var(--bad)}
+.status{font-size:.88rem;font-weight:500}
+.status.good{color:var(--ok)} .status.no{color:var(--bad)}
+
+.check{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem;cursor:pointer}
+.check:last-child{border-bottom:0}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--gold-hi)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tab{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.88rem}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.site{display:none;flex-direction:column;gap:14px}
+.site.on{display:flex}
+dl.facts{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 16px;margin:0;font-size:.94rem}
+dl.facts dt{color:var(--ink-2);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}
+dl.facts dd{margin:0}
+.nd{color:var(--pend);font-style:italic}
+
+.timeline{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.tl{display:grid;grid-template-columns:120px 92px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.tl:last-child{border-bottom:0}
+.tl .time{font-variant-numeric:tabular-nums;font-weight:500;font-size:.9rem}
+.tl .what{font-size:.95rem}
+.tl .what small{display:block;color:var(--ink-2);font-size:.82rem}
+.tl .len{font-variant-numeric:tabular-nums;font-size:.82rem;color:var(--ink-2)}
+.tl.brk{background:var(--sunk)}
+
+.cert{border:2px solid var(--gold-hi);border-radius:4px;padding:36px 24px;text-align:center;background:var(--surface);display:flex;flex-direction:column;gap:10px;align-items:center}
+.cert .nm{font-family:var(--f-display);font-size:2.4rem;font-style:italic;color:var(--gold)}
+.score{font-family:var(--f-display);font-size:3rem;line-height:1;font-variant-numeric:tabular-nums}
+
+.sign{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.sign div{border-top:1px solid var(--ink);padding-top:6px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.pager{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:18px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:20px}
+  .rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;flex-direction:row;overflow-x:auto;background:var(--paper);padding-block:8px;margin-inline:calc(-1 * clamp(16px,4vw,48px));padding-inline:clamp(16px,4vw,48px);border-bottom:1px solid var(--line);gap:4px;scrollbar-width:thin}
+  .rail-h{display:none}
+  .nav{grid-template-columns:auto auto;white-space:nowrap}
+  .nav .m{display:none}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:620px){
+  .grid2,.vs,.edo,.fields,.sign{grid-template-columns:minmax(0,1fr)}
+  .tl{grid-template-columns:auto 1fr;row-gap:4px}
+  .tl .what{grid-column:1 / -1}
+  .tl .len{grid-column:2;justify-self:end;grid-row:1}
+  dl.facts{grid-template-columns:minmax(0,1fr)}
+  dl.facts dt{padding-top:6px}
+  h2{font-size:1.8rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  .rail,.pager,.btns,.meter,.no-print{display:none!important}
+  .shell{display:block;padding:0}
+  .sec{display:flex!important;break-before:page}
+  .site{display:flex!important}
+  .reveal-body{display:block!important}
+  .mast{background:none;color:#000}
+  body{background:#fff;color:#000}
+}
+</style>
+
+<header class="mast">
+  <div class="mast-in">
+    <div>
+      <div class="eyebrow">Apex Concierge Services · New Hire Experience</div>
+      <h1>The Speed <em>Packet</em></h1>
+      <p>One day to learn the Apex Standard, practice it, walk your site, and prove it. Work through it in order.</p>
+    </div>
+    <div class="meter no-print">
+      <div class="cand">
+        <label for="candSel">Candidate</label>
+        <select id="candSel" aria-label="Choose candidate"></select>
+        <button class="mbtn" id="newCand" type="button">+ New</button>
+      </div>
+      <div class="meter-row" aria-live="polite"><span>Packet progress</span><span id="meterTxt">0 of 7 gates</span></div>
+      <div class="meter-bar"><span id="meterBar"></span></div>
+      <div class="who" id="whoLine">New hire: not entered yet</div>
+      <div class="savebar"><button class="mbtn gold" id="saveBtn" type="button">Save progress</button><span id="saveStat" aria-live="polite">Saved on this device</span></div>
+      <details class="recs"><summary>Records</summary>
+        <div class="row">
+          <button class="mbtn" id="expBtn" type="button">Export progress file</button>
+          <label class="mbtn" for="impFile">Import progress file</label>
+          <input type="file" id="impFile" accept=".json,application/json" hidden>
+          <button class="mbtn warn" id="rmBtn" type="button">Remove candidate</button>
+          <button class="mbtn warn" id="rmConfirm" type="button" hidden>Confirm remove</button>
+        </div>
+        <p id="recMsg"></p>
+      </details>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+<nav class="rail" aria-label="Packet sections">
+  <button class="nav" data-go="start"><span class="dot" data-dot="start"></span><span class="t">Start here</span><span class="m"></span></button>
+  <div class="rail-h">Your day</div>
+  <button class="nav" data-go="m1"><span class="dot" data-dot="m1"></span><span class="t">1 · Identity &amp; presence</span><span class="m">75 min</span></button>
+  <button class="nav" data-go="m2"><span class="dot" data-dot="m2"></span><span class="t">2 · Policies</span><span class="m">45 min</span></button>
+  <button class="nav" data-go="m3"><span class="dot" data-dot="m3"></span><span class="t">3 · Desk &amp; shift log</span><span class="m">60 min</span></button>
+  <button class="nav" data-go="m4"><span class="dot" data-dot="m4"></span><span class="t">4 · Packages &amp; emergencies</span><span class="m">60 min</span></button>
+  <button class="nav" data-go="live"><span class="dot" data-dot="live"></span><span class="t">Coach block</span><span class="m">90 min</span></button>
+  <button class="nav" data-go="shadow"><span class="dot" data-dot="shadow"></span><span class="t">Site shadow</span><span class="m">90 min</span></button>
+  <button class="nav" data-go="exam"><span class="dot" data-dot="exam"></span><span class="t">Final assessment</span><span class="m">45 min</span></button>
+  <button class="nav" data-go="signoff"><span class="dot" data-dot="signoff"></span><span class="t">Sign-off &amp; launch</span><span class="m">30 min</span></button>
+</nav>
+
+<main>
+<!-- ============ START ============ -->
+<section class="sec" id="start" data-sec>
+  <div class="sec-head">
+    <div class="k">Start here</div>
+    <h2>Welcome to Apex.</h2>
+    <p class="lede">You were hired because we believe you can represent this standard. Today you'll learn it, practice it, walk your site, and prove it, all in one day.</p>
+  </div>
+  <div class="block">
+    <div class="fields">
+      <label class="f" for="hireName">Your full name
+        <input type="text" id="hireName" class="persist" autocomplete="name" placeholder="First and last name">
+      </label>
+      <label class="f" for="hireSite">Your assigned site
+        <select id="hireSite" class="persist">
+          <option value="">Choose a site</option>
+          <option>The Benjamin</option><option>VIA Seaport</option><option>Ora Seaport</option>
+          <option>Avalon North Station (ANS)</option><option>AVA North Point (ANP)</option>
+        </select>
+      </label>
+      <label class="f" for="hireDate">Training date
+        <input type="text" id="hireDate" class="persist" placeholder="MM/DD/YYYY">
+      </label>
+      <label class="f" for="hireTrainer">Trainer / Lead today
+        <input type="text" id="hireTrainer" class="persist" placeholder="Name">
+      </label>
+    </div>
+  </div>
+  <div class="block">
+    <div class="k">How today works</div>
+    <div class="grid2">
+      <div class="panel"><span class="chip live">Live</span><p>Your trainer is with you for kickoff, a short check-in at the start of each module, the coach block, and your sign-off.</p></div>
+      <div class="panel"><span class="chip self">Self-guided</span><p>You work through a module in this packet on your own. Each one ends with a checkpoint you must pass. About 5 hours.</p></div>
+      <div class="panel"><span class="chip shadow">Shadow</span><p>On site with your Lead or Senior Agent. Walk the property, process real packages, write a live tour entry. 90 minutes.</p></div>
+      <div class="panel"><span class="chip pend">Pending approval</span><p>Content taught from a draft or unapproved source. Follow it today; it may be updated once leadership signs off.</p></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="k">The seven gates to finish today</div>
+    <ol class="steps">
+      <li>Pass the Module 1 checkpoint.</li>
+      <li>Pass the Module 2 checkpoint and sign the conduct acknowledgment.</li>
+      <li>Pass the Module 3 checkpoint and write your three practice log entries.</li>
+      <li>Pass the Module 4 checkpoint.</li>
+      <li>Complete the site walk with your Lead.</li>
+      <li>Score 80% or higher on the final assessment.</li>
+      <li>Complete your sign-off with your trainer.</li>
+    </ol>
+  </div>
+  <div class="pager"><span></span><button class="btn" data-go="m1">Next: Module 1 →</button></div>
+</section>
+
+<!-- ============ MODULE 1 ============ -->
+<section class="sec" id="m1" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip self">Self-guided</span><span class="small">75 min</span></div>
+    <h2>1 · Identity &amp; presence</h2>
+    <p class="lede">Who Apex is, what you represent, and how the standard looks, sounds and feels on shift.</p>
+  </div>
+  <div class="block">
+    <p class="quote">You are not just a concierge. You are Apex.</p>
+    <p>Every interaction is a brand moment. Residents don't see the company, they see you. This role carries reputational weight for the property and for Apex.</p>
+  </div>
+  <div class="block">
+    <div class="k">The H.O.M.E. values</div>
+    <div class="grid4 home">
+      <div class="panel"><span class="letter">H</span><h4>Hospitality</h4><p class="tag">We create experiences, not transactions.</p><p class="small">Greet by name. Hold the elevator. Offer help before they ask.</p><p class="miss">Missing looks like: head down, phone in hand, a resident walks past feeling invisible.</p></div>
+      <div class="panel"><span class="letter">O</span><h4>Ownership</h4><p class="tag">We don't blame. We solve.</p><p class="small">A package is missing: you investigate, document, follow up and close the loop.</p><p class="miss">Missing looks like: passing problems to the next shift.</p></div>
+      <div class="panel"><span class="letter">M</span><h4>Mindfulness</h4><p class="tag">We stay present. We anticipate.</p><p class="small">Notice the resident who looks stressed. Remember the package that was coming.</p><p class="miss">Missing looks like: reactive service; residents feel like a number.</p></div>
+      <div class="panel"><span class="letter">E</span><h4>Excellence</h4><p class="tag">We don't fluctuate based on mood.</p><p class="small">Monday morning and Friday night get the same standard, watched or not.</p><p class="miss">Missing looks like: great one day, forgettable the next.</p></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="k">The Apex Standard: five non-negotiables</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Standard</th><th>What it means</th></tr>
+      <tr><td><strong>Consistency</strong></td><td>The same professionalism at 8 AM, at midnight, and on a slow Tuesday.</td></tr>
+      <tr><td><strong>Intentionality</strong></td><td>Nothing about how you present, communicate or operate is an accident.</td></tr>
+      <tr><td><strong>Ownership</strong></td><td>You don't wait to be corrected. You hold the standard because it is yours.</td></tr>
+      <tr><td><strong>Representation</strong></td><td>You are Apex on shift, and near the property off shift.</td></tr>
+      <tr><td><strong>Non-negotiable</strong></td><td>The standard doesn't drop for volume, resident behavior, or how your day is going.</td></tr>
+    </table></div>
+    <p class="small">The real test: what does the standard look like at 4:45 AM on a quiet overnight with no residents in sight? The standard is not for an audience.</p>
+  </div>
+  <div class="block">
+    <div class="k">Proactive, not reactive</div>
+    <ul>
+      <li>Luxury is the quality of experience you deliver, not the expensive building.</li>
+      <li>Reactive service waits for the resident to name a problem. Proactive service prevents the ask.</li>
+      <li>The resident who is difficult today gets the same service as the one who is pleasant.</li>
+      <li>Emotional intelligence is a core job skill. It's how you manage the lobby under pressure.</li>
+    </ul>
+  </div>
+  <div class="block">
+    <div class="k">Appearance: the uniform standard</div>
+    <div class="grid2">
+      <div class="panel"><h3>Front desk concierge</h3><ul>
+        <li>Black suit jacket, black pants (or below-the-knee skirt), clean and wrinkle-free</li>
+        <li>White button-down shirt or blouse, pressed</li>
+        <li>Tie with the jacket (provided), clean and properly knotted</li>
+        <li>Black, clean, closed-toe professional shoes. No sneakers or sandals</li>
+        <li>Name tag on the upper left chest, always</li></ul></div>
+      <div class="panel"><h3>Package room concierge</h3><ul>
+        <li>Black button-down collared shirt, pressed, tucked in preferred</li>
+        <li>Black professional pants. No jeans or yoga pants</li>
+        <li>Black, clean, closed-toe dress shoes. No laced sneakers or sandals</li>
+        <li>Name tag on the upper left chest, always</li></ul></div>
+    </div>
+    <p class="small">Grooming, hair and fragrance stay understated. Facial piercings covered or removed except minimal earrings. Be in full uniform at your post at your start time; changing on site is not paid time. Hair and facial hair consistent with cultural, ethnic or racial identity are always permitted, and accommodations are available through your supervisor.</p>
+  </div>
+  <div class="block">
+    <div class="k">Energy &amp; desk</div>
+    <ul>
+      <li>You set the temperature of the lobby. Tired or distracted energy is visible, and contagious.</li>
+      <li>Posture, eye contact and body language speak before you do. Make eye contact within 5 seconds of an approach.</li>
+      <li>No food, bags or face-up phone at the desk. The desk shows readiness, not personal comfort.</li>
+      <li>Handle personal matters before your shift. The lobby is not the place.</li>
+    </ul>
+  </div>
+  <div class="block">
+    <div class="k">What you say</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Instead of this</th><th>Say this</th></tr>
+      <tr><td>"I don't know."</td><td>"Let me find that out for you right now."</td></tr>
+      <tr><td>"That's not my job."</td><td>"Let me connect you with the right person."</td></tr>
+      <tr><td>"They haven't come yet."</td><td>"I'll follow up on that and get back to you."</td></tr>
+      <tr><td>"I can't help with that."</td><td>"Here is what I can do for you."</td></tr>
+      <tr><td>"There's nothing I can do."</td><td>"Here is who I'm connecting you with, and why."</td></tr>
+    </table></div>
+    <p class="small">Say each one out loud. They need to come out automatically under pressure.</p>
+  </div>
+  <div class="block">
+    <p class="quote">Friendly is required. Familiar is a liability.</p>
+    <div class="vs">
+      <div class="panel strong"><h4>Friendly, required</h4><ul><li>Warm greeting by name</li><li>Genuine interest in resident wellbeing</li><li>Proactive offers of help</li><li>The same warmth for every resident, every time</li></ul></div>
+      <div class="panel weak"><h4>Familiar, never</h4><ul><li>Nicknames, casual address, favoritism</li><li>Personal conversations beyond the role</li><li>Opinions on internal matters or other residents</li><li>Special treatment based on relationship</li></ul></div>
+    </div>
+    <div class="callout"><strong>The test:</strong> "Would I behave the same way with every resident, or only this one?" If only this one, you've crossed into familiar. Friendly is consistent. Familiar is selective.</div>
+  </div>
+  <div class="block">
+    <div class="k">Reflection (2 minutes)</div>
+    <label class="f" for="refl1">What does it mean to represent something bigger than yourself on shift?
+      <textarea id="refl1" class="persist" placeholder="Write a few sentences. Your trainer may ask you about it."></textarea>
+    </label>
+  </div>
+  <div class="block panel">
+    <div class="k">Checkpoint 1</div>
+    <div data-cp="m1"></div>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="start">← Start here</button><button class="btn" data-go="m2">Next: Module 2 →</button></div>
+</section>
+
+<!-- ============ MODULE 2 ============ -->
+<section class="sec" id="m2" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip self">Self-guided</span><span class="small">45 min</span></div>
+    <h2>2 · Policies &amp; accountability</h2>
+    <p class="lede">Who you serve, who you report to, and the attendance, coverage and conduct rules. No gaps and no surprises at your 30-day review.</p>
+  </div>
+  <div class="block">
+    <div class="k">The ecosystem you work in</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Who</th><th>Their role</th><th>How you partner</th></tr>
+      <tr><td><strong>Property ownership / management</strong></td><td>Highest authority. Sets policy, approves exceptions.</td><td>Represent their brand. Serious issues go here through proper channels, never resolved alone at the desk.</td></tr>
+      <tr><td><strong>Leasing</strong></td><td>Revenue and occupancy.</td><td>Support the experience they sell. No unit access or reservations on their verbal request.</td></tr>
+      <tr><td><strong>Maintenance</strong></td><td>Service requests.</td><td>Route, document with the work-order number, follow up. Never promise residents a timeline or scope.</td></tr>
+      <tr><td><strong>Concierge, you</strong></td><td>Connective tissue of the property.</td><td>First and last impression, every day. You see and hear more than anyone on site.</td></tr>
+    </table></div>
+    <div class="grid2">
+      <div class="panel"><h3>You report to</h3><p>Apex management and your site supervisor or Lead. All direction flows through them.</p></div>
+      <div class="panel"><h3>You support</h3><p>Residents first, then property management, leasing and maintenance. Supporting someone doesn't mean following their orders outside your role.</p></div>
+    </div>
+    <div class="callout"><strong>"They said it was approved" is not authorization.</strong> If someone you can't verify asks for unit access, confirm it yourself with your supervisor or property management first. If it's confirmed, log who asked, who you verified with, what they said, and the time.</div>
+  </div>
+  <div class="block">
+    <div class="k">Attendance &amp; call-out</div>
+    <ul>
+      <li>Your first 90 days are the performance window. Tardiness and absences show up in your 30- and 90-day reviews.</li>
+      <li><strong>Call out at least 2 hours before your shift</strong> (handbook minimum). Apex expects as early as possible.</li>
+      <li><strong>Call AND text</strong> your supervisor and the on-call manager. Give a reason and your expected return. Call in each day you'll be out.</li>
+      <li>Out more than 2 consecutive days: return with documentation.</li>
+      <li>No more than <strong>3 unexcused absences in any 90-day period</strong>.</li>
+      <li>Missing a shift with no call and no show is treated as a voluntary resignation unless extenuating circumstances apply.</li>
+      <li>If you don't follow the procedure, the absence is unexcused, whatever the reason. Protected leave (sick time, jury duty, FMLA/PFML and others) never counts against you.</li>
+    </ul>
+  </div>
+  <div class="block">
+    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="k">Shift swap protocol</div><span class="chip pend" title="May be updated after leadership review">Pending approval</span></div>
+    <ol class="steps">
+      <li><span><strong>Reach out directly</strong> to a teammate. Confirm date, time and site.</span></li>
+      <li><span><strong>Post in the All Users chat</strong> in Connecteam if that fails. Example: "VIA, Fri 9/20, 3p–11p (John D.), need coverage."</span></li>
+      <li><span><strong>Notify management</strong> with both names and the shift. The swap isn't official until management validates it in Connecteam.</span></li>
+      <li><span><strong>No coverage found?</strong> Contact your manager. You own the shift until you're released.</span></li>
+    </ol>
+  </div>
+  <div class="block">
+    <div class="k">Time, breaks &amp; sick time</div>
+    <ul>
+      <li>Clock in and out in Connecteam, accurately, every shift. Never work off the clock, and never clock for someone else.</li>
+      <li>6+ consecutive hours earns a 30-minute paid meal break. If you're the only staff on site, you stay on the premises.</li>
+      <li>The desk is never left unattended. Hand off keys and responsibilities before you step away.</li>
+      <li>Massachusetts earned sick time accrues at 1 hour per 30 worked, usable after your first 90 days. Give notice in the scheduling app and to your supervisor.</li>
+    </ul>
+  </div>
+  <div class="block">
+    <div class="k">Conduct, devices &amp; confidentiality</div>
+    <div class="grid2">
+      <div class="panel"><h3>Devices</h3><ul>
+        <li>Personal phone use only on breaks and meal periods</li>
+        <li>Silenced and stored at the desk: not face-up, not visible</li>
+        <li>Personal calls on shift for emergencies only</li>
+        <li>No earbuds or headphones on post</li></ul></div>
+      <div class="panel"><h3>No fraternization</h3><ul>
+        <li>No romantic or personal relationships with residents</li>
+        <li>No exchanging personal contact info or socializing outside work</li>
+        <li>No financial arrangements or recruiting residents for outside services</li>
+        <li>Small holiday tokens are fine. Any personal item (furniture, valuables) must be documented in writing to management</li></ul></div>
+      <div class="panel"><h3>Confidentiality</h3><ul>
+        <li>Resident names, units, complaints and personal matters stay private</li>
+        <li>No photos, video or recordings of residents, common areas or incidents</li>
+        <li>No social media about the property, residents or anything seen on shift</li>
+        <li>It doesn't expire when your employment ends</li></ul></div>
+      <div class="panel"><h3>Respect</h3><ul>
+        <li>Zero tolerance for harassment of any kind, toward anyone</li>
+        <li>Report what you experience or witness to your supervisor or management</li>
+        <li>Retaliation against anyone who reports is itself a terminable offense</li>
+        <li>Coworker conflicts go privately to your supervisor, never at the desk</li></ul></div>
+    </div>
+    <div class="callout">The Employee Handbook has the full policy for everything above. If anything changes, your trainer will tell you.</div>
+  </div>
+  <div class="block panel">
+    <div class="k">Acknowledgment</div>
+    <label class="check"><input type="checkbox" id="ack" class="persist"><span>I have read the attendance, call-out, swap, device, fraternization, confidentiality and harassment standards above. I will sign the paper conduct acknowledgment form before the coach block.</span></label>
+  </div>
+  <div class="block panel">
+    <div class="k">Checkpoint 2</div>
+    <div data-cp="m2"></div>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="m1">← Module 1</button><button class="btn" data-go="m3">Next: Module 3 →</button></div>
+</section>
+
+<!-- ============ MODULE 3 ============ -->
+<section class="sec" id="m3" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip self">Self-guided</span><span class="small">60 min</span></div>
+    <h2>3 · Desk operations &amp; the shift log</h2>
+    <p class="lede">The operational non-negotiables of every shift, and the E.D.O. method. This is the most important hour of the day.</p>
+  </div>
+  <div class="block">
+    <div class="k">Your shift begins before you sit down</div>
+    <ol class="steps">
+      <li>Arrive 10 minutes early. Never clock in and take the desk unprepared.</li>
+      <li>Read the pass-on log in full before the outgoing agent leaves.</li>
+      <li>Confirm open items: pending packages, active maintenance, known resident concerns.</li>
+      <li>Check the desk: log open, radio charged, call sheet current, supplies stocked.</li>
+    </ol>
+  </div>
+  <div class="block">
+    <p class="quote">The desk is a post, not a seat. It is never unattended.</p>
+    <ul>
+      <li>Secure relief before stepping away for a bathroom or break.</li>
+      <li>If relief is unavailable or late, notify your supervisor and <strong>stay</strong>.</li>
+      <li>Abandoning your post without coverage is a terminable offense.</li>
+    </ul>
+  </div>
+  <div class="block">
+    <div class="k">Site tours</div>
+    <ul>
+      <li>Minimum <strong>2 per shift</strong>, each logged with E.D.O.</li>
+      <li>Three purposes: security awareness, deterrent presence, community connection.</li>
+      <li>Same route, same observation points: common areas, amenities, entry points, package areas, elevators, stairwells, garage.</li>
+      <li>Note anything unusual, visible maintenance issues, and active policy violations. Greet residents warmly; don't interrogate.</li>
+    </ul>
+  </div>
+  <div class="block">
+    <div class="k">What the shift log is</div>
+    <p>A time-stamped professional record, read by the next agent, supervisors, property management, HR, and potentially legal. The next agent should be fully briefed from your log alone.</p>
+    <p class="quote">An undocumented event did not happen, operationally and legally.</p>
+  </div>
+  <div class="block">
+    <div class="k">The E.D.O. method · every entry, every time</div>
+    <div class="edo">
+      <div class="panel"><span class="letter">E</span><h3>Event</h3><p>What happened? One specific, observable sentence. If you can't state it clearly, you don't have an Event yet.</p></div>
+      <div class="panel"><span class="letter">D</span><h3>Detail</h3><p>Who, when, where, how? Unit or location, exact time, parties involved. Facts only.</p></div>
+      <div class="panel"><span class="letter">O</span><h3>Outcome</h3><p>What did you do? Resolved, escalated or pending. If pending: to whom, and why.</p></div>
+    </div>
+    <div class="callout"><strong>Liability lives in the Outcome.</strong> Every closing has four parts: the action taken, who was notified by name and channel, the status (resolved, escalated or pending), and the next step with its owner.</div>
+  </div>
+  <div class="block">
+    <div class="k">Strong vs. weak</div>
+    <div class="vs">
+      <div class="panel weak"><h4>Weak tour entry</h4><p class="log">9 PM — checked building, everything fine.</p></div>
+      <div class="panel strong"><h4>Strong tour entry</h4><p class="log">9:04 PM — Conducted scheduled tour of floors 1–4, pool deck and parking garage. No violations observed. Hallway light out on floor 3 near stairwell exit — submitted maintenance ticket #MT-0817. All entry points secure.</p></div>
+      <div class="panel weak"><h4>Weak pass-on</h4><p class="log">CONCIERGE: Nothing of note.
+MAINTENANCE: N/A.
+LEASING: N/A.</p></div>
+      <div class="panel strong"><h4>Strong pass-on</h4><p class="log">CONCIERGE: 370 packages in system. 3 perishables in fridge (units 421, 817, 1104). RTS pending: 2 (UPS, FedEx), carrier pickup Friday.
+MAINTENANCE: P3 exit door latch broken — reported to A. Mejia 7:45 AM, service request submitted. Follow-up required.</p></div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="k">Log non-negotiables</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Rule</th><th>Standard</th></tr>
+      <tr><td>Frequency</td><td>At least 1 time-stamped entry per hour. If nothing occurred, log what you checked.</td></tr>
+      <tr><td>Tours</td><td>At least 2 tour entries: route, stops, observations.</td></tr>
+      <tr><td>Pass-on</td><td>All three sections every shift: Concierge, Maintenance, Leasing.</td></tr>
+      <tr><td>Voice</td><td>Third person, neutral, factual. "Concierge greeted resident…", never "I told them…".</td></tr>
+      <tr><td>Banned</td><td>"Quiet night", "Nothing to report", "Handled it", copy-pasted entries, gossip, random highlighting.</td></tr>
+      <tr><td>Corrections</td><td>Never delete. Add a follow-up entry with the new information and time.</td></tr>
+      <tr><td>Subject line</td><td><span class="log">[Site] — [Date] — [Shift Time] — [Your Name]</span>, signed with name and shift time.</td></tr>
+      <tr><td>Submit</td><td>To the PASS ON LOG email group at end of shift. Add recipients by hand if it doesn't auto-fill.</td></tr>
+    </table></div>
+    <p class="small">The witness test, four fatal flaws: open loops with no owner, opinions or blame, escalations done by phone with no written record, and timestamps out of order or missing.</p>
+  </div>
+  <div class="block">
+    <div class="k">Practice: write three entries</div>
+    <p>Write each one before opening the model. Your trainer reviews these with you in the coach block. Use realistic times.</p>
+    <div class="panel">
+      <h3>A · Propped door</h3>
+      <p class="small">You see a resident's guest propping the main lobby door open with a chair while moving boxes. You address them. The guest complies and removes the chair.</p>
+      <div class="fields">
+        <label class="f" for="pA_e">Event<textarea id="pA_e" class="persist"></textarea></label>
+        <label class="f" for="pA_d">Detail<textarea id="pA_d" class="persist"></textarea></label>
+      </div>
+      <label class="f" for="pA_o">Outcome<textarea id="pA_o" class="persist"></textarea></label>
+      <div class="no-print"><button class="btn ghost" data-reveal>Show model entry</button></div>
+      <div class="reveal-body" hidden><p class="log">2:12 PM — Lobby Door Propped
+E: Main lobby entry door observed propped open with a chair by a resident's guest moving boxes.
+D: Guest (name not provided) moving boxes for Unit [###]. Concierge advised guest that entry doors must remain closed for building security.
+O: Guest removed the chair at 2:14 PM; door confirmed closed and latched. No further action required.</p></div>
+    </div>
+    <div class="panel">
+      <h3>B · Hallway flood</h3>
+      <p class="small">Unit 614 calls to report the 6th-floor hallway is flooded. Water appears to be coming from under the door of Unit 612. You contact on-call maintenance.</p>
+      <div class="fields">
+        <label class="f" for="pB_e">Event<textarea id="pB_e" class="persist"></textarea></label>
+        <label class="f" for="pB_d">Detail<textarea id="pB_d" class="persist"></textarea></label>
+      </div>
+      <label class="f" for="pB_o">Outcome<textarea id="pB_o" class="persist"></textarea></label>
+      <div class="no-print"><button class="btn ghost" data-reveal>Show model entry</button></div>
+      <div class="reveal-body" hidden><p class="log">9:20 PM — Water in Floor 6 Hallway
+E: Resident of Unit 614 reported water flooding the 6th-floor hallway, appearing to come from under the door of Unit 612.
+D: Call received 9:20 PM. Concierge confirmed standing water outside Unit 612 at 9:24 PM. Unit 612 called — no answer.
+O: On-call maintenance ([name]) contacted by phone 9:25 PM, ETA [time]. Supervisor notified by phone 9:27 PM. Incident report filed. Pending maintenance — flagged for pass-on.</p></div>
+    </div>
+    <div class="panel">
+      <h3>C · Garage entry</h3>
+      <p class="small">An unknown person enters through the parking garage door. They say they're visiting a friend but can't give a unit number or name. You ask them to leave and they comply.</p>
+      <div class="fields">
+        <label class="f" for="pC_e">Event<textarea id="pC_e" class="persist"></textarea></label>
+        <label class="f" for="pC_d">Detail<textarea id="pC_d" class="persist"></textarea></label>
+      </div>
+      <label class="f" for="pC_o">Outcome<textarea id="pC_o" class="persist"></textarea></label>
+      <div class="no-print"><button class="btn ghost" data-reveal>Show model entry</button></div>
+      <div class="reveal-body" hidden><p class="log">1:05 AM — Unverified Person, Garage Entry
+E: Unidentified individual entered the building through the P1 garage door.
+D: Individual stated they were visiting a friend but could not provide a resident name or unit number. Description: [height, clothing, direction of travel].
+O: Individual asked to leave; exited via garage door at 1:09 AM. Supervisor notified by phone 1:10 AM. Garage door checked and secured. Flagged for pass-on.</p></div>
+    </div>
+  </div>
+  <div class="block panel">
+    <div class="k">Checkpoint 3</div>
+    <div data-cp="m3"></div>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="m2">← Module 2</button><button class="btn" data-go="m4">Next: Module 4 →</button></div>
+</section>
+
+<!-- ============ MODULE 4 ============ -->
+<section class="sec" id="m4" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip self">Self-guided</span><span class="small">60 min</span></div>
+    <h2>4 · Packages, incidents &amp; emergencies</h2>
+    <p class="lede">Chain of custody for every package, the incident report standard, and your role when something goes wrong.</p>
+  </div>
+  <div class="block">
+    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="k">Packages</div><span class="chip pend" title="May be updated after leadership review">Pending approval</span></div>
+    <p class="quote">Log it in the system before you move it anywhere.</p>
+    <ol class="steps">
+      <li><span><strong>Confirm</strong>: recipient name and unit against current leaseholder records.</span></li>
+      <li><span><strong>Log</strong>: enter it in the system before it moves. Never skipped.</span></li>
+      <li><span><strong>Label</strong>: unit number, date and time received.</span></li>
+      <li><span><strong>Notify</strong>: contact the resident through the site's channel now, not at end of shift.</span></li>
+    </ol>
+    <div class="tbl-wrap"><table>
+      <tr><th>Category</th><th>Protocol</th><th>Critical distinction</th></tr>
+      <tr><td><strong>Standard</strong></td><td>Log → Label → Shelf → Notify</td><td>The baseline. No shortcuts.</td></tr>
+      <tr><td><strong>Food delivery</strong><br><span class="small">DoorDash, UberEats</span></td><td>Log → Refrigerate → <strong>Call</strong></td><td>Call, don't just text. No answer in 15–30 min: fridge and log. Dispose after <strong>24 hrs</strong> unclaimed, documented.</td></tr>
+      <tr><td><strong>Grocery delivery</strong><br><span class="small">Instacart, AmazonFresh</span></td><td>Log → Refrigerate → Daily outreach</td><td><strong>48 hrs</strong>. Outreach every day. Escalate to your Lead before disposal.</td></tr>
+      <tr><td><strong>High-value</strong><br><span class="small">electronics, luxury goods</span></td><td>Log as high-value → Secured storage → Notify promptly</td><td>Never on the general shelf.</td></tr>
+      <tr><td><strong>Outgoing / RTS</strong></td><td>Verify postage → Log → Stage for carrier</td><td>No postage, no acceptance. Decline politely and offer alternatives.</td></tr>
+    </table></div>
+    <div class="grid2">
+      <div class="panel"><h3>Release</h3><p>Verify identity by photo ID or system lookup before you retrieve the package, every time, however well you know them. If anything doesn't match, hold it and call your Lead. Never release under pressure.</p></div>
+      <div class="panel"><h3>Never</h3><ul><li>Store a package unlogged</li><li>Classify high-value as standard or "other"</li><li>Release on verbal confirmation</li><li>Accept outgoing without postage</li><li>Store in unapproved areas (fridge is for perishables only)</li></ul></div>
+    </div>
+    <p class="small">Package room vs. system is reconciled daily. A potentially missing package is investigated through intake records, audits and carrier tracking. Name not on the lease? Check the guest list, contact the unit, check past residents, then RTS and escalate to a Lead.</p>
+  </div>
+
+  <div class="block">
+    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="k">Incident reports</div><span class="chip pend" title="May be updated after leadership review">When-to-file &amp; chain: pending approval</span></div>
+    <div class="grid2">
+      <div class="panel"><h3>Always file for</h3><ul>
+        <li>Any physical altercation, threat or confrontation</li>
+        <li>Any injury to a resident, guest or visitor, even minor</li>
+        <li>Any property damage</li>
+        <li>Unauthorized entry, security breach, or suspicious activity acted on</li>
+        <li>Any medical emergency, including EMS response</li>
+        <li>A complaint escalated or unresolved at the desk</li></ul>
+        <p class="small"><strong>When in doubt, file.</strong> An unnecessary report is recoverable. A missing one is not.</p></div>
+      <div class="panel"><h3>How to file</h3><ul>
+        <li>Connecteam → Forms → Incident Report</li>
+        <li>Submit before the end of the shift it happened in</li>
+        <li>Add site manager emails so local management sees it</li>
+        <li><strong>Safety, legal or police involvement:</strong> phone the Regional Manager immediately, then file</li></ul>
+        <p class="small">Review chain: Agent → Site Lead/Supervisor → Regional Manager → Property Management / Executive Leadership.</p></div>
+    </div>
+    <div class="k">Write what you observed, not what you concluded</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Never write</th><th>Write instead</th></tr>
+      <tr><td>"The resident was drunk."</td><td>"Resident exhibited slurred speech and unsteady gait."</td></tr>
+      <tr><td>"He was being aggressive."</td><td>"Subject moved toward the desk with a raised voice."</td></tr>
+      <tr><td>"The elevator closed on her leg."</td><td>"The resident reported that an elevator door closed on her leg."</td></tr>
+      <tr><td>"She had serious bruising."</td><td>"Concierge observed a small visible abrasion on the resident's knee."</td></tr>
+      <tr><td>"The situation was handled."</td><td>"Supervisor notified at 9:42 PM. Resolved by 9:55 PM."</td></tr>
+    </table></div>
+    <p class="small">Every report needs: exact time ("approximately" if unsure, never invented precision), specific location, full names and roles, what was reported vs. what you saw, who you notified by name and channel, witnesses (say exactly what they saw), how the interaction ended, and what follow-up is open. Never give medication, diagnose, or judge severity. Never edit the record to look better; correct the behavior going forward.</p>
+  </div>
+
+  <div class="block">
+    <div class="k">Emergencies · call first, document everything, support within your role</div>
+    <p>You are not a first responder. You're the organized point of contact who gets the right people the right information. Before any escalation, ask: <strong>Can I resolve this within my role and authority?</strong> Yes: resolve and log. No: escalate and log.</p>
+    <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="panel"><h3>Fire</h3><ol class="steps">
+        <li>Don't investigate. Call 911, then your supervisor.</li><li>Pull the alarm if it isn't already sounding.</li><li>Direct residents to exits. No elevators.</li><li>Meet responders at the entrance.</li><li>No re-entry until the fire department clears it.</li><li>Document alarm time, actions, notifications.</li></ol></div>
+      <div class="panel"><h3>Medical</h3><ol class="steps">
+        <li>Call 911: address, floor, unit, what's happening.</li><li>Don't move the person unless there's immediate danger.</li><li>Stay with them, calm and professional.</li><li>Clear bystanders; keep a path for EMS.</li><li>Meet EMS at the entry point.</li><li>Document time, observations, responders, outcome.</li></ol></div>
+      <div class="panel"><h3>Security threat</h3><ol class="steps">
+        <li>Don't confront. Keep distance.</li><li>Call 911 if the threat is credible.</li><li>Notify your supervisor by radio or second line.</li><li>Observe and document: description, direction, words.</li><li>Follow law enforcement direction.</li><li>Your safety comes first. Remove yourself from danger.</li></ol></div>
+    </div>
+  </div>
+  <div class="block panel">
+    <div class="k">Checkpoint 4</div>
+    <div data-cp="m4"></div>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="m3">← Module 3</button><button class="btn" data-go="live">Next: Coach block →</button></div>
+</section>
+
+<!-- ============ COACH BLOCK ============ -->
+<section class="sec" id="live" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip live">Live</span><span class="small">90 min · with your trainer</span></div>
+    <h2>Coach block</h2>
+    <p class="lede">Now you practice under pressure. Your trainer reads each situation, you answer first, then you compare with the Apex approach. Every answer should end with "and I logged it."</p>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Part</th><th>What happens</th></tr>
+    <tr><td><strong>Entry review</strong></td><td>Hand in your signed acknowledgment. Your trainer reviews your three Module 3 practice entries with you.</td></tr>
+    <tr><td><strong>A.C.T.</strong></td><td>One structure for every high-pressure moment.</td></tr>
+    <tr><td><strong>Scenarios</strong></td><td>At least the five marked <strong>Required</strong>. Answer before you open the Apex approach.</td></tr>
+    <tr><td><strong>Emergency drill</strong></td><td>Fire, medical, security: the first three steps, from memory.</td></tr>
+    <tr><td><strong>Systems match</strong></td><td>Match each task to the right system, on your own.</td></tr>
+  </table></div>
+
+  <div class="block">
+    <div class="k">A.C.T. · your structure for every high-pressure moment</div>
+    <div class="edo">
+      <div class="panel"><span class="letter">A</span><h3>Acknowledge</h3><p>Recognize what's happening. Don't react, respond. Let them know they've been heard first.</p></div>
+      <div class="panel"><span class="letter">C</span><h3>Control</h3><p>Control the environment, then the conversation. Lower your voice. Create space. Don't match their energy.</p></div>
+      <div class="panel"><span class="letter">T</span><h3>Transfer or resolve</h3><p>Resolve within your authority, or escalate to the right person. Document either way. Escalation is strength.</p></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="k">Scenarios</div>
+    <div class="grid2" id="scen"></div>
+  </div>
+
+  <div class="block">
+    <div class="k">Systems match</div>
+    <p class="small">"Property system" means the site's resident and work-order tool: Yardi, Avalon Access / Associate Portal, or whatever your site uses. Your Lead shows you yours on the shadow.</p>
+    <div class="panel" id="sysMatch"></div>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="m4">← Module 4</button><button class="btn" data-go="shadow">Next: Site shadow →</button></div>
+</section>
+
+<!-- ============ SHADOW ============ -->
+<section class="sec" id="shadow" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip shadow">Shadow</span><span class="small">90 min · with your Lead or Senior Agent</span></div>
+    <h2>Site shadow</h2>
+    <p class="lede">Walk your property with your Lead. Bring this packet. Ask specific questions, not general ones. Your Lead initials each item.</p>
+  </div>
+  <div class="block panel">
+    <div class="k">Walk checklist</div>
+    <div id="walkList"></div>
+  </div>
+  <div class="block">
+    <label class="f" for="walkNotes">Walk notes: package room location, AED, fire panel, after-hours maintenance number, anything specific
+      <textarea id="walkNotes" class="persist" style="min-height:110px"></textarea>
+    </label>
+  </div>
+  <div class="block">
+    <div class="k">Site quick pages</div>
+    <div class="callout"><strong>Your site page is with your Lead.</strong> Building details — systems, key control, posts and site rules — are kept off this public page. Your Lead or trainer walks you through your site's page on the shadow; use the walk notes above to capture what you learn.</div>
+    <div id="siteTabs" hidden></div>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="live">← Coach block</button><button class="btn" data-go="exam">Next: Final assessment →</button></div>
+</section>
+
+<!-- ============ EXAM ============ -->
+<section class="sec" id="exam" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip self">Self-guided</span><span class="small">45 min · no notes, no phone</span></div>
+    <h2>Final assessment</h2>
+    <p class="lede">Fourteen questions and one written escalation entry. 20 points total. 16 points (80%) certifies. Your lowest area becomes your 30-day focus.</p>
+  </div>
+  <div class="block panel"><div id="examMC"></div></div>
+  <div class="block panel">
+    <div class="k">Written drill · 6 points</div>
+    <p><strong>11:40 PM.</strong> Two residents from Units 812 and 814 begin arguing loudly in the lobby over a parking space. One shoves the other. No injuries. You verbally separate them and both leave the lobby separately at 11:48 PM. This is above desk-level authority and must be escalated.</p>
+    <p class="small">Write the log entry with E.D.O. Include who you notified, when, and through what channel.</p>
+    <label class="f" for="wTime">Time stamp<input type="text" id="wTime" class="persist" placeholder="e.g. 11:40 PM"></label>
+    <label class="f" for="wE">Event<textarea id="wE" class="persist"></textarea></label>
+    <label class="f" for="wD">Detail<textarea id="wD" class="persist"></textarea></label>
+    <label class="f" for="wO">Outcome<textarea id="wO" class="persist"></textarea></label>
+  </div>
+  <div class="btns"><button class="btn" id="gradeBtn">Grade my assessment</button></div>
+  <div id="examResult" class="block" hidden></div>
+  <div class="pager"><button class="btn ghost" data-go="shadow">← Site shadow</button><button class="btn" data-go="signoff">Next: Sign-off →</button></div>
+</section>
+
+<!-- ============ SIGN-OFF ============ -->
+<section class="sec" id="signoff" data-sec>
+  <div class="sec-head">
+    <div class="row"><span class="chip live">Live</span><span class="small">30 min</span></div>
+    <h2>Sign-off &amp; 30-day launch</h2>
+    <p class="lede">The assessment shows knowledge. The Lead still clears you for solo only after you show readiness on shift.</p>
+  </div>
+  <div class="block panel">
+    <div class="k">Your sign-off checklist · completed with your trainer</div>
+    <div id="signList"></div>
+  </div>
+  <div class="block panel" id="completeBox">
+    <div class="k">Completion &amp; certificate</div>
+    <div id="completeBody"></div>
+  </div>
+  <div class="block">
+    <div class="k">Your path from today</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>When</th><th>Stage</th><th>What it looks like</th></tr>
+      <tr><td class="time">Days 1–3</td><td><strong>Shadow</strong></td><td>Shadow your Lead or Senior Agent every shift. Observe, ask, log with guidance.</td></tr>
+      <tr><td class="time">Days 4–7</td><td><strong>Supported</strong></td><td>Run the desk; supervisor reachable but not hands-on. Logs reviewed at end of shift.</td></tr>
+      <tr><td class="time">Week 2</td><td><strong>Solo + check-ins</strong></td><td>Fully independent with a daily supervisor check-in. Flag uncertainty before acting.</td></tr>
+      <tr><td class="time">Weeks 3–4</td><td><strong>Full operation</strong></td><td>Benchmarked on attendance, log quality, resident feedback and presence.</td></tr>
+      <tr><td class="time">Day 30</td><td><strong>Formal review</strong></td><td>Log quality, attendance, conduct, escalation decisions. Your commitment card is read back.</td></tr>
+      <tr><td class="time">Day 90</td><td><strong>Full evaluation</strong></td><td>End of probation. Trajectory and Excellence Academy eligibility: clean attendance, strong logs, no conduct flags, supervisor endorsement.</td></tr>
+    </table></div>
+  </div>
+  <div class="block">
+    <div class="k">Who to contact</div>
+    <p class="small">Fill in with your trainer. Keep a copy at the desk.</p>
+    <div class="fields">
+      <label class="f" for="c1">Site supervisor / Lead<input type="text" id="c1" class="persist" placeholder="Name and number"></label>
+      <label class="f" for="c2">Regional Manager / on-call line<input type="text" id="c2" class="persist" placeholder="Name and number"></label>
+      <label class="f" for="c3">After-hours maintenance<input type="text" id="c3" class="persist" placeholder="Name and number"></label>
+      <label class="f" for="c4">Property management office<input type="text" id="c4" class="persist" placeholder="Name and number"></label>
+    </div>
+  </div>
+  <div class="block panel">
+    <div class="k">Commitment card</div>
+    <label class="f" for="k1">The Apex Standard I carry into every shift, starting today, is…<textarea id="k1" class="persist"></textarea></label>
+    <label class="f" for="k2">The one thing I hold myself accountable for in the first 30 days is…<textarea id="k2" class="persist"></textarea></label>
+    <label class="f" for="k3">At my 30-day review, I'll know I succeeded if…<textarea id="k3" class="persist"></textarea></label>
+    <div class="sign" style="margin-top:22px"><div>New hire signature &amp; date</div><div>Trainer / Lead signature</div><div>Regional Manager signature</div></div>
+  </div>
+  <div class="block">
+    <p class="quote">Today is the baseline. Now go exceed it.</p>
+  </div>
+  <div class="pager"><button class="btn ghost" data-go="exam">← Final assessment</button><button class="btn ghost" data-go="start">Back to start</button></div>
+</section>
+
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+/* ---------- candidate records ----------
+   Every candidate has one state object. Copies live in this browser (BOOK) and,
+   when the page runs inside Claude with the db capability, in the artifact's
+   private "candidates" collection so records follow you across devices. */
+const LKEY='apexNheSpeed.v2', OLDKEY='apexNheSpeed.v1';
+// Opened from a computer's folder (file://) always works locally, even if a browser extension adds window.claude.
+const IN_CLAUDE=location.protocol!=='file:'&&!!(window.claude&&window.claude.use);
+const blank=()=>({f:{},cp:{},exam:null,walk:{},sign:{},sys:null,created:Date.now(),updatedAt:0,completedAt:null,certId:null});
+const newId=()=>'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const hasData=st=>!!st&&(Object.keys(st.f||{}).some(k=>st.f[k])||Object.keys(st.cp||{}).length>0);
+let BOOK={current:null,c:{}};
+try{const r=localStorage.getItem(LKEY); if(r){const b=JSON.parse(r); if(b&&b.c) BOOK=b;}}catch(e){}
+try{const o=localStorage.getItem(OLDKEY); if(o&&!Object.keys(BOOK.c).length){const st=Object.assign(blank(),JSON.parse(o)); if(hasData(st)){const id=newId(); BOOK.c[id]=st; BOOK.current=id;}}}catch(e){}
+if(!BOOK.current||!BOOK.c[BOOK.current]){const k=Object.keys(BOOK.c); if(k.length) BOOK.current=k[0]; else {const id=newId(); BOOK.c[id]=blank(); BOOK.current=id;}}
+let S=BOOK.c[BOOK.current];
+['f','cp','walk','sign'].forEach(k=>{if(!S[k]) S[k]={};});
+let DB=null, dbOK=false, lastSaved=0, statMode='local';
+const pend={}, chain={};
+function persistLocal(){try{localStorage.setItem(LKEY,JSON.stringify(BOOK));}catch(e){}}
+function hhmm(t){return new Date(t).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});}
+function setStat(mode){
+  if(mode) statMode=mode;
+  const el=document.getElementById('saveStat'); if(!el) return;
+  if(dbOK){
+    el.textContent=statMode==='saving'?'Saving…':statMode==='err'?"Couldn't reach Apex records. Saved on this device.":(lastSaved?'Saved to Apex records · '+hhmm(lastSaved):'Apex records connected');
+  } else {
+    el.textContent=S.updatedAt?'Saved on this device · '+hhmm(S.updatedAt):'Saves on this device as you work';
+  }
+}
+function bodyFor(st){return JSON.parse(JSON.stringify({state:st,name:(st.f&&st.f.hireName)||'',site:(st.f&&st.f.hireSite)||'',gates:gatesOf(st).filter(Boolean).length,score:(st.exam&&st.exam.graded)?st.exam.graded.total:null,completedAt:st.completedAt||null,updatedAt:st.updatedAt||0}));}
+function pushRemote(id){
+  if(!DB||!dbOK||!BOOK.c[id]) return Promise.resolve();
+  clearTimeout(pend[id]);
+  chain[id]=(chain[id]||Promise.resolve()).then(()=>DB.collection('candidates').doc(id).set(bodyFor(BOOK.c[id])))
+    .then(()=>{lastSaved=Date.now(); setStat('saved');})
+    .catch(e=>{ if(e&&(e.code==='invalid_argument'||e.code==='not_granted'||e.code==='revoked')) dbOK=false; setStat('err'); });
+  return chain[id];
+}
+function queueRemote(id){ if(!DB||!dbOK){setStat(); return;} setStat('saving'); clearTimeout(pend[id]); pend[id]=setTimeout(()=>pushRemote(id),1500); }
+function save(){ S.updatedAt=Date.now(); BOOK.c[BOOK.current]=S; persistLocal(); queueRemote(BOOK.current); refresh(); }
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- navigation ---------- */
+const ids=$$('[data-sec]').map(s=>s.id);
+function show(id){
+  if(!ids.includes(id)) id='start';
+  $$('[data-sec]').forEach(s=>s.classList.toggle('on',s.id===id));
+  $$('.nav').forEach(n=>n.setAttribute('aria-current',n.dataset.go===id?'true':'false'));
+  const cur=$('.nav[data-go="'+id+'"]'); if(cur&&cur.scrollIntoView&&window.innerWidth<900) cur.scrollIntoView({block:'nearest',inline:'center'});
+  try{history.replaceState(null,'','#'+id);}catch(e){}
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');
+  if(g){show(g.dataset.go); if(!g.classList.contains('nav')) window.scrollTo({top:0});}
+  const r=e.target.closest('[data-reveal]');
+  if(r){const b=r.parentElement.nextElementSibling; b.hidden=!b.hidden; r.textContent=b.hidden?r.textContent.replace('Hide','Show'):r.textContent.replace('Show','Hide');}
+});
+
+/* ---------- persisted fields ---------- */
+function fillFields(){ $$('.persist').forEach(el=>{ const v=S.f[el.id]; if(el.type==='checkbox') el.checked=!!v; else el.value=(v==null?'':v); }); }
+$$('.persist').forEach(el=>{
+  el.addEventListener(el.type==='checkbox'||el.tagName==='SELECT'?'change':'input',()=>{
+    S.f[el.id]=el.type==='checkbox'?el.checked:el.value; save();
+  });
+});
+fillFields();
+
+/* ---------- checkpoints ---------- */
+const CP={
+ m1:[
+  {q:'In H.O.M.E., what does the M stand for?',o:['Mastery','Mindfulness','Motivation'],a:1,why:'Mindfulness: we stay present and anticipate needs before they are voiced.'},
+  {q:'A resident asks something you don\'t know. What do you say?',o:['"I don\'t know, try the office."','"Let me find that out for you right now."','"That\'s not really my job."'],a:1,why:'Reframe to ownership: you find out, or connect them to the right person.'},
+  {q:'Which question tells you you\'ve crossed from friendly into familiar?',o:['"Is this resident nice to me?"','"Would I behave the same way with every resident, or only this one?"','"Is my supervisor watching?"'],a:1,why:'Friendly is consistent. Familiar is selective.'}],
+ m2:[
+  {q:'When is a shift swap official?',o:['When both agents agree by text','When it\'s posted in All Users chat','When management validates it in Connecteam'],a:2,why:'A verbal agreement between coworkers means nothing operationally until management confirms it.'},
+  {q:'You can\'t make tomorrow\'s 7 AM shift. What\'s the procedure?',o:['Text a coworker to cover','Call AND text your supervisor and the on-call manager at least 2 hours before, and start the swap steps','Email HR after the shift'],a:1,why:'Call and text both contacts, as early as possible, at least 2 hours ahead, and follow the swap protocol.'},
+  {q:'A leasing agent you don\'t recognize says the property manager verbally approved unit access. You:',o:['Let them in, since leasing is a partner','Verify independently with your supervisor or PM, and log the whole exchange','Refuse and tell them to leave'],a:1,why:'"They said it was approved" is not authorization. Verify, then log.'}],
+ m3:[
+  {q:'How many site tours must be logged per shift, at minimum?',o:['One','Two','Four'],a:1,why:'Minimum two tours, each with route and observations.'},
+  {q:'At 2 AM nothing has happened for an hour. Your entry is:',o:['"Quiet night."','No entry needed','"2:00 AM — Lobby quiet. Desk coverage maintained. Cameras monitored, no activity."'],a:2,why:'At least one entry per hour, and say what you checked. "Quiet night" is never acceptable.'},
+  {q:'Your relief hasn\'t arrived and your shift is over. You:',o:['Leave a note and go','Notify your supervisor and stay at the desk','Ask a resident to watch the desk'],a:1,why:'The desk is never unattended. Abandoning a post is a terminable offense.'}],
+ m4:[
+  {q:'A DoorDash order arrives and the resident doesn\'t answer. What\'s the protocol?',o:['Log, refrigerate, call (not just text); dispose after 24 hrs, documented','Leave it on the shelf for 48 hrs','Text once and hold it at the desk'],a:0,why:'Food: call, refrigerate, 24-hour window. Groceries are the 48-hour, daily-outreach protocol.'},
+  {q:'You\'re unsure whether an event needs an incident report. You:',o:['Skip it unless asked','File it. An unnecessary report is recoverable; a missing one isn\'t','Mention it verbally to the next shift'],a:1,why:'When in doubt, file.'},
+  {q:'A resident collapses in the lobby. After calling 911, you:',o:['Move them to a couch','Don\'t move them unless there\'s immediate danger; stay with them and clear bystanders','Look through their wallet for contacts'],a:1,why:'Call first, don\'t move them, stay calm, clear space for EMS, document.'}]
+};
+function renderCP(key){
+  const host=$('[data-cp="'+key+'"]'); if(!host) return;
+  const st=S.cp[key]||{ans:{},pass:false};
+  host.innerHTML=CP[key].map((it,i)=>'<div class="q"><div class="stem">'+(i+1)+'. '+esc(it.q)+'</div>'+
+    it.o.map((o,j)=>{const chosen=st.ans[i]===j; const cls=chosen?(j===it.a?' right':' wrong'):''; return '<button type="button" class="opt'+cls+'" data-cpk="'+key+'" data-i="'+i+'" data-j="'+j+'">'+esc(o)+'</button>';}).join('')+
+    (st.ans[i]!==undefined?'<div class="fb '+(st.ans[i]===it.a?'good':'no')+'">'+(st.ans[i]===it.a?'Correct. ':'Not quite. ')+esc(it.why)+'</div>':'')+
+    '</div>').join('')+
+    '<div class="status '+(st.pass?'good':'no')+'">'+(st.pass?'Checkpoint passed.':'Answer all three correctly to pass. You can change an answer.')+'</div>';
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-cpk]'); if(!b) return;
+  const k=b.dataset.cpk,i=+b.dataset.i,j=+b.dataset.j;
+  const st=S.cp[k]||{ans:{},pass:false}; st.ans[i]=j;
+  st.pass=CP[k].every((it,x)=>st.ans[x]===it.a); S.cp[k]=st; save(); renderCP(k);
+});
+Object.keys(CP).forEach(renderCP);
+
+/* ---------- scenarios ---------- */
+const SC=[
+ {t:'Missing package',req:1,s:'An agitated resident says a package delivered 3 days ago never reached them. The system shows it signed in and stored.',a:'Validate the frustration, not the accusation: "I understand, let me pull up what we have." Show the log. If they persist, take contact info, follow up with your supervisor, and give a time you\'ll reach them. Log every element in E.D.O.'},
+ {t:'Communication under pressure',req:1,s:'Phone ringing, resident at the desk, maintenance on the radio, delivery driver at the door. All at once.',a:'Resident at desk: "One moment, please." Phone: take name and callback. Radio: "Copy, responding shortly." Door: hand signal. Return to the resident with full attention. Never visible stress.'},
+ {t:'Unverified person in lobby',req:1,s:'Someone has sat in the lobby 45 minutes. No check-in, vague answers.',a:'"Are you waiting for a resident? Can I let them know you\'re here?" If they can\'t verify: "For our residents\' security I need to confirm your visit." If they refuse, notify your supervisor. Never physically remove anyone. Document from first observation.'},
+ {t:'Handoff failure',req:1,cap:1,s:'You arrive. The outgoing agent is gone. The last log entry was 4 hours ago. A note says "maintenance issue on 7th floor, no details."',a:'Document the state you inherited: time, what was present, what was missing. Don\'t assume the issue is resolved; go look. Notify your supervisor about the incomplete pass-on immediately.'},
+ {t:'Wellness check trigger',req:1,cap:1,s:'A distressed resident asks if anyone has checked on their neighbor in 811, unseen for three days.',a:'Life-safety matter. Give full attention; don\'t minimize. Ask when they were last seen and any known health concerns. First call: your supervisor, immediately.'},
+ {t:'Noise complaint',s:'11:30 PM. A resident reports loud music from the unit above and wants immediate action.',a:'Don\'t promise enforcement. "I\'m going to document this and contact the on-call supervisor. I\'ll follow up within 15 minutes." Log call, unit, time, nature. Escalate. Never knock on a door alone for noise.'},
+ {t:'Smoking violation',s:'On your 9:30 PM tour, a resident is smoking on a non-designated balcony and keeps going after seeing you.',a:'Calm, non-accusatory: "Smoking on balconies isn\'t permitted. The designated area is [location]. I\'ll need to note this in the shift log." No debate. If they argue: "I understand you may disagree. I do need to document this." Log on return.'},
+ {t:'Escalation decision',s:'A maintenance issue has become a conflict. The resident threatens to "go above you."',a:'"I hear your frustration. I\'m escalating this to my supervisor right now so they can follow up with you today." Then escalate immediately and log the full interaction. A threat to escalate is your signal to escalate.'},
+ {t:'Policy gray zone',cap:1,s:'A resident asks you to hold a key for a guest arriving after they leave. No guest-key policy is on file.',a:'"That\'s not something I can do without confirming our policy. Let me check with my supervisor." Never fill a policy gap with personal judgment. Escalate and document.'},
+ {t:'Multi-party lobby conflict',cap:1,s:'Two residents are in a heated argument. One demands management; the other threatens to call police. The phone rings.',a:'Separate the parties first. One conversation at a time. Don\'t take a side. Call your supervisor immediately. Document in real time with timestamps on every action.'}
+];
+$('#scen').innerHTML=SC.map(x=>'<div class="panel"><div class="row" style="display:flex;gap:8px;flex-wrap:wrap">'+(x.req?'<span class="chip live">Required</span>':'')+(x.cap?'<span class="chip self">Capstone</span>':'')+'</div><h3>'+esc(x.t)+'</h3><p>'+esc(x.s)+'</p><div class="no-print"><button class="btn ghost" data-reveal>Show the Apex approach</button></div><div class="reveal-body" hidden><p class="small">'+esc(x.a)+'</p></div></div>').join('');
+
+/* ---------- systems match ---------- */
+const SYS=['Connecteam','Paylocity','Property system'];
+const TASKS=[['Clock in and out of your shift',0],['Submit a work order for a maintenance issue',2],['Access last week\'s pay stub',1],['Request to swap your Friday shift',0],['Look up a resident before releasing a package',2],['Set up direct deposit',1],['Submit an incident report',0],['Access your W-2',1]];
+function renderSys(){
+  const st=S.sys||{ans:{},checked:false};
+  $('#sysMatch').innerHTML=TASKS.map((t,i)=>{const v=st.ans[i]; const mark=st.checked&&v!==undefined&&v!==''?(+v===t[1]?' <span class="status good">✓</span>':' <span class="status no">✕ '+SYS[t[1]]+'</span>'):'';
+    return '<div class="check" style="grid-template-columns:minmax(0,1fr) 180px;cursor:default"><span>'+esc(t[0])+mark+'</span><select id="sys'+i+'" data-sys="'+i+'" aria-label="System for: '+esc(t[0])+'"><option value="">Choose…</option>'+SYS.map((s,j)=>'<option value="'+j+'"'+(String(v)===String(j)?' selected':'')+'>'+s+'</option>').join('')+'</select></div>';}).join('')+
+    '<div class="btns" style="margin-top:12px"><button class="btn ghost" id="sysCheck">Check answers</button>'+(st.checked?'<span class="status '+(TASKS.every((t,i)=>+st.ans[i]===t[1])?'good">All 8 correct.':'no">Fix the ✕ items and walk through them with your trainer.')+'</span>':'')+'</div>';
+}
+document.addEventListener('change',e=>{const s=e.target.closest('[data-sys]'); if(!s) return; S.sys=S.sys||{ans:{},checked:false}; S.sys.ans[s.dataset.sys]=s.value; S.sys.checked=false; save(); renderSys();});
+document.addEventListener('click',e=>{if(e.target.id==='sysCheck'){S.sys=S.sys||{ans:{},checked:false}; S.sys.checked=true; save(); renderSys();}});
+renderSys();
+
+/* ---------- checklists ---------- */
+const WALK=['Entry and exit points: main lobby, service entrance, garage, loading dock','Package room or mail center: storage system, intake station, fridge, high-value storage','Amenity spaces: hours and access rules','Fire pull stations, extinguishers, stairwell exits, fire panel','AED location','Elevator banks: residential, freight, service, and restrictions','Concierge desk: log system, radio, call sheet, key system, supplies','Tour route walked with the Lead: at least 3 stops, observation points named','Processed 3 real packages with the Lead, logged before moving','Wrote one live tour entry in E.D.O., reviewed by the Lead','Clock-in tested in Connecteam','Where logs are submitted, and who\'s on the pass-on distribution'];
+const SIGN=['Conduct & policy acknowledgment signed and handed in','Paylocity onboarding documents and direct deposit complete','Connecteam login works; clock-in tested','Uniform and name tag meet standard','Checkpoints 1–4 passed','Three practice log entries reviewed with my trainer','Emergency drill passed from memory: fire, medical, security','Site walk checklist complete and initialed by Lead','Final assessment 80% or higher','My first three shadow shifts are on my schedule','Contact card filled in'];
+function renderList(host,items,bucket,prefix){
+  $(host).innerHTML=items.map((t,i)=>'<label class="check"><input type="checkbox" id="'+prefix+i+'" data-list="'+bucket+'" data-i="'+i+'"'+(S[bucket][i]?' checked':'')+'><span>'+esc(t)+'</span></label>').join('')+
+  '<div class="status '+(items.every((t,i)=>S[bucket][i])?'good':'no')+'" style="margin-top:8px">'+items.filter((t,i)=>S[bucket][i]).length+' of '+items.length+' complete</div>';
+}
+document.addEventListener('change',e=>{const c=e.target.closest('[data-list]'); if(!c) return; S[c.dataset.list][c.dataset.i]=c.checked; save(); renderList(c.dataset.list==='walk'?'#walkList':'#signList',c.dataset.list==='walk'?WALK:SIGN,c.dataset.list,c.dataset.list==='walk'?'w':'s');});
+renderList('#walkList',WALK,'walk','w'); renderList('#signList',SIGN,'sign','s');
+
+/* ---------- site tabs ---------- */
+const SITES=[['ben','The Benjamin'],['via','VIA Seaport'],['ora','Ora Seaport'],['ans','Avalon North Station'],['anp','AVA North Point']];
+const siteFor={'The Benjamin':'ben','VIA Seaport':'via','Ora Seaport':'ora','Avalon North Station (ANS)':'ans','AVA North Point (ANP)':'anp'};
+function showSite(k){$$('.site').forEach(s=>s.classList.toggle('on',s.dataset.site===k)); $$('#siteTabs .tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.k===k?'true':'false'));}
+$('#siteTabs').innerHTML=SITES.map(s=>'<button class="tab" role="tab" data-k="'+s[0]+'">'+s[1]+'</button>').join('');
+$('#siteTabs').addEventListener('click',e=>{const t=e.target.closest('.tab'); if(t) showSite(t.dataset.k);});
+showSite(siteFor[S.f.hireSite]||'ben');
+
+/* ---------- final assessment ---------- */
+const MC=[
+ {q:'H.O.M.E. stands for:',o:['Hospitality, Ownership, Mindfulness, Excellence','Hospitality, Order, Mastery, Effort','Honesty, Ownership, Manners, Excellence'],a:0,cat:'Identity'},
+ {q:'A resident you know well asks for a favor you wouldn\'t do for others. The standard says:',o:['Do it; regulars have earned it','Same professional warmth for every resident; no special treatment','Do it only when no one is watching'],a:1,cat:'Identity'},
+ {q:'Your relief is 30 minutes late and your shift has ended. You:',o:['Leave; your shift is over','Stay at the desk and notify your supervisor','Lock the package room and leave'],a:1,cat:'Desk'},
+ {q:'Minimum shift log standard:',o:['One entry per shift plus pass-on','One entry per hour, two logged tours, all three pass-on sections','Entries only when something happens'],a:1,cat:'Shift log'},
+ {q:'Which entry meets the Apex standard?',o:['"10 PM — tour done, all good."','"10:02 PM — Tour of lobby, floors 2–6, gym, P1 garage. Gym door not latching; maintenance notified via WO #3310 at 10:15 PM. Pending — flagged for pass-on."','"10 PM — I walked around and things seemed fine."'],a:1,cat:'Shift log'},
+ {q:'A package arrives. When must it go into the system?',o:['Before it moves anywhere','At the end of your shift','After the resident picks it up'],a:0,cat:'Packages'},
+ {q:'An Instacart grocery order goes unclaimed. The protocol is:',o:['Dispose at 24 hours','Daily outreach; escalate to your Lead before disposal at 48 hours','Hold indefinitely'],a:1,cat:'Packages'},
+ {q:'A FedEx box labeled "Apple Store — MacBook Pro" arrives. You:',o:['Shelve it with standard packages','Log it as high-value, put it in secured storage, notify promptly','Leave it at the desk for quick pickup'],a:1,cat:'Packages'},
+ {q:'The fire alarm sounds and you smell smoke. Your first action:',o:['Go find the source','Call 911, then your supervisor','Wait to see if the alarm stops'],a:1,cat:'Emergencies'},
+ {q:'An incident involves police. How do you notify leadership?',o:['Phone the Regional Manager immediately, then file the written report before end of shift','File the Connecteam form and wait','Text a coworker'],a:0,cat:'Incidents'},
+ {q:'Which is correct incident-report language?',o:['"The resident was drunk."','"Resident exhibited slurred speech and unsteady gait."','"I think he\'d been drinking."'],a:1,cat:'Incidents'},
+ {q:'A resident threatens to "go above you" over a maintenance issue. You:',o:['Tell them that won\'t help','Escalate to your supervisor right now and log the interaction','Promise maintenance will come today'],a:1,cat:'Escalation'},
+ {q:'Where do you request a shift swap?',o:['Paylocity','Connecteam, then management validates it','A text to a coworker is enough'],a:1,cat:'Policies'},
+ {q:'A resident asks you to hold a key for a guest. There\'s no policy on file. You:',o:['Hold it; it\'s a small favor','Say you need to check with your supervisor, escalate, and document','Refuse and end the conversation'],a:1,cat:'Escalation'}
+];
+function renderExam(){
+  const st=S.exam||{ans:{}};
+  $('#examMC').innerHTML='<div class="k">Questions · 14 points</div>'+MC.map((it,i)=>'<div class="q"><div class="stem">'+(i+1)+'. '+esc(it.q)+'</div>'+it.o.map((o,j)=>'<label class="opt" for="ex'+i+'_'+j+'"><input type="radio" name="ex'+i+'" id="ex'+i+'_'+j+'" data-ex="'+i+'" value="'+j+'"'+(st.ans[i]===j?' checked':'')+'><span>'+esc(o)+'</span></label>').join('')+'</div>').join('');
+}
+document.addEventListener('change',e=>{const r=e.target.closest('[data-ex]'); if(!r) return; S.exam=S.exam||{ans:{}}; S.exam.ans[r.dataset.ex]=+r.value; S.exam.graded=null; save();});
+renderExam();
+
+function gradeWritten(){
+  const t=(S.f.wTime||'').trim(),ev=(S.f.wE||'').trim(),dt=(S.f.wD||'').trim(),oc=(S.f.wO||'').trim();
+  const all=[ev,dt,oc].join(' ');
+  const words=s=>s.split(/\s+/).filter(Boolean).length;
+  const opinion=/\b(i think|i feel|i guess|probably|seems|seemed|in my opinion|annoying|rude|crazy|drunk|psycho)\b/i;
+  const casual=/\b(nothing happened|stuff|things|idk|lol|kinda|sorta|a guy|that guy|handled it)\b/i;
+  const firstP=/(^|[\s.,])(I|i|me|my)(?=[\s.,])/;
+  return [
+   {n:'Valid time stamp',ok:/\b\d{1,2}:\d{2}\s?(AM|PM)\b/i.test(t),tip:'Use a time like 11:40 PM.'},
+   {n:'Event is one clear sentence',ok:words(ev)>=6,tip:'State what happened in a full, specific sentence.'},
+   {n:'Detail names units and specifics',ok:/\b(812|814)\b/.test(dt)&&words(dt)>=10,tip:'Include both unit numbers, the location, and what you observed.'},
+   {n:'Outcome names who you notified',ok:/(notif|contact|call|escalat|radio)/i.test(oc)&&/(supervisor|lead|manager|management|on-call)/i.test(oc),tip:'Name the person or role you escalated to.'},
+   {n:'Outcome records time or channel and closes the loop',ok:/(\d{1,2}:\d{2}|phone|radio|text|teams)/i.test(oc)&&/(incident report|report filed|pass-on|pass on|pending|monitor|resolved)/i.test(oc),tip:'Add when and how you notified, plus the report or pass-on.'},
+   {n:'Professional, third-person, factual voice',ok:!!all&&!opinion.test(all)&&!casual.test(all)&&!firstP.test(all),tip:'Write "Concierge separated…", not "I". No opinions or casual words.'}
+  ];
+}
+function showGrade(fresh){
+  const st=S.exam||{ans:{}};
+  const missing=MC.filter((q,i)=>st.ans[i]===undefined).length;
+  const mcRes=MC.map((q,i)=>({q,ok:st.ans[i]===q.a}));
+  const mcPts=mcRes.filter(r=>r.ok).length;
+  const wr=gradeWritten(); const wPts=wr.filter(w=>w.ok).length;
+  const total=mcPts+wPts, pass=total>=16;
+  const cats={}; mcRes.forEach(r=>{cats[r.q.cat]=cats[r.q.cat]||[0,0]; cats[r.q.cat][1]++; if(r.ok) cats[r.q.cat][0]++;});
+  cats['Written entry']=[wPts,6];
+  const weakest=Object.entries(cats).sort((a,b)=>a[1][0]/a[1][1]-b[1][0]/b[1][1])[0];
+  const focus=weakest[1][0]<weakest[1][1]?weakest[0]:'';
+  if(fresh){ S.exam=Object.assign(st,{graded:{total,pass,focus,ts:Date.now()}}); save(); }
+  const name=esc(S.f.hireName||'New hire');
+  const box=$('#examResult'); box.hidden=false;
+  box.innerHTML='<div class="panel"><div style="display:flex;flex-wrap:wrap;gap:18px;align-items:baseline"><span class="score">'+total+' / 20</span><span class="status '+(pass?'good':'no')+'">'+(pass?'Certified: 80% or higher.':'Below 80%. Review the flagged items with your trainer and re-take.')+'</span></div>'+
+   (missing?'<p class="status no">'+missing+' question'+(missing>1?'s':'')+' unanswered.</p>':'')+
+   (weakest[1][0]<weakest[1][1]?'<p class="small">30-day focus area: <strong>'+esc(weakest[0])+'</strong> ('+weakest[1][0]+' of '+weakest[1][1]+').</p>':'<p class="small">No gaps on the assessment. Pick the 30-day focus area with your trainer.</p>')+
+   '<div class="tbl-wrap"><table><tr><th>Written entry check</th><th>Result</th></tr>'+wr.map(w=>'<tr><td>'+esc(w.n)+(w.ok?'':'<br><span class="small">'+esc(w.tip)+'</span>')+'</td><td class="status '+(w.ok?'good':'no')+'">'+(w.ok?'✓':'✕')+'</td></tr>').join('')+'</table></div>'+
+   (mcRes.some(r=>!r.ok)?'<p class="small">Questions missed: '+mcRes.map((r,i)=>r.ok?null:(i+1)).filter(Boolean).join(', ')+'</p>':'')+'</div>'+
+   (pass?'<div class="cert"><div class="eyebrow" style="color:var(--gold)">Apex Concierge Services</div><h3>New Hire Experience · Speed Certification</h3><div class="small">This certifies that</div><div class="nm">'+name+'</div><p class="small" style="max-width:52ch">completed the New Hire Experience Speed Packet and passed the standards assessment with '+total+' of 20 points'+(S.f.hireSite?', assigned to '+esc(S.f.hireSite):'')+'.</p><div class="small">'+esc(S.f.hireDate||new Date().toLocaleDateString())+' · Trainer: '+esc(S.f.hireTrainer||'__________')+'</div></div>':'');
+  if(fresh) refresh();
+}
+$('#gradeBtn').addEventListener('click',()=>showGrade(true));
+
+/* ---------- progress ---------- */
+function gatesOf(st){ const cp=st.cp||{}, f=st.f||{}, w=st.walk||{}, sg=st.sign||{};
+  return [!!(cp.m1&&cp.m1.pass),!!(cp.m2&&cp.m2.pass&&f.ack),!!(cp.m3&&cp.m3.pass&&f.pA_o&&f.pB_o&&f.pC_o),!!(cp.m4&&cp.m4.pass),WALK.every((t,i)=>w[i]),!!(st.exam&&st.exam.graded&&st.exam.graded.pass),SIGN.every((t,i)=>sg[i])]; }
+const GATE_NAMES=['Module 1 checkpoint','Module 2 checkpoint and acknowledgment','Module 3 checkpoint and practice entries','Module 4 checkpoint','Site walk with Lead','Final assessment 80% or higher','Sign-off checklist'];
+function refresh(){
+  const gates=gatesOf(S);
+  const n=gates.filter(Boolean).length;
+  $('#meterTxt').textContent=n+' of 7 gates'; $('#meterBar').style.width=(n/7*100)+'%';
+  $('#whoLine').textContent='New hire: '+(S.f.hireName||'not entered yet')+(S.f.hireSite?' · '+S.f.hireSite:'');
+  const done={start:!!S.f.hireName,ros:false,m1:gates[0],m2:gates[1],m3:gates[2],m4:gates[3],live:!!(S.sys&&S.sys.checked),shadow:gates[4],exam:gates[5],signoff:gates[6],sources:false};
+  $$('[data-dot]').forEach(d=>d.classList.toggle('done',!!done[d.dataset.dot]));
+  renderSwitcher(); renderComplete(gates);
+}
+
+/* ---------- switcher ---------- */
+function labelFor(id){ const st=BOOK.c[id]; const nm=(st.f&&st.f.hireName)||'Unnamed candidate'; return nm+' · '+(st.completedAt?'Complete':gatesOf(st).filter(Boolean).length+'/7'); }
+function renderSwitcher(){
+  const sel=$('#candSel'); const ids=Object.keys(BOOK.c).sort((a,b)=>(BOOK.c[b].updatedAt||BOOK.c[b].created||0)-(BOOK.c[a].updatedAt||BOOK.c[a].created||0));
+  const html=ids.map(id=>'<option value="'+id+'"'+(id===BOOK.current?' selected':'')+'>'+esc(labelFor(id))+'</option>').join('');
+  if(sel.dataset.h!==html){ sel.innerHTML=html; sel.dataset.h=html; }
+  sel.value=BOOK.current;
+}
+function rerenderAll(){
+  ['f','cp','walk','sign'].forEach(k=>{if(!S[k]) S[k]={};});
+  fillFields(); Object.keys(CP).forEach(renderCP); renderSys();
+  renderList('#walkList',WALK,'walk','w'); renderList('#signList',SIGN,'sign','s');
+  renderExam(); showSite(siteFor[S.f.hireSite]||'ben');
+  if(S.exam&&S.exam.graded) showGrade(false); else { const b=$('#examResult'); b.hidden=true; b.innerHTML=''; }
+  refresh(); setStat();
+}
+function switchTo(id){ BOOK.current=id; S=BOOK.c[id]; persistLocal(); rerenderAll(); show('start'); window.scrollTo({top:0}); }
+$('#candSel').addEventListener('change',e=>switchTo(e.target.value));
+$('#newCand').addEventListener('click',()=>{ const id=newId(); BOOK.c[id]=blank(); switchTo(id); const n=$('#hireName'); if(n) n.focus(); });
+$('#saveBtn').addEventListener('click',async()=>{
+  S.updatedAt=Date.now(); BOOK.c[BOOK.current]=S; persistLocal();
+  if(DB&&dbOK){ setStat('saving'); pushRemote(BOOK.current); return; }
+  setStat();
+  // Opened as a file on this computer: also drop a progress file in Downloads so the
+  // Command Center filer can move it into the employee's 04_Training folder.
+  if(!IN_CLAUDE){
+    const nm=String(S.f.hireName||'').trim();
+    if(nm.split(/\s+/).filter(Boolean).length<2){ $('#saveStat').textContent='Saved on this device. Enter first and last name on Start here to also save a file.'; return; }
+    const data=JSON.stringify({kind:'apex-nhe-speed-progress',v:1,id:BOOK.current,exportedAt:new Date().toISOString(),state:S},null,1);
+    const r=await offerFile('NHE_Progress_'+lastFirst(nm)+'_'+dateTag()+'.json', new Blob([data],{type:'application/json'}));
+    $('#saveStat').textContent=r==='saved'?'Saved · progress file sent to Downloads '+hhmm(Date.now()):'Saved on this device · '+hhmm(Date.now());
+  }
+});
+
+/* ---------- records menu ---------- */
+const recMsg=t=>{ $('#recMsg').textContent=t; };
+async function offerFile(name, blob){
+  if(IN_CLAUDE){
+    let dl=null; try{ dl=await window.claude.use('downloads'); }catch(e){}
+    if(!dl) return 'unavailable';
+    try{ await dl.save({filename:name,data:blob}); return 'saved'; }catch(e){ return e&&e.code==='declined'?'declined':(e&&e.code==='rate_limited'?'busy':'unavailable'); }
+  }
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(url); a.remove();},2000); return 'saved';
+}
+const fileSafe=s=>String(s||'Candidate').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'')||'Candidate';
+const nameSafe=s=>String(s||'').replace(/['\u2019]/g,'').replace(/[^A-Za-z0-9-]+/g,'_').replace(/^_|_$/g,'');
+const lastFirst=n=>{ const p=String(n||'').trim().split(/\s+/).map(nameSafe).filter(Boolean); return p.length<2?(p[0]||'Candidate'):p[p.length-1]+'_'+p.slice(0,-1).join('_'); };
+const dateTag=()=>{const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const outcome={saved:'Saved.',declined:'Download cancelled.',busy:'A download prompt is already open.',unavailable:"Downloads aren't available in this view. Open the copy in your Command Center to download."};
+$('#expBtn').addEventListener('click',async()=>{
+  const data=JSON.stringify({kind:'apex-nhe-speed-progress',v:1,id:BOOK.current,exportedAt:new Date().toISOString(),state:S},null,1);
+  const r=await offerFile('NHE_Progress_'+lastFirst(S.f.hireName)+'_'+dateTag()+'.json', new Blob([data],{type:'application/json'}));
+  recMsg(r==='saved'?'Progress file saved. Import it on any device to pick up where they left off.':outcome[r]);
+});
+$('#impFile').addEventListener('change',e=>{
+  const file=e.target.files&&e.target.files[0]; if(!file) return;
+  const fr=new FileReader();
+  fr.onload=()=>{ try{
+      const o=JSON.parse(fr.result); if(!o||o.kind!=='apex-nhe-speed-progress'||!o.state) throw new Error('kind');
+      const id=(typeof o.id==='string'&&/^[A-Za-z0-9_-]{4,40}$/.test(o.id))?o.id:newId();
+      const incoming=Object.assign(blank(),o.state);
+      if(BOOK.c[id]&&(BOOK.c[id].updatedAt||0)>(incoming.updatedAt||0)){ recMsg('This device already has a newer copy of that candidate. Switched to it.'); switchTo(id); return; }
+      BOOK.c[id]=incoming; switchTo(id); S.updatedAt=Math.max(S.updatedAt||0,Date.now()); persistLocal(); if(DB&&dbOK) pushRemote(id);
+      recMsg('Imported '+((S.f&&S.f.hireName)||'candidate')+'.');
+    }catch(err){ recMsg("That file isn't an NHE progress file."); }
+    e.target.value='';
+  };
+  fr.readAsText(file);
+});
+let rmTimer=null;
+$('#rmBtn').addEventListener('click',()=>{ $('#rmConfirm').hidden=false; recMsg('Remove '+((S.f&&S.f.hireName)||'this candidate')+' and all their progress? Press Confirm remove.'); clearTimeout(rmTimer); rmTimer=setTimeout(()=>{$('#rmConfirm').hidden=true; recMsg('');},6000); });
+$('#rmConfirm').addEventListener('click',async()=>{
+  const id=BOOK.current; $('#rmConfirm').hidden=true; clearTimeout(pend[id]);
+  delete BOOK.c[id];
+  if(DB&&dbOK){ try{ await (chain[id]||Promise.resolve()); await DB.collection('candidates').doc(id).delete(); }catch(e){} }
+  const rest=Object.keys(BOOK.c); let next=rest[0]; if(!next){ next=newId(); BOOK.c[next]=blank(); }
+  switchTo(next); recMsg('Candidate removed.');
+});
+
+/* ---------- completion + certificate ---------- */
+function renderComplete(gates){
+  const box=$('#completeBody'); if(!box) return;
+  const all=gates.every(Boolean);
+  if(S.completedAt){
+    box.innerHTML='<p class="status good">Training complete · '+esc(new Date(S.completedAt).toLocaleDateString())+' · Certificate '+esc(S.certId||'')+'</p>'+
+      '<p class="small">The PDF has two pages: the certificate, and a completion record with the score, checklist and commitment card for the personnel file.</p>'+
+      '<div class="btns"><button class="btn" id="pdfBtn" type="button">Download certificate PDF</button></div><p class="small" id="pdfMsg"></p>';
+  } else if(all){
+    box.innerHTML='<p class="status good">All seven gates are complete.</p><p class="small">Marking training complete records today\'s date and unlocks the certificate.</p><div class="btns"><button class="btn" id="doneBtn" type="button">Mark training complete</button></div>';
+  } else {
+    box.innerHTML='<p class="small">The certificate unlocks when all seven gates are complete.</p><ul class="gatechk">'+GATE_NAMES.map((g,i)=>'<li><span class="g status '+(gates[i]?'good':'no')+'">'+(gates[i]?'✓':'·')+'</span><span>'+(i+1)+'. '+esc(g)+'</span></li>').join('')+'</ul>';
+  }
+}
+document.addEventListener('click',async e=>{
+  if(e.target.id==='doneBtn'){
+    S.completedAt=Date.now();
+    const d=new Date(S.completedAt); S.certId='APX-'+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+BOOK.current.slice(-4).toUpperCase();
+    save(); if(DB&&dbOK) pushRemote(BOOK.current);
+  }
+  if(e.target.id==='pdfBtn'){
+    const msg=$('#pdfMsg'); msg.textContent='Building PDF…';
+    const blob=buildPDF();
+    if(!blob){ msg.textContent="The PDF tool didn't load. Check the internet connection and reload the page."; return; }
+    const r=await offerFile('Apex_NHE_Certificate_'+lastFirst(S.f.hireName)+'_'+dateTag()+'.pdf', blob);
+    msg.textContent=r==='saved'?'Certificate saved. Print it or file it in their personnel folder.':outcome[r];
+  }
+});
+function pdfText(s){ return String(s==null?'':s).replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/—/g,' - ').replace(/–/g,'-').replace(/…/g,'...').replace(/[•·]/g,'·').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,''); }
+function buildPDF(){
+  const J=window.jspdf&&window.jspdf.jsPDF; if(!J) return null;
+  const f=S.f||{}, g=(S.exam&&S.exam.graded)||{};
+  const NAVY=[11,23,41], GOLD=[163,126,46], INK=[30,34,45], MUTE=[96,100,112], PAPER=[251,248,241];
+  const name=pdfText(f.hireName||'New hire'), site=pdfText(f.hireSite||''), trainer=pdfText(f.hireTrainer||'');
+  const done=new Date(S.completedAt||Date.now()).toLocaleDateString([], {year:'numeric',month:'long',day:'numeric'});
+  const doc=new J({orientation:'landscape',unit:'pt',format:'letter'}); const W=792,H=612;
+  doc.setFillColor(...PAPER); doc.rect(0,0,W,H,'F');
+  doc.setDrawColor(...NAVY); doc.setLineWidth(10); doc.rect(22,22,W-44,H-44);
+  doc.setDrawColor(...GOLD); doc.setLineWidth(1.2); doc.rect(40,40,W-80,H-80);
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...GOLD); doc.text('A P E X   C O N C I E R G E   S E R V I C E S', W/2, 96, {align:'center'});
+  doc.setFont('times','bold'); doc.setFontSize(42); doc.setTextColor(...NAVY); doc.text('Certificate of Completion', W/2, 156, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(13); doc.setTextColor(...MUTE); doc.text('New Hire Experience  ·  Speed Certification', W/2, 184, {align:'center'});
+  doc.setFontSize(12); doc.text('This certifies that', W/2, 236, {align:'center'});
+  doc.setFont('times','bolditalic'); doc.setFontSize(40); doc.setTextColor(...GOLD); doc.text(name, W/2, 286, {align:'center'});
+  doc.setDrawColor(...GOLD); doc.setLineWidth(0.8); doc.line(W/2-210,298,W/2+210,298);
+  doc.setFont('helvetica','normal'); doc.setFontSize(12.5); doc.setTextColor(...INK);
+  const body='has completed the Apex New Hire Experience and passed the standards assessment with '+(g.total!=null?g.total:'--')+' of 20 points, meeting the Apex Standard'+(site?' for '+site:'')+'.';
+  doc.text(doc.splitTextToSize(body,520), W/2, 332, {align:'center', lineHeightFactor:1.5});
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...GOLD); doc.text('HOSPITALITY   ·   OWNERSHIP   ·   MINDFULNESS   ·   EXCELLENCE', W/2, 392, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(12); doc.setTextColor(...INK); doc.text('Completed '+done, W/2, 420, {align:'center'});
+  doc.setDrawColor(...NAVY); doc.setLineWidth(0.7);
+  doc.line(130,498,350,498); doc.line(442,498,662,498);
+  if(trainer){ doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.setTextColor(...INK); doc.text(trainer, 240, 490, {align:'center'}); }
+  doc.setFontSize(9.5); doc.setTextColor(...MUTE); doc.text('TRAINER / LEAD', 240, 514, {align:'center'}); doc.text('REGIONAL MANAGER', 552, 514, {align:'center'});
+  doc.setFontSize(8.5); doc.text('Certificate ID '+pdfText(S.certId||'')+'   ·   Apex Concierge Services Inc.   ·   Greater Boston', W/2, 548, {align:'center'});
+
+  // page 2: completion record
+  doc.addPage('letter','portrait'); const PW=612, PH=792, L=54, R=PW-54; let y=0;
+  doc.setFillColor(...NAVY); doc.rect(0,0,PW,74,'F');
+  doc.setFont('times','bold'); doc.setFontSize(20); doc.setTextColor(243,236,221); doc.text('NHE Speed  ·  Completion Record', L, 46);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(201,168,76); doc.text(pdfText(S.certId||''), R, 46, {align:'right'});
+  y=106;
+  const need=h=>{ if(y+h>PH-60){ doc.addPage('letter','portrait'); y=60; } };
+  const head=t=>{ need(40); doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...GOLD); doc.text(t.toUpperCase(), L, y); doc.setDrawColor(224,215,197); doc.setLineWidth(0.6); doc.line(L,y+6,R,y+6); y+=21; };
+  const kv=(k,v)=>{ const lines=doc.splitTextToSize(pdfText(v||'-'), R-L-150); need(lines.length*12.5+3); doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(...MUTE); doc.text(k, L, y); doc.setTextColor(...INK); doc.text(lines, L+150, y, {lineHeightFactor:1.25}); y+=lines.length*12.5+3; };
+  const items=list=>{ const colW=(R-L-20)/2; const prep=list.map(([ok,t])=>({ok,lines:doc.splitTextToSize(pdfText(t), colW-44)}));
+    for(let i=0;i<prep.length;i+=2){ const a=prep[i], b=prep[i+1]; const h=Math.max(a.lines.length,b?b.lines.length:1)*11.5+4; need(h);
+      [a,b].forEach((it,k)=>{ if(!it) return; const x=L+k*(colW+20); doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...(it.ok?[31,107,58]:[139,30,30])); doc.text(it.ok?'DONE':'OPEN', x, y); doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(...INK); doc.text(it.lines, x+40, y, {lineHeightFactor:1.2}); });
+      y+=h; } };
+  head('Candidate');
+  kv('Name', f.hireName); kv('Property', f.hireSite); kv('Training date', f.hireDate); kv('Trainer / Lead', f.hireTrainer);
+  kv('Completed', done); kv('Final assessment', g.total!=null?(g.total+' of 20'+(g.pass?' · Certified':'')):'Not graded'); kv('30-day focus area', g.focus||'Set with trainer');
+  y+=4; head('Gates');
+  items(gatesOf(S).map((ok,i)=>[ok,(i+1)+'. '+GATE_NAMES[i]]));
+  y+=4; head('Sign-off checklist');
+  items(SIGN.map((t,i)=>[!!S.sign[i],t]));
+  y+=4; head('Who to contact');
+  kv('Site supervisor / Lead', f.c1); kv('Regional Manager / on-call', f.c2); kv('After-hours maintenance', f.c3); kv('Property management', f.c4);
+  y+=4; head('Commitment card');
+  kv('The standard I carry', f.k1); kv('I hold myself accountable for', f.k2); kv('Success at 30 days', f.k3);
+  need(80); y+=40; doc.setDrawColor(...NAVY); doc.setLineWidth(0.6);
+  const cw=(R-L-40)/3; ['New hire','Trainer / Lead','Regional Manager'].forEach((t,i)=>{ const x=L+i*(cw+20); doc.line(x,y,x+cw,y); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(...MUTE); doc.text(t.toUpperCase()+'  ·  DATE', x, y+14); });
+  const pages=doc.getNumberOfPages();
+  for(let p=2;p<=pages;p++){ doc.setPage(p); doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...MUTE); doc.text('Apex Concierge Services  ·  File in personnel folder  ·  Page '+p+' of '+pages, PW/2, PH-30, {align:'center'}); }
+  return doc.output('blob');
+}
+
+/* ---------- connect to Apex records (inside Claude only) ---------- */
+(async()=>{
+  if(!IN_CLAUDE){ setStat(); return; }
+  let db=null; try{ db=await window.claude.use('db'); }catch(e){}
+  if(!db){ setStat(); return; }
+  try{
+    const snap=await db.collection('candidates').get();
+    DB=db; dbOK=true;
+    const remoteIds=new Set();
+    snap.docs.forEach(d=>{ remoteIds.add(d.id); const b=d.data(); if(!b||!b.state) return; const loc=BOOK.c[d.id];
+      if(!loc||(b.updatedAt||0)>(loc.updatedAt||0)) BOOK.c[d.id]=Object.assign(blank(),JSON.parse(JSON.stringify(b.state))); });
+    Object.keys(BOOK.c).forEach(id=>{ if(!remoteIds.has(id)&&hasData(BOOK.c[id])) pushRemote(id); });
+    const blanks=Object.keys(BOOK.c).filter(id=>!hasData(BOOK.c[id])&&id!==BOOK.current);
+    blanks.forEach(id=>delete BOOK.c[id]);
+    if(!hasData(BOOK.c[BOOK.current])&&[...remoteIds].some(id=>BOOK.c[id])){ delete BOOK.c[BOOK.current]; BOOK.current=[...remoteIds].filter(id=>BOOK.c[id]).sort((a,b)=>(BOOK.c[b].updatedAt||0)-(BOOK.c[a].updatedAt||0))[0]; }
+    S=BOOK.c[BOOK.current]; persistLocal(); rerenderAll(); setStat('saved');
+  }catch(e){ DB=null; dbOK=false; setStat(); }
+})();
+refresh(); setStat();
+const h=(location.hash||'').replace('#',''); show(h||'start');
+window.addEventListener('hashchange',()=>show((location.hash||'').replace('#','')));
+})();
+</script>

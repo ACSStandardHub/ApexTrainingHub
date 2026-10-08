@@ -77,6 +77,12 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
 .coming-card{border:1px dashed rgba(255,255,255,0.08);border-radius:2px;padding:18px 20px;background:rgba(255,255,255,0.015)}
 .coming-label{font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.18);margin-bottom:5px}
 .coming-name{font-size:12.5px;font-weight:500;color:rgba(255,255,255,0.28)}
+.coming-card.live{border:1px solid rgba(26,92,42,0.45);background:rgba(26,92,42,0.08)}
+.coming-card.live .coming-label{color:#4ade80;opacity:.85}
+.coming-card.live .coming-name{color:rgba(255,255,255,0.78)}
+.coming-note{font-size:11px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.55;margin-top:6px}
+.cc-note{margin:0 0 22px;padding:14px 18px;border-left:2px solid #1A5C2A;background:rgba(26,92,42,0.08);font-size:12.5px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.65}
+.cc-note b{color:rgba(255,255,255,0.85);font-weight:600}
 
 /* FOOTER */
 .hub-footer{border-top:1px solid rgba(201,168,76,0.08);margin:0 -64px;padding:24px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
@@ -117,10 +123,31 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
       <div>
         <div class="module-number">01</div>
         <div class="module-name">New Hire Experience</div>
-        <p class="module-desc">The complete 3-day onboarding program. Facilitation tools, training outlines, reference materials, and live session apps — everything needed to run a consistent, standard-level orientation at any Apex property.</p>
+        <p class="module-desc">NHE Speed — the one-day New Hire Experience — is the current program (October 2026): four modules, a coach block, a site shadow, a final assessment and sign-off in a single shift. The original 3-day NHO stays below as source material.</p>
       </div>
       <div><span class="status-badge status-active"><span class="status-dot"></span>Active</span></div>
     </div>
+    <div class="tools-grid">
+      <a class="tool-card" href="nhe-speed-packet.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Current Program · Agent-Facing</div>
+          <div class="tool-name">NHE Speed — Agent Packet</div>
+          <p class="tool-desc">The packet the new hire works through: M1 Identity &amp; presence, M2 Policies &amp; accountability, M3 Desk operations &amp; the shift log, M4 Packages, incidents &amp; emergencies — with checkpoints, coach block, site shadow, final assessment and sign-off.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">One Day · ~9¼ Hours</span><span class="tool-arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="nhe-facilitator-flow.html">
+        <div class="tool-card-accent green"></div>
+        <div class="tool-card-inner">
+          <div class="tool-type">Current Program · Trainer Only</div>
+          <div class="tool-name">NHE Speed — Facilitator Flow</div>
+          <p class="tool-desc">Run sheet with an elapsed clock, slides to show, talking points, checks and answer keys, plus short-day, long-day, overnight-start and multi-hire variations.</p>
+        </div>
+        <div class="tool-card-footer"><span class="tool-tag">Open During Training</span><span class="tool-arrow">→</span></div>
+      </a>
+    </div>
+    <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Original 3-day NHO · source material</div><div class="section-rule-line"></div></div>
     <div class="tools-grid">
       <a class="tool-card" href="training-materials-library.html">
         <div class="tool-card-accent"></div>
@@ -161,7 +188,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
     </div>
     <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Coming to this module</div><div class="section-rule-line"></div></div>
     <div class="coming-soon-grid">
-      <div class="coming-card"><div class="coming-label">In Development</div><div class="coming-name">New Hire Tracking Dashboard</div></div>
+      <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">New Hire Tracking Dashboard</div><div class="coming-note">NHE Speed steps per trainee, 30 / 90-day and 6-month dates. Confidential — runs locally, not on this site.</div></div>
       <div class="coming-card"><div class="coming-label">In Development</div><div class="coming-name">30-Day Review Form</div></div>
       <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Agent Assessment Scorecard</div></div>
       <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Cohort History Log</div></div>
@@ -196,7 +223,7 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
     </div>
     <div class="tools-grid">
       <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Coaching Guide</div><div class="tool-name">Senior Agent Peer Coaching Guide</div><p class="tool-desc">Nine-module coaching guide for senior agents developing new hires. What to teach, how to teach it, what ready looks like, and reflection prompts.</p></div><div class="tool-card-footer"><span class="tool-tag">Document Ready · Web Version Coming</span></div></div>
-      <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Certification</div><div class="tool-name">Trainer Certification Framework</div><p class="tool-desc">Criteria, evaluation rubric, and sign-off process for certifying Apex trainers to facilitate the 3-day NHO program.</p></div><div class="tool-card-footer"><span class="tool-tag">Planned</span></div></div>
+      <div class="tool-card inactive"><div class="tool-card-accent dim"></div><div class="tool-card-inner"><div class="tool-type">Certification</div><div class="tool-name">Trainer Certification Framework</div><p class="tool-desc">Criteria, evaluation rubric, and sign-off process for certifying Apex trainers to facilitate the NHE Speed program.</p></div><div class="tool-card-footer"><span class="tool-tag">Planned</span></div></div>
     </div>
   </section>
 
@@ -208,14 +235,15 @@ body{font-family:'Barlow',sans-serif;background:var(--navy-dark);color:var(--whi
         <div class="module-name">New Hire Tracking &amp; Feedback</div>
         <p class="module-desc">The accountability layer. Track new hire progress from Day 1 through the 90-day mark, capture assessment scores, document flags, and maintain the feedback loop between facilitators and supervisors.</p>
       </div>
-      <div><span class="status-badge status-planned"><span class="status-dot"></span>Planned</span></div>
+      <div><span class="status-badge status-active"><span class="status-dot"></span>Live · Command Center</span></div>
     </div>
+    <p class="cc-note"><b>Where this lives:</b> tracking and feedback run in the Apex Operations Command Center (Training &amp; Development tab), kept on the Regional Concierge Manager's laptop. Trainee progress, coaching notes and recognition are confidential personnel records, so they are never published on this site. This lab holds the training materials; the Command Center holds the people data.</p>
     <div class="coming-soon-grid">
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">New Hire Progress Tracker</div></div>
+      <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">New Hire Progress Tracker</div><div class="coming-note">Every NHE Speed step through solo clearance, with 30 / 90-day and 6-month dates and trainer notes.</div></div>
+      <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">Coaching &amp; Recognition Log</div><div class="coming-note">Replaces Flag &amp; Remediation Notes: coaching by APSF standard, recognition, and a follow-up check (Improved / Partly / Not yet) for coaching transfer.</div></div>
+      <div class="coming-card live"><div class="coming-label">Live · Ops Command Center</div><div class="coming-name">Monthly T&amp;D Impact Summary</div><div class="coming-note">Replaces the Cohort Completion Report: hires started and onboarded, modules delivered, coaching transfer rate, recognition, reviews.</div></div>
       <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">30-Day Review Form</div></div>
       <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Assessment Score Log</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Flag &amp; Remediation Notes</div></div>
-      <div class="coming-card"><div class="coming-label">Planned</div><div class="coming-name">Cohort Completion Report</div></div>
     </div>
   </section>
 

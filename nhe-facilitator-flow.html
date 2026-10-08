@@ -1,0 +1,301 @@
+<title>NHE Facilitator Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: trainer run sheet — sticky clock bar on top, ten blocks in order down the page (the live one opens and glows), reference tabs underneath. */
+:root{
+  --paper:#F6F2E9; --surface:#FFFFFF; --sunk:#EFE9DC;
+  --ink:#0B1729; --ink-2:#4B5162; --line:#E0D7C5;
+  --gold:#8A6A24; --gold-hi:#C9A84C; --gold-wash:#F4EAD0;
+  --band:#0B1729; --band-ink:#F3ECDD; --band-mute:#B3AC9E;
+  --teal:#1E5D58; --teal-wash:#DDEEEB;
+  --pend:#8A3B12; --pend-wash:#FBE7D8; --ok:#1F6B3A; --ok-wash:#E1F0E5;
+  --f-display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --f-body:"Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0B1729; --surface:#122039; --sunk:#0F1B31; --ink:#EEE7D7; --ink-2:#A8AFBD; --line:#26375A;
+  --gold:#D9BA64; --gold-hi:#D9BA64; --gold-wash:#2A2A26; --band:#060E1C; --band-ink:#F3ECDD; --band-mute:#9AA0AD;
+  --teal:#7CC8C0; --teal-wash:#12322F; --pend:#F2A774; --pend-wash:#3A2415; --ok:#82D49C; --ok-wash:#123220; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0B1729; --surface:#122039; --sunk:#0F1B31; --ink:#EEE7D7; --ink-2:#A8AFBD; --line:#26375A;
+  --gold:#D9BA64; --gold-hi:#D9BA64; --gold-wash:#2A2A26; --band:#060E1C; --band-ink:#F3ECDD; --band-mute:#9AA0AD;
+  --teal:#7CC8C0; --teal-wash:#12322F; --pend:#F2A774; --pend-wash:#3A2415; --ok:#82D49C; --ok-wash:#123220; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0} ul,ol{margin:0;padding-left:1.2rem} li+li{margin-top:.2rem}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+
+.mast{background:var(--band);color:var(--band-ink);padding-block:26px 22px}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--gold-hi)}
+.mast h1{font-size:clamp(2rem,4.6vw,3rem);margin-top:6px}
+.mast p{color:var(--band-mute);max-width:60ch;margin-top:6px;font-size:.95rem}
+
+.clock{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--band);color:var(--band-ink);border-top:1px solid #1E2C48;padding-block:12px}
+.clock .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
+.elapsed{font-family:var(--f-display);font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--gold-hi);min-width:4.2ch}
+.now{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.now b{font-weight:600;font-size:1rem}
+.now span{font-size:.85rem;color:var(--band-mute)}
+.cbtns{display:flex;gap:8px;flex-wrap:wrap}
+.cb{border:1px solid #3A4A6A;background:transparent;color:var(--band-ink);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:.88rem}
+.cb.primary{background:var(--gold-hi);border-color:var(--gold-hi);color:#0B1729;font-weight:600}
+.cb.warn{border-color:#C46A3A;color:#F2A774}
+
+main{padding-block:28px 64px;display:flex;flex-direction:column;gap:36px}
+.k{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.small{font-size:.86rem;color:var(--ink-2)}
+.chip{display:inline-flex;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.chip.live{background:var(--gold-wash);color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.chip.self{color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink-2)}
+.chip.shadow{background:var(--teal-wash);color:var(--teal);box-shadow:inset 0 0 0 1px var(--teal)}
+.chip.brk{color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
+
+.blocks{display:flex;flex-direction:column;gap:10px}
+details.blk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.blk[open]{box-shadow:0 1px 0 var(--line)}
+details.blk.cur{border-color:var(--gold-hi);box-shadow:0 0 0 2px var(--gold-hi)}
+details.blk.done summary .ttl{color:var(--ink-2)}
+summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:96px auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 18px}
+summary::-webkit-details-marker{display:none}
+.win{font-variant-numeric:tabular-nums;font-weight:500;font-size:.92rem}
+.ttl{font-family:var(--f-display);font-size:1.35rem;font-weight:600;line-height:1.2}
+.ttl small{display:block;font-family:var(--f-body);font-size:.82rem;color:var(--ink-2);font-weight:400}
+.prog{font-size:.8rem;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.prog.all{color:var(--ok);font-weight:600}
+.body{padding:4px 18px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;border-top:1px solid var(--line)}
+.body .col{display:flex;flex-direction:column;gap:8px;min-width:0;padding-top:14px}
+.body .full{grid-column:1/-1}
+.say{border-left:2px solid var(--gold-hi);padding-left:14px;font-family:var(--f-display);font-size:1.15rem;line-height:1.35;font-style:italic}
+.slides{display:flex;flex-wrap:wrap;gap:6px}
+.sl{font-size:.8rem;border:1px solid var(--line);border-radius:6px;padding:2px 8px;background:var(--sunk);font-variant-numeric:tabular-nums}
+.check{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:6px 0;font-size:.95rem;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--gold-hi)}
+.check input:checked+span{color:var(--ink-2);text-decoration:line-through}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tab{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.88rem}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pane{display:none;flex-direction:column;gap:14px}
+.pane.on{display:flex}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:600;background:var(--sunk)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.panel h3{font-size:1.3rem}
+.pendc{background:var(--pend-wash);color:var(--pend);font-size:.74rem;border-radius:999px;padding:2px 9px;white-space:nowrap}
+@media (max-width:720px){
+  summary{grid-template-columns:auto 1fr;row-gap:4px}
+  summary .ttl{grid-column:1/-1}
+  summary .prog{grid-column:2;justify-self:end;grid-row:1}
+  .body,.grid2{grid-template-columns:minmax(0,1fr)}
+  .elapsed{font-size:2rem}
+}
+@media print{.clock,.cbtns,.tabs{display:none!important}.pane{display:flex!important}details.blk{break-inside:avoid}}
+</style>
+
+<header class="mast"><div class="wrap">
+  <div class="eyebrow">Apex NHE · Trainer only</div>
+  <h1>Facilitator Flow</h1>
+  <p>Start the clock at kickoff. The block you're in opens automatically with the slides to show, what to say, and what to check before moving on. Works for any start time.</p>
+</div></header>
+
+<div class="clock"><div class="wrap">
+  <div class="elapsed" id="elapsed" aria-live="off">0:00</div>
+  <div class="now"><b id="nowTxt">Clock not started</b><span id="nextTxt">Press Start at kickoff</span></div>
+  <div class="cbtns">
+    <button class="cb primary" id="btnStart">Start</button>
+    <button class="cb" id="btnBack">−5 min</button>
+    <button class="cb" id="btnFwd">+5 min</button>
+    <button class="cb" id="btnReset">Reset</button>
+    <button class="cb warn" id="btnConfirm" hidden>Confirm reset</button>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <div class="k">The day, block by block</div>
+    <p class="small">Elapsed time from kickoff (hours:minutes). Slide numbers match the trainer deck. Checks save on this device.</p>
+    <div class="blocks" id="blocks"></div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <div class="k">Reference</div>
+    <div class="tabs" role="tablist" id="refTabs">
+      <button class="tab" role="tab" data-p="keys" aria-selected="true">Answer keys</button>
+      <button class="tab" role="tab" data-p="score" aria-selected="false">Scoring &amp; sign-off</button>
+      <button class="tab" role="tab" data-p="adjust" aria-selected="false">Adjust the day</button>
+      <button class="tab" role="tab" data-p="pending" aria-selected="false">Pending &amp; sources</button>
+    </div>
+
+    <div class="pane on" data-pane="keys">
+      <div class="tbl-wrap"><table>
+        <tr><th>Slide</th><th>Scenario</th><th>Apex approach</th></tr>
+        <tr><td>19</td><td>Missing package</td><td>Validate the frustration, not the accusation. Show the log. If they insist: take contact info, follow up with supervisor, give a time. Log it in E.D.O.</td></tr>
+        <tr><td>20</td><td>Everything at once</td><td>Resident: "One moment, please." Phone: name and callback. Radio: "Copy, responding shortly." Door: hand signal. Back to the resident. No visible stress.</td></tr>
+        <tr><td>21</td><td>Visitor who won't say</td><td>"Are you waiting for a resident?" Can't verify → "For residents' security I need to confirm your visit." Refuses → supervisor. Never physically remove anyone.</td></tr>
+        <tr><td>22</td><td>Handoff that didn't happen</td><td>Document what you inherited. Don't assume it's resolved; go look. Notify supervisor about the incomplete pass-on.</td></tr>
+        <tr><td>23</td><td>Neighbor no one has seen</td><td>Life-safety. Full attention, clarifying questions. First call: supervisor, immediately. Don't enter the unit.</td></tr>
+        <tr><td>24</td><td>When policy is silent</td><td>"Let me check with my supervisor." Never fill a policy gap with personal judgment. Escalate, document.</td></tr>
+        <tr><td>25</td><td>11:30 PM noise call</td><td>No enforcement promises. Document, call on-call supervisor, follow up within 15 minutes. Never knock alone.</td></tr>
+      </table></div>
+      <div class="grid2">
+        <div class="panel"><h3>Emergency drill · first three steps</h3>
+          <p><strong>Fire:</strong> don't investigate, call 911 then supervisor · pull the alarm · exits, no elevators.</p>
+          <p><strong>Medical:</strong> call 911 with address, floor, unit · don't move them · stay with them.</p>
+          <p><strong>Security:</strong> don't confront, keep distance · 911 if credible · notify supervisor. Safety first.</p></div>
+        <div class="panel"><h3>Systems match</h3>
+          <p><strong>Connecteam:</strong> clock in/out, shift swap, incident report.</p>
+          <p><strong>Paylocity:</strong> pay stub, direct deposit, W-2.</p>
+          <p><strong>Property system:</strong> work order, verify resident before release.</p></div>
+      </div>
+    </div>
+
+    <div class="pane" data-pane="score">
+      <div class="grid2">
+        <div class="panel"><h3>Final assessment</h3><ul>
+          <li>14 multiple-choice (1 pt each) + written escalation entry (6 pts) = 20</li>
+          <li><strong>16 or higher certifies.</strong> The packet shows a certificate.</li>
+          <li>Below 16: review the missed items, then re-take before signing item 9</li>
+          <li>Lowest category on the result screen = 30-day focus area</li></ul></div>
+        <div class="panel"><h3>Written entry is auto-checked for</h3><ul>
+          <li>A valid time stamp</li><li>A full Event sentence</li><li>Both unit numbers in the Detail</li>
+          <li>Who was notified, with time or channel</li><li>A closed loop (report filed, pass-on, pending)</li><li>Third-person, no opinions</li></ul>
+          <p class="small">Read it yourself too. The checks catch format, not judgment.</p></div>
+      </div>
+      <div class="panel"><h3>Solo clearance</h3><p>The assessment shows knowledge. The Lead clears for solo only after the hire demonstrates readiness on shift: Days 1–3 shadow, Days 4–7 supported, Week 2 solo with daily check-ins.</p></div>
+    </div>
+
+    <div class="pane" data-pane="adjust">
+      <div class="grid2">
+        <div class="panel"><h3>Only 8 hours</h3><ul><li>Module 1 to 60 min (skip the reflection)</li><li>Module 4 to 50 min</li><li>Coach block to 75 min: four scenarios (drop 23 or 22)</li><li>Assessment to 40 min</li></ul></div>
+        <div class="panel"><h3>Up to 10 hours</h3><ul><li>Shadow to 120 min: hire runs the desk 30 min, Lead watching</li><li>Coach block adds the bonus scenarios (24, 25)</li></ul></div>
+        <div class="panel"><h3>Evening or overnight start</h3><ul><li>Same order, same lengths</li><li>Line up a Lead or Senior Agent who is on site for the shadow block</li><li>Walk the property as it runs at that hour: lighting, locked doors, overnight package process</li></ul></div>
+        <div class="panel"><h3>Two or more hires</h3><ul><li>One device each; progress saves per device</li><li>Run kickoff, check-ins, coach block and sign-off together</li><li>Split them across Leads for the shadow block if needed</li></ul></div>
+      </div>
+      <div class="panel"><h3>Have ready before kickoff</h3><div id="matList"></div></div>
+    </div>
+
+    <div class="pane" data-pane="pending">
+      <div class="tbl-wrap"><table>
+        <tr><th>Item</th><th>Status</th><th>How it's taught</th></tr>
+        <tr><td>Incident Reporting SOP (when to file, reporting chain)</td><td><span class="pendc">Draft since Mar 2026</span></td><td>Taught as written and tagged in Module 4. The Sept 2026 quality standard (how to write) is current.</td></tr>
+        <tr><td>Employee Handbook version</td><td><span class="pendc">Cover reads 2025</span></td><td>Policies quoted from the "2026" file. Agents are told the handbook is the full reference.</td></tr>
+        <tr><td>Package handling SOP</td><td><span class="pendc">No approval record</span></td><td>General refresher pack. Benjamin and VIA site SOPs not on file.</td></tr>
+        <tr><td>Shift swap protocol</td><td><span class="pendc">Deck only</span></td><td>Four steps from the Day 1 deck, tagged.</td></tr>
+        <tr><td>Call-out notice</td><td>Sources differ</td><td>Deck said 2–4 hours; handbook says at least 2. Packet uses the handbook minimum.</td></tr>
+        <tr><td>H.O.M.E. "M"</td><td>Sources differ</td><td>Outline V2 says Mastery; agent decks and printables say Mindfulness. Packet uses Mindfulness.</td></tr>
+        <tr><td>Field Training Standard, escalation contact matrix</td><td>Not located</td><td>Shadow block and the packet's contact card stand in.</td></tr>
+      </table></div>
+      <p class="small">Built from: NHO Master Outline V2 · NHO Day 1, 2, 3 decks · Day 1 New Hire Packet · Printable Materials Pack · Shift Log and Package refresher packs · Escalations &amp; Incident Reporting Standards 2026 · Incident Reporting SOP (draft) · Professional Standards Framework V1 · E.D.O. pocket card · SOP Refresher Module · 2026 Handbook · five site profiles · Avalon Scope of Work · ANS Site Breakdown.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+const KEY='apexNheFlow.v1';
+let S={start:null,acc:0,run:false,chk:{}};
+try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=m=>Math.floor(m/60)+':'+String(Math.floor(m%60)).padStart(2,'0');
+
+const B=[
+ {id:'b1',a:0,b:30,type:'live',t:'Kickoff',sub:'Identity frame and launch',slides:'1–6',agent:'Settling in, entering name and site on the packet Start page.',
+  do:['Room set to standard before they arrive','Greet each hire by name: handshake, eye contact','Slides 1–5, then slide 6 sends them into the packet'],
+  say:'"This is not a job. This is a profession. We are hospitality professionals inside someone\'s home."',
+  chk:['Packet open on their device, name and site entered','Paper acknowledgment form handed over','Phones silenced and stored']},
+ {id:'b2',a:30,b:105,type:'self',t:'Module 1 · Identity & presence',sub:'75 min self-guided',slides:'7–8',agent:'Reading H.O.M.E., the Apex Standard, uniform, reframes; reflection; Checkpoint 1.',
+  do:['Show slide 7 and talk through its three points (5 min)','Step away. Come back mid-module for slide 8, the friendly vs. familiar test'],
+  say:'"Would I behave the same way with every resident, or only this one?" Let it sit five seconds.',
+  chk:['Check-in done (slide 7)','Slide 8 talked through','Checkpoint 1 passed (gate 1 on their progress bar)']},
+ {id:'b3',a:105,b:150,type:'self',t:'Module 2 · Policies',sub:'45 min self-guided',slides:'9–10',agent:'Ecosystem, attendance, call-out, swaps, conduct; signs the acknowledgment; Checkpoint 2.',
+  do:['Slide 9: have them recite the call-out procedure back to you','Slide 10 when they finish: devices, boundaries, confidentiality (5–7 min max)'],
+  say:'"A swap isn\'t real until management confirms it in Connecteam."',
+  chk:['Call-out recited correctly','Acknowledgment form signed','Checkpoint 2 passed']},
+ {id:'b4',a:150,b:210,type:'self',t:'Module 3 · Desk & shift log',sub:'60 min self-guided',slides:'11–12',agent:'Shift start, the desk as a post, tours, E.D.O.; writes three practice entries; Checkpoint 3.',
+  do:['Slide 11: tell them this is the most important hour of the day','Slide 12: the rule. Then remind them to write before opening the models'],
+  say:'"An undocumented event did not happen. Operationally and legally."',
+  chk:['Check-in done','Three practice entries written (A, B, C)','Checkpoint 3 passed']},
+ {id:'b5',a:210,b:240,type:'brk',t:'Meal break',sub:'30 min, paid',slides:'—',agent:'On break. Fully relieved of duties.',
+  do:['Skim their three practice entries so you know the weakest Outcome before the coach block'],say:'',chk:['Practice entries skimmed']},
+ {id:'b6',a:240,b:300,type:'self',t:'Module 4 · Packages & emergencies',sub:'60 min self-guided',slides:'13–14',agent:'Package intake and categories, release, incident reports, fire/medical/security; Checkpoint 4.',
+  do:['Slide 13: keep it brisk, ask instead of lecture (energy dips after the meal)','Slide 14: "Why log before storage?" Chain of custody'],
+  say:'"Log it before you move it. Confirm, log, label, notify."',
+  chk:['Check-in done','Checkpoint 4 passed (4 of 7 gates showing)']},
+ {id:'b7',a:300,b:390,type:'live',t:'Coach block',sub:'90 min live',slides:'15–28',agent:'Answering scenarios first, practicing A.C.T., the emergency drill from memory, systems match.',
+  do:['20 min: entry review (slides 16–17), coach the weakest Outcome','10 min: A.C.T. (slide 18)','45 min: five required scenarios (19–23); bonus 24–25 if time','10 min: emergency drill (26–27); 5 min: systems (28)'],
+  say:'"Every answer ends with: and I logged it."',
+  chk:['Signed acknowledgment collected for the file','Weakest practice entry coached to all four Outcome parts','Five required scenarios run','Emergency drill clean, no notes','Systems match all correct','Connecteam and Paylocity logins verified']},
+ {id:'b8',a:390,b:480,type:'shadow',t:'Site shadow',sub:'90 min with Lead',slides:'29',agent:'Walking the property with the Lead; processing three packages; writing a live tour entry; clock-in test.',
+  do:['Show slide 29, then hand off to the Lead in person','Brief the Lead: initial each walk item, watch package logging and release, review the tour entry'],
+  say:'"Ask specific questions, not general ones."',
+  chk:['Lead briefed in person','Walk checklist complete and initialed (gate 5)']},
+ {id:'b9',a:480,b:525,type:'self',t:'Final assessment',sub:'45 min, no notes, no phone',slides:'—',agent:'14 questions plus one written escalation entry. Auto-graded in the packet.',
+  do:['Phones away, packet only','Stay nearby but don\'t coach'],say:'',chk:['Assessment graded in the packet']},
+ {id:'b10',a:525,b:555,type:'live',t:'Sign-off & launch',sub:'30 min live',slides:'30–34',agent:'Reviewing the score, filling the contact card, writing and signing the commitment card.',
+  do:['Slide 30: open their result; 16+ certifies, below 16 re-takes','Walk their sign-off checklist in the packet item by item','Slides 31–33: 90-day path, Academy, commitment card (8 min silent)','Slide 34: close, 5 min Q&A max'],
+  say:'"Today is the baseline. Now go exceed it."',
+  chk:['Score reviewed; 30-day focus area named','Packet sign-off checklist complete (gate 7)','Contact card filled in','Commitment card signed: hire, trainer, Regional Manager','First three shadow shifts scheduled','Credentials and first-week schedule in hand']}
+];
+const MAT=['A device per hire with the packet open','Printed conduct & policy acknowledgment form','Laminated H.O.M.E. and E.D.O. cards','Connecteam and Paylocity credentials','Property contact sheet and first-week schedule','Lead or Senior Agent confirmed for the shadow block','Uniform and name tag issued','Trainer deck open in presenter view'];
+
+const chipName={live:'Live',self:'Self',shadow:'Shadow',brk:'Break'};
+function render(){
+  $('#blocks').innerHTML=B.map(x=>{
+    const done=x.chk.filter((c,i)=>S.chk[x.id+'_'+i]).length;
+    return '<details class="blk" id="'+x.id+'"><summary><span class="win">'+fmt(x.a)+' – '+fmt(x.b)+'</span><span class="chip '+x.type+'">'+chipName[x.type]+'</span><span class="ttl">'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span><span class="prog'+(done===x.chk.length?' all':'')+'">'+done+'/'+x.chk.length+'</span></summary>'+
+    '<div class="body">'+
+      '<div class="col"><div class="k">Slides</div><div class="slides">'+(x.slides==='—'?'<span class="small">No slides</span>':'<span class="sl">'+esc(x.slides)+'</span>')+'</div><div class="k" style="margin-top:6px">Agent is</div><p>'+esc(x.agent)+'</p></div>'+
+      '<div class="col"><div class="k">You do</div><ul>'+x.do.map(d=>'<li>'+esc(d)+'</li>').join('')+'</ul></div>'+
+      (x.say?'<div class="col full"><div class="k">Line to land</div><p class="say">'+esc(x.say)+'</p></div>':'')+
+      '<div class="col full"><div class="k">Before you move on</div>'+x.chk.map((c,i)=>'<label class="check"><input type="checkbox" id="'+x.id+'_'+i+'" data-c="'+x.id+'_'+i+'"'+(S.chk[x.id+'_'+i]?' checked':'')+'><span>'+esc(c)+'</span></label>').join('')+'</div>'+
+    '</div></details>';
+  }).join('');
+  $('#matList').innerHTML=MAT.map((m,i)=>'<label class="check"><input type="checkbox" id="mat_'+i+'" data-c="mat_'+i+'"'+(S.chk['mat_'+i]?' checked':'')+'><span>'+esc(m)+'</span></label>').join('');
+}
+document.addEventListener('change',e=>{const c=e.target.closest('[data-c]'); if(!c) return; S.chk[c.dataset.c]=c.checked; save();
+  const blk=c.closest('details.blk'); if(blk){const x=B.find(b=>b.id===blk.id); const done=x.chk.filter((q,i)=>S.chk[x.id+'_'+i]).length; const p=blk.querySelector('.prog'); p.textContent=done+'/'+x.chk.length; p.classList.toggle('all',done===x.chk.length);}});
+
+function mins(){return (S.acc+(S.run&&S.start?(Date.now()-S.start):0))/60000;}
+let lastCur=null;
+function tick(){
+  const m=mins(); $('#elapsed').textContent=fmt(m);
+  const started=S.run||S.acc>0;
+  let cur=B.findIndex(x=>m>=x.a&&m<x.b); if(m>=555) cur=B.length-1;
+  if(!started){ $('#nowTxt').textContent='Clock not started'; $('#nextTxt').textContent='Press Start at kickoff'; }
+  else{
+    const x=B[cur];
+    $('#nowTxt').textContent='Now: '+x.t+(S.run?'':' (paused)');
+    const nx=B[cur+1];
+    $('#nextTxt').textContent=m>=555?'Day complete':(nx?'Next: '+nx.t+' in '+Math.max(0,Math.ceil(x.b-m))+' min':Math.max(0,Math.ceil(x.b-m))+' min left');
+  }
+  B.forEach((x,i)=>{const el=document.getElementById(x.id); if(!el) return; el.classList.toggle('cur',started&&i===cur); el.classList.toggle('done',started&&i<cur);});
+  if(started&&cur!==lastCur){ B.forEach((x,i)=>{const el=document.getElementById(x.id); if(el) el.open=(i===cur);}); lastCur=cur; }
+  $('#btnStart').textContent=S.run?'Pause':(S.acc>0?'Resume':'Start');
+}
+$('#btnStart').addEventListener('click',()=>{ if(S.run){S.acc+=Date.now()-S.start; S.start=null; S.run=false;} else {S.start=Date.now(); S.run=true;} save(); tick(); });
+function shift(d){S.acc=Math.max(0,S.acc+d*60000); if(S.run&&mins()<0){S.acc=0;} save(); tick();}
+$('#btnFwd').addEventListener('click',()=>shift(5));
+$('#btnBack').addEventListener('click',()=>shift(-5));
+$('#btnReset').addEventListener('click',()=>{ $('#btnConfirm').hidden=false; setTimeout(()=>{$('#btnConfirm').hidden=true;},4000); });
+$('#btnConfirm').addEventListener('click',()=>{ S={start:null,acc:0,run:false,chk:{}}; save(); lastCur=null; render(); tick(); $('#btnConfirm').hidden=true; });
+
+$('#refTabs').addEventListener('click',e=>{const t=e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('#refTabs .tab').forEach(b=>b.setAttribute('aria-selected',b===t?'true':'false'));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.dataset.pane===t.dataset.p));});
+
+render(); tick(); if(!(S.run||S.acc>0)) document.getElementById('b1').open=true;
+setInterval(tick,15000);
+})();
+</script>
