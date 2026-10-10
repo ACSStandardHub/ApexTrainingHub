@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Apex Desk Checklist</title>
+<meta name="description" content="Apex Concierge Services — frontline desk checklist for every shift.">
+<meta name="theme-color" content="#0D1F3C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Apex Desk">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1F3C;--navy-mid:#162C50;--navy-dark:#081429;
+  --gold:#C9A84C;--gold-light:#E8D5A3;--gold-dim:#8a6e2e;
+  --cream:#F5F3EE;--cream-dark:#E8E4DB;--card:#FFFFFF;
+  --ink:#1A1A2E;--muted:#5d5f6b;--line:#ddd8cc;
+  --green:#1A5C2A;--green-bg:#e6f0e8;--red:#8c1f1f;--red-bg:#f7e5e3;--amber:#7A5A0A;--amber-bg:#f6eed6;
+  --nav-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Barlow',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;font-size:16px;line-height:1.4}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+
+/* HEADER */
+.top{background:var(--navy-dark);color:#fff;padding:calc(env(safe-area-inset-top) + 14px) 16px 14px;position:sticky;top:0;z-index:20;border-bottom:2px solid var(--gold)}
+.top-in{max-width:640px;margin:0 auto}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:10px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.hub-link{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);text-decoration:none;border:1px solid rgba(201,168,76,.35);padding:6px 10px;border-radius:3px;white-space:nowrap}
+.site{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;letter-spacing:.01em;margin-top:6px;line-height:1.1}
+.meta{font-size:13px;color:rgba(255,255,255,.62);margin-top:2px}
+.prog{display:flex;align-items:center;gap:10px;margin-top:10px}
+.bar{flex:1;height:6px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.pct{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--gold-light);min-width:44px;text-align:right}
+
+/* MAIN */
+main{max-width:640px;margin:0 auto;padding:16px 16px calc(var(--nav-h) + env(safe-area-inset-bottom) + 28px)}
+h2.sec{font-family:'EB Garamond',serif;font-weight:500;font-size:28px;line-height:1.1;color:var(--navy);margin:6px 0 2px}
+.blurb{color:var(--muted);font-size:14px;margin-bottom:14px}
+.label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin:22px 0 8px;display:flex;justify-content:space-between;align-items:baseline}
+.label b{font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.02em;color:var(--navy)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px}
+.card+.card{margin-top:10px}
+
+/* CHECK ITEMS */
+.list{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.item{display:flex;align-items:stretch;border-top:1px solid var(--line)}
+.item:first-child{border-top:none}
+.tick{flex:1;display:flex;gap:12px;align-items:flex-start;text-align:left;background:none;border:none;padding:14px 12px 14px 14px;cursor:pointer;min-height:56px}
+.box{flex:none;width:26px;height:26px;border:2px solid #b9b2a2;border-radius:50%;display:grid;place-items:center;margin-top:1px;transition:all .15s}
+.box svg{width:14px;height:14px;opacity:0}
+.item.done .box{background:var(--green);border-color:var(--green)}
+.item.done .box svg{opacity:1}
+.txt{flex:1;min-width:0}
+.t{font-weight:600;font-size:16px;line-height:1.3}
+.item.done .t{color:var(--muted)}
+.s{font-size:13.5px;color:var(--muted);margin-top:3px}
+.stamp{display:inline-block;font-size:12px;font-weight:700;color:var(--green);margin-top:4px;letter-spacing:.03em}
+.ref{flex:none;display:flex;align-items:center;padding:0 14px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);text-decoration:none;border-left:1px solid var(--line)}
+
+/* TIP */
+.tip{background:var(--navy);color:#fff;border-radius:6px;padding:16px;border-left:4px solid var(--gold)}
+.tip .k{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.tip p{font-family:'EB Garamond',serif;font-size:20px;line-height:1.3;margin-top:6px}
+
+/* HOURS */
+.hours{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.hr{border:1.5px solid var(--line);background:var(--card);border-radius:6px;padding:10px 4px;text-align:center;cursor:pointer;min-height:58px}
+.hr .h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--navy)}
+.hr .w{font-size:11px;color:var(--muted);margin-top:1px}
+.hr.now{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,168,76,.25)}
+.hr.done{background:var(--green);border-color:var(--green)}
+.hr.done .h,.hr.done .w{color:#fff}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:5px;padding:13px 16px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;min-height:48px;text-decoration:none}
+.btn.pri{background:var(--navy);color:#fff}
+.btn.gold{background:var(--gold);color:var(--navy-dark)}
+.btn.ghost{background:transparent;border:1.5px solid var(--navy);color:var(--navy)}
+.btn.warn{background:var(--red);color:#fff}
+.btn.full{width:100%}
+.btn.sm{min-height:38px;padding:8px 12px;font-size:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>.btn{flex:1}
+
+/* TOURS / FRIDGE */
+.tours{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--green-bg);color:var(--green);font-weight:700;font-size:14px;border-radius:20px;padding:6px 6px 6px 12px}
+.chip button{border:none;background:rgba(26,92,42,.12);color:var(--green);width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1}
+.empty{color:var(--muted);font-size:14px}
+.fr{display:flex;gap:10px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.fr:first-child{border-top:none;padding-top:0}
+.fr .u{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:var(--navy);min-width:58px}
+.fr .d{flex:1;font-size:13.5px;color:var(--muted);min-width:0}
+.fr .d b{color:var(--ink);font-weight:600}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;padding:2px 6px;margin-top:3px}
+.pill.ok{background:var(--green-bg);color:var(--green)}
+.pill.soon{background:var(--amber-bg);color:var(--amber)}
+.pill.late{background:var(--red-bg);color:var(--red)}
+.fr .acts{display:flex;flex-direction:column;gap:6px}
+
+/* FORMS */
+.field{margin-top:12px}
+.field:first-child{margin-top:0}
+.field label{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+.field .hn{text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)}
+input[type=text],input[type=number],input[type=time],select,textarea{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:5px;padding:12px;font-size:16px;min-height:48px}
+textarea{resize:vertical;line-height:1.45}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg button{border:1.5px solid var(--line);background:#fff;border-radius:5px;padding:12px 6px;font-weight:600;font-size:14px;cursor:pointer;min-height:48px}
+.seg button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.subject{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;background:var(--cream);border:1px dashed var(--line);border-radius:4px;padding:10px;word-break:break-word}
+
+/* STANDARDS */
+details.std{background:var(--card);border:1px solid var(--line);border-radius:6px}
+details.std+details.std{margin-top:8px}
+details.std summary{list-style:none;cursor:pointer;padding:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+details.std summary::-webkit-details-marker{display:none}
+details.std summary::after{content:'+';font-size:20px;color:var(--gold-dim);font-weight:500}
+details.std[open] summary::after{content:'–'}
+details.std .b{padding:0 14px 14px;font-size:14.5px;color:#333}
+details.std .b a{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);text-decoration:none}
+
+/* SUMMARY */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px 8px;text-align:center}
+.stat .n{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;color:var(--navy);line-height:1}
+.stat .l{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.missed{margin-top:10px;font-size:14px;color:var(--red)}
+.missed li{margin-left:18px;margin-top:3px}
+.hist{font-size:14px}
+.hist .hrow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.hist .hrow:first-child{border-top:none;padding-top:0}
+.hist .hp{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--navy)}
+
+/* REFERENCE */
+.edo{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.edo div{background:var(--navy);color:#fff;border-radius:5px;padding:12px 10px}
+.edo .L{font-family:'EB Garamond',serif;font-size:30px;color:var(--gold);line-height:1}
+.edo .W{font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.edo .D{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:4px}
+.rl{list-style:none}
+.rl li{padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.rl li:first-child{border-top:none;padding-top:0}
+.rl b{color:var(--navy)}
+.hubl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 14px;border-top:1px solid var(--line);text-decoration:none}
+.hubl:first-child{border-top:none}
+.hubl .n{font-weight:700;color:var(--navy)}
+.hubl .x{font-size:13px;color:var(--muted)}
+.hubl .ar{color:var(--gold-dim);font-size:18px}
+
+/* SETUP */
+.hero{background:var(--navy-dark);color:#fff;border-radius:6px;padding:22px 18px;border-bottom:3px solid var(--gold)}
+.hero h1{font-family:'EB Garamond',serif;font-weight:400;font-size:34px;line-height:1.05}
+.hero h1 em{color:var(--gold-light)}
+.hero p{font-size:14px;color:rgba(255,255,255,.62);margin-top:8px}
+
+/* NAV */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy-dark);border-top:1px solid rgba(201,168,76,.25);padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+nav.tabs button{background:none;border:none;color:rgba(255,255,255,.5);height:var(--nav-h);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;position:relative}
+nav.tabs button svg{width:22px;height:22px}
+nav.tabs button.on{color:var(--gold)}
+nav.tabs button.on::before{content:'';position:absolute;top:0;left:22%;right:22%;height:2px;background:var(--gold)}
+nav.tabs .c{position:absolute;top:8px;right:calc(50% - 22px);background:var(--gold);color:var(--navy-dark);font-size:10px;border-radius:8px;padding:0 5px;letter-spacing:0;line-height:15px}
+
+.toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px);transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:5px;font-size:14px;opacity:0;transition:all .2s;pointer-events:none;z-index:40;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:12px;color:var(--muted);margin-top:28px}
+
+@media (min-width:520px){ .hours{grid-template-columns:repeat(8,1fr)} }
+@media print{ .top,nav.tabs{position:static} nav.tabs{display:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="top-row">
+      <span class="brand">Apex Concierge · Desk</span>
+      <a class="hub-link" href="../">Training Hub</a>
+    </div>
+    <div id="hdr"></div>
+  </div>
+</header>
+
+<main id="view" aria-live="polite"></main>
+
+<nav class="tabs" aria-label="Checklist sections">
+  <div class="in">
+    <button data-tab="start" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Open<span class="c" id="c-start" hidden></span></button>
+    <button data-tab="during" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>On Shift<span class="c" id="c-during" hidden></span></button>
+    <button data-tab="end" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 20V9"/></svg>Close<span class="c" id="c-end" hidden></span></button>
+    <button data-tab="ref" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5V21h16"/></svg>Reference</button>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="checklist.js"></script>
+<script>
+(function(){
+'use strict';
+var C = window.APEX_DESK;
+var HUB = '../';
+var K = { settings:'apexDesk.settings', shift:'apexDesk.shift', history:'apexDesk.history', tab:'apexDesk.tab', fridge:'apexDesk.fridge.' };
+
+/* ---------- storage (safe) ---------- */
+function load(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function drop(k){ try{ localStorage.removeItem(k); }catch(e){} }
+
+var settings = load(K.settings, { name:'', site:'', shift:'am' });
+var shift = load(K.shift, null);
+var history = load(K.history, []);
+var tab = load(K.tab, 'start');
+var view = document.getElementById('view');
+var confirmArm = null;
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function tm(ts){ return new Date(ts).toLocaleTimeString([], { hour:'numeric', minute:'2-digit' }); }
+function hourLabel(h){ var a = h % 12 || 12; return a + (h < 12 ? ' AM' : ' PM'); }
+function ymd(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function mdy(s){ var p = s.split('-'); return p[1] + '/' + p[2] + '/' + p[0].slice(2); }
+function longDate(s){ var p = s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]).toLocaleDateString([], { weekday:'short', month:'short', day:'numeric' }); }
+function shiftDef(key){ for (var i=0;i<C.shifts.length;i++) if (C.shifts[i].key === key) return C.shifts[i]; return C.shifts[0]; }
+function section(key){ for (var i=0;i<C.sections.length;i++) if (C.sections[i].key === key) return C.sections[i]; }
+function hoursOf(def){ var out = [], h = def.start; for (var n=0;n<24;n++){ out.push(h); h = (h+1) % 24; if (h === def.end) break; } return out; }
+function toast(msg){ var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('on'); }, 1800); }
+function fridgeKey(){ return K.fridge + (shift ? shift.site : settings.site); }
+function fridge(){ return load(fridgeKey(), []); }
+function setFridge(f){ save(fridgeKey(), f); }
+function persist(){ save(K.shift, shift); }
+function hubHref(p){ return HUB + p; }
+function copy(text){
+  if (navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).then(function(){ toast('Copied'); }, fallback); }
+  else fallback();
+  function fallback(){ var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('Copied'); }catch(e){ toast('Copy failed — select and copy manually'); } document.body.removeChild(ta); }
+}
+
+/* ---------- progress ---------- */
+function stats(){
+  if (!shift) return null;
+  var items = 0, done = 0, missed = [];
+  C.sections.forEach(function(s){ s.items.forEach(function(it){ items++; if (shift.checks[it.id]) done++; else missed.push(s.title + ': ' + it.text); }); });
+  var hrs = hoursOf(shiftDef(shift.shiftKey));
+  var hd = hrs.filter(function(h){ return shift.hours[h]; }).length;
+  var tc = shift.tours.length;
+  if (hd < hrs.length) missed.push('Hourly entries: ' + hd + ' of ' + hrs.length + ' logged');
+  if (tc < 2) missed.push('Site tours: ' + tc + ' of 2 minimum');
+  var pct = Math.round(100 * (done + hd + Math.min(tc,2)) / (items + hrs.length + 2));
+  return { pct:pct, items:items, done:done, hrs:hrs, hd:hd, tours:tc, missed:missed };
+}
+function sectionLeft(key){ var s = section(key); return s.items.filter(function(it){ return !shift.checks[it.id]; }).length; }
+
+/* ---------- header + nav ---------- */
+function renderHeader(){
+  var h = document.getElementById('hdr');
+  if (!shift){ h.innerHTML = '<div class="site">Desk Checklist</div><div class="meta">Start your shift to begin.</div>'; }
+  else {
+    var st = stats();
+    h.innerHTML = '<div class="site">' + esc(shift.site) + '</div>' +
+      '<div class="meta">' + esc(shift.name) + ' · ' + esc(shiftDef(shift.shiftKey).label) + ' · ' + esc(longDate(shift.date)) + '</div>' +
+      '<div class="prog"><div class="bar"><i style="width:' + st.pct + '%"></i></div><span class="pct">' + st.pct + '%</span></div>';
+  }
+  document.querySelectorAll('nav.tabs button').forEach(function(b){ b.classList.toggle('on', b.dataset.tab === tab); });
+  ['start','during','end'].forEach(function(k){
+    var el = document.getElementById('c-' + k); if (!el) return;
+    var n = shift ? sectionLeft(k) : 0;
+    el.hidden = !n; el.textContent = n;
+  });
+}
+
+/* ---------- item list ---------- */
+var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
+function itemsHTML(sec){
+  return '<div class="list">' + sec.items.map(function(it){
+    var ts = shift.checks[it.id];
+    return '<div class="item' + (ts ? ' done' : '') + '">' +
+      '<button class="tick" type="button" data-act="toggle" data-id="' + esc(it.id) + '" aria-pressed="' + (ts ? 'true' : 'false') + '">' +
+        '<span class="box">' + CHECK + '</span>' +
+        '<span class="txt"><span class="t">' + esc(it.text) + '</span>' +
+        (it.sub ? '<span class="s" style="display:block">' + esc(it.sub) + '</span>' : '') +
+        (ts ? '<span class="stamp">✓ ' + tm(ts) + '</span>' : '') +
+        '</span></button>' +
+      (it.ref ? '<a class="ref" href="' + esc(hubHref(it.ref)) + '">SOP</a>' : '') +
+    '</div>';
+  }).join('') + '</div>';
+}
+
+/* ---------- views ---------- */
+function vSetup(){
+  var now = new Date();
+  var guess = settings.shift || (now.getHours() >= 23 || now.getHours() < 7 ? 'ovn' : now.getHours() >= 15 ? 'pm' : 'am');
+  view.innerHTML =
+    '<div class="hero"><h1>Start your <em>shift</em></h1><p>One standard, every site, every shift. Check items off as you go — the app stamps the time.</p></div>' +
+    '<div class="label">Shift details</div>' +
+    '<div class="card">' +
+      '<div class="field"><label for="fName">Your name</label><input id="fName" type="text" autocomplete="name" maxlength="40" value="' + esc(settings.name) + '" placeholder="First and last name"></div>' +
+      '<div class="field"><label for="fSite">Site</label><select id="fSite"><option value="">Choose your site</option>' +
+        C.sites.map(function(s){ return '<option' + (s === settings.site ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select></div>' +
+      '<div class="field"><label>Shift</label><div class="seg" id="fShift">' +
+        C.shifts.map(function(s){ return '<button type="button" data-act="pickShift" data-k="' + s.key + '" class="' + (s.key === guess ? 'on' : '') + '">' + esc(s.label) + '</button>'; }).join('') +
+      '</div></div>' +
+    '</div>' +
+    '<div style="margin-top:16px"><button class="btn gold full" type="button" data-act="startShift">Start shift</button></div>' +
+    '<div class="tip" style="margin-top:22px"><div class="k">Standard of the day</div><p>' + esc(tipOfDay()) + '</p></div>' +
+    '<div class="foot">Saved on this device only · v' + esc(C.version) + '</div>';
+  view.dataset.shift = guess;
+}
+function tipOfDay(){ var d = new Date(); var n = Math.floor((d - new Date(d.getFullYear(),0,0)) / 864e5); return C.tips[n % C.tips.length]; }
+
+function vStart(){
+  var sec = section('start');
+  view.innerHTML = '<h2 class="sec">' + esc(sec.title) + '</h2><p class="blurb">' + esc(sec.blurb) + '</p>' +
+    '<div class="tip"><div class="k">Standard of the day</div><p>' + esc(tipOfDay()) + '</p></div>' +
+    '<div class="label">Checklist <b>' + (sec.items.length - sectionLeft('start')) + ' / ' + sec.items.length + '</b></div>' +
+    itemsHTML(sec) +
+    (sectionLeft('start') === 0 ? '<div style="margin-top:14px"><button class="btn pri full" type="button" data-act="go" data-tab="during">Desk is open → On Shift</button></div>' : '');
+}
+
+function vDuring(){
+  var sec = section('during'), st = stats(), def = shiftDef(shift.shiftKey);
+  var nowH = new Date().getHours();
+  var hoursHTML = st.hrs.map(function(h){
+    var ts = shift.hours[h];
+    return '<button type="button" class="hr' + (ts ? ' done' : '') + (h === nowH && !ts ? ' now' : '') + '" data-act="hour" data-h="' + h + '" aria-pressed="' + (ts ? 'true' : 'false') + '">' +
+      '<div class="h">' + hourLabel(h).replace(' ', '') + '</div><div class="w">' + (ts ? '✓ ' + tm(ts) : (h === nowH ? 'now' : '—')) + '</div></button>';
+  }).join('');
+  var tours = shift.tours.length ? shift.tours.map(function(ts, i){ return '<span class="chip">Tour ' + (i+1) + ' · ' + tm(ts) + '<button type="button" data-act="rmTour" data-i="' + i + '" aria-label="Remove tour ' + (i+1) + '">×</button></span>'; }).join('') : '<span class="empty">No tours logged yet. Minimum 2 per shift — route, time, what you saw.</span>';
+
+  view.innerHTML = '<h2 class="sec">' + esc(sec.title) + '</h2><p class="blurb">' + esc(sec.blurb) + '</p>' +
+    '<div class="label">Hourly log entries <b>' + st.hd + ' / ' + st.hrs.length + '</b></div>' +
+    '<div class="hours">' + hoursHTML + '</div>' +
+    '<p class="s" style="margin-top:8px">Tap an hour once you\'ve written a time-stamped entry for it. Quiet hour? Log what you checked.</p>' +
+
+    '<div class="label">Site tours <b>' + st.tours + ' / 2 min</b></div>' +
+    '<div class="card"><button class="btn pri full" type="button" data-act="addTour">Log a tour now</button><div class="tours">' + tours + '</div></div>' +
+
+    '<div class="label">Fridge board <b>' + fridge().length + ' in fridge</b></div>' + fridgeHTML() +
+
+    '<div class="label">Mid-shift checks <b>' + (sec.items.length - sectionLeft('during')) + ' / ' + sec.items.length + '</b></div>' +
+    itemsHTML(sec) +
+
+    '<div class="label">Every-time standards</div>' +
+    C.standards.map(function(s){ return '<details class="std"><summary>' + esc(s.title) + '</summary><div class="b">' + s.body + (s.ref ? '<br><a href="' + esc(hubHref(s.ref)) + '">Open SOP →</a>' : '') + '</div></details>'; }).join('');
+}
+
+function fridgeHTML(){
+  var f = fridge(), now = Date.now();
+  var t = new Date(); var hhmm = String(t.getHours()).padStart(2,'0') + ':' + String(t.getMinutes()).padStart(2,'0');
+  var rows = f.length ? f.map(function(p){
+    var win = p.type === 'grocery' ? 48 : 24, due = p.ts + win*36e5, left = due - now, cls, txt;
+    if (left <= 0){ cls = 'late'; txt = p.type === 'grocery' ? 'Past 48h — Lead before disposal' : 'Past 24h — dispose & document'; }
+    else { var hl = Math.floor(left/36e5), ml = Math.floor((left%36e5)/6e4); cls = left < 4*36e5 ? 'soon' : 'ok'; txt = hl + 'h ' + ml + 'm left'; }
+    return '<div class="fr"><div class="u">' + esc(p.unit) + '</div><div class="d"><b>' + (p.type === 'grocery' ? 'Groceries' : 'Food delivery') + '</b> · rec\'d ' + new Date(p.ts).toLocaleString([], { month:'numeric', day:'numeric', hour:'numeric', minute:'2-digit' }) +
+      '<br>Contact attempts: <b>' + (p.calls || 0) + '</b><br><span class="pill ' + cls + '">' + txt + '</span></div>' +
+      '<div class="acts"><button class="btn ghost sm" type="button" data-act="call" data-id="' + p.id + '">+ Call</button><button class="btn pri sm" type="button" data-act="clearFridge" data-id="' + p.id + '">Cleared</button></div></div>';
+  }).join('') : '<p class="empty">Fridge is empty. Add perishables as they come in — they stay on this device for the next agent at this site.</p>';
+  return '<div class="card">' + rows + '</div>' +
+    '<div class="card"><div class="grid2"><div class="field" style="margin:0"><label for="frUnit">Unit</label><input id="frUnit" type="text" inputmode="numeric" maxlength="8" placeholder="1210"></div>' +
+    '<div class="field" style="margin:0"><label for="frTime">Received</label><input id="frTime" type="time" value="' + hhmm + '"></div></div>' +
+    '<div class="field"><label>Type</label><div class="seg" style="grid-template-columns:1fr 1fr" id="frType"><button type="button" class="on" data-act="frType" data-k="food">Food · 24h</button><button type="button" data-act="frType" data-k="grocery">Groceries · 48h</button></div></div>' +
+    '<div style="margin-top:12px"><button class="btn gold full" type="button" data-act="addFridge">Add to fridge</button></div>' +
+    '<p class="s" style="margin-top:8px">Food: call the resident first, refrigerate if no answer.</p></div>';
+}
+
+function subjectLine(){ return shift.site + ' — ' + mdy(shift.date) + ' — ' + shiftDef(shift.shiftKey).label.replace(' – ','–') + ' — ' + shift.name; }
+function passOnText(){
+  var p = shift.passon;
+  return 'CONCIERGE TEAM NOTES:\n' + (p.c || '') + '\n\nMAINTENANCE NOTES:\n' + (p.m || '') + '\n\nLEASING NOTES:\n' + (p.l || '') + '\n\n— ' + shift.name + ', ' + shiftDef(shift.shiftKey).label;
+}
+function buildConcierge(){
+  var p = shift.passon, f = fridge(), parts = [];
+  parts.push((p.pkg !== '' && p.pkg != null ? p.pkg : '___') + ' packages in system at end of shift.');
+  if (f.length) parts.push(f.length + ' perishable' + (f.length > 1 ? 's' : '') + ' in fridge (' + f.map(function(x){ return 'Unit ' + x.unit + ' ' + (x.type === 'grocery' ? 'groceries' : 'food') + ', rec\'d ' + tm(x.ts); }).join('; ') + ').');
+  else parts.push('No perishables in fridge.');
+  parts.push('RTS pending: ' + (p.rts !== '' && p.rts != null ? p.rts : '___') + '.');
+  return parts.join(' ');
+}
+
+function vEnd(){
+  var sec = section('end'), st = stats(), p = shift.passon;
+  view.innerHTML = '<h2 class="sec">' + esc(sec.title) + '</h2><p class="blurb">' + esc(sec.blurb) + '</p>' +
+    '<div class="label">Checklist <b>' + (sec.items.length - sectionLeft('end')) + ' / ' + sec.items.length + '</b></div>' +
+    itemsHTML(sec) +
+
+    '<div class="label">Pass-on builder</div>' +
+    '<div class="card">' +
+      '<div class="grid2"><div class="field" style="margin:0"><label for="pPkg">Package count</label><input id="pPkg" type="number" inputmode="numeric" min="0" data-pass="pkg" value="' + esc(p.pkg) + '"></div>' +
+      '<div class="field" style="margin:0"><label for="pRts">RTS pending</label><input id="pRts" type="text" maxlength="60" data-pass="rts" value="' + esc(p.rts) + '" placeholder="2 (UPS, FedEx)"></div></div>' +
+      '<div style="margin-top:12px"><button class="btn ghost full" type="button" data-act="fill">Fill concierge notes from this shift</button></div>' +
+      '<div class="field"><label for="pC">Concierge team notes <span class="hn">— packages, perishables, RTS, open tasks</span></label><textarea id="pC" rows="4" data-pass="c">' + esc(p.c) + '</textarea></div>' +
+      '<div class="field"><label for="pM">Maintenance notes <span class="hn">— issue, who was notified, status, SR #</span></label><textarea id="pM" rows="3" data-pass="m">' + esc(p.m) + '</textarea></div>' +
+      '<div class="field"><label for="pL">Leasing notes <span class="hn">— resident requests, prospects</span></label><textarea id="pL" rows="2" data-pass="l">' + esc(p.l) + '</textarea></div>' +
+      '<div class="field"><label>Subject line</label><div class="subject" id="subj">' + esc(subjectLine()) + '</div></div>' +
+      '<div class="row" style="margin-top:12px"><button class="btn ghost" type="button" data-act="copySubj">Copy subject</button><button class="btn ghost" type="button" data-act="copyPass">Copy pass-on</button></div>' +
+      '<div style="margin-top:8px"><a class="btn pri full" id="mailBtn" href="#" data-act="mail">Email pass-on</a></div>' +
+    '</div>' +
+
+    '<div class="label">Shift summary</div>' +
+    '<div class="stats"><div class="stat"><div class="n">' + st.pct + '%</div><div class="l">Complete</div></div><div class="stat"><div class="n">' + st.hd + '/' + st.hrs.length + '</div><div class="l">Hours logged</div></div><div class="stat"><div class="n">' + st.tours + '</div><div class="l">Tours</div></div></div>' +
+    (st.missed.length ? '<div class="card" style="margin-top:10px"><b style="color:var(--red)">Still open (' + st.missed.length + ')</b><ul class="missed">' + st.missed.map(function(m){ return '<li>' + esc(m) + '</li>'; }).join('') + '</ul></div>' : '<div class="card" style="margin-top:10px;color:var(--green);font-weight:700">Everything checked. Clean handoff.</div>') +
+    '<div style="margin-top:12px"><button class="btn warn full" type="button" data-act="closeShift" id="closeBtn">Close shift &amp; save</button></div>' +
+    histHTML();
+}
+
+function histHTML(){
+  if (!history.length) return '';
+  return '<div class="label">Past shifts on this device <b>' + history.length + '</b></div><div class="card hist">' +
+    history.slice(0, 10).map(function(h){ return '<div class="hrow"><div><b>' + esc(h.site) + '</b><br><span class="s">' + esc(mdy(h.date)) + ' · ' + esc(h.shift) + ' · ' + esc(h.name) + '</span></div><div class="hp">' + h.pct + '%</div></div>'; }).join('') +
+    '</div><div style="margin-top:8px"><button class="btn ghost full" type="button" data-act="csv">Export history (CSV)</button></div>';
+}
+
+function vRef(){
+  view.innerHTML = '<h2 class="sec">Quick Reference</h2><p class="blurb">The standards in one place. Full SOPs live in the Training Hub.</p>' +
+    '<div class="label">Every log entry · E.D.O.</div>' +
+    '<div class="edo"><div><div class="L">E</div><div class="W">Event</div><div class="D">What happened — one sentence.</div></div><div><div class="L">D</div><div class="W">Detail</div><div class="D">Who, unit, exact time, specifics.</div></div><div><div class="L">O</div><div class="W">Outcome</div><div class="D">Action · who notified · status · next step.</div></div></div>' +
+    '<div class="label">Minimums every shift</div>' +
+    '<div class="card"><ul class="rl"><li><b>1 entry per hour</b>, time-stamped. Quiet? Log what you checked.</li><li><b>2 site tours</b> with route, time and observations.</li><li><b>Pass-on</b>: Concierge, Maintenance, Leasing — every shift.</li><li><b>Third person</b>, facts only. Corrections are additions, never deletions.</li><li><b>Subject:</b> Site — Date — Shift — Name. Send to PASS ON LOG.</li></ul></div>' +
+    '<div class="label">Packages</div>' +
+    '<div class="card"><ul class="rl"><li><b>Intake:</b> Receive → Label → Log (system + intake sheet) → Store → Notify.</li><li><b>Pickup:</b> system lookup every time, read the label before handover. No photo ID needed.</li><li><b>Food:</b> call first, refrigerate if no answer, 24 hrs.</li><li><b>Groceries:</b> daily outreach, 48 hrs, Lead before disposal.</li><li><b>High-value:</b> secure storage, never the general shelf.</li><li><b>Outgoing:</b> no postage, no acceptance.</li><li><b>Doesn\'t match?</b> Hold it. Call your Lead.</li></ul></div>' +
+    '<div class="label">Escalation</div>' +
+    '<div class="card"><ul class="rl"><li><b>Noise:</b> document, call on-call supervisor, follow up within 15 min, never knock alone.</li><li><b>Incident:</b> E.D.O. in log + Connecteam incident report before shift end.</li><li><b>Safety, legal or police:</b> phone the Regional Manager immediately, then file.</li><li><b>Fire:</b> don\'t investigate · 911 · alarm · exits, no elevators.</li><li><b>Medical:</b> 911 · don\'t move them · stay with them · meet EMS.</li><li><b>Threat:</b> don\'t confront · distance · 911 if credible · supervisor.</li><li><b>Call-out:</b> ' + esc(C.callOut.replace(/^Can't make a shift\? /,'')) + '</li></ul></div>' +
+    '<div class="label">Training Hub</div>' +
+    '<div class="list">' + C.hub.map(function(h){ return '<a class="hubl" href="' + esc(hubHref(h.href)) + '"><span><span class="n">' + esc(h.name) + '</span><br><span class="x">' + esc(h.desc) + '</span></span><span class="ar">→</span></a>'; }).join('') + '</div>' +
+    (shift ? '<div class="label">This shift</div><button class="btn ghost full" type="button" data-act="discard" id="discardBtn">Discard current shift</button>' : '') +
+    '<div class="foot">Apex Concierge Services · Desk Checklist v' + esc(C.version) + '<br>Data is saved on this device only.</div>';
+}
+
+function render(){
+  renderHeader();
+  confirmArm = null;
+  if (tab === 'ref') vRef();
+  else if (!shift) vSetup();
+  else if (tab === 'start') vStart();
+  else if (tab === 'during') vDuring();
+  else vEnd();
+}
+
+/* ---------- actions ---------- */
+function startShift(){
+  var name = document.getElementById('fName').value.trim();
+  var site = document.getElementById('fSite').value;
+  var key = view.dataset.shift || 'am';
+  if (!name){ toast('Enter your name'); document.getElementById('fName').focus(); return; }
+  if (!site){ toast('Choose your site'); document.getElementById('fSite').focus(); return; }
+  var d = new Date();
+  if (key === 'ovn' && d.getHours() < 12) d.setDate(d.getDate() - 1); // overnight belongs to the start date
+  settings = { name:name, site:site, shift:key }; save(K.settings, settings);
+  shift = { id: Date.now(), name:name, site:site, shiftKey:key, date: ymd(d), startedAt: Date.now(), checks:{}, hours:{}, tours:[], passon:{ pkg:'', rts:'', c:'', m:'', l:'' } };
+  persist(); tab = 'start'; save(K.tab, tab); render(); window.scrollTo(0,0);
+}
+
+function closeShift(btn){
+  if (confirmArm !== 'close'){ confirmArm = 'close'; btn.textContent = 'Tap again to confirm'; setTimeout(function(){ if (confirmArm === 'close'){ confirmArm = null; btn.innerHTML = 'Close shift &amp; save'; } }, 4000); return; }
+  var st = stats();
+  history.unshift({ date: shift.date, site: shift.site, name: shift.name, shift: shiftDef(shift.shiftKey).label, pct: st.pct, items: st.done + '/' + st.items, hours: st.hd + '/' + st.hrs.length, tours: st.tours, pkg: shift.passon.pkg, missed: st.missed, closedAt: Date.now() });
+  history = history.slice(0, 60); save(K.history, history);
+  shift = null; drop(K.shift); tab = 'start'; save(K.tab, tab);
+  render(); window.scrollTo(0,0); toast('Shift closed and saved');
+}
+
+function exportCSV(){
+  var rows = [['Date','Site','Agent','Shift','Complete %','Checklist','Hours logged','Tours','Package count','Still open','Closed at']];
+  history.forEach(function(h){ rows.push([h.date, h.site, h.name, h.shift, h.pct, h.items, h.hours, h.tours, h.pkg, (h.missed||[]).join(' | '), new Date(h.closedAt).toLocaleString()]); });
+  var csv = rows.map(function(r){ return r.map(function(c){ c = String(c == null ? '' : c); return /[",\n]/.test(c) ? '"' + c.replace(/"/g,'""') + '"' : c; }).join(','); }).join('\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv' })); a.download = 'apex-desk-history-' + ymd(new Date()) + '.csv'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+view.addEventListener('click', function(e){
+  var el = e.target.closest('[data-act]'); if (!el) return;
+  var act = el.dataset.act;
+  if (act === 'toggle'){ var id = el.dataset.id; if (shift.checks[id]) delete shift.checks[id]; else shift.checks[id] = Date.now(); persist(); keepScroll(render); }
+  else if (act === 'hour'){ var h = el.dataset.h; if (shift.hours[h]) delete shift.hours[h]; else shift.hours[h] = Date.now(); persist(); keepScroll(render); }
+  else if (act === 'addTour'){ shift.tours.push(Date.now()); persist(); keepScroll(render); toast('Tour ' + shift.tours.length + ' logged — write the route and what you saw'); }
+  else if (act === 'rmTour'){ shift.tours.splice(+el.dataset.i, 1); persist(); keepScroll(render); }
+  else if (act === 'pickShift'){ view.dataset.shift = el.dataset.k; el.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', b === el); }); }
+  else if (act === 'startShift') startShift();
+  else if (act === 'go'){ tab = el.dataset.tab; save(K.tab, tab); render(); window.scrollTo(0,0); }
+  else if (act === 'frType'){ el.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', b === el); }); }
+  else if (act === 'addFridge'){
+    var unit = document.getElementById('frUnit').value.trim(); if (!unit){ toast('Enter the unit number'); document.getElementById('frUnit').focus(); return; }
+    var tv = document.getElementById('frTime').value || '', d = new Date();
+    if (/^\d{2}:\d{2}$/.test(tv)){ var p = tv.split(':'); d.setHours(+p[0], +p[1], 0, 0); if (d.getTime() > Date.now() + 6e4) d.setDate(d.getDate() - 1); }
+    var typeBtn = document.querySelector('#frType .on'); var type = typeBtn ? typeBtn.dataset.k : 'food';
+    var f = fridge(); f.push({ id: Date.now(), unit: unit, type: type, ts: d.getTime(), calls: 0 }); f.sort(function(a,b){ return a.ts - b.ts; }); setFridge(f); keepScroll(render); toast('Unit ' + unit + ' added to fridge');
+  }
+  else if (act === 'call'){ var f2 = fridge(); f2.forEach(function(x){ if (String(x.id) === el.dataset.id) x.calls = (x.calls||0) + 1; }); setFridge(f2); keepScroll(render); toast('Contact attempt logged — note it in the shift log'); }
+  else if (act === 'clearFridge'){ setFridge(fridge().filter(function(x){ return String(x.id) !== el.dataset.id; })); keepScroll(render); toast('Removed from fridge board'); }
+  else if (act === 'fill'){ shift.passon.c = buildConcierge() + (shift.passon.c ? '\n' + shift.passon.c : ''); persist(); keepScroll(render); }
+  else if (act === 'copySubj') copy(subjectLine());
+  else if (act === 'copyPass') copy(passOnText());
+  else if (act === 'mail'){ e.preventDefault(); location.href = 'mailto:?subject=' + encodeURIComponent(subjectLine()) + '&body=' + encodeURIComponent(passOnText()); }
+  else if (act === 'closeShift') closeShift(el);
+  else if (act === 'csv') exportCSV();
+  else if (act === 'discard'){
+    if (confirmArm !== 'discard'){ confirmArm = 'discard'; el.textContent = 'Tap again to discard'; el.classList.add('warn'); return; }
+    shift = null; drop(K.shift); tab = 'start'; save(K.tab, tab); render(); toast('Shift discarded');
+  }
+});
+
+view.addEventListener('input', function(e){
+  var k = e.target.dataset.pass; if (!k || !shift) return;
+  shift.passon[k] = e.target.value; persist();
+  var s = document.getElementById('subj'); if (s) s.textContent = subjectLine();
+});
+
+document.querySelector('nav.tabs').addEventListener('click', function(e){
+  var b = e.target.closest('button[data-tab]'); if (!b) return;
+  tab = b.dataset.tab; save(K.tab, tab); render(); window.scrollTo(0,0);
+});
+
+function keepScroll(fn){ var y = window.scrollY; fn(); window.scrollTo(0, y); }
+
+// Refresh live times (fridge countdown, current hour) once a minute, unless the agent is typing.
+setInterval(function(){
+  if (!shift || tab !== 'during') return;
+  var a = document.activeElement; if (a && /INPUT|TEXTAREA|SELECT/.test(a.tagName)) return;
+  keepScroll(render);
+}, 60000);
+
+render();
+
+if ('serviceWorker' in navigator && location.protocol === 'https:'){ navigator.serviceWorker.register('sw.js').catch(function(){}); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "Apex Desk Checklist",
+  "short_name": "Apex Desk",
+  "description": "Apex Concierge Services — frontline desk checklist for every shift.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#081429",
+  "theme_color": "#0D1F3C",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
